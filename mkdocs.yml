@@ -16,6 +16,7 @@ theme:
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
+    - content.action.edit
   language: en
   palette:
     - scheme: default
@@ -45,24 +46,30 @@ markdown_extensions:
   - pymdownx.mark
   - attr_list
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
 
 plugins:
   - search
+  - awesome-pages
   - mkdocs-nav-weight:
       section_renamed: false
       index_weight: -10
       warning: true
       reverse: false
       headless_included: false
-  - awesome-pages
+  - git-revision-date-localized:
+        enable_creation_date: true
+  - git-committers:
+      repository: open-forest-observatory/ofo-docs
+      branch: main
 
 nav:
   - "← OFO home": https://openforestobservatory.org/
   - ...
 
-# repo_url: https://github.com/squidfunk/mkdocs-material
-# repo_name: 
+repo_url: https://github.com/open-forest-observatory/ofo-docs
+repo_name: open-forest-observatory/ofo-docs
+edit_uri: edit/main/docs/
