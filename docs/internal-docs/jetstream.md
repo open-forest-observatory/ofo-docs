@@ -148,7 +148,7 @@ Note that if you want to set up your local machine for R editing too, the steps 
     - Enable the extension's "bracketed paste" option: In the extension settings, find the setting 'Bracketed Paste' and check the box.
 - Code linting is enabled by default. To change what types of issues get flagged by the linter, [see here](https://code.visualstudio.com/docs/languages/r#_linting).
 
- ### Run command line processes without staying connected
+### Run command line processes without staying connected
 
 Many types of command line processes are long-running and you don't want to have to stay signed in via an SSH connection to keep them running. Examples include large `rclone` data transfers and long data processing runs. To create processes that stay running even when your SSH connection closes, one approach is to use the [`tmux`](https://github.com/tmux/tmux/wiki) or [`screen`](https://www.gnu.org/software/screen/manual/screen.html) tools.
 
