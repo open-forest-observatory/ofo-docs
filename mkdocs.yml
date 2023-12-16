@@ -53,13 +53,13 @@ markdown_extensions:
 
 plugins:
   - search
-  - awesome-pages
   - mkdocs-nav-weight:
       section_renamed: false
       index_weight: -10
       warning: true
       reverse: false
       headless_included: false
+  - awesome-pages
   - git-revision-date-localized:
         enable_creation_date: true
   - git-committers:
