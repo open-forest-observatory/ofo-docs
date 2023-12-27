@@ -38,7 +38,7 @@ If you checked out a different commit of the dataset submodule and want to resto
 (The following does not seem to work [as documented](https://docs.datalad.org/en/stable/generated/man/datalad-update.html): to pull the version (commit) of the dataset registered in the parent repo, run
 `datalad update --how merge --follow parentds` or potentially instead of `merge`, use `checkout`. )
 
-To enable access to the data files (in cloud storage) underlying a Datalad/git-annex dataset, see [this section******************************]().
+To enable access to the data files (in cloud storage) underlying a Datalad/git-annex dataset, see [this section](#enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset).
 
 
 ### Clone existing remote dataset (with metadata on GitHub and files on CyVerse), not inside a code repository
@@ -93,8 +93,8 @@ If the data remote that you want to use is configured as an "rclone remote", you
 * Not sure if necessary: make your git repo a Datalad repo too: `datalad create --force --no-annex`
 * Clone the existing dataset into your top-level repo as a 'subdataset': `datalad clone --dataset . <github url>`
 * `cd` into the new subdataset
-* Enable siblings as [described above*******]()
-* Continue in [above section*******]() at "Set up your repo to push data to cyverse whenever you commit metadata changes to github"
+* Enable siblings as [described above](#enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset)
+* Continue in [above section](#clone-existing-remote-dataset-with-metadata-on-github-and-files-on-cyverse-not-inside-a-code-repository) at "Set up your repo to push data to cyverse whenever you commit metadata changes to github"
 
 ### Delete a remote
 
