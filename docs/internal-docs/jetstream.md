@@ -166,4 +166,4 @@ Instances support a remote desktop that you access via a browser tab. To access 
 
 The Metashape GUI is installed on the OFO dev image.
 
-The Metashape python module is also installed, specifically in the conda environment `meta20`. For running Metashape and the `automate-metashape` repo code from the command line, switch to the environment using `conda activate meta20`.
+The Metashape python module is also installed, specifically in the conda environment `meta`. For running Metashape and the `automate-metashape` repo code from the command line, switch to the environment using `conda activate meta`. We aim to keep the `meta` environment updated with the current version of Metashape.
