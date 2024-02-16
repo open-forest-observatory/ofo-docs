@@ -6,7 +6,7 @@
 
 These steps are required once per new user.
 
-1. Create an [ACCESS](https://access-ci.org/) account and provide your username to Derek, Jeff, or Tyson, so they can add you to our project.
+1. Create an [ACCESS](https://access-ci.org/) account and provide your username to your supervisor, so they can add you to our project.
 1. Create (or locate an existing) SSH key. Here's [a detailed tutorial](https://happygitwithr.com/ssh-keys) with some good context (you can skip the R-specific parts).
 1. [Once added to our ACCESS project:] Add your public SSH key in [CACAO](https://cacao.jetstream-cloud.org/): Log in with your ACCESS credentials, go to Credentials, click Add Credential in the top right, and click SSH Public Key. Enter a public key name (e.g. `derek-laptop01`) and paste in the key text.
 1. Add your public SSH key in [Exosphere](https://jetstream2.exosphere.app/): Log in with your ACCESS credentials (once added to our project), go to our project/allocation (BIO220124), click Create in the top right, and click SSH Public Key. Enter a public key name (e.g. derek-laptop01) and paste in the key text.
