@@ -1,0 +1,1266 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../jetstream/">
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Data version control - Open Forest Observatory Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-version-control" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Open Forest Observatory Documentation" class="md-header__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-shaded.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Open Forest Observatory Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data version control
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/open-forest-observatory/ofo-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    open-forest-observatory/ofo-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://openforestobservatory.org/" class="md-tabs__link">
+        
+  
+    
+  
+  ← OFO home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Docs home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../MVMT/" class="md-tabs__link">
+          
+  
+    
+  
+  MVMT
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  Internal docs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Open Forest Observatory Documentation" class="md-nav__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-shaded.png" alt="logo">
+
+    </a>
+    Open Forest Observatory Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/open-forest-observatory/ofo-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    open-forest-observatory/ofo-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openforestobservatory.org/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ← OFO home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docs home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../MVMT/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    MVMT
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            MVMT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MVMT/prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prediction tasks with MVMT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../contributing/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Contributing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing to code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/docs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing to documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Internal docs
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Internal docs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Data version control
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Data version control
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datalad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datalad
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Datalad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-a-code-repository-containing-a-version-controlled-dataladgit-annex-dataset-as-a-submodule" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone a code repository containing a version-controlled (Datalad/git-annex) dataset as a submodule
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone-existing-remote-dataset-with-metadata-on-github-and-files-on-cyverse-not-inside-a-code-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone existing remote dataset (with metadata on GitHub and files on CyVerse), not inside a code repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable access to the data files (in cloud storage) underlying a Datalad/git-annex dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-and-publish-a-dataladgit-annex-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create and publish a Datalad/git-annex dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-datalad-dataset-as-a-subdataset-within-an-existing-git-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Datalad dataset as a subdataset within an existing git repo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-remote" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a remote
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes-on-transfer-speeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes on transfer speeds
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      DVC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DVC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notes-on-usage-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes on usage challenges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes-to-self-for-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes to self for config
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jetstream/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Jetstream2 for OFO development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datalad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datalad
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Datalad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-a-code-repository-containing-a-version-controlled-dataladgit-annex-dataset-as-a-submodule" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone a code repository containing a version-controlled (Datalad/git-annex) dataset as a submodule
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone-existing-remote-dataset-with-metadata-on-github-and-files-on-cyverse-not-inside-a-code-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone existing remote dataset (with metadata on GitHub and files on CyVerse), not inside a code repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable access to the data files (in cloud storage) underlying a Datalad/git-annex dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-and-publish-a-dataladgit-annex-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create and publish a Datalad/git-annex dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-datalad-dataset-as-a-subdataset-within-an-existing-git-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add a Datalad dataset as a subdataset within an existing git repo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-a-remote" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete a remote
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes-on-transfer-speeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes on transfer speeds
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      DVC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DVC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notes-on-usage-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes on usage challenges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes-to-self-for-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes to self for config
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/open-forest-observatory/ofo-docs/edit/main/docs/internal-docs/data-version-control.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="data-version-control">Data version control<a class="headerlink" href="#data-version-control" title="Permanent link">&para;</a></h1>
+<p>Notes and tips as we develop our data version control practices. <strong>This is still a work in progress!</strong></p>
+<h2 id="datalad">Datalad<a class="headerlink" href="#datalad" title="Permanent link">&para;</a></h2>
+<h3 id="clone-a-code-repository-containing-a-version-controlled-dataladgit-annex-dataset-as-a-submodule">Clone a code repository containing a version-controlled (Datalad/git-annex) dataset as a submodule<a class="headerlink" href="#clone-a-code-repository-containing-a-version-controlled-dataladgit-annex-dataset-as-a-submodule" title="Permanent link">&para;</a></h3>
+<p>To clone a code repo and also obtain datalad data submodules ("subdatasets" in Datalad terms) (just the data file pointers, not actual data):</p>
+<p><code>datalad install -r &lt;repo url&gt;</code></p>
+<p>This appears to clone the data submodules at the state (commit) referenced from the parent repository, even if there are more recent commits to the submodules. Optionally, add <code>-g</code> to get the actual data underlying the data file pointers from the remote repositories, if auto-enabled.</p>
+<p>(The above appears to be the same as <code>git clone --recursive &lt;repo url&gt;</code>.)</p>
+<p>If the code repository has already been cloned <em>without</em> the data submodules (e.g. via <code>git clone</code> without <code>--recursive</code>, or <code>datalad install</code> without <code>-r</code>), you can obtain the submodules from witihn the parent repo with:</p>
+<p><code>datalad install -r .</code>
+or from within the (empty) submodule folder with
+<code>datalad install .</code> or <code>datalad get -n</code>.</p>
+<p>(These both appear to clone the data submodules at the state (commit) referenced from the parent repository.)</p>
+<p>To check if your dataset (submodule) state is current with its remote:
+<code>git status</code></p>
+<p>(You can use <code>datalad status</code> but it does not check status relative to the remote, just checks for changes to local files.)</p>
+<p>To pull the most recent version (commit) of the dataset (submodule) (useful, for example, if you cloned a code repo that contained a data submodule frozen at a specific commit that has since been update):</p>
+<p><code>datalad update --how merge</code>
+or
+<code>git pull</code></p>
+<p>If you checked out a different commit of the dataset submodule and want to restore it to the version that is tagged in the parent code repo (assuming you haven't made a commit there to update the dataset version tag): <code>cd</code> to the parent code repo and run <code>git submodule update</code>, possibly with the <code>--init</code> option.</p>
+<p>(The following does not seem to work <a href="https://docs.datalad.org/en/stable/generated/man/datalad-update.html">as documented</a>: to pull the version (commit) of the dataset registered in the parent repo, run
+<code>datalad update --how merge --follow parentds</code> or potentially instead of <code>merge</code>, use <code>checkout</code>. )</p>
+<p>To enable access to the data files (in cloud storage) underlying a Datalad/git-annex dataset, see <a href="#enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset">this section</a>.</p>
+<h3 id="clone-existing-remote-dataset-with-metadata-on-github-and-files-on-cyverse-not-inside-a-code-repository">Clone existing remote dataset (with metadata on GitHub and files on CyVerse), not inside a code repository<a class="headerlink" href="#clone-existing-remote-dataset-with-metadata-on-github-and-files-on-cyverse-not-inside-a-code-repository" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>datalad clone &lt;github url&gt;</code></li>
+<li>Enable the 'siblings' (data storage remotes): run the <code>datalad siblings ...</code> command suggested in output of the <code>clone</code> command. For CyVerse WebDAV, enter username and password when prompted.<ul>
+<li>Note: Once I got an error <code>Failed to create the collection: Prompt dismissed..</code> and the solution (I'm not clear on why) was to first run <code>export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring</code> per <a href="https://github.com/python-poetry/poetry/issues">this post</a></li>
+</ul>
+</li>
+<li>Check that the siblings were added: <code>datalad siblings</code>. You should see <code>origin</code>, <code>here</code>, and <code>cyverse</code>. <code>(+)</code> means it contains data files, not just pointers/metadata.</li>
+<li>Set up your repo to push data to cyverse whenever you commit metadata changes to github (from the root of the repo): <code>datalad create-sibling-github -d . &lt;name-of-repo&gt; --publish-depends cyverse --existing reconfigure</code><ul>
+<li>It would be great if we could find a way to have this setting saved in the DataLad settings in the GitHub repo so all clones use it by default.</li>
+</ul>
+</li>
+<li>Locally download a file/folder/glob: <code>datalad get &lt;file/folder/glob&gt;</code></li>
+<li>Modify the data locally</li>
+<li>Push your changes datalad push --to origin<ul>
+<li>Note: I haven't figured out why it doesn't work to push data with <code>datalad push --to cyverse</code> the way it does if you're the one who created the dataset. (This is only relevant if you have not set up the repo to push to cyverse whenever committing to github as instructed above. However, a workaround appears to be <code>datalad push --data anything</code> though I'm not completely sure what this is intended for.</li>
+</ul>
+</li>
+<li>Pull remote changes from GitHub (pointers/metadata only): <code>datalad update --how merge</code></li>
+</ul>
+<h3 id="enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset">Enable access to the data files (in cloud storage) underlying a Datalad/git-annex dataset<a class="headerlink" href="#enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset" title="Permanent link">&para;</a></h3>
+<p>To enable access to a "data remote" ("data sibling" in datalad terms; "special remote" in git-annex terms), <code>cd</code> to the repo and run <code>datalad siblings enable -s &lt;name of sibling&gt;</code>. To get a list of remotes that can be initialized, use <code>git annex initremote</code>. If you need to change anything about the data remote, or re-authenticate, see the docs for <a href="https://docs.datalad.org/en/stable/generated/man/datalad-siblings.html">datalad sibling update</a> or the docs for <a href="https://git-annex.branchable.com/git-annex-configremote/">git-annex configremote</a>.</p>
+<p>For the CyVerse WebDAV special remote, enter username and password when prompted.
+    * Note: Once I got an error <code>Failed to create the collection: Prompt dismissed..</code> and the solution (I'm not clear on why) was to first run <code>export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring</code> per <a href="https://github.com/python-poetry/poetry/issues">this post</a>.</p>
+<p>If the data remote that you want to use is configured as an "rclone remote", you will need to <a href="https://rclone.org/install/">install rclone</a>, configure it to access the data remote as instructed by the dataset provider, and install the <a href="https://github.com/git-annex-remote-rclone/git-annex-remote-rclone">rclone special remote package</a> for git-annex.</p>
+<h3 id="create-and-publish-a-dataladgit-annex-dataset">Create and publish a Datalad/git-annex dataset<a class="headerlink" href="#create-and-publish-a-dataladgit-annex-dataset" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Create a dataset (git repo): <code>datalad create -c text2git &lt;name-of-dataset&gt;</code> and <code>cd</code> into it</li>
+<li>Optionally make larger text files be stored outside the git repo, in the 'annex' (by default the <code>text2git</code> config makes all text files be stored in the git repo): <code>nano .gitattributes</code> and change <code>...(mimeencoding=binary)and(largerthan=0)...</code> to <code>(mimeencoding=binary)or(largerthan=10kb)</code><ul>
+<li>Then commit this change to the git repo</li>
+</ul>
+</li>
+<li>Consider <a href="https://git-annex.branchable.com/backends/">setting the hashing backend</a> to be BLAKE2B160E for &gt; 2x faster hashing</li>
+<li>Copy data files into the repo (can use <code>datalad download-url</code> to track provenance in metadata)<ul>
+<li>Note to self: download raw imagery: <code>rclone copy gdrive:Natural_Reserves_Bucciarelli/KMZs original/KMZs --transfers 16 --progress --drive-shared-with-me</code></li>
+</ul>
+</li>
+<li>Check status: <code>datalad status</code></li>
+<li>Save (commit) its state: <code>datalad save -m "&lt;message&gt;"</code> (optionally specific specific files/folders to save)<ul>
+<li>It took about 30 min to save a dataset of ~6000 drone images. Interested to know if plain git-annex would be faster.</li>
+</ul>
+</li>
+<li>[Option 1] Create Cyverse remote ('sibling') for data: <code>WEBDAV_USERNAME=&lt;username&gt; WEBDAV_PASSWORD=&lt;password&gt; git annex initremote cyverse type=webdav url=https://data.cyverse.org/dav/iplant/projects/ofo/datalad-testing2 chunk=100mb encryption=none</code> (you can alternatively set the username and password env vars in advance of this call)</li>
+<li>[Option 2] Create a Box (or other <code>rclone</code>-enabled) remote for data:<ul>
+<li>Install rclone via <code>sudo apt install rclone</code></li>
+<li>Set up rclone for your Box account via <code>rclone config</code></li>
+<li>Run <code>sudo apt install git-annex-remote-rclone</code></li>
+<li>Run <code>git annex initremote box type=external externaltype=rclone chunk=100MiB encryption=none target=&lt;name of your remote in rclone&gt; prefix=&lt;path to the data folder in your Box account&gt;</code></li>
+</ul>
+</li>
+<li>Create github remote repo ('sibling') for metadata and small files: <code>datalad create-sibling-github -d . -s github-ofo ucnrs-data --github-organization open-forest-observatory --publish-depends cyverse &lt;optionally: another --publish-depends for other data remotes&gt;</code>. The <code>--publish-depends</code> part sets it up to trigger data upload to cyverse whenever the metadata is committed to github; otherwise you'd need two commands every time.<ul>
+<li>Note: Once I got an error <code>Failed to create the collection: Prompt dismissed..</code> and the solution (I'm not clear on why) was to first run <code>export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring</code> per <a href="https://github.com/python-poetry/poetry/issues/1917#issuecomment-1380429197">this post</a>.</li>
+</ul>
+</li>
+<li>To set it up to autoenable the remotes upon <code>datalad install</code> performed by collaborators (so they don't have to run <code>datalad siblings enable</code>, when doing <code>git annex initremote</code>, add <code>autoenable=true</code>. This probably only makes sense for remotes not needing authentication, like a public-readable remote. If you've already added a remote without autoenable and you want to turn on autoenable, use <code>git annex configremote &lt;remote name&gt; autoenable=true</code>.</li>
+<li>Push the data and metadata to cyverse &amp; github: <code>datalad push --to github-ofo</code></li>
+</ul>
+<h3 id="add-a-datalad-dataset-as-a-subdataset-within-an-existing-git-repo">Add a Datalad dataset as a subdataset within an existing git repo<a class="headerlink" href="#add-a-datalad-dataset-as-a-subdataset-within-an-existing-git-repo" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>cd</code> into your git repo</li>
+<li>Not sure if necessary: make your git repo a Datalad repo too: <code>datalad create --force --no-annex</code></li>
+<li>Clone the existing dataset into your top-level repo as a 'subdataset': <code>datalad clone --dataset . &lt;github url&gt;</code></li>
+<li><code>cd</code> into the new subdataset</li>
+<li>Enable siblings as <a href="#enable-access-to-the-data-files-in-cloud-storage-underlying-a-dataladgit-annex-dataset">described above</a></li>
+<li>Continue in <a href="#clone-existing-remote-dataset-with-metadata-on-github-and-files-on-cyverse-not-inside-a-code-repository">above section</a> at "Set up your repo to push data to cyverse whenever you commit metadata changes to github"</li>
+</ul>
+<h3 id="delete-a-remote">Delete a remote<a class="headerlink" href="#delete-a-remote" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Edit the <code>.git/config</code> file and delete the respective remote entries.</li>
+</ul>
+<h3 id="notes-on-transfer-speeds">Notes on transfer speeds<a class="headerlink" href="#notes-on-transfer-speeds" title="Permanent link">&para;</a></h3>
+<ul>
+<li>With 40 GB of data, mostly individual drone images<ul>
+<li>Box rclone remote with -J16: ~120 MB/s</li>
+<li>GIN remote with -J16: ~10 MB/s</li>
+<li>Cyverse WebDAV remote with -J5: ~2 MB/s</li>
+</ul>
+</li>
+<li>With 160 GB of data, composed of 4 zip archives (38G, 22G, 96G) and remotes set to use 100 MB chunks:<ul>
+<li>Box with -J16: ~180 MB/s (used one thread per original file, not chunk)</li>
+<li>GIN with -J16: ~4 MB/s (same as ^)</li>
+<li>Cyverse WebDav with -J5: ~45 MB/s (same as ^)</li>
+</ul>
+</li>
+<li>Same as above but using 500 MB chunks:<ul>
+<li>Box: 210 MB/s</li>
+<li>CyVerse: ~45 MB/s (each transfer -- of 3 total -- seemed to have only ~12 MB/s even excluding the per-file overhead, which is now a much smaller fraction of the total transfer time with the larger chunks)</li>
+</ul>
+</li>
+</ul>
+<p>Interrupted transfers properly resumed on all three remotes (at least from the last transferred chunk).</p>
+<h2 id="dvc">DVC<a class="headerlink" href="#dvc" title="Permanent link">&para;</a></h2>
+<h3 id="notes-on-usage-challenges">Notes on usage challenges<a class="headerlink" href="#notes-on-usage-challenges" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>dvc pull</code> can be given paths inside tracked directories. You can specify the actual file you want (as opposed to the <em>.dvc file). But </em><em>how do you know the directory listing</em>* in order to request them?<ul>
+<li>With git-annex you can see the file listing because all the files show up as broken symlinks (until you pull the data, when they become unbroken).</li>
+</ul>
+</li>
+<li>When you use <code>dvc pull</code> on a granular data sub-component of a tracked directory and then modify that file, are the granular file-level changes tracked anywhere?<ul>
+<li>No. DVC will tell you that the tracked directory was changed, but it seems you have to know which file was change in order to do <code>dvc add &lt;the-changed-file&gt;</code> (or maybe you can do <code>dvc add &lt;tracked-directory&gt;</code> and it will add the changes to the file. Also, it will not tell you what sub-files were changed, it only knows that something changed in the directory.</li>
+</ul>
+</li>
+<li>If you download part of the full data repo (even everything associated with one .dvc file) and then update it (or even don't update it), you can't just do a generic <code>dvc push</code> to push the changes and "sync" your local changes with the data storage remote. You get an "unexpected error" related to the data files that you never downloaded. Also, if the files you downloaded were a subset of the files within the directory tracked by, e.g., <code>folder1.dvc</code> and you then do <code>dvc push folder1</code>, this will have the unintended consequences of permanently deleting all the files in that folder other than the ones you did download. The only way to download, modify, and push a subset of files in a tracked folder is to explicitly push those files.</li>
+<li>When you add files/dirs to the repo, you have to explicitly <code>dvc add</code> each one (at whatever level you want them to be tracked), whereas git-annex can automatically track all of them; there are no separate units that are tracked, just all files.</li>
+<li>Added all images in a directory individually to DVC tracking with <code>dvc add *</code> but then could not find an equivalent <code>dvc remove *</code> to remove them all. Clearly adding all images individually is not the intended use method.</li>
+</ul>
+<h3 id="notes-to-self-for-config">Notes to self for config<a class="headerlink" href="#notes-to-self-for-config" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>git init</code>, <code>dvc init</code>, add files to repo.</li>
+<li>dvc remote add -d cyverse webdavs://data.cyverse.org/dav/iplant/projects/ofo/datalad-testing4</li>
+<li>dvc remote modify --local cyverse_public user <cyverse username></li>
+<li>dvc remote modify --local cyverse_public password <cyverse password></li>
+<li>Mostly followed <a href="https://dvc.org/doc/start/data-management/data-versioning">this</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 24, 2024</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 24, 2024</span>
+  </span>
+
+    
+    
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="Contributors">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
+          
+          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&size=72" alt="youngdjn">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>

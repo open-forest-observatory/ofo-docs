@@ -1,0 +1,1523 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../data-version-control/">
+      
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Using Jetstream2 for OFO development - Open Forest Observatory Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#using-jetstream2-for-ofo-development" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Open Forest Observatory Documentation" class="md-header__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-shaded.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Open Forest Observatory Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Using Jetstream2 for OFO development
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/open-forest-observatory/ofo-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    open-forest-observatory/ofo-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://openforestobservatory.org/" class="md-tabs__link">
+        
+  
+    
+  
+  ← OFO home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Docs home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../MVMT/" class="md-tabs__link">
+          
+  
+    
+  
+  MVMT
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+    
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  Internal docs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Open Forest Observatory Documentation" class="md-nav__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-shaded.png" alt="logo">
+
+    </a>
+    Open Forest Observatory Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/open-forest-observatory/ofo-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    open-forest-observatory/ofo-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openforestobservatory.org/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ← OFO home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docs home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../MVMT/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    MVMT
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            MVMT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MVMT/prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prediction tasks with MVMT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../contributing/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Contributing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing to code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/docs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing to documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Internal docs
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Internal docs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-version-control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data version control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Using Jetstream2 for OFO development
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Using Jetstream2 for OFO development
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-set-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting set up
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting set up">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      New users
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-vms" class="md-nav__link">
+    <span class="md-ellipsis">
+      New VMs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-instance-access-and-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic instance access and management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic instance access and management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSH access
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-desktop-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote desktop access
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shelving-and-unshelving" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shelving and unshelving
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resizing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      More details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-instances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using instances
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using instances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ofo-share" class="md-nav__link">
+    <span class="md-ellipsis">
+      /ofo-share/
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="/ofo-share/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-repositories-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code repositories: development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-repositories-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code repositories: production
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temporary-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temporary data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data transfer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-notebook-jupyter-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jupyter Notebook / Jupyter Lab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rstudio" class="md-nav__link">
+    <span class="md-ellipsis">
+      RStudio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs-code-for-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Code for R
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VS Code for R">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-remote-server-from-vs-code-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to remote server from VS Code: first time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-remote-server-from-vs-code-after-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to remote server from VS Code: after first time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-vs-code-for-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up VS Code for R
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-command-line-processes-without-staying-connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run command line processes without staying connected
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-gui-software-via-remote-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use GUI software via remote desktop
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metashape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metashape
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-set-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting set up
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting set up">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      New users
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-vms" class="md-nav__link">
+    <span class="md-ellipsis">
+      New VMs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-instance-access-and-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic instance access and management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic instance access and management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSH access
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-desktop-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote desktop access
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shelving-and-unshelving" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shelving and unshelving
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resizing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      More details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-instances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using instances
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using instances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ofo-share" class="md-nav__link">
+    <span class="md-ellipsis">
+      /ofo-share/
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="/ofo-share/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-repositories-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code repositories: development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-repositories-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code repositories: production
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temporary-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temporary data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data transfer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-notebook-jupyter-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jupyter Notebook / Jupyter Lab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rstudio" class="md-nav__link">
+    <span class="md-ellipsis">
+      RStudio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs-code-for-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Code for R
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VS Code for R">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-remote-server-from-vs-code-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to remote server from VS Code: first time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-remote-server-from-vs-code-after-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to remote server from VS Code: after first time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-vs-code-for-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up VS Code for R
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-command-line-processes-without-staying-connected" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run command line processes without staying connected
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-gui-software-via-remote-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use GUI software via remote desktop
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metashape" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metashape
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/open-forest-observatory/ofo-docs/edit/main/docs/internal-docs/jetstream.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="using-jetstream2-for-ofo-development">Using Jetstream2 for OFO development<a class="headerlink" href="#using-jetstream2-for-ofo-development" title="Permanent link">&para;</a></h1>
+<h2 id="getting-set-up">Getting set up<a class="headerlink" href="#getting-set-up" title="Permanent link">&para;</a></h2>
+<h3 id="new-users">New users<a class="headerlink" href="#new-users" title="Permanent link">&para;</a></h3>
+<p>These steps are required once per new user.</p>
+<ol>
+<li>Create an <a href="https://access-ci.org/">ACCESS</a> account and provide your username to your supervisor, so they can add you to our project.</li>
+<li>[Possibly not required for web desktop use only:] Create (or locate an existing) SSH key. Here's <a href="https://happygitwithr.com/ssh-keys">a detailed tutorial</a> with some good context (read sections 10.1 through 10.4). Note: this tutorial is designed for R and RStudio users, but you can ignore all the refenreces to R and RStudio and focus on the shell instructions.</li>
+<li>[Once added to our ACCESS project:] Add credentials in <a href="https://cacao.jetstream-cloud.org/">CACAO</a> (after logging in with your ACCESS credentials):<ol>
+<li>The OFO ACCESS project (BIO220124):  go to Credentials (key icon), click Add Credential in the top right, and click Cloud Credential. Choose Jetstream2, log in at the ACCESS prompt, and select the project BIO220124.</li>
+<li>Your public SSH key: go to Credentials (key icon), click Add Credential in the top right, and click SSH Public Key. Enter a public key name (e.g. <code>derek-laptop01</code>) and paste in the key text [if you have skipped the step of creating a SSH key, just enter any dummy text here].</li>
+</ol>
+</li>
+<li>Add your public SSH key in <a href="https://jetstream2.exosphere.app/">Exosphere</a>: Log in with your ACCESS credentials (once added to our project), go to our project/allocation (BIO220124), click Create in the top right, and click SSH Public Key. Enter a public key name (e.g. derek-laptop01) and paste in the key text [if you have skipped the step of creating a SSH key, just enter any dummy text here].</li>
+</ol>
+<h3 id="new-vms">New VMs<a class="headerlink" href="#new-vms" title="Permanent link">&para;</a></h3>
+<p>These steps are required once for each new VM that a user desires. This should be done during initial onboarding (after the new user steps above), and it can also be done whenever an updated VM is desired. There are several events that may trigger users to want a new VM:</p>
+<ul>
+<li>Jetstream2 updates their featured Ubuntu image</li>
+<li>OFO updates its <a href="https://github.com/open-forest-observatory/cacao-terraform-ofo">development VM template</a> (which is applied on top of the current Jetstream2 featured Ubuntu image)</li>
+<li>You need more compute nodes</li>
+<li>You screwed up your VM configuration and want to start fresh</li>
+</ul>
+<p>The steps to create a new instance(s) are:</p>
+<ol>
+<li>Go to <a href="https://cacao.jetstream-cloud.org">CACAO</a> and select the Deployments tab on the left. Click Add Deployment, select the OFO dev template from the list, and click Next.<ol>
+<li>For Instance Name, enter a name that's descriptive to you and starts with your name. For example, <code>derek-dev</code> or simply <code>derek</code>.</li>
+<li>For Boot Image Name, choose the most recent featured Ubuntu image.</li>
+<li>Enter the desired number of instances (usually 1).</li>
+<li>Enter a flavor (size). Start with m3.small or m3.quad, as you can always resize later when you need more compute.</li>
+<li>Enter the Manila share key and Metashape license server IP address found in the <a href="https://docs.google.com/document/d/155AP0P3jkVa-yT53a-QLp7vBAfjRa78gdST1Dfb4fls/edit?usp=sharing">OFO Credentials</a> google doc shared with all OFO members.</li>
+<li>Click Advanced, enable Configure Boot Disk, change Boot Type to Volume, and enter 60 GB unless you know you will need something larger. Normally you won't because most data is stored on <code>/ofo-share</code> which is not part of this 60 GB.</li>
+</ol>
+</li>
+<li>[Only necessary if you want to access RStudio Server; can be done at a later time:] SSH into the machine and change your password<ol>
+<li><code>ssh &lt;username&gt;@&lt;ip address&gt;</code></li>
+<li>Your username is the same as your <a href="https://access-ci.org/">ACCESS-CI</a> username.</li>
+<li>If you lose track of the IP address, you can find it in <a href="https://cacao.jetstream-cloud.org/">CACAO</a>: go to Deployments and select the deployment you want to access.</li>
+<li>Set a password for your user: <code>sudo passwd &lt;username&gt;</code>. Choose a secure password because if others can guess it they could access our VMs and shared data volume.</li>
+</ol>
+</li>
+</ol>
+<p>You should be the only one who can access this instance/VM, so it should be safe to store credentials on. Examples of credentials you might store are: a Box account login (stored in <code>rclone</code>; see below), so you can transfer files between the VM and Box; GitHub credentials, so you can push to repos without entering a password every time.</p>
+<h2 id="basic-instance-access-and-management">Basic instance access and management<a class="headerlink" href="#basic-instance-access-and-management" title="Permanent link">&para;</a></h2>
+<h3 id="ssh-access">SSH access<a class="headerlink" href="#ssh-access" title="Permanent link">&para;</a></h3>
+<p>SSH into your instance using <code>ssh &lt;username&gt;@&lt;ip address&gt;</code>. You can find the IP address of your instance in <a href="https://cacao.jetstream-cloud.org/">CACAO</a> under Deployments. Your username is the same as your <a href="https://access-ci.org/">ACCESS-CI</a> username.</p>
+<h3 id="remote-desktop-access">Remote desktop access<a class="headerlink" href="#remote-desktop-access" title="Permanent link">&para;</a></h3>
+<p>To access a graphical remote desktop in a browser tab, navigate to that instance's page in <a href="https://cacao.jetstream-cloud.org/">CACAO</a> under Deployments and click the  "Web Desktop" button.</p>
+<h3 id="shelving-and-unshelving">Shelving and unshelving<a class="headerlink" href="#shelving-and-unshelving" title="Permanent link">&para;</a></h3>
+<p>It is <strong>very important</strong> that you shelve your instances when not using them, especially the larger instances. </p>
+<p>It's fastest to this via the instance's page in <a href="https://jetstream2.exosphere.app/exosphere/">Jetstream Exosphere</a>:</p>
+<ol>
+<li>Go to our project/allocation (BIO220124)</li>
+<li>Click on Instances</li>
+<li>Clear the filter</li>
+<li>Click on your instance</li>
+<li>In the top right under "Actions", select "Shelve"</li>
+</ol>
+<p>Note that this has the same effect as powering off a computer; i.e. all unsaved work will be lost, and next time you will start from a fresh boot. Use this same approach to unshelve your instance when you're ready to resume work, and to resize your instance if you need more compute or memory (see below). Note that when unshelving via Exosphere, you may need to wait ~1 minute before you can open the remote desktop via CACAO.</p>
+<p>Shelving/unshelving can also be done via the <a href="https://cacao.jetstream-cloud.org/home">CACAO</a> interface under Deployments, by pressing the square Stop button to shelve it (or triangle Play button to unshelve it). Using this method though, unshelving takes much longer because it does a check that the VM has all the configurations specified by our template, a generally unnecessary step.</p>
+<h3 id="resizing">Resizing<a class="headerlink" href="#resizing" title="Permanent link">&para;</a></h3>
+<p>Resizing is super useful to enable you do do simple tasks like coding and low-compute testing with a small instance (uses less of our allocation budget) and then sizing up when necessary for large compute jobs. Note that resizing involves a reboot, so any unsaved work will be lost. The <code>m2.small</code> instance size is sufficient for code development with lightweight processing.</p>
+<p>Resizing is not currently available in CACAO, but you can resize using an alternative interface called <a href="https://jetstream2.exosphere.app/">Exosphere</a>. You will need to select our allocation (BIO220124), go to Instances, clear the filter, find your instance by name, and select it. Resize it via the Actions menu on the top right of the instance page.</p>
+<h3 id="more-details">More details<a class="headerlink" href="#more-details" title="Permanent link">&para;</a></h3>
+<p>More details on instance access and management can be found in the <a href="https://docs.jetstream-cloud.org/">Jetstream2 documentation</a>, including:</p>
+<ul>
+<li><a href="https://docs.jetstream-cloud.org/ui/exo/manage/#instance-management-actions">Instance Management Actions</a></li>
+</ul>
+<p>Note that some instance interactions available via the Exosphere interface are not available for instances created via CACAO.</p>
+<h2 id="using-instances">Using instances<a class="headerlink" href="#using-instances" title="Permanent link">&para;</a></h2>
+<h3 id="ofo-share"><code>/ofo-share/</code><a class="headerlink" href="#ofo-share" title="Permanent link">&para;</a></h3>
+<p>Instances have very limited storage specific to the instance, but they are set up to mount an 8 TB shared volume at <code>/ofo-share/</code>. This is where all project data and code should be stored. For each project you work on, create (or use an existing) subfolder of <code>/ofo-share/</code> to hold the data.</p>
+<h4 id="code-repositories-development">Code repositories: development<a class="headerlink" href="#code-repositories-development" title="Permanent link">&para;</a></h4>
+<p>For code development, each person should create a subfolder <code>/ofo-share/repos-&lt;firstname&gt;</code> to hold all their code repositories. Doing it this way (rather than everyone accessing the same code files) allows each person to work in their own branch and make their own changes that don't affect other people. The code you modify will be accessible to other people (via their own copies of the repo) when you push your commits.</p>
+<p>In contrast to <strong>code</strong> development, the <strong>data</strong> that the repo operates on should be in a general project data folder so that everyone can access it (so we don't need multiple copies of the data on <code>/ofo-share/</code>).</p>
+<h4 id="code-repositories-production">Code repositories: production<a class="headerlink" href="#code-repositories-production" title="Permanent link">&para;</a></h4>
+<p>The folder <code>/ofo-share/utils</code> is intended to hold the current public, production code (generally the most recent commit in the <code>main</code> branch) of our code libraries. Use the code here if you need to use some of our OFO functions for an analysis (as opposed to actively developing/testing them, in which case they should be in your own <code>repos-&lt;firstname&gt;</code> folder). We can regularly <code>git pull</code> in these repos to keep them up to date with the remote, but don't directly edit the code in this folder or push from it.</p>
+<h4 id="temporary-data">Temporary data<a class="headerlink" href="#temporary-data" title="Permanent link">&para;</a></h4>
+<p>For temporary data that you don't want to store in a project's data folder, you can use a folder <code>/ofo-share/scratch-&lt;firstname&gt;</code> or <code>/ofo-share/tmp/</code>.</p>
+<h3 id="data-transfer">Data transfer<a class="headerlink" href="#data-transfer" title="Permanent link">&para;</a></h3>
+<p>For data files on cloud storage such as Box, an incredibly value command line tool is <code>rclone</code>. To set up an account, use <code>rclone config</code> and follow the instructions. Assuming you set up a Box account with the name <code>box_myname</code>, you'd transfer data with a command like: <code>rclone sync box_myname:projects/myproject_data/ /ofo-share/myproject_data --progress --transfers 16</code>.</p>
+<h3 id="jupyter-notebook-jupyter-lab">Jupyter Notebook / Jupyter Lab<a class="headerlink" href="#jupyter-notebook-jupyter-lab" title="Permanent link">&para;</a></h3>
+<p>You can get Jupyter Lab in a browser tab (accessible from anywhere on the internet) using Jupyter server on your instance. It's best if you start the server from the root of the <code>/ofo-share</code> folder so you have easy access to all files there. Run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cd /ofo-share/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/ofo-share/utils/environments/jetstream/jupyter-lab.sh
+</code></pre></div>
+<p>then copy the last URL shown in the terminal and paste it into a browser. Inside a notebook you should be able to choose different kernels (conda environments) that are configured for the user account running the server. The <code>base</code> conda environment is called <code>root</code> here. When you're done, shut down the notebook server (either from the notebook, or from the terminal by doing Control-C twice) to prevent access to the server by others. If you want a basic Jupyter notebook instead of Jupyter Lab, you can use <code>/ofo-share/utils/environments/jetstream/jupyter-notebook.sh</code>.</p>
+<h3 id="rstudio">RStudio<a class="headerlink" href="#rstudio" title="Permanent link">&para;</a></h3>
+<p>Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server has all the same functionality and many conveniences. RStudio Server is a version of RStudio that runs in a browser tab on your local machine, but all the data and compute comes from your remote VM. Access RStudio from the browser on your local computer at <code>https://&lt;ip address&gt;</code>. Log in using your ACCESS-CI username and the password you set up for it (in the "Getting set up" section above). The first time you access RStudio Server via HTTPS, you will likely get a warning about an unsigned SSL certificate, but that is OK; it's the certificate installed by CACAO upon VM creation and it enables a secure connection even though it's not signed. To interface with <code>git</code> for code development in RStudio, you can use the command line or use RStudio's built-in git functionality under the Git tab in the top-right pane (shows up when you've opened a project that is a git repo).</p>
+<p><strong>Accessing <code>/ofo-share/</code> from the RStudio Server file browser:</strong> The RStudio Server file browser defaults to the <code>~/</code> directory. To access a higher-level directory on the instance (and specifically the <code>/ofo-share/</code> folder), you need to click the <code>...</code> in the top  right of the file browser and enter <code>/</code> at the prompt. Then you will see all top-level directories on the instance and you can navigate to <code>/ofo-share/</code>.</p>
+<h3 id="vs-code-for-r">VS Code for R<a class="headerlink" href="#vs-code-for-r" title="Permanent link">&para;</a></h3>
+<h4 id="connecting-to-remote-server-from-vs-code-first-time">Connecting to remote server from VS Code: first time<a class="headerlink" href="#connecting-to-remote-server-from-vs-code-first-time" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install the the VS Code extension "Remote - SSH"</li>
+<li>Connect to the remote VM by clicking the '&gt;&lt;' button in the bottom left</li>
+<li>Click 'Connect to host'.</li>
+<li>Click 'Add new SSH host'. Type <code>ssh &lt;your_access_username&gt;@&lt;vm_ip_address&gt;</code>.</li>
+<li>When prompted, choose to update the SSH config in <code>/home/&lt;username&gt;/.ssh/config</code></li>
+<li>Click the '&gt;&lt;' button again, then 'Connect to host...', then select the host you just added. You may need to repond 'Yes' to accept the fingerprint of the host.</li>
+</ul>
+<h4 id="connecting-to-remote-server-from-vs-code-after-first-time">Connecting to remote server from VS Code: after first time<a class="headerlink" href="#connecting-to-remote-server-from-vs-code-after-first-time" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Click the '&gt;&lt;' button, then 'Connect to host...', then select the host IP (or name) you want to connect to.</li>
+<li>Open a code folder on the remote host by clicking 'Open folder...'. You'll probably want to navigate up the directories (<code>..</code>) and into <code>/ofo-share/repos-&lt;yourname&gt;/</code>.</li>
+</ul>
+<h4 id="setting-up-vs-code-for-r">Setting up VS Code for R<a class="headerlink" href="#setting-up-vs-code-for-r" title="Permanent link">&para;</a></h4>
+<p>Note that if you want to set up your local machine for R editing too, the steps below are not complete because some of them have already been completed on the OFO VM image. For full steps, <a href="https://code.visualstudio.com/docs/languages/r">see here</a>.</p>
+<ul>
+<li>Open the plugins pane (click on the 4 blocks icon in the left)</li>
+<li>Find the <code>R</code> plugin. Install it locally. Then click 'Install in SSH'.</li>
+<li>Find the <code>R Debugger</code> plugin. Install it locally. Then click 'Install in SSH'.</li>
+<li><strong>Set up the radian R terminal</strong> (it has autocompletion, syntax highlighting, etc): <ul>
+<li>In the extensions pane, click the gear next to the R extension, and click 'Extension settings'. Find the setting 'Rterm: Linux'. In the box, enter <code>/opt/radian</code>. NOTE: If your local machine is linux, this setting will also apply there. Therefore I recommend you put a symlink to your local radian binary (likely located at <code>~/.local/bin/radian</code>) at <code>/opt/radian</code>. This is how the VM is set up.</li>
+<li>Enable the extension's "bracketed paste" option: In the extension settings, find the setting 'Bracketed Paste' and check the box.</li>
+</ul>
+</li>
+<li>Code linting is enabled by default. To change what types of issues get flagged by the linter, <a href="https://code.visualstudio.com/docs/languages/r#_linting">see here</a>.</li>
+</ul>
+<h3 id="run-command-line-processes-without-staying-connected">Run command line processes without staying connected<a class="headerlink" href="#run-command-line-processes-without-staying-connected" title="Permanent link">&para;</a></h3>
+<p>Many types of command line processes are long-running and you don't want to have to stay signed in via an SSH connection to keep them running. Examples include large <code>rclone</code> data transfers and long data processing runs. To create processes that stay running even when your SSH connection closes, one approach is to use the <a href="https://github.com/tmux/tmux/wiki"><code>tmux</code></a> or <a href="https://www.gnu.org/software/screen/manual/screen.html"><code>screen</code></a> tools.</p>
+<p>To use <code>tmux</code>, in a SSH session, type <code>tmux</code> and hit enter at the prompt. Now you can run commands like usual, except that if you are disconnected (e.g. you close your terminal window), they continue running. You can reconnect by starting another SSH session and typing <code>tmux attach</code>. You can also run multiple processes ("windows") within one SSH session via <code>tmux</code>. To start a new one, type <code>Control-B C</code>. To move between windows, type <code>Control-B #</code>, where <code>#</code> is the index of the window (indicated in the bottom panel; starts at 0). To close one, switch to it and then type <code>Control-B &amp;</code>.</p>
+<p>To use <code>screen</code>, in a SSH session, type <code>screen</code> and hit enter at the prompt. Now you can run commands like usual, except that if you are disconnected (e.g. you close your terminal window), they continue running. You can reconnect by starting another SSH session and typing <code>screen -dr</code>. You can also run multiple processes ("windows") within one SSH session via <code>screen</code>. To start a new one, type <code>Control-A C</code>. To toggle between that one and the original, type <code>Control-A Control-A</code>. If you create more than two, select from them by typing <code>Control-A Shift-"</code>. To close one, make it active (by selecting it from the menu that appears after typing <code>Control-A Shift-"</code>) and then type <code>Control-A K</code>.</p>
+<h3 id="use-gui-software-via-remote-desktop">Use GUI software via remote desktop<a class="headerlink" href="#use-gui-software-via-remote-desktop" title="Permanent link">&para;</a></h3>
+<p>Instances support a remote desktop that you access via a browser tab. To access it, navigate to the instance's page in CACAO and then click the Web Desktop icon. (If it does not load properly, try first opening a "Web Shell" from CACAO and closing it, and/or waiting 1 minute after unshelving.) Most software can be started via the "Activities" menu, which you can access with the Activities button in the top right (and then searching for the software name) or via the "9 dots" button in the bottom panel. Note that as configured, the bottom panel gets hidden when software windows overlap it, in which case you have to use the "Activities" button.</p>
+<p><strong>Web browser:</strong> Firefox browser comes preinstalled as part of the JS2 featured image.</p>
+<h2 id="metashape">Metashape<a class="headerlink" href="#metashape" title="Permanent link">&para;</a></h2>
+<p>The Metashape GUI is installed on the OFO dev image.</p>
+<p>The Metashape python module is also installed, specifically in the conda environment <code>meta</code>. For running Metashape and the <code>automate-metashape</code> repo code from the command line, switch to the environment using <code>conda activate meta</code>. We aim to keep the <code>meta</code> environment updated with the current version of Metashape.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 24, 2024</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 24, 2024</span>
+  </span>
+
+    
+    
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="Contributors">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
+          
+          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&size=72" alt="youngdjn">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>
