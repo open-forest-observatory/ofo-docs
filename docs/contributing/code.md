@@ -1,3 +1,3 @@
 # Contributing to code
 
-We are currently developing code contributing guidelines. In the meantime, if you are interested in contributing, refer to the contributing guidelines in the repository you are interested in contributing to ([example for MVMT](https://github.com/open-forest-observatory/multiview-mapping-toolkit/blob/main/CONTRIBUTING.md)), or [contact us](https://github.com/orgs/open-forest-observatory/discussions).
+We are currently developing code contributing guidelines. In the meantime, if you are interested in contributing, refer to the contributing guidelines in the repository you are interested in contributing to ([example for Geograypher](https://github.com/open-forest-observatory/geograypher/blob/main/CONTRIBUTING.md)), or [contact us](https://github.com/orgs/open-forest-observatory/discussions).
