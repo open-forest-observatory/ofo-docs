@@ -1,3 +1,3 @@
-# ofo-docs
+## Contributing to the documentation
 
-Follow these [steps](https://docs.openforestobservatory.org/contributing/docs/) to set up a local documentation environment for the Open Forest Observatory project using MkDocs
+To modify or add to the documentation, please refer to our [instructions for contributing](https://docs.openforestobservatory.org/contributing/docs/).
