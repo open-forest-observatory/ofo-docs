@@ -26,7 +26,7 @@ The steps to create a new instance(s) are:
 
 1. Go to [CACAO](https://cacao.jetstream-cloud.org) and select the Deployments tab on the left. Click Add Deployment, select the OFO dev template from the list, and click Next.
     1. For Instance Name, enter a name that's descriptive to you and starts with your name. For example, `derek-dev` or simply `derek`.
-    1. For Boot Image Name, choose the most recent featured Ubuntu image.
+    1. For Boot Image Name, choose the most recent featured Ubuntu image, for example `Featured-Ubuntu22`.
     1. Enter the desired number of instances (usually 1).
     1. Enter a flavor (size). Start with m3.small or m3.quad, as you can always resize later when you need more compute.
     1. Enter the Manila share key and Metashape license server IP address found in the [OFO Credentials](https://docs.google.com/document/d/155AP0P3jkVa-yT53a-QLp7vBAfjRa78gdST1Dfb4fls/edit?usp=sharing) google doc shared with all OFO members.
