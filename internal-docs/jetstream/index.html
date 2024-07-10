@@ -1333,7 +1333,8 @@
 <li>Click on Instances</li>
 <li>Clear the filter</li>
 <li>Click on your instance</li>
-<li>In the top right under "Actions", select "Shelve"</li>
+<li>In the top right under "Actions", select "Shelve"
+1.<strong>Un</strong>check the option to "Release public IP address from this instance while shelved" and then click the <code>Yes</code> icon to confirm you want to shelve.</li>
 </ol>
 <p>Note that this has the same effect as powering off a computer; i.e. all unsaved work will be lost, and next time you will start from a fresh boot. Use this same approach to unshelve your instance when you're ready to resume work, and to resize your instance if you need more compute or memory (see below). Note that when unshelving via Exosphere, you may need to wait ~1 minute before you can open the remote desktop via CACAO.</p>
 <p>Shelving/unshelving can also be done via the <a href="https://cacao.jetstream-cloud.org/home">CACAO</a> interface under Deployments, by pressing the square Stop button to shelve it (or triangle Play button to unshelve it). Using this method though, unshelving takes much longer because it does a check that the VM has all the configurations specified by our template, a generally unnecessary step.</p>
