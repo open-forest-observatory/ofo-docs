@@ -61,7 +61,7 @@ It's fastest to this via the instance's page in [Jetstream Exosphere](https://je
 1. Clear the filter
 1. Click on your instance
 1. In the top right under "Actions", select "Shelve"
-1.**Un**check the option to "Release public IP address from this instance while shelved" and then click the `Yes` icon to confirm you want to shelve.
+1. **Un**check the option to "Release public IP address from this instance while shelved" and then click the `Yes` icon to confirm you want to shelve.
 
 Note that this has the same effect as powering off a computer; i.e. all unsaved work will be lost, and next time you will start from a fresh boot. Use this same approach to unshelve your instance when you're ready to resume work, and to resize your instance if you need more compute or memory (see below). Note that when unshelving via Exosphere, you may need to wait ~1 minute before you can open the remote desktop via CACAO.
 
