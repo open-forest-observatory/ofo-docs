@@ -29,7 +29,7 @@ The steps to create a new instance(s) are:
     1. For Boot Image Name, choose the most recent featured Ubuntu image, for example `Featured-Ubuntu22`.
     1. Enter the desired number of instances (usually 1).
     1. Enter a flavor (size). Start with m3.small or m3.quad, as you can always resize later when you need more compute.
-    1. Enter the Manila share key and Metashape license server IP address found in the [OFO Credentials](https://docs.google.com/document/d/155AP0P3jkVa-yT53a-QLp7vBAfjRa78gdST1Dfb4fls/edit?usp=sharing) google doc shared with all OFO members.
+    1. Enter the the Metashape license server IP address found in the [OFO Credentials](https://docs.google.com/document/d/155AP0P3jkVa-yT53a-QLp7vBAfjRa78gdST1Dfb4fls/edit?usp=sharing) google doc shared with all OFO members.
     1. Click Advanced, enable Configure Boot Disk, change Boot Type to Volume, and enter 60 GB unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB.
 1. [Only necessary if you want to access RStudio Server; can be done at a later time:] SSH into the machine and change your password
     1. `ssh <username>@<ip address>`
