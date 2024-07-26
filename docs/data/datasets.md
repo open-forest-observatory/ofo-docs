@@ -1,6 +1,6 @@
 # OFO datasets
 
-A prototype of our field reference data catalog is available at [https://openforestobservatory.netlify.app/data/](https://openforestobservatory.netlify.app/data/).
+We are pleased to share [a prototype](https://openforestobservatory.netlify.app/data/) of our field reference data catalog.
 
 We are hard at work on the initial release of our drone imagery catalog. In the meantime, preliminary versions of some of our most frequently requested datasets are linked below. If you don't find what you are looking for here, please [contact us](https://openforestobservatory.org/about/) as we may be able to provide access to additional preliminary datasets that will meet your needs.
 
