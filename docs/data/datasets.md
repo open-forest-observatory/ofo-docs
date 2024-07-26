@@ -43,7 +43,7 @@ This drone dataset footprint covers the same field reference dataset linked abov
 
 #### Over-canopy drone imagery
 
-[120 m nadir](https://ucdavis.box.com/s/4hdivzmejv0y4nxz6u5rsvu73qjz1m16)
+[120 m nadir](https://ucdavis.box.com/s/qg1nw8pw64zpua13jiv8l36gk502xhtd)
 
 [80 m oblique (35 deg)](https://ucdavis.box.com/s/cx3a2ah30lcoi9qqrm7rxr0zgciztb0b)
 
