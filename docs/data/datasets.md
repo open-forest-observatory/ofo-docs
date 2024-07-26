@@ -2,7 +2,7 @@
 
 We are pleased to share [a prototype](https://openforestobservatory.netlify.app/data/) of our field reference data catalog.
 
-We are hard at work on the initial release of our drone imagery catalog. In the meantime, preliminary versions of some of our most frequently requested datasets are linked below. If you don't find what you are looking for here, please [contact us](https://openforestobservatory.org/about/) as we may be able to provide access to additional preliminary datasets that will meet your needs.
+We are hard at work on the initial release of our drone imagery catalog. In the meantime, preliminary versions of some of our most frequently requested datasets are linked below. If you don't find what you are looking for here, please [contact us](https://openforestobservatory.org/about/), as we may be able to provide access to additional preliminary datasets that will meet your needs.
 
 ### Emerald Point
 
@@ -14,13 +14,13 @@ The drone imagery datasets linked here have a very high image denstiy. For a mor
 
 [120 m nadir](https://ucdavis.box.com/s/hb78n583zy24ifnng6k5ts1a1q16wztu)
 
-[90 m oblique (25 deeg)](https://ucdavis.box.com/s/vfcugxwxnybijdjs90d3cfh57w1l8mst)
+[90 m oblique (25 deg)](https://ucdavis.box.com/s/vfcugxwxnybijdjs90d3cfh57w1l8mst)
 
 #### Field reference data
 
 [Visualization](https://openforestobservatory.netlify.app/data-field-ref-plot-details/0068/)
 
-Please note the data licensing details on that page, which apply to the data access link below.
+Please note the data licensing details on the visualization page, which apply to the data access link below.
 
 [Data access](https://ucdavis.box.com/s/56qrdofabfr69tyc5aqmyrjta11a829t)
 
