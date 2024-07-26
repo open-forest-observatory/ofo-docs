@@ -6,7 +6,7 @@ We are hard at work on the initial release of our drone imagery catalog. In the 
 
 ### Emerald Point
 
-This is a relatively flat mixed-conifer stand on peninsula on the shore of Lake Tahoe that contains a large (> 3 ha) field based tree map with detailed tree-level attributes. The drone imagery and field reference data linked here were the basis for the [paper by Young et al. (2022)](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13860).
+This is a relatively flat mixed-conifer stand on a peninsula on the shore of Lake Tahoe, California. It contains a large (> 3 ha) field based tree map with detailed tree-level attributes. The drone imagery and field reference data linked here were the basis for the [paper by Young et al. (2022)](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13860).
 
 #### Over-canopy drone imagery
 
