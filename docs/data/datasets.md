@@ -87,7 +87,7 @@ Field data file available upon request
 
 [120 m nadir](https://ucdavis.box.com/s/b9j2v6t2aev62755qajqbhqr2oam0rfp)
 
-[80 m oblique (35 deg)](https://ucdavis.box.com/s/hzfh9gxs7j1w57x90jyhlhnbnc4j4hqx)
+[80 m oblique (35 deg)](https://ucdavis.box.com/s/i0j9sa31bv2zvivqvcyqv4zvuy0yxus4)
 
 #### Under-canopy imagery
 
