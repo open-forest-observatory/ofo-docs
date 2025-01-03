@@ -6,37 +6,71 @@
 
 These steps are required once per new user.
 
-1. Create an [ACCESS](https://access-ci.org/) account and provide your username to your supervisor, so they can add you to our project.
-1. [Possibly not required for web desktop use only:] Create (or locate an existing) SSH key. Here's [a detailed tutorial](https://happygitwithr.com/ssh-keys) with some good context (read sections 10.1 through 10.4). Note: this tutorial is designed for R and RStudio users, but you can ignore all the refenreces to R and RStudio and focus on the shell instructions.
-1. [Once added to our ACCESS project:] Add credentials in [CACAO](https://cacao.jetstream-cloud.org/) (after logging in with your ACCESS credentials):
-    1. The OFO ACCESS project (BIO220124):  go to Credentials (key icon), click Add Credential in the top right, and click Cloud Credential. Choose Jetstream2, log in at the ACCESS prompt, and select the project BIO220124.
-    1. Your public SSH key: go to Credentials (key icon), click Add Credential in the top right, and click SSH Public Key. Enter a public key name (e.g. `derek-laptop01`) and paste in the key text [if you have skipped the step of creating a SSH key, just enter any dummy text here].
-1. Add your public SSH key in [Exosphere](https://jetstream2.exosphere.app/): Log in with your ACCESS credentials (once added to our project), go to our project/allocation (BIO220124), click Create in the top right, and click SSH Public Key. Enter a public key name (e.g. derek-laptop01) and paste in the key text [if you have skipped the step of creating a SSH key, just enter any dummy text here].
+1. Create an [ACCESS](https://access-ci.org/) account and provide your username to your supervisor,
+   so they can add you to our project. Before performing the next steps, wait until your supervisor
+   confirms you are added to our ACCESS project.
+1. Create (or locate an existing) SSH key. You can google instructions for your operating system, or
+   follow [this suggested
+   guide](https://medium.com/@mbohlip/generating-ssh-key-pairs-on-a-windows-mac-linux-0e9993bf2985).
+   If you'd like more detail, here's [more detailed tutorial](https://happygitwithr.com/ssh-keys) (read
+   sections 10.1 through 10.4). Note: this detailed tutorial is designed for R and RStudio users, but you can
+   ignore all the refenreces to R and RStudio and focus on the shell instructions.
+1. Add your public SSH key in [Exosphere](https://jetstream2.exosphere.app/): Log in with your ACCESS credentials (once added to our project), go to our project/allocation (BIO220124), click Create in the top right, and click SSH Public Key. Enter a public key name (e.g. `derek-laptop01`) and paste in the key text.
+
+If you will need CACAO to create Kubernetes clusters (such as if you are helping with infrastructure engineering--your supervisor will tell you if so), you should also do the following:
+
+1. Add credentials in [CACAO](https://cacao.jetstream-cloud.org/):
+   1. Log in to [CACAO](https://cacao.jetstream-cloud.org/) with your ACCESS credentials.
+   2. Add a credential for the OFO ACCESS project (BIO220124): go to Credentials (key icon), click Add Credential in the top right, and click Cloud Credential. Choose Jetstream2, log in at the ACCESS prompt, and select the project BIO220124.
+   3. Add your public SSH key: go to Credentials (key icon), click Add Credential in the top right, and click SSH Public Key. Enter a public key name (e.g. `derek-laptop01`) and paste in the key text .
+
 
 ### New VMs
 
-These steps are required once for each new VM that a user desires. This should be done during initial onboarding (after the new user steps above), and it can also be done whenever an updated VM is desired. There are several events that may trigger users to want a new VM:
+These steps are required once for each new VM that a user desires. This should be done during initial onboarding (after the new user steps above), and it can also be done whenever an updated or additional VM is desired. There are several events that may trigger users to want a new VM:
 
 - Jetstream2 updates their featured Ubuntu image
-- OFO updates its [development VM template](https://github.com/open-forest-observatory/cacao-terraform-ofo) (which is applied on top of the current Jetstream2 featured Ubuntu image)
+- OFO updates its [development VM template](https://github.com/open-forest-observatory/ofo-ansible) (which is applied on top of a Jetstream2 featured Ubuntu image)
 - You need more compute nodes
 - You screwed up your VM configuration and want to start fresh
 
-The steps to create a new instance(s) are:
+Follow these steps to createand configure a new instance:
 
-1. Go to [CACAO](https://cacao.jetstream-cloud.org) and select the Deployments tab on the left. Click Add Deployment, select the OFO dev template from the list, and click Next.
+1. Go to [Exosphere](https://jetstream2.exosphere.app/exosphere/) and select our project/allocation (BIO220124).
+2. Click Create -> Instance in the top right.
+3. Click the button for Ubuntu 22.04 (we are working to transition to the newer 24.04 but need one JS2 bug to be worked out first).
+4. For Name, enter a name that's descriptive to you and starts with your name. For example, `derek-01`.
+5. For Flavor, select **m3.small** to start, unless you know you will need more compute immediately. You can resize later when you need more compute. Exception: If you will need a g3.xl (unlikely for new OFO members), you need to create it now, because the GPU drivers are different for this specific flavor.
+6. For **Choose a root disk size**, select **Custom** and enter `60` (GB) unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB.
+7. For **Enable web desktop**, select **Yes**, unless you know you will not need it (unlikely for new OFO members).
+8. For **Choose an SSH public key**, select the key you added in the previous section.
+9. Click **Create**.
+10. Pull up the instance's page by clicking on the **Instances** box and then clicking on the instance name. Wait for the status in the top right to change to **Ready** in green (approx. 1 minute).
+11. Click the copy (clipboard) icon next to the Public IP Address to copy it to your clipboard.
+12. Open a terminal on your local machine and SSH into the instance using the copied IP address: `ssh exouser@<ip address>`. Alternatively, you can use the Web Shell button on the instance page to open a terminal in your browser.
+13. Copy the following set of commands, paste them into your terminal, **replace the final `<password>` with a password you will remember**, and hit enter.
+```
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt-get install ansible-core -y
+ansible-galaxy collection install ansible.posix
+ansible-pull -U https://github.com/open-forest-observatory/ofo-ansible -i inventory -e CREDS_PASSWORD=<password>
+```
+14. More steps.
+
+
+14. Go to [CACAO](https://cacao.jetstream-cloud.org) and select the Deployments tab on the left. Click Add Deployment, select the OFO dev template from the list, and click Next.
     1. For Instance Name, enter a name that's descriptive to you and starts with your name. For example, `derek-dev` or simply `derek`.
-    1. For Boot Image Name, choose `Featured-Ubuntu22`.
-    1. Enter the desired number of instances (usually 1).
-    1. Enter a flavor (size). Start with m3.small or m3.quad, as you can always resize later when you need more compute.
-    1. Enter the the Metashape license server IP address found in the [OFO Credentials](https://docs.google.com/document/d/155AP0P3jkVa-yT53a-QLp7vBAfjRa78gdST1Dfb4fls/edit?usp=sharing) google doc shared with all OFO members.
-    1. Click Advanced, enable Configure Boot Disk, change Boot Type to Volume, and enter 60 GB unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB.
-    1. Click submit. It may take around ten minutes for your instance to be ready. 
-1. [Only necessary if you want to access RStudio Server; can be done at a later time:] SSH into the machine and change your password
+    2. For Boot Image Name, choose `Featured-Ubuntu22`.
+    3. Enter the desired number of instances (usually 1).
+    4. Enter a flavor (size). Start with m3.small or m3.quad, as you can always resize later when you need more compute.
+    5. Enter the the Metashape license server IP address found in the [OFO Credentials](https://docs.google.com/document/d/155AP0P3jkVa-yT53a-QLp7vBAfjRa78gdST1Dfb4fls/edit?usp=sharing) google doc shared with all OFO members.
+    6. Click Advanced, enable Configure Boot Disk, change Boot Type to Volume, and enter 60 GB unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB.
+    7. Click submit. It may take around ten minutes for your instance to be ready. 
+15. [Only necessary if you want to access RStudio Server; can be done at a later time:] SSH into the machine and change your password
     1. `ssh <username>@<ip address>`
-    1. Your username is the same as your [ACCESS-CI](https://access-ci.org/) username.
-    1. If you lose track of the IP address, you can find it in [CACAO](https://cacao.jetstream-cloud.org/): go to Deployments and select the deployment you want to access.
-    1. Set a password for your user: `sudo passwd <username>`. Choose a secure password because if others can guess it they could access our VMs and shared data volume.
+    2. Your username is the same as your [ACCESS-CI](https://access-ci.org/) username.
+    3. If you lose track of the IP address, you can find it in [CACAO](https://cacao.jetstream-cloud.org/): go to Deployments and select the deployment you want to access.
+    4. Set a password for your user: `sudo passwd <username>`. Choose a secure password because if others can guess it they could access our VMs and shared data volume.
 
 You should be the only one who can access this instance/VM, so it should be safe to store credentials on. Examples of credentials you might store are: a Box account login (stored in `rclone`; see below), so you can transfer files between the VM and Box; GitHub credentials, so you can push to repos without entering a password every time.
 
