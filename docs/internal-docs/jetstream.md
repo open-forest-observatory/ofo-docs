@@ -37,10 +37,10 @@ These steps are required once for each new VM that a user desires. This should b
 Follow these steps to createand configure a new instance:
 
 1. Go to [Exosphere](https://jetstream2.exosphere.app/exosphere/) and select our project/allocation (BIO220124).
-2. Click Create -> Instance in the top right.
-3. Click the button for Ubuntu 22.04 (we are working to transition to the newer 24.04 but need one JS2 bug to be worked out first).
-4. For Name, enter a name that's descriptive to you and starts with your name. For example, `derek-01`.
-5. For Flavor, select **m3.small** to start, unless you know you will need more compute immediately. You can resize later when you need more compute. Exception: If you will need a g3.xl (unlikely for new OFO members), you need to create it now, because the GPU drivers are different for this specific flavor.
+2. Click **Create** -> **Instance** in the top right.
+3. Click the button for **Ubuntu 22.04** (we are working to transition to the newer 24.04 but need one JS2 bug to be worked out first).
+4. For **Name**, enter a name that's descriptive to you and starts with your name. For example, `derek-01`.
+5. For **Flavor**, select **m3.small** to start, unless you know you will need more compute immediately. You can resize later when you need more compute. Exception: If you will need a g3.xl (unlikely for new OFO members), you need to create it now, because the GPU drivers are different for this specific flavor.
 6. For **Choose a root disk size**, select **Custom** and enter `60` (GB) unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB.
 7. For **Enable web desktop**, select **Yes**, unless you know you will not need it (unlikely for new OFO members).
 8. For **Choose an SSH public key**, select the key you added in the previous section.
@@ -55,7 +55,7 @@ sudo apt-get install ansible-core -y
 ansible-galaxy collection install ansible.posix
 ansible-pull -U https://github.com/open-forest-observatory/ofo-ansible -i inventory -e CREDS_PASSWORD=<password>
 ```
-14. More steps.
+If the process hangs (no updates on screen for > 1 minute), you may need to press **Ctrl-C** to cancel it, then **up arrow** to recall your last command, then **Enter** to start it again. It should take about 15 minutes total. When it finishes, it will display a **PLAY RECAP** and take you back to your command prompt.
 
 
 14. Go to [CACAO](https://cacao.jetstream-cloud.org) and select the Deployments tab on the left. Click Add Deployment, select the OFO dev template from the list, and click Next.
