@@ -29,93 +29,60 @@ If you will need CACAO to create Kubernetes clusters (such as if you are helping
 
 These steps are required once for each new VM that a user desires. This should be done during initial onboarding (after the new user steps above), and it can also be done whenever an updated or additional VM is desired. There are several events that may trigger users to want a new VM:
 
-- Jetstream2 updates their featured Ubuntu image
 - OFO updates its [development VM template](https://github.com/open-forest-observatory/ofo-ansible) (which is applied on top of a Jetstream2 featured Ubuntu image)
 - You need more compute nodes
 - You screwed up your VM configuration and want to start fresh
 
-Follow these steps to createand configure a new instance:
+Follow these steps to create and configure a new instance:
 
 1. Go to [Exosphere](https://jetstream2.exosphere.app/exosphere/) and select our project/allocation (BIO220124).
 2. Click **Create** -> **Instance** in the top right.
-3. Click the button for **Ubuntu 22.04** (we are working to transition to the newer 24.04 but need one JS2 bug to be worked out first).
+3. Click the **By Image** tab, search for `ofo-dev`, find the newest image (should be at the bottom), and click *Create Instance*.
 4. For **Name**, enter a name that's descriptive to you and starts with your name. For example, `derek-01`.
-5. For **Flavor**, select **m3.small** to start, unless you know you will need more compute immediately. You can resize later when you need more compute. Exception: If you will need a g3.xl (unlikely for new OFO members), you need to create it now, because the GPU drivers are different for this specific flavor.
-6. For **Choose a root disk size**, select **Custom** and enter `60` (GB) unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB.
+5. For **Flavor**, select **m3.small** to start, unless you know you will need more compute immediately. You can resize later when you need more compute. Exception: If you will need a g3.xl (unlikely for new OFO members), you may need to create it now, because the GPU drivers are different for this specific flavor (though JS2 may have resolved this).
+6. For **Choose a root disk size**, select **Custom** and enter `50` (GB) unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB. [This selection actually does not affect the instance creation, which uses the image's disk size.]
 7. For **Enable web desktop**, select **Yes**, unless you know you will not need it (unlikely for new OFO members).
 8. For **Choose an SSH public key**, select the key you added in the previous section.
 9. Click **Create**.
-10. Pull up the instance's page by clicking on the **Instances** box and then clicking on the instance name. Wait for the status in the top right to change to **Ready** in green (approx. 1 minute).
-11. Click the copy (clipboard) icon next to the Public IP Address to copy it to your clipboard.
-12. Open a terminal on your local machine and SSH into the instance using the copied IP address: `ssh exouser@<ip address>`. Alternatively, you can use the Web Shell button on the instance page to open a terminal in your browser.
-13. Copy the following set of commands, paste them into your terminal, **replace the final `<password>` with a password you will remember**, and hit enter.
-```
-sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt-get install ansible-core -y
-ansible-galaxy collection install ansible.posix
-ansible-pull -U https://github.com/open-forest-observatory/ofo-ansible -i inventory -e CREDS_PASSWORD=<password>
-```
-If the process hangs (no updates on screen for > 1 minute), you may need to press **Ctrl-C** to cancel it, then **up arrow** to recall your last command, then **Enter** to start it again. It should take about 15 minutes total. When it finishes, it will display a **PLAY RECAP** and take you back to your command prompt.
+10. Pull up the instance's page by clicking on the **Instances** box and then clicking on the instance name. Wait for the status in the top-right to change to **Ready** in green (2-3 min).
 
-
-14. Go to [CACAO](https://cacao.jetstream-cloud.org) and select the Deployments tab on the left. Click Add Deployment, select the OFO dev template from the list, and click Next.
-    1. For Instance Name, enter a name that's descriptive to you and starts with your name. For example, `derek-dev` or simply `derek`.
-    2. For Boot Image Name, choose `Featured-Ubuntu22`.
-    3. Enter the desired number of instances (usually 1).
-    4. Enter a flavor (size). Start with m3.small or m3.quad, as you can always resize later when you need more compute.
-    5. Enter the the Metashape license server IP address found in the [OFO Credentials](https://docs.google.com/document/d/155AP0P3jkVa-yT53a-QLp7vBAfjRa78gdST1Dfb4fls/edit?usp=sharing) google doc shared with all OFO members.
-    6. Click Advanced, enable Configure Boot Disk, change Boot Type to Volume, and enter 60 GB unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB.
-    7. Click submit. It may take around ten minutes for your instance to be ready. 
-15. [Only necessary if you want to access RStudio Server; can be done at a later time:] SSH into the machine and change your password
-    1. `ssh <username>@<ip address>`
-    2. Your username is the same as your [ACCESS-CI](https://access-ci.org/) username.
-    3. If you lose track of the IP address, you can find it in [CACAO](https://cacao.jetstream-cloud.org/): go to Deployments and select the deployment you want to access.
-    4. Set a password for your user: `sudo passwd <username>`. Choose a secure password because if others can guess it they could access our VMs and shared data volume.
-
-You should be the only one who can access this instance/VM, so it should be safe to store credentials on. Examples of credentials you might store are: a Box account login (stored in `rclone`; see below), so you can transfer files between the VM and Box; GitHub credentials, so you can push to repos without entering a password every time.
+Note that others in our project can access the instances you create, so *do not store unencrypted credentials* or other private or sensitive information on them. See the Security section below for solutions.
 
 ## Basic instance access and management
 
 ### SSH access
 
-SSH into your instance using `ssh <username>@<ip address>`. You can find the IP address of your instance in [CACAO](https://cacao.jetstream-cloud.org/) under Deployments. Your username is the same as your [ACCESS-CI](https://access-ci.org/) username.
+SSH into your instance using `ssh exouser@<ip address>`. You can find the IP address of your instance on the instance's page in [Exosphere](https://jetstream2.exosphere.app/exosphere/).
 
 ### Remote desktop access
 
-To access a graphical remote desktop in a browser tab, navigate to that instance's page in [CACAO](https://cacao.jetstream-cloud.org/) under Deployments and click the  "Web Desktop" button.
+To access a graphical remote desktop in a browser tab, navigate to that instance's page in [Exosphere](https://jetstream2.exosphere.app/exosphere/) and click the **Web Desktop** button.
 
 ### Shelving and unshelving
 
 It is **very important** that you shelve your instances when not using them, especially the larger instances. 
 
-It's fastest to this via the instance's page in [Jetstream Exosphere](https://jetstream2.exosphere.app/exosphere/):
+The easiest way to shelve and unshelve is via the instance's page in [Exosphere](https://jetstream2.exosphere.app/exosphere/):
 
 1. Go to our project/allocation (BIO220124)
 1. Click on Instances
-1. Clear the filter
 1. Click on your instance
 1. In the top right under "Actions", select "Shelve"
-1. **Un**check the option to "Release public IP address from this instance while shelved" and then click the `Yes` icon to confirm you want to shelve.
 
-Note that this has the same effect as powering off a computer; i.e. all unsaved work will be lost, and next time you will start from a fresh boot. Use this same approach to unshelve your instance when you're ready to resume work, and to resize your instance if you need more compute or memory (see below). Note that when unshelving via Exosphere, you may need to wait ~1 minute before you can open the remote desktop via CACAO.
-
-Shelving/unshelving can also be done via the [CACAO](https://cacao.jetstream-cloud.org/home) interface under Deployments, by pressing the square Stop button to shelve it (or triangle Play button to unshelve it). Using this method though, unshelving takes much longer because it does a check that the VM has all the configurations specified by our template, a generally unnecessary step.
+Note that this has the same effect as powering off a computer: all unsaved work will be lost, and next time you will start from a fresh boot. Use this same approach to unshelve your instance when you're ready to resume work, and to resize your instance if you need more compute or memory (see below). Note that after unshelving, there may be a brief delay before the web desktop becomes available or before you can SSH in.
 
 
 ### Resizing
 
 Resizing is super useful to enable you do do simple tasks like coding and low-compute testing with a small instance (uses less of our allocation budget) and then sizing up when necessary for large compute jobs. Note that resizing involves a reboot, so any unsaved work will be lost. The `m2.small` instance size is sufficient for code development with lightweight processing.
 
-Resizing is not currently available in CACAO, but you can resize using an alternative interface called [Exosphere](https://jetstream2.exosphere.app/). You will need to select our allocation (BIO220124), go to Instances, clear the filter, find your instance by name, and select it. Resize it via the Actions menu on the top right of the instance page.
+Resize the instance via the instance's [Exosphere](https://jetstream2.exosphere.app/) page, using the Actions menu on the top right of the instance page.
 
 ### More details
 
 More details on instance access and management can be found in the [Jetstream2 documentation](https://docs.jetstream-cloud.org/), including:
 
 - [Instance Management Actions](https://docs.jetstream-cloud.org/ui/exo/manage/#instance-management-actions)
-
-Note that some instance interactions available via the Exosphere interface are not available for instances created via CACAO.
- 
 
 ## Using instances
 
@@ -139,7 +106,9 @@ For temporary data that you don't want to store in a project's data folder, you 
 
 ### Data transfer
 
-For data files on cloud storage such as Box, an incredibly value command line tool is `rclone`. To set up an account, use `rclone config` and follow the instructions. Assuming you set up a Box account with the name `box_myname`, you'd transfer data with a command like: `rclone sync box_myname:projects/myproject_data/ /ofo-share/myproject_data --progress --transfers 16`.
+For data files on cloud storage such as Box or CyVerse, an incredibly value command line tool is `rclone`. To set up an account, use `rclone config` and follow the instructions. Assuming you set up a Box account with the name `box_myname`, you'd transfer data with a command like: `rclone sync box_myname:projects/myproject_data/ /ofo-share/myproject_data --progress --transfers 16`.
+
+Please note that it is essential that you **encrypt your rclone configuration file**, as it will contain your login credentials to cloud storage providers. To do this, run `rclone config` and select the option "Set configuration password".
 
 ### Jupyter Notebook / Jupyter Lab
 
@@ -150,22 +119,30 @@ cd /ofo-share/
 /ofo-share/utils/environments/jetstream/jupyter-lab.sh
 ```
 
-then copy the last URL shown in the terminal and paste it into a browser. Inside a notebook you should be able to choose different kernels (conda environments) that are configured for the user account running the server. The `base` conda environment is called `root` here. When you're done, shut down the notebook server (either from the notebook, or from the terminal by doing Control-C twice) to prevent access to the server by others. If you want a basic Jupyter notebook instead of Jupyter Lab, you can use `/ofo-share/utils/environments/jetstream/jupyter-notebook.sh`.
+then copy the last URL shown in the terminal and paste it into a browser. Inside a notebook you should be able to choose different kernels (conda environments) that are configured for the user account running the server. When you're done, shut down the notebook server (either from the notebook, or from the terminal by doing Control-C twice) to prevent access to the server by others. If you want a basic Jupyter notebook instead of Jupyter Lab, you can use `/ofo-share/utils/environments/jetstream/jupyter-notebook.sh`.
 
 ### RStudio
 
-Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server has all the same functionality and many conveniences. RStudio Server is a version of RStudio that runs in a browser tab on your local machine, but all the data and compute comes from your remote VM. Access RStudio from the browser on your local computer at `https://<ip address>`. Log in using your ACCESS-CI username and the password you set up for it (in the "Getting set up" section above). The first time you access RStudio Server via HTTPS, you will likely get a warning about an unsigned SSL certificate, but that is OK; it's the certificate installed by CACAO upon VM creation and it enables a secure connection even though it's not signed. To interface with `git` for code development in RStudio, you can use the command line or use RStudio's built-in git functionality under the Git tab in the top-right pane (shows up when you've opened a project that is a git repo).
+Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server has all the same functionality and many conveniences. RStudio Server is a version of RStudio that runs in a browser tab on your local machine, but all the data and compute comes from your remote VM. Access RStudio from the browser on your local computer at `https://<ip address>`. Log in using username `exouser` and the passphrase found on your instance's page in [Exosphere](https://jetstream2.exosphere.app/). The first time you access RStudio Server via HTTPS, you will likely get a warning about an unsigned SSL certificate, but that is OK; it's the certificate installed upon VM creation and it enables a secure connection even though it's not signed.
 
-**Accessing `/ofo-share/` from the RStudio Server file browser:** The RStudio Server file browser defaults to the `~/` directory. To access a higher-level directory on the instance (and specifically the `/ofo-share/` folder), you need to click the `...` in the top  right of the file browser and enter `/` at the prompt. Then you will see all top-level directories on the instance and you can navigate to `/ofo-share/`.
+#### RStudio and git
 
-### VS Code for R
+To interface with `git` for code development in RStudio, you can use the command line or use RStudio's built-in git functionality under the Git tab in the top right pane (shows up when you've opened a project that is a git repo). However, we recommend that you use VS Code for git (either via its graphical tools or its terminal) because it does not require storing your credentials on the VM. If you do want to use RStudio's git functionality or the VM's native terminal (not via VS Code), you need to set up a private encrypted folder to store your git credentials so they cannot be accessed by others on our project. See the [Security](#security) section below for instructions.
+
+#### RStudio and `/ofo-share`
+
+The RStudio Server file browser defaults to the `~/` directory. To access a higher-level directory on the instance (and specifically the `/ofo-share/` folder), you need to click the `...` in the top  right of the file browser and enter `/` at the prompt. Then you will see all top-level directories on the instance and you can navigate to `/ofo-share/`.
+
+### VS Code
+
+[VS Code](https://code.visualstudio.com/) is a very powerful and flexible code editor that can be run on your local machine. It is strong for both Python and R (though its debugging features are more finnicky than those in RStudio). Your local instance of VS Code can easily connect to JS2 VMs to edit and execute code remotely, so you only need to install VS Code locally.
 
 #### Connecting to remote server from VS Code: first time
 
 - Install the the VS Code extension "Remote - SSH"
 - Connect to the remote VM by clicking the '><' button in the bottom left
 - Click 'Connect to host'.
-- Click 'Add new SSH host'. Type `ssh <your_access_username>@<vm_ip_address>`.
+- Click 'Add new SSH host'. Type `ssh exouser@<vm_ip_address>`.
 - When prompted, choose to update the SSH config in `/home/<username>/.ssh/config`
 - Click the '><' button again, then 'Connect to host...', then select the host you just added. You may need to repond 'Yes' to accept the fingerprint of the host.
 
@@ -176,7 +153,7 @@ Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server h
 
 #### Setting up VS Code for R
 
-Note that if you want to set up your local machine for R editing too, the steps below are not complete because some of them have already been completed on the OFO VM image. For full steps, [see here](https://code.visualstudio.com/docs/languages/r).
+Note that if you want to set up your local machine for R editing too, the steps below are not complete because some additional steps have already been completed on the OFO VM image. For full steps, [see here](https://code.visualstudio.com/docs/languages/r).
 
 - Open the plugins pane (click on the 4 blocks icon in the left)
 - Find the `R` plugin. Install it locally. Then click 'Install in SSH'.
@@ -205,3 +182,39 @@ Instances support a remote desktop that you access via a browser tab. To access 
 The Metashape GUI is installed on the OFO dev image.
 
 The Metashape python module is also installed, specifically in the conda environment `meta`. For running Metashape and the `automate-metashape` repo code from the command line, switch to the environment using `conda activate meta`. We aim to keep the `meta` environment updated with the current version of Metashape.
+
+## Security
+
+Anyone in our Jetstream project can access the instances you create, so *do not store unencrypted credentials* or other private or sensitive information on them. Here are some solutions for common credentials.
+
+### Rclone
+
+To store your rclone configuration file securely, you can encrypt it using `rclone config`. Run `rclone config` and select the option "Set configuration password". This will encrypt your configuration file so that it cannot be read by others. You will need to enter the password you set each time you run `rclone`.
+
+### git
+
+VS Code's Remote SSH extension is magic for working with git: it forwards your local machine's git credentials to the VM whenever necessary, without ever storing your credentials on the VM. This applies to terminals opened in VS Code as well as VS Code's graphical git tools. Therefore, the top recommendation is to use VS Code for performing all git operations. If you do not normally use VS Code for your project, you can still use it just for git operations. Follow the [instructions above](#vs-code) for connecting your local VS Code to your remote VM. Then just click the "open folder" button and navigate to the folder containing your cloned git repo. It will open the folder, and the left sidebar will contain options for browsing and opening the repo's files, as well as for performing git operations. You can also open a terminal inside VS Code and interact with git via the command line.
+
+If you must use the VM's command line (outside VS Code) or RStudio's git functionality, you must set up a private encrypted folder to store your git credentials so they cannot be accessed by others on our project. Please see the [private encrypted folder](#private-encrypted-folder) section below.
+
+### Browser logins
+
+Sometimes the easiest way to access files is via the Firefox browser in the VM's remote desktop, but often you will need to enter passwords to log in to websites. Don't use the Firefox's built-in password store; use a password manager extension such as [Bitwarden](https://bitwarden.com/). The password manager will store your passwords securely in the cloud (encrypted with a master password) and allow you to log in to websites without typing your password. The password manager will not store your passwords on the VM, so they will not be accessible to others in our project.
+
+### Other credentials
+
+If you must store other credentials on the VM, you should use a private encrypted folder. See the [private encrypted folder](#private-encrypted-folder) section below. Let Derek know what other use cases you have for storing credentials on the VM, and he can help you set up a secure solution, such as better integration with the private encrypted folder described below.
+
+### Private encrypted folder
+
+There is a shell script automatically loaded onto the OFO dev image that will create a private encrypted folder for you. This folder will be mounted at ~/Private and will be encrypted with a passphrase that only you know. You can store your credentials in this folder, decrypt them when needed, and they will only be accessible to your current login session.
+
+After set up, there are a few ways to decrypt your private folder:
+- When you open the web desktop, after about a minute, you will get a prompt box with a button "Run this action now". Click the button and enter your passphrase.
+- When connected to a terminal (SSH or web shell), you can run the command `dec` (which is an alias for the `ecryptfs-mount-privage` and enter your passphrase.
+
+When your private folder is decrypted, you will see all the files in it. When it is decrypted, it will just show a readme.txt file explaining that it is a private folder and how to decrypt it. When you are done with the files in the folder, you can run the command `enc` (which is an alias for `ecryptfs-umount-private`) to re-encrypt the folder, or simply log out or close your SSH session or web shell and it will be automatically re-encrypted.
+
+Part of the configuration around the private folder (which is handled automatically -- for git credentials only -- by the setup script referenced below) involves putting your credentials file in the ~/Private folder and symlinking to it from the place where the credentials file is expected. For git credentials, the file `~/.git-credentials` is moved to `~/Private/.git-credentials` and a symlink to this location is placed in the original location. This way, the git credential helper will read the credentials from the symlinked file, which is decrypted when you run `dec` and encrypted when you run `enc`. When the private folder is encrypted, the symlinked file will be empty and the git credential helper will not be able to read any credentials.
+
+To set up this folder, run the following command in a terminal on the VM: `/opt/setup-private-folder.sh` and provide a password at the prompt.
