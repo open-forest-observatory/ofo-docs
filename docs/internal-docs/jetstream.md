@@ -46,7 +46,7 @@ Follow these steps to create and configure a new instance:
 9. Click **Create**.
 10. Pull up the instance's page by clicking on the **Instances** box and then clicking on the instance name. Wait for the status in the top-right to change to **Ready** in green (2-3 min).
 
-Note that others in our project can access the instances you create, so *do not store unencrypted credentials* or other private or sensitive information on them. See the Security section below for solutions.
+Note that others in our project can access the instances you create, so *do not store unencrypted credentials* or other private or sensitive information on them. See the [Security](#security) section below for solutions.
 
 ## Basic instance access and management
 
