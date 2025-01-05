@@ -187,7 +187,7 @@ The Metashape python module is also installed, specifically in the conda environ
 
 Anyone in our Jetstream project can access the instances you create, so *do not store unencrypted credentials* or other private or sensitive information on them. Here are some solutions for common credentials.
 
-### Rclone
+### rclone
 
 To store your rclone configuration file securely, you can encrypt it using `rclone config`. Run `rclone config` and select the option "Set configuration password". This will encrypt your configuration file so that it cannot be read by others. You will need to enter the password you set each time you run `rclone`.
 
