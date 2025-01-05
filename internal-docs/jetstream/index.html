@@ -1118,7 +1118,7 @@
           <li class="md-nav__item">
   <a href="#rclone" class="md-nav__link">
     <span class="md-ellipsis">
-      Rclone
+      rclone
     </span>
   </a>
   
@@ -1490,7 +1490,7 @@
           <li class="md-nav__item">
   <a href="#rclone" class="md-nav__link">
     <span class="md-ellipsis">
-      Rclone
+      rclone
     </span>
   </a>
   
@@ -1693,7 +1693,7 @@
 <p>The Metashape python module is also installed, specifically in the conda environment <code>meta</code>. For running Metashape and the <code>automate-metashape</code> repo code from the command line, switch to the environment using <code>conda activate meta</code>. We aim to keep the <code>meta</code> environment updated with the current version of Metashape.</p>
 <h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <p>Anyone in our Jetstream project can access the instances you create, so <em>do not store unencrypted credentials</em> or other private or sensitive information on them. Here are some solutions for common credentials.</p>
-<h3 id="rclone">Rclone<a class="headerlink" href="#rclone" title="Permanent link">&para;</a></h3>
+<h3 id="rclone">rclone<a class="headerlink" href="#rclone" title="Permanent link">&para;</a></h3>
 <p>To store your rclone configuration file securely, you can encrypt it using <code>rclone config</code>. Run <code>rclone config</code> and select the option "Set configuration password". This will encrypt your configuration file so that it cannot be read by others. You will need to enter the password you set each time you run <code>rclone</code>.</p>
 <h3 id="git">git<a class="headerlink" href="#git" title="Permanent link">&para;</a></h3>
 <p>VS Code's Remote SSH extension is magic for working with git: it forwards your local machine's git credentials to the VM whenever necessary, without ever storing your credentials on the VM. This applies to terminals opened in VS Code as well as VS Code's graphical git tools. Therefore, the top recommendation is to use VS Code for performing all git operations. If you do not normally use VS Code for your project, you can still use it just for git operations. Follow the <a href="#vs-code">instructions above</a> for connecting your local VS Code to your remote VM. Then just click the "open folder" button and navigate to the folder containing your cloned git repo. It will open the folder, and the left sidebar will contain options for browsing and opening the repo's files, as well as for performing git operations. You can also open a terminal inside VS Code and interact with git via the command line.</p>
