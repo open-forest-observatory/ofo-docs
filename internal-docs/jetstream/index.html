@@ -1606,7 +1606,9 @@
 <p>Note that others in our project can access the instances you create, so <em>do not store unencrypted credentials</em> or other private or sensitive information on them. See the <a href="#security">Security</a> section below for solutions.</p>
 <h2 id="basic-instance-access-and-management">Basic instance access and management<a class="headerlink" href="#basic-instance-access-and-management" title="Permanent link">&para;</a></h2>
 <h3 id="ssh-access">SSH access<a class="headerlink" href="#ssh-access" title="Permanent link">&para;</a></h3>
-<p>SSH into your instance using <code>ssh exouser@&lt;ip address&gt;</code>. You can find the IP address of your instance on the instance's page in <a href="https://jetstream2.exosphere.app/exosphere/">Exosphere</a>.</p>
+<p>SSH into your instance using <code>ssh exouser@&lt;ip address&gt;</code> or <code>ssh exouser@&lt;hostname&gt;</code>. You can find
+the IP address and hostname of your instance on the instance's page in
+<a href="https://jetstream2.exosphere.app/exosphere/">Exosphere</a>.</p>
 <h3 id="remote-desktop-access">Remote desktop access<a class="headerlink" href="#remote-desktop-access" title="Permanent link">&para;</a></h3>
 <p>To access a graphical remote desktop in a browser tab, navigate to that instance's page in <a href="https://jetstream2.exosphere.app/exosphere/">Exosphere</a> and click the <strong>Web Desktop</strong> button.</p>
 <h3 id="shelving-and-unshelving">Shelving and unshelving<a class="headerlink" href="#shelving-and-unshelving" title="Permanent link">&para;</a></h3>
@@ -1647,7 +1649,14 @@
 </code></pre></div>
 <p>then copy the last URL shown in the terminal and paste it into a browser. Inside a notebook you should be able to choose different kernels (conda environments) that are configured for the user account running the server. When you're done, shut down the notebook server (either from the notebook, or from the terminal by doing Control-C twice) to prevent access to the server by others. If you want a basic Jupyter notebook instead of Jupyter Lab, you can use <code>/ofo-share/utils/environments/jetstream/jupyter-notebook.sh</code>.</p>
 <h3 id="rstudio">RStudio<a class="headerlink" href="#rstudio" title="Permanent link">&para;</a></h3>
-<p>Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server has all the same functionality and many conveniences. RStudio Server is a version of RStudio that runs in a browser tab on your local machine, but all the data and compute comes from your remote VM. Access RStudio from the browser on your local computer at <code>https://&lt;ip address&gt;</code>. Log in using username <code>exouser</code> and the passphrase found on your instance's page in <a href="https://jetstream2.exosphere.app/">Exosphere</a>. The first time you access RStudio Server via HTTPS, you will likely get a warning about an unsigned SSL certificate, but that is OK; it's the certificate installed upon VM creation and it enables a secure connection even though it's not signed.</p>
+<p>Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server has all the same
+functionality and many conveniences. RStudio Server is a version of RStudio that runs in a browser
+tab on your local machine, but all the data and compute comes from your remote VM. Access RStudio
+from the browser on your local computer at <code>https://&lt;ip address&gt;</code> or <code>https://&lt;hostname&gt;</code>. Log in using username <code>exouser</code>
+and the passphrase found on your instance's page in <a href="https://jetstream2.exosphere.app/">Exosphere</a>.
+The first time you access RStudio Server via HTTPS, you will likely get a warning about an unsigned
+SSL certificate, but that is OK; it's the certificate installed upon VM creation and it enables a
+secure connection even though it's not signed.</p>
 <h4 id="rstudio-and-git">RStudio and git<a class="headerlink" href="#rstudio-and-git" title="Permanent link">&para;</a></h4>
 <p>To interface with <code>git</code> for code development in RStudio, you can use the command line or use RStudio's built-in git functionality under the Git tab in the top right pane (shows up when you've opened a project that is a git repo). However, we recommend that you use VS Code for git (either via its graphical tools or its terminal) because it does not require storing your credentials on the VM. If you do want to use RStudio's git functionality or the VM's native terminal (not via VS Code), you need to set up a private encrypted folder to store your git credentials so they cannot be accessed by others on our project. See the <a href="#security">Security</a> section below for instructions.</p>
 <h4 id="rstudio-and-ofo-share">RStudio and <code>/ofo-share</code><a class="headerlink" href="#rstudio-and-ofo-share" title="Permanent link">&para;</a></h4>
@@ -1659,7 +1668,9 @@
 <li>Install the the VS Code extension "Remote - SSH"</li>
 <li>Connect to the remote VM by clicking the '&gt;&lt;' button in the bottom left</li>
 <li>Click 'Connect to host'.</li>
-<li>Click 'Add new SSH host'. Type <code>ssh exouser@&lt;vm_ip_address&gt;</code>.</li>
+<li>Click 'Add new SSH host'. Type <code>ssh exouser@&lt;vm_ip_address&gt;</code> or <code>ssh exouser@&lt;vm_hostname&gt;</code>. You
+  can get the IP address and hostname from the instance's Exosphere page. It may be best to use the
+  hostname because it will stay constant even if the IP address changes.</li>
 <li>When prompted, choose to update the SSH config in <code>/home/&lt;username&gt;/.ssh/config</code></li>
 <li>Click the '&gt;&lt;' button again, then 'Connect to host...', then select the host you just added. You may need to repond 'Yes' to accept the fingerprint of the host.</li>
 </ul>
@@ -1732,7 +1743,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 5, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 8, 2025</span>
   </span>
 
     
