@@ -221,8 +221,9 @@ If you must store other credentials on the VM, you should use a private encrypte
 There is a shell script automatically loaded onto the OFO dev image that will create a private encrypted folder for you. This folder will be mounted at ~/Private and will be encrypted with a passphrase that only you know. You can store your credentials in this folder, decrypt them when needed, and they will only be accessible to your current login session.
 
 After set up, there are a few ways to decrypt your private folder:
+
 - When you open the web desktop, after about a minute, you will get a prompt box with a button "Run this action now". Click the button and enter your passphrase.
-- When connected to a terminal (SSH or web shell), you can run the command `dec` (which is an alias for the `ecryptfs-mount-privage` and enter your passphrase.
+- When connected to a terminal (SSH or web shell), you can run the command `dec` (which is an alias for the `ecryptfs-mount-private`) and enter your passphrase.
 
 When your private folder is decrypted, you will see all the files in it. When it is decrypted, it will just show a readme.txt file explaining that it is a private folder and how to decrypt it. When you are done with the files in the folder, you can run the command `enc` (which is an alias for `ecryptfs-umount-private`) to re-encrypt the folder, or simply log out or close your SSH session or web shell and it will be automatically re-encrypted.
 
