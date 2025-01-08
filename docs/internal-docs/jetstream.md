@@ -52,7 +52,9 @@ Note that others in our project can access the instances you create, so *do not 
 
 ### SSH access
 
-SSH into your instance using `ssh exouser@<ip address>`. You can find the IP address of your instance on the instance's page in [Exosphere](https://jetstream2.exosphere.app/exosphere/).
+SSH into your instance using `ssh exouser@<ip address>` or `ssh exouser@<hostname>`. You can find
+the IP address and hostname of your instance on the instance's page in
+[Exosphere](https://jetstream2.exosphere.app/exosphere/).
 
 ### Remote desktop access
 
@@ -123,7 +125,14 @@ then copy the last URL shown in the terminal and paste it into a browser. Inside
 
 ### RStudio
 
-Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server has all the same functionality and many conveniences. RStudio Server is a version of RStudio that runs in a browser tab on your local machine, but all the data and compute comes from your remote VM. Access RStudio from the browser on your local computer at `https://<ip address>`. Log in using username `exouser` and the passphrase found on your instance's page in [Exosphere](https://jetstream2.exosphere.app/). The first time you access RStudio Server via HTTPS, you will likely get a warning about an unsigned SSL certificate, but that is OK; it's the certificate installed upon VM creation and it enables a secure connection even though it's not signed.
+Use RStudio Server; don't use RStudio GUI via a remote desktop. RStudio Server has all the same
+functionality and many conveniences. RStudio Server is a version of RStudio that runs in a browser
+tab on your local machine, but all the data and compute comes from your remote VM. Access RStudio
+from the browser on your local computer at `https://<ip address>` or `https://<hostname>`. Log in using username `exouser`
+and the passphrase found on your instance's page in [Exosphere](https://jetstream2.exosphere.app/).
+The first time you access RStudio Server via HTTPS, you will likely get a warning about an unsigned
+SSL certificate, but that is OK; it's the certificate installed upon VM creation and it enables a
+secure connection even though it's not signed.
 
 #### RStudio and git
 
@@ -142,7 +151,9 @@ The RStudio Server file browser defaults to the `~/` directory. To access a high
 - Install the the VS Code extension "Remote - SSH"
 - Connect to the remote VM by clicking the '><' button in the bottom left
 - Click 'Connect to host'.
-- Click 'Add new SSH host'. Type `ssh exouser@<vm_ip_address>`.
+- Click 'Add new SSH host'. Type `ssh exouser@<vm_ip_address>` or `ssh exouser@<vm_hostname>`. You
+  can get the IP address and hostname from the instance's Exosphere page. It may be best to use the
+  hostname because it will stay constant even if the IP address changes.
 - When prompted, choose to update the SSH config in `/home/<username>/.ssh/config`
 - Click the '><' button again, then 'Connect to host...', then select the host you just added. You may need to repond 'Yes' to accept the fingerprint of the host.
 
