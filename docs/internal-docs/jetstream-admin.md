@@ -6,7 +6,7 @@ Follow these steps to create and configure a new instance image to serve as a te
 
 1. Go to [Exosphere](https://jetstream2.exosphere.app/exosphere/) and select our project/allocation (BIO220124).
 3. Click **Create** -> **Instance** in the top right.
-4. Click the button for **Ubuntu 22.04** (we are working to transition to the newer 24.04 but need one JS2 bug (related to installing R) to be worked out first before we can transition).
+4. Click the button for **Ubuntu 24.04**.
 5. For **Name**, enter `ofo-dev-YYYYMMDD`, inserting the current date in place of `YYYYMMDD`.
 6. For **Flavor**, select **m3.small**.
 7. For **Choose a root disk size**, select **Custom** and enter `50` (GB).
