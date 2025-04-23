@@ -18,7 +18,7 @@ The drone imagery datasets linked here have a very high image denstiy. For a mor
 
 #### Field reference data
 
-[Visualization](https://openforestobservatory.netlify.app/data-field-ref-plot-details/0068/)
+[Visualization](https://openforestobservatory.netlify.app/data/ground-ref/plot-details/0068/)
 
 Please note the data licensing details on the visualization page, which apply to the data access link below.
 
@@ -55,7 +55,7 @@ This imagery was collected by walking a serpentine ("lawnmower") pattern in a po
 
 #### Field reference data
 
-[Visualization](https://openforestobservatory.netlify.app/data-field-ref-plot-details/0077/)
+[Visualization](https://openforestobservatory.netlify.app/data/ground-ref/plot-details/0077/)
 
 Field data file available upon request
 
@@ -76,7 +76,7 @@ This imagery was collected by walking a serpentine ("lawnmower") pattern in a po
 
 #### Field reference data
 
-[Visualization](https://openforestobservatory.netlify.app/data-field-ref-plot-details/0079/)
+[Visualization](https://openforestobservatory.netlify.app/data/ground-ref/plot-details/0079/)
 
 Field data file available upon request
 
@@ -97,6 +97,6 @@ This imagery was collected by walking a serpentine ("lawnmower") pattern in a po
 
 #### Field reference data
 
-[Visualization](https://openforestobservatory.netlify.app/data-field-ref-plot-details/0117/)
+[Visualization](https://openforestobservatory.netlify.app/data/ground-ref/plot-details/0117/)
 
 Data file available upon request
