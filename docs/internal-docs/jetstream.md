@@ -194,6 +194,18 @@ The Metashape GUI is installed on the OFO dev image.
 
 The Metashape python module is also installed, specifically in the conda environment `meta`. For running Metashape and the `automate-metashape` repo code from the command line, switch to the environment using `conda activate meta`. We aim to keep the `meta` environment updated with the current version of Metashape.
 
+## Geograypher
+
+David has set up a conda env with all the dependencies for geograypher. To have access to it (and
+all of David's envs), you need to add it to your user's conda config by running the following:
+
+```
+conda config --append envs_dirs /ofo-share/repos-david/conda/envs/
+conda config --append pkgs_dirs /ofo-share/repos-david/conda/pkgs/
+```
+
+Then you can activate the env with `conda activate geograypher`.
+
 ## Security
 
 Anyone in our Jetstream project can access the instances you create, so *do not store unencrypted credentials* or other private or sensitive information on them. Here are some solutions for common credentials.
