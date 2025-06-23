@@ -9,13 +9,14 @@ These steps are required once per new user.
 1. Create an [ACCESS](https://access-ci.org/) account and provide your username to your supervisor,
    so they can add you to our project. Before performing the next steps, wait until your supervisor
    confirms you are added to our ACCESS project.
+1. Log into [Exosphere](https://jetstream2.exosphere.app/), the primary interface we use to interact with our cloud compute. Click `Add ACCESS Account`, then use the default `ACCESS CI (XSEDE)` identity provider. This will prompt you to enter your ACCESS ID and password from the previous step. If you've been added to our project, you should see our project/allocation (BIO220124). Note that it may take a few minutes after you've been added to the allocation for this option to become visible.
 1. Create (or locate an existing) SSH key. You can google instructions for your operating system, or
    follow [this suggested
    guide](https://medium.com/@mbohlip/generating-ssh-key-pairs-on-a-windows-mac-linux-0e9993bf2985).
    If you'd like more detail, here's [more detailed tutorial](https://happygitwithr.com/ssh-keys) (read
    sections 10.1 through 10.4). Note: this detailed tutorial is designed for R and RStudio users, but you can
-   ignore all the refenreces to R and RStudio and focus on the shell instructions.
-1. Add your public SSH key in [Exosphere](https://jetstream2.exosphere.app/): Log in with your ACCESS credentials (once added to our project), go to our project/allocation (BIO220124), click Create in the top right, and click SSH Public Key. Enter a public key name (e.g. `derek-laptop01`) and paste in the key text.
+   ignore all the references to R and RStudio and focus on the shell instructions.
+1. Add your public SSH key in [Exosphere](https://jetstream2.exosphere.app/): Click Create in the top right, and click SSH Public Key. Enter a public key name (e.g. `derek-laptop01`) and paste in the key text.
 
 If you will need CACAO to create Kubernetes clusters (such as if you are helping with infrastructure engineering--your supervisor will tell you if so), you should also do the following:
 
