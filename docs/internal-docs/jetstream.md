@@ -207,6 +207,10 @@ conda config --append pkgs_dirs /ofo-share/repos-david/conda/pkgs/
 
 Then you can activate the env with `conda activate geograypher`.
 
+## Poetry
+[Poetry](https://python-poetry.org/) is a Python dependency management tool that is used across multiple projects. It can be installed following the instructions [here](https://python-poetry.org/docs/#installing-with-the-official-installer), and it seems like the `with official installer` option has worked consistently well on Jetstream. One common issue that happens on Jetstream is `poetry` tries to use a system keyring that is locked, which causes operations to hang or time out. We don't understand the root cause, but this issue is explored in this Github [issue
+](https://github.com/python-poetry/poetry/issues/5250). To fix the issue, run `export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring` in the terminal you are going to run the `poetry` command. Alternatively, you could add this line to your `.bashrc` file so it is run automatically, though this may have unintended consequences. 
+ 
 ## Security
 
 Anyone in our Jetstream project can access the instances you create, so *do not store unencrypted credentials* or other private or sensitive information on them. Here are some solutions for common credentials.
