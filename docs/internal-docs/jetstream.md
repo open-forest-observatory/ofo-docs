@@ -41,7 +41,7 @@ Follow these steps to create and configure a new instance:
 3. Click the **By Image** tab, search for `ofo-dev`, find the newest image (should be at the bottom), and click *Create Instance*. Do not use images with `g3xl` in the name unless you will need a `g3.xl` flavor. This image only works on that flavor (and is required for it).
 4. For **Name**, enter a name that's descriptive to you and starts with your name. For example, `derek-01`.
 5. For **Flavor**, select **m3.small** to start, unless you know you will need more compute immediately. You can resize later when you need more compute. Exception: If you will need a g3.xl (unlikely for new OFO members), you may need to create it now, because the GPU drivers are different for this specific flavor (though JS2 may have resolved this).
-6. For **Choose a root disk size**, select **Custom** and enter `50` (GB) unless you know you will need something larger. Normally you won't because most data is stored on `/ofo-share` which is not part of this 60 GB. [This selection actually does not affect the instance creation, which uses the image's disk size.]
+6. For **Choose a root disk size**, leave as default, as this selection actually does not affect the instance creation, which uses the image's disk size.
 7. For **Enable web desktop**, select **Yes**, unless you know you will not need it (unlikely for new OFO members).
 8. For **Choose an SSH public key**, select the key you added in the previous section.
 9. Click **Create**.
