@@ -21,12 +21,16 @@ Here we provide step-by-step tutorials covering common tasks related to automate
 
 ## Preparing to follow the tutorials
 
-Text here
+TODO: Text on things to keep in mind that apply to all tutorials, such as where to get the data, etc.
 
 ### Docker
 
-Text here
+TODO: Text describing what Docker is and why we use it, how to install it (links to Docker docs?), and how to run generic docker containers. Will need to include something about permissions of docker-written files (owned by root on linux). Need to make sure it's all cross-plaform
 
-#### Level 4 header
+### TODO
 
-Text here
+TODO: Other things to keep in mind. Perhaps:
+
+* Explain we give raw python code examples but Jupyter notebooks are also available (if true)
+* Where to get the example data
+* More?

@@ -7,4 +7,4 @@ weight: 40
 
 This tutorial covers the process of evaluating the accuracy of automated geospatial tree detections by comparing the detections against ground-based plot data.
 
-Tutorial text here
+{{ pagetree(siblings) }}
