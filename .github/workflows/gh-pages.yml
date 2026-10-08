@@ -29,11 +29,7 @@ jobs:
             mkdocs-material-
 
       - run: pip install -r requirements.txt
-      - run: pip install mkdocs-material 
-      - run: pip install mkdocs-awesome-pages-plugin
-      - run: pip install mkdocs-nav-weight
-      - run: pip install mkdocs-git-revision-date-localized-plugin
-      - run: pip install mkdocs-git-committers-plugin-2
+
       - run: mkdocs build
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
