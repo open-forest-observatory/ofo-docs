@@ -1,5 +1,5 @@
 site_name: Open Forest Observatory Documentation
-site_url: https://docs.openforestobservatory.org/
+site_url: !ENV [SITE_URL, 'https://docs.openforestobservatory.org/']
 theme:
   name: material
   logo: assets/logo-shaded.png
