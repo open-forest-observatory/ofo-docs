@@ -1,3 +1,7 @@
+---
+weight: 2
+---
+
 # OFO datasets
 
 We are pleased to share [a prototype](https://openforestobservatory.netlify.app/data/) of our field reference data catalog.
