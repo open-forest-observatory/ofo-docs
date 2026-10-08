@@ -2,4 +2,4 @@
 weight: 30
 ---
 
-# Step 2: Classification
+# Task 2: Classification
