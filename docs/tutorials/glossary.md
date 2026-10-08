@@ -1,11 +1,8 @@
 ---
 weight: 100
-# Phrases that are automatically linked to each term's definition, keyed by the
-# heading anchor below. Matching ignores case (except for all-caps acronyms) and
-# also catches a trailing "s" for plurals.
-glossary:
-  chm: [canopy height model]
-  orthomosaic: [orthomosaic]
+# To make a term linkable from any page by writing it in square brackets, add
+# it (and any variants, e.g. plurals) to includes/glossary-links.md, pointing
+# to its heading anchor.
 ---
 
 # Glossary

@@ -37,7 +37,14 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      check_paths: true
+      # Glossary links: includes/glossary-links.md is appended to every page, so
+      # writing [term] anywhere links it to its glossary entry with a hover
+      # preview. Matching ignores case but otherwise needs the exact text, so
+      # add a line there for each variant you use (e.g. plurals).
+      auto_append:
+        - includes/glossary-links.md
   - admonition
   - pymdownx.arithmatex:
       generic: true
@@ -61,10 +68,6 @@ markdown_extensions:
         - targets:
             include:
               - tutorials/glossary.md
-
-hooks:
-  # Auto-link glossary terms (defined in docs/tutorials/glossary.md front matter)
-  - hooks/glossary.py
 
 extra_css:
   - stylesheets/extra.css
