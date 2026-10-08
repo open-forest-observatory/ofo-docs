@@ -1,0 +1,28 @@
+name: pr-preview
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+concurrency: preview-${{ github.ref }}
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    # Fork PRs lack write permissions
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - if: github.event.action != 'closed'
+        run: |
+          pip install mkdocs-material mkdocs-awesome-pages-plugin mkdocs-nav-weight \
+            mkdocs-git-revision-date-localized-plugin mkdocs-git-committers-plugin-2
+          mkdocs build
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: site
