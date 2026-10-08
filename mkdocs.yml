@@ -62,6 +62,7 @@ plugins:
       reverse: false
       headless_included: false
   - awesome-pages
+  - pagetree
   - git-revision-date-localized:
         enable_creation_date: true
   - git-committers:
