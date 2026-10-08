@@ -1,0 +1,14 @@
+/* Glossary term links: dotted underline in the text color, preview on hover */
+.md-typeset a.term {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--md-default-fg-color--light);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: help;
+}
+.md-typeset a.term:hover,
+.md-typeset a.term:focus {
+  color: inherit;
+  text-decoration-color: var(--md-accent-fg-color);
+}

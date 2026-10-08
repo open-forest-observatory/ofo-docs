@@ -1,4 +1,5 @@
 site_name: Open Forest Observatory Documentation
+site_url: https://docs.openforestobservatory.org/
 theme:
   name: material
   logo: assets/logo-shaded.png
@@ -54,6 +55,19 @@ markdown_extensions:
       permalink: true
   - attr_list
   - md_in_html
+  # Hover previews for any manual link to the glossary
+  - material.extensions.preview:
+      configurations:
+        - targets:
+            include:
+              - tutorials/glossary.md
+
+hooks:
+  # Auto-link glossary terms (defined in docs/tutorials/glossary.md front matter)
+  - hooks/glossary.py
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - search

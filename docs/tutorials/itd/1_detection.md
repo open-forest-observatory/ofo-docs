@@ -4,13 +4,13 @@ weight: 20
 
 # Task 1: Detection & mapping
 
-We will use the OFO's [Tree Detection Framework](https://github.com/open-forest-observatory/tree-detection-framework) to detect and delineate tree crowns from drone-derived data products using a variety of approaches, including a geometric algorithm applied to a *canopy height model* (TODO: Popup with definition? Or link to a glossary?) (CHM) and several different computer vision algorithms applied an *orthomosaic* (TODO: Popup with definition? Or link to a glossary?).
+We will use the OFO's [Tree Detection Framework](https://github.com/open-forest-observatory/tree-detection-framework) to detect and delineate tree crowns from drone-derived data products using a variety of approaches, including a geometric algorithm applied to a *canopy height model* (CHM) and several different computer vision algorithms applied an *orthomosaic*.
 
 ## Input data
 
 | Name                | Source                         | Example file                                                             |
 | ------------------- | ------------------------------ | ------------------------------------------------------------------------ |
-| Canopy height model () | Photogrammetry post-processing | TODO: Thumbnail [000452-subset_chm.tif](TODO: Link to Box)               |
+| Canopy height model | Photogrammetry post-processing | TODO: Thumbnail [000452-subset_chm.tif](TODO: Link to Box)               |
 | Orthomosaic         | Photogrammetry post-processing | TODO: Thumbnail [000452-subset_ortho-chm-ptcloud.tif](TODO: Link to Box) |
 
 ## Setup
