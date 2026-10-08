@@ -10,8 +10,8 @@ We will use the OFO's [Tree Detection Framework](https://github.com/open-forest-
 
 | Name                | Source                         | Example file                                                             |
 | ------------------- | ------------------------------ | ------------------------------------------------------------------------ |
-| [Canopy height model] | Photogrammetry post-processing | TODO: Thumbnail [000452-subset_chm.tif](TODO: Link to Box)               |
-| [Orthomosaic]         | Photogrammetry post-processing | TODO: Thumbnail [000452-subset_ortho-chm-ptcloud.tif](TODO: Link to Box) |
+| [Canopy height model] | Photogrammetry post-processing | [000452-subset_chm.tif](TODO: Link to Box)               |
+| [Orthomosaic]         | Photogrammetry post-processing | [000452-subset_ortho-chm-ptcloud.tif](TODO: Link to Box) |
 
 ## Setup
 
@@ -33,8 +33,16 @@ TODO: More context?
 
 === "Docker (recommended)"
 
+    Linux/Mac:
+
     ```bash
-    # TODO: Docker command
+    # TODO: Bash Docker command
+    ```
+
+    Windows
+
+    ```powershell
+    # TODO: PowerShell Docker command
     ```
 
 === "Native Python"
