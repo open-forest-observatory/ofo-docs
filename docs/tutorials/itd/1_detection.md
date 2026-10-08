@@ -17,7 +17,7 @@ We will use the OFO's [Tree Detection Framework](https://github.com/open-forest-
 
 === "Docker (recommended)"
 
-    Follow our [Docker guide](/tutorials/#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
 === "Native Python"
 
