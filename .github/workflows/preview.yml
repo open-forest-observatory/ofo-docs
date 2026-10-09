@@ -19,9 +19,10 @@ jobs:
         with:
           python-version: 3.x
       - if: github.event.action != 'closed'
+        env:
+          SITE_URL: https://docs.openforestobservatory.org/pr-preview/pr-${{ github.event.number }}/
         run: |
-          pip install mkdocs-material mkdocs-awesome-pages-plugin mkdocs-nav-weight \
-            mkdocs-git-revision-date-localized-plugin mkdocs-git-committers-plugin-2
+          pip install -r requirements.txt
           mkdocs build
       - uses: rossjrw/pr-preview-action@v1
         with:

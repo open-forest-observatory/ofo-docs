@@ -1,4 +1,5 @@
 site_name: Open Forest Observatory Documentation
+site_url: !ENV [SITE_URL, 'https://docs.openforestobservatory.org/']
 theme:
   name: material
   logo: assets/logo-shaded.png
@@ -36,7 +37,14 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      check_paths: true
+      # Glossary links: includes/glossary-links.md is appended to every page, so
+      # writing [term] anywhere links it to its glossary entry with a hover
+      # preview. Matching ignores case but otherwise needs the exact text, so
+      # add a line there for each variant you use (e.g. plurals).
+      auto_append:
+        - includes/glossary-links.md
   - admonition
   - pymdownx.arithmatex:
       generic: true
@@ -52,6 +60,17 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
+  - attr_list
+  - md_in_html
+  # Hover previews for any manual link to the glossary
+  - material.extensions.preview:
+      configurations:
+        - targets:
+            include:
+              - tutorials/glossary.md
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - search
@@ -62,6 +81,7 @@ plugins:
       reverse: false
       headless_included: false
   - awesome-pages
+  - pagetree
   - git-revision-date-localized:
         enable_creation_date: true
   - git-committers:
@@ -71,6 +91,10 @@ plugins:
 nav:
   - "← OFO home": https://openforestobservatory.org/
   - ...
+
+validation:
+  links:
+    absolute_links: relative_to_docs
 
 repo_url: https://github.com/open-forest-observatory/ofo-docs
 repo_name: open-forest-observatory/ofo-docs
