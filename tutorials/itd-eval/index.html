@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://docs.openforestobservatory.org/geograypher/">
+        <link rel="canonical" href="https://docs.openforestobservatory.org/tutorials/itd-eval/">
       
       
-        <link rel="prev" href="../data/">
+        <link rel="prev" href="../itd/2_classification/">
       
       
-        <link rel="next" href="prediction/">
+        <link rel="next" href="1_registration/">
       
       
         
       
       
-      <link rel="icon" href="../assets/logo.png">
+      <link rel="icon" href="../../assets/logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Geograypher - Open Forest Observatory Documentation</title>
+        <title>Evaluating tree detection accuracy - Open Forest Observatory Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,11 +51,11 @@
       
     
     
-      <link rel="stylesheet" href="../assets/mkdocs_pagetree_plugin.css">
+      <link rel="stylesheet" href="../../assets/mkdocs_pagetree_plugin.css">
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#geograypher" class="md-skip">
+        <a href="#evaluating-tree-detection-accuracy" class="md-skip">
           Skip to content
         </a>
       
@@ -94,9 +94,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Open Forest Observatory Documentation" class="md-header__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
+    <a href="../.." title="Open Forest Observatory Documentation" class="md-header__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
       
-  <img src="../assets/logo-shaded.png" alt="logo">
+  <img src="../../assets/logo-shaded.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Geograypher
+              Evaluating tree detection accuracy
             
           </span>
         </div>
@@ -245,7 +245,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -262,11 +262,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../tutorials/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -288,7 +290,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../data/" class="md-tabs__link">
+        <a href="../../data/" class="md-tabs__link">
           
   
   
@@ -306,13 +308,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../geograypher/" class="md-tabs__link">
           
   
   
@@ -334,7 +334,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../contributing/" class="md-tabs__link">
+        <a href="../../contributing/" class="md-tabs__link">
           
   
   
@@ -356,7 +356,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../internal-docs/" class="md-tabs__link">
+        <a href="../../internal-docs/" class="md-tabs__link">
           
   
   
@@ -392,9 +392,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Open Forest Observatory Documentation" class="md-nav__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
+    <a href="../.." title="Open Forest Observatory Documentation" class="md-nav__button md-logo" aria-label="Open Forest Observatory Documentation" data-md-component="logo">
       
-  <img src="../assets/logo-shaded.png" alt="logo">
+  <img src="../../assets/logo-shaded.png" alt="logo">
 
     </a>
     Open Forest Observatory Documentation
@@ -448,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -472,6 +472,8 @@
       
   
   
+    
+  
   
   
     
@@ -491,20 +493,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../tutorials/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -522,13 +527,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -564,10 +569,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -575,7 +583,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../tutorials/itd/" class="md-nav__link ">
+            <a href="../itd/" class="md-nav__link ">
               
   
   
@@ -593,7 +601,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -619,7 +627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/itd/1_detection/" class="md-nav__link">
+      <a href="../itd/1_detection/" class="md-nav__link">
         
   
   
@@ -647,7 +655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/itd/2_classification/" class="md-nav__link">
+      <a href="../itd/2_classification/" class="md-nav__link">
         
   
   
@@ -680,6 +688,8 @@
                 
   
   
+    
+  
   
   
     
@@ -699,18 +709,21 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../tutorials/itd-eval/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   
@@ -728,13 +741,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -754,7 +767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/itd-eval/1_registration/" class="md-nav__link">
+      <a href="1_registration/" class="md-nav__link">
         
   
   
@@ -782,7 +795,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/itd-eval/2_evaluation/" class="md-nav__link">
+      <a href="2_evaluation/" class="md-nav__link">
         
   
   
@@ -818,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/glossary/" class="md-nav__link">
+      <a href="../glossary/" class="md-nav__link">
         
   
   
@@ -876,7 +889,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../data/" class="md-nav__link ">
+            <a href="../../data/" class="md-nav__link ">
               
   
   
@@ -919,8 +932,6 @@
       
   
   
-    
-  
   
   
     
@@ -936,23 +947,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../geograypher/" class="md-nav__link ">
               
   
   
@@ -970,13 +978,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_5" id="__nav_5_label" tabindex="">
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -996,7 +1004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="prediction/" class="md-nav__link">
+      <a href="../../geograypher/prediction/" class="md-nav__link">
         
   
   
@@ -1058,7 +1066,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../contributing/" class="md-nav__link ">
+            <a href="../../contributing/" class="md-nav__link ">
               
   
   
@@ -1102,7 +1110,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../contributing/code/" class="md-nav__link">
+      <a href="../../contributing/code/" class="md-nav__link">
         
   
   
@@ -1130,7 +1138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../contributing/docs/" class="md-nav__link">
+      <a href="../../contributing/docs/" class="md-nav__link">
         
   
   
@@ -1194,7 +1202,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../internal-docs/" class="md-nav__link ">
+            <a href="../../internal-docs/" class="md-nav__link ">
               
   
   
@@ -1238,7 +1246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internal-docs/data-version-control/" class="md-nav__link">
+      <a href="../../internal-docs/data-version-control/" class="md-nav__link">
         
   
   
@@ -1266,7 +1274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internal-docs/jetstream-admin/" class="md-nav__link">
+      <a href="../../internal-docs/jetstream-admin/" class="md-nav__link">
         
   
   
@@ -1294,7 +1302,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internal-docs/jetstream/" class="md-nav__link">
+      <a href="../../internal-docs/jetstream/" class="md-nav__link">
         
   
   
@@ -1357,7 +1365,7 @@
 
 
   
-    <a href="https://github.com/open-forest-observatory/ofo-docs/edit/main/docs/geograypher/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/open-forest-observatory/ofo-docs/edit/main/docs/tutorials/itd-eval/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1365,12 +1373,42 @@
   
 
 
-<h1 id="geograypher">Geograypher<a class="headerlink" href="#geograypher" title="Permanent link">&para;</a></h1>
-<p>Geograypher core functionality is documented in its <a href="https://github.com/open-forest-observatory/geograypher">GitHub readme</a>, python docstrings, and via the <a href="https://github.com/open-forest-observatory/geograypher/tree/main/examples">example notebooks</a>.</p>
-<p>The geograypher documentation on this site covers:</p>
-<ul>
-<li><a href="prediction/">Using Geograypher in prediction workflows</a></li>
-</ul>
+<h1 id="evaluating-tree-detection-accuracy">Evaluating tree detection accuracy<a class="headerlink" href="#evaluating-tree-detection-accuracy" title="Permanent link">&para;</a></h1>
+<p>This tutorial covers the process of evaluating the accuracy of automated geospatial tree detections by comparing the detections against ground-based plot data.</p>
+<p>
+<div class="pagetree-container">
+    <div class="pagetree-functions"></div>
+    <ul class="pagetree">
+        <li>
+            
+
+
+
+<a
+    class="pagetree-navlink "
+    data-page-status=""
+    href="1_registration/"
+>
+    Task 1: Co-registration
+    
+</a>
+        </li>
+        <li>
+            
+
+
+
+<a
+    class="pagetree-navlink "
+    data-page-status=""
+    href="2_evaluation/"
+>
+    Task 2: Evaluation
+    
+</a>
+        </li>
+    </ul>
+</div></p>
 
 
 
@@ -1393,7 +1431,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 2, 2024 15:20:28 UTC">July 2, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 17:13:21 UTC">October 8, 2026</span>
   </span>
 
     
@@ -1403,7 +1441,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="December 16, 2023 02:15:31 UTC">December 16, 2023</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 05:12:07 UTC">October 8, 2026</span>
   </span>
 
     
@@ -1421,9 +1459,9 @@
     
     <nav>
       
-        <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
+        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
           
-          <img src="https://avatars.githubusercontent.com/u/29384527?v=4&size=72" alt="russelldj">
+          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&size=72" alt="youngdjn">
         </a>
       
       
@@ -1483,12 +1521,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../assets/mkdocs_pagetree_plugin.js"></script>
+        <script src="../../assets/mkdocs_pagetree_plugin.js"></script>
       
     
   </body>
