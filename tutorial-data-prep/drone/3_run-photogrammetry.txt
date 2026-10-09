@@ -1,0 +1,1 @@
+docker run -v /ofo-share/project-data/tutorial-data/tutorial-data/drone:/data -e AGISOFT_FLS=$AGISOFT_FLS --gpus all ghcr.io/open-forest-observatory/automate-metashape --config-file /data/metashape-configs/composite1.yml
