@@ -25,7 +25,44 @@ TODO: Text on things to keep in mind that apply to all tutorials, such as where 
 
 ### Docker
 
-TODO: Text describing what Docker is and why we use it, how to install it (links to Docker docs?), and how to run generic docker containers. Will need to include something about permissions of docker-written files (owned by root on linux). Need to make sure it's all cross-plaform
+TODO: Text describing what Docker is and why we use it, how to install it (links to Docker docs?), and how to run generic docker containers. Need to make sure covers windows, linux, mac.
+
+
+#### Docker Installation
+
+=== "Linux/Mac"
+
+    TODO
+
+=== "Windows"
+
+
+    Install Windows Subsystem for Linux (WSL2):
+    `wsl --install`
+
+    Reboot your computer, then download the [Docker Desktop installer](https://www.docker.com/get-started/). If you don't know whether you have AMD64 or ARM64 architecture, you can check by opening a PowerShell window and running the command `systeminfo | findstr /B /C:"System Type"`. If it says "x64-based PC", you have AMD64 architecture. If it says "ARM-based PC", you have ARM64 architecture.
+    
+    Run the installer, using the recommended settings.
+
+
+
+### Podman
+
+TODO: Derek's notes below
+
+Run as administrator in PowerShell:
+
+`winget install RedHat.Podman`
+
+Then in a normal PowerShell:
+
+``` powershell
+podman machine init
+podman machine set --rootful
+```
+
+
+
 
 ### TODO
 
