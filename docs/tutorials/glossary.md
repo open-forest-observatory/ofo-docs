@@ -11,12 +11,18 @@ This page defines common technical terms used in the OFO tutorials. TODO: Expand
 
 ## Canopy height model (CHM) { #chm }
 
-A raster data product that represents the height of vegetation above the ground surface.
+A raster data product that represents the height of vegetation above the ground surface. It is a geospatial data product, allowing for precise measurements and analysis using GIS tools.
+
+![Canopy height model](/assets/images/tutorials/composite1_chm-mesh.png)
 
 ## Orthomosaic { #orthomosaic }
 
 A georeferenced image created by stitching together multiple overlapping aerial photographs. It is a geospatial data product, allowing for precise measurements and analysis using GIS tools.
 
+![Orthomosaic](/assets/images/tutorials/composite1_ortho-dsm-ptcloud.png)
+
 ## Variable-radius local maximum filter { #lmf }
 
 An algorithm that searches each pixel in a canopy height model to determine whether it is a local maximum (i.e., a treetop) by comparing its height to neighboring pixels. The neighboring pixels that are checked are those within a radius that varies based on the height of the pixel being evaluated. The relationship between the pixel's height and the radius of the search area is defined by a user-specified function.
+
+![Local maximum filter](/assets/images/tutorials/lmf.png)
