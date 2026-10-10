@@ -1538,77 +1538,177 @@
 <tr>
 <td><a data-preview="" href="../../glossary/#chm">Canopy height model</a></td>
 <td>Photogrammetry post-processing</td>
-<td><a href="TODO: Link to Box">000452-subset_chm.tif</a></td>
+<td><a href="https://ucdavis.box.com/s/s02rs8rndobua45ukw0rjb8zysihicl4">composite1_chm-mesh.tif</a></td>
 </tr>
 <tr>
 <td><a data-preview="" href="../../glossary/#orthomosaic">Orthomosaic</a></td>
 <td>Photogrammetry post-processing</td>
-<td><a href="TODO: Link to Box">000452-subset_ortho-chm-ptcloud.tif</a></td>
+<td><a href="https://ucdavis.box.com/s/optcezvxz3mzeo1qshyebpnm58ab1epw">composite1_ortho-dsm-ptcloud.tif</a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">¶</a></h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Docker (recommended)</label><label for="__tabbed_1_2">Native Python</label></div>
+<div class="admonition info">
+<p class="admonition-title">Before you begin</p>
+<p>Make sure you have gone through the <a href="../../#preparing-to-follow-the-tutorials">OFO tutorial preparation</a> guidance.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Docker (recommended)</label><label for="__tabbed_1_2">Jupyter</label><label for="__tabbed_1_3">Python command-line entrypoint</label><label for="__tabbed_1_4">Python script</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Follow our <a href="../../#docker">Docker guide</a> to understand what Docker is and ensure your system is set up to run Docker containers.</p>
 </div>
 <div class="tabbed-block">
-<p>TODO: Pointer to TDF installation instructions.</p>
+<p>TODO: Link to the notebook we will be using, info to set up Conda env as for the other Python options?</p>
+</div>
+<div class="tabbed-block">
+<p>Install the Tree Detection Framework Python library and its dependencies into a Conda environment following the <a href="https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/">installation instructions</a>, then activate the Conda environment in a terminal window:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-detection-framework
+</code></pre></div>
+<p>{TODO: To the TDF install instructions, add a mention of the need to install Conda, and link to Conda install instructions instructions (ideally miniconda?). Consider using venv instead, since already included with python? Unless other OFO packages do require conda. Alternatively, consider adding Conda install info/link to the tutorials overview page.}</p>
+</div>
+<div class="tabbed-block">
+<p>Install the Tree Detection Framework Python library and its dependencies into a Conda environment following the <a href="https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/">installation instructions</a>.   </p>
+<p>Then load the required libraries:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># TODO: Complete python lines to load libraries</span>
+</code></pre></div>
 </div>
 </div>
 </div>
-<p>Download the input data to your computer. We recommend downloading the entire <a href="TODO: Link to Box">tutorial data folder</a>, which contains the data for all OFO tutorials, but you can also download just the input data needed for this task, listed above. {TODO: Will we just repeat this blurb on every tutorial task page? Better way to do this?}</p>
 <h2 id="geometric-tree-detection-from-a-canopy-height-model">Geometric tree detection from a canopy height model<a class="headerlink" href="#geometric-tree-detection-from-a-canopy-height-model" title="Permanent link">¶</a></h2>
 <p>First, we will use a <em>geometric algorithm</em> implemented in the Tree Detection Framework to detect treetops as local maxima in the canopy height model (CHM). This approach uses a <a data-preview="" href="../../glossary/#lmf">variable-radius local maximum filter</a>. We will demonstrate with the CHM linked above:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh.png" data-desc-position="bottom"><img alt="CHM" src="../../../assets/images/tutorials/composite1_chm-mesh.png"></a></p>
 <p>TODO: More context?</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Docker (recommended)</label><label for="__tabbed_2_2">Podman (Windows)</label><label for="__tabbed_2_3">Native Python</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Docker</label><label for="__tabbed_2_2">Jupyter</label><label for="__tabbed_2_3">Python command-line entrypoint</label><label for="__tabbed_2_4">Python script</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Linux/Mac:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/ofo-tutorial-testing:/data"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework:latest<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span>/data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span>/data/outputs/detected-trees/composite1_tree-tops_v02.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span>--tree-crowns-save-path<span class="w"> </span>/data/outputs/detected-trees/composite1_tree-crowns_v02.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span>--tree-top-detector-kwargs<span class="w"> </span><span class="s1">'{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"path/to/data:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span>/data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span>/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span>--tree-crowns-save-path<span class="w"> </span>/data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span>--tree-top-detector-kwargs<span class="w"> </span><span class="s1">'{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'</span>
 </code></pre></div>
 <p>Windows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># TODO: PowerShell Docker command</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">-v</span> <span class="s2">"path\to\data:/data"</span> <span class="p">`</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-detection-framework</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_detection_framework</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">detect_geometric_two_stage</span> <span class="p">`</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">inputs</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-tops_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="p">-</span><span class="n">-tree-crowns-save-path</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="p">-</span><span class="n">-raster-blur-sigma</span> <span class="n">0</span><span class="p">.</span><span class="n">5</span> <span class="p">`</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="p">-</span><span class="n">-tree-top-detector-kwargs</span> <span class="s1">'{\"a\": 0, \"b\": 0.0325, \"c\": 0.25, \"min_ht\": 5}'</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>TODO: This worked, though it took a long time to download the container blobs. Derek is attempting to provide this as an alternative to Docker Desktop for Windows user, which is commercial software requiring a paid license for members of organizations larger than 250. But that might be exempted for using non-commercial open-source software like the OFO containers (hard to tell from license).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">podman</span> <span class="n">machine</span> <span class="nb">start</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">podman</span> <span class="p">-</span><span class="n">-connection</span> <span class="n">podman-machine-default-root</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">-v</span> <span class="s2">"$HOME\Documents\ofo-tutorial-testing:/data"</span> <span class="p">`</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-detection-framework</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">tree_detection_framework</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">detect_geometric_two_stage</span> <span class="p">`</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">inputs</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-tops_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="p">-</span><span class="n">-tree-crowns-save-path</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="p">-</span><span class="n">-raster-blur-sigma</span> <span class="n">0</span><span class="p">.</span><span class="n">5</span> <span class="p">`</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="p">-</span><span class="n">-tree-top-detector-kwargs</span> <span class="s1">'{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'</span>
+<p>This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span>path/to/data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span>path/to/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span>--tree-crowns-save-path<span class="w"> </span>path/to/data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span>--tree-top-detector-kwargs<span class="w"> </span><span class="s1">'{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>TODO: Do we use the python entrypoint script? Or load objects and call functions directly? Maybe both (as separate taps)? Somehow reference a notebook? I'd opt to avoid a notebook as the main reference, but perhaps we can link to a notebook at the end as an alternative option.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># TODO: First python line</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># TODO: Second python line</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># TODO: Lines to load inputs</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># TODO: Lines to run geometric tree detection algorithm</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># TODO: Lines to write outputs</span>
 </code></pre></div>
 </div>
 </div>
 </div>
-<p>This command saves two geospatial output files: points representing detected tree tops and polygons representing detected tree crowns. You can visualize these outputs in a GIS software like <a href="https://qgis.org/en/site/">QGIS</a>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_v01.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_v01.png"></a></p>
+<p>This command saves two geospatial output files: points representing detected tree tops and polygons representing detected tree crowns. You can visualize these outputs in GIS software like <a href="https://qgis.org/en/site/">QGIS</a>:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v01.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v01.png"></a></p>
+<p>The detected trees all have a <code>height</code> attribute extracted from the CHM. The heights were used to size the tree points in the visualization above.</p>
 <p>The geometric tree detection algorithm can be parameterized in many different ways. For example, the value passed to <code>--raster-blur-sigma</code> controls the amount of smoothing applied to the CHM before detecting local maxima. The values given for <code>a</code>, <code>b</code>, and <code>c</code> in the <code>--tree-top-detector-kwargs</code> affects the local maximum search radius relative to the height of the tree. Other parameters not supplied here (and thus using their defaults) include <code>chip_size</code> and <code>chip_stride</code>, which control how large CHMs are split up into manageable chunks prior to processing, and <code>resolution</code>, which controls the resolution the CHM is resampled to prior to running the algorithm. See the <a href="https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/detect_geometric_two_stage/">Tree Detection Framework documentation</a> for a detailed description of all parameters. Here is an example of the effect of setting the treetop detector parameter <code>c</code> to <code>5</code>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_v02.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_v02.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v02.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v02.png"></a></p>
+<p>The Open Forest Observatory has done extensive testing of the geometric tree detection algorithm and has found that the default parameters used here work well in many California conifer forests. Some of our parameter tuning work is published in <a href="https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.13860" rel="noopener" target="_blank">Methods in Ecology and Evolution <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2z"></path></svg></span></a>, and other work is in progress.</p>
 <h2 id="computer-vision-tree-detection-from-an-orthomosaic">Computer vision tree detection from an orthomosaic<a class="headerlink" href="#computer-vision-tree-detection-from-an-orthomosaic" title="Permanent link">¶</a></h2>
-<p>TODO: Finish</p>
+<p>The Tree Detection Framework also provides an interface to several existing computer vision models for detecting trees from an <a data-preview="" href="../../glossary/#orthomosaic">orthomosaic</a>. These models run fastest when a GPU is available, but some can also run on a CPU in a reasonable amount of time, particularly for small orthomoaics.</p>
+<p>We will first demonstrate using it to run DeepForest on the orthomosaic linked above:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_ortho-dsm-ptcloud.png" data-desc-position="bottom"><img alt="Orthomosaic" src="../../../assets/images/tutorials/composite1_ortho-dsm-ptcloud.png"></a></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><input id="__tabbed_3_4" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Docker</label><label for="__tabbed_3_2">Jupyter</label><label for="__tabbed_3_3">Python command-line entrypoint</label><label for="__tabbed_3_4">Python script</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="admonition warning">
+<p class="admonition-title">Running without a GPU</p>
+<p>If you are running this on a machine without a GPU, remove <code>--gpus all</code> from the <code>docker run</code> command below.</p>
+</div>
+<p>Linux/Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">#TODO: Fix this the need to define the cache folders and eliminate need to use $HOME so we can set it to `path/to/data`</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/ofo-tutorial-testing/.cache"</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span>-w<span class="w"> </span>/data<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span>-e<span class="w"> </span><span class="nv">HOME</span><span class="o">=</span>/data/.cache<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span>-e<span class="w"> </span><span class="nv">TORCH_HOME</span><span class="o">=</span>/data/.cache/torch<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span>-e<span class="w"> </span><span class="nv">MPLCONFIGDIR</span><span class="o">=</span>/data/.cache/matplotlib<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/ofo-tutorial-testing:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.generate_predictions<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span>--raster-folder-path<span class="w"> </span>/data/inputs/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">        </span>--tree-detection-model<span class="w"> </span>deepforest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">        </span>--chip-size<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span>--chip-stride<span class="w"> </span><span class="m">768</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span>--resolution<span class="w"> </span><span class="m">0</span>.05<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">        </span>--run-nms<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">        </span>--predictions-save-path<span class="w"> </span>/data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+</code></pre></div>
+<p>Windows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c"># TODO</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># TODO</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># TODO: Lines to load inputs</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># TODO: Lines to run tree detection algorithm</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># TODO: Lines to write outputs</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like <a href="https://qgis.org/en/site/">QGIS</a>:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png"></a></p>
+<p>The rectangle bounding box output format is specific to the DeepForest model. TODO: Demonstration of converting them to masks/centroids with heights?</p>
+<p>TODO: A few sentences on the parameters, following the pattern in the geometric detection section above. Possibly a vis of the effect of changing the params</p>
+<p>TODO: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.</p>
+<p>TODO: Table of supported models.</p>
+<p>To run detections using an alternative model, simply change <code>deepforest</code> above to the name of the model you want to use. For example, here we have changed it to <code>detectree2</code>.</p>
+<p>TODO: The above gave me the error below and I had to fix it by adding <code>-w /data \</code> to the docker command. Can we avoid needing this? Possibly this is due to me running it in WSL.
+TODO: Also detectree2 appears to require a GPU, do we know that and can we avoid it?
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Traceback (most recent call last):
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    return _run_code(code, main_globals, None,
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    exec(code, run_globals)
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 275, in &lt;module&gt;
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    generate_predictions(**args.__dict__)
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 135, in generate_predictions
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    dtree2_module = Detectree2Module(param_dict)
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>  File "/app/tree_detection_framework/detection/models.py", line 196, in __init__
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    self.cfg = self.setup_cfg(**self.param_dict)
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>  File "/app/tree_detection_framework/detection/models.py", line 270, in setup_cfg
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>    Path(cfg.OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    self._accessor.mkdir(self, mode)
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>PermissionError: [Errno 13] Permission denied: 'train_outputs'
+</code></pre></div>
+TODO: SAM2 run without a GPU gave the error <code>UserWarning: cannot import name '_C' from 'sam2' (/usr/local/lib/python3.10/dist-packages/sam2/__init__.py)</code>, not sure if this is due to the lack of a GPU or if it is a separate issue. Have not yet tried running it on a GPU.<p></p>
+<p>TODO: Demonstration of how to get SAM3 weights and run SAM3?</p>
+<p>For full description of the TDF computer vision tree detection module and its options, see the <a href="https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/">Tree Detection Framework documentation</a>.</p>
 
 
 
@@ -1631,7 +1731,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 10, 2026 02:41:00 UTC">October 10, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 10, 2026 20:27:55 UTC">October 10, 2026</span>
   </span>
 
     

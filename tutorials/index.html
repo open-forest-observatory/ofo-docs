@@ -1374,6 +1374,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#example-input-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example input data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computing-hardware-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computing hardware requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#docker" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1389,7 +1411,18 @@
   <a href="#docker-installation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Docker Installation
+        Docker installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloading-all-ofo-docker-images-in-advance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Downloading all OFO Docker images in advance
       
     </span>
   </a>
@@ -1402,10 +1435,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#podman" class="md-nav__link">
+  <a href="#native-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Podman
+        Native Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Native Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-conda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Conda
       
     </span>
   </a>
@@ -1413,13 +1458,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
+  <a href="#installing-poetry" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TODO
+        Installing Poetry
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-command-line-entrypoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python command-line entrypoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jupyter notebooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-python-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Python scripts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1454,7 +1537,7 @@
 
 
 <h1 id="data-processing-tutorials">Data processing tutorials<a class="headerlink" href="#data-processing-tutorials" title="Permanent link">¶</a></h1>
-<p>Here we provide step-by-step tutorials covering common tasks related to automated forest invntory. The tutorials use OFO datasets and rely primraily on OFO software tools. The tutorials demonstrate basic software usage and point to separate documentation for more advanced functionality.</p>
+<p>Here we provide step-by-step tutorials covering common tasks related to automated forest inventory. The tutorials use OFO datasets and rely primarily on OFO software tools. The tutorials demonstrate basic software usage and point to separate documentation for more advanced functionality.</p>
 <div class="grid cards">
 <ul>
 <li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.5 1C8 1 10 3 10 5.5c0 .88-.25 1.7-.69 2.4l.1.1h5.18l.1-.1c-.44-.7-.69-1.52-.69-2.4C14 3 16 1 18.5 1S23 3 23 5.5 21 10 18.5 10c-.88 0-1.7-.25-2.4-.69l-1.1 1.1v3.18l1.1 1.1c.7-.44 1.52-.69 2.4-.69 2.5 0 4.5 2 4.5 4.5S21 23 18.5 23 14 21 14 18.5c0-.88.25-1.7.69-2.4l-.1-.1H9.41l-.1.1c.44.7.69 1.52.69 2.4C10 21 8 23 5.5 23S1 21 1 18.5 3 14 5.5 14c.88 0 1.7.25 2.4.69l1.1-1.1v-3.18l-1.1-1.1c-.7.44-1.52.69-2.4.69C3 10 1 8 1 5.5S3 1 5.5 1m0 2A2.5 2.5 0 0 0 3 5.5 2.5 2.5 0 0 0 5.5 8 2.5 2.5 0 0 0 8 5.5 2.5 2.5 0 0 0 5.5 3m0 13A2.5 2.5 0 0 0 3 18.5 2.5 2.5 0 0 0 5.5 21 2.5 2.5 0 0 0 8 18.5 2.5 2.5 0 0 0 5.5 16m13-13A2.5 2.5 0 0 0 16 5.5 2.5 2.5 0 0 0 18.5 8 2.5 2.5 0 0 0 21 5.5 2.5 2.5 0 0 0 18.5 3m0 13a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5M3.91 17.25l1.13.66c.13-.1.29-.16.46-.16a.75.75 0 0 1 .75.75l-.01.1 1.13.65-.28.5-1.13-.66c-.13.1-.29.16-.46.16a.75.75 0 0 1-.75-.75l.01-.1-1.13-.65zm-.28-11 1.13-.65-.01-.1a.75.75 0 0 1 .75-.75c.17 0 .33.06.46.16l1.13-.66.28.5-1.13.65.01.1a.75.75 0 0 1-.75.75c-.17 0-.33-.06-.46-.16l-1.13.66zm13.28-2 1.13.66c.13-.1.29-.16.46-.16a.75.75 0 0 1 .75.75l-.01.1 1.13.65-.28.5-1.13-.66c-.13.1-.29.16-.46.16a.75.75 0 0 1-.75-.75l.01-.1-1.13-.65zm-.28 15 1.12-.75a.75.75 0 0 1 .75-.75c.17 0 .33.06.46.16l1.13-.66.28.5-1.12.75a.75.75 0 0 1-.75.75c-.17 0-.33-.06-.46-.16l-1.13.66z"></path></svg></span> <strong>Processing raw drone photos</strong> using structure-from-motion photogrammetry (coming soon!)</li>
@@ -1464,11 +1547,44 @@
 </div>
 <!-- [Processing raw drone photos]: photogrammetry.md -->
 <h2 id="preparing-to-follow-the-tutorials">Preparing to follow the tutorials<a class="headerlink" href="#preparing-to-follow-the-tutorials" title="Permanent link">¶</a></h2>
-<p>TODO: Text on things to keep in mind that apply to all tutorials, such as where to get the data, etc.</p>
+<p>The information here applies to all OFO tutorials. Follow the guidance here before starting any of the tutorials.</p>
+<h3 id="example-input-data">Example input data<a class="headerlink" href="#example-input-data" title="Permanent link">¶</a></h3>
+<p>For all tutorial data processing tasks, we provide example input data you can use (though you can alternatively use your own data). If you will use the example data, we recommend you download the entire folder of example data in advance, as its file tree matches the expectations of the example code in the tutorials. In the tutorials, you will just need to change <code>path/to/data/</code> to the path on your computer where you downloaded the example data.</p>
+<p><a href="https://ucdavis.box.com/s/iq6afom3pxg81y8vts8imidy3a91fvoy"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"></path></svg></span> Download example data</a> (4.6 GB)</p>
+<p>Alternatively, you can download just the input data needed for a specific tutorial task (linked in an "input data" table near the top of each tutorial task page). In that case, you may need to modify the input file paths in the example code more extensively to match the location of the input data on your computer.</p>
+<h3 id="computing-hardware-requirements">Computing hardware requirements<a class="headerlink" href="#computing-hardware-requirements" title="Permanent link">¶</a></h3>
+<p>For processing a single drone mission at a time (up to ~50 ha), a standard laptop or desktop computer is generally sufficient, with a few exceptions: tasks involving computer vision inference generally require a GPU.</p>
 <h3 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">¶</a></h3>
-<p>TODO: Text describing what Docker is and why we use it, how to install it (links to Docker docs?), and how to run generic docker containers. Need to make sure covers windows, linux, mac.</p>
-<h4 id="docker-installation">Docker Installation<a class="headerlink" href="#docker-installation" title="Permanent link">¶</a></h4>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux/Mac</label><label for="__tabbed_1_2">Windows</label></div>
+<p>Docker is a system that allows software developers to distribute software packages, including all their dependencies, in a way that can be run on any operating system. For each OFO tool, OFO provides a Docker <em>image</em>, which essentially contains the software (Python code), its dependencies, and a minimal operating system. When you run an instance of a Docker image on your computer, it is called a <em>container</em>.</p>
+<p>Docker provides a convenient way for users to run OFO software without having to run any Python code directly, or worry about installing Python libraries and other dependencies. When users run OFO tools using Docker, they run a single command in a terminal window. This command specifies the Docker image to use, the input and output file locations, and the processing parameters. A docker command might look like the following (in this case for detecting trees from a canopy height model using the OFO <a href="https://github.com/open-forest-observatory/tree-detection-framework">Tree Detection Framework</a>):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux/Mac</label><label for="__tabbed_1_2">Windows (PowerShell)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"path/to/data:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span>/data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span>/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">-v</span> <span class="s2">"path\to\data:/data"</span> <span class="p">`</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-detection-framework</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_detection_framework</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">detect_geometric_two_stage</span> <span class="p">`</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">inputs</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-tops_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="p">-</span><span class="n">-raster-blur-sigma</span> <span class="n">0</span><span class="p">.</span><span class="n">5</span> <span class="p">`</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>This command downloads the <code>tree-detection-framework</code> Docker image (if it is not already downloaded), runs the software in the image, and saves the output files to your computer. The <code>-v</code> option specifies a folder on your computer that is made available to the software running in the Docker container, which sees it at the path following the <code>:</code>. In this case, the folder <code>path/to/data</code> on your computer is made available as <code>/data</code> inside the container. The input and output file paths are specified relative to this folder.</p>
+<p>To be able to run Docker containers, you need to install Docker on your computer.</p>
+<h4 id="docker-installation">Docker installation<a class="headerlink" href="#docker-installation" title="Permanent link">¶</a></h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Linux/Mac</label><label for="__tabbed_2_2">Windows</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>TODO</p>
@@ -1477,25 +1593,40 @@
 <p>Install Windows Subsystem for Linux (WSL2):
 <code>wsl --install</code></p>
 <p>Reboot your computer, then download the <a href="https://www.docker.com/get-started/">Docker Desktop installer</a>. If you don't know whether you have AMD64 or ARM64 architecture, you can check by opening a PowerShell window and running the command <code>systeminfo | findstr /B /C:"System Type"</code>. If it says "x64-based PC", you have AMD64 architecture. If it says "ARM-based PC", you have ARM64 architecture.</p>
-<p>Run the installer, using the recommended settings.</p>
+<p>Run the installer, using the recommended settings (including installing for the user only).</p>
 </div>
 </div>
 </div>
-<h3 id="podman">Podman<a class="headerlink" href="#podman" title="Permanent link">¶</a></h3>
-<p>TODO: Derek's notes below</p>
-<p>Run as administrator in PowerShell:</p>
-<p><code>winget install RedHat.Podman</code></p>
-<p>Then in a normal PowerShell:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">podman</span> <span class="n">machine</span> <span class="n">init</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">podman</span> <span class="n">machine</span> <span class="nb">set </span><span class="p">-</span><span class="n">-rootful</span>
+<h4 id="downloading-all-ofo-docker-images-in-advance">Downloading all OFO Docker images in advance<a class="headerlink" href="#downloading-all-ofo-docker-images-in-advance" title="Permanent link">¶</a></h4>
+<p>Each OFO tutorial task includes code to download the Docker images required for that task. However, downloads can be slow. If you want to download all OFO Docker images in advance so you don't have to wait for downloads when going through the tutorials, you can run the following commands.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># TODO: Commands to download all OFO Docker iages</span>
 </code></pre></div>
-<h3 id="todo">TODO<a class="headerlink" href="#todo" title="Permanent link">¶</a></h3>
-<p>TODO: Other things to keep in mind. Perhaps:</p>
-<ul>
-<li>Explain we give raw python code examples but Jupyter notebooks are also available (if true)</li>
-<li>Where to get the example data</li>
-<li>More?</li>
-</ul>
+<h3 id="native-python">Native Python<a class="headerlink" href="#native-python" title="Permanent link">¶</a></h3>
+<p>OFO tools are written in Python, so they can also be run directly on your computer without using Docker. This requires installing Python and the required Python libraries and other system dependencies on your computer. This process involves a few more steps than Docker, but a big benefit is that you can then run the OFO tools directly in a Python environment, such as a Jupyter notebook (see below). This allows you to integrate OFO data processing with other Python code--for example, code to prepare the input data and visualize the output data. Each OFO tutorial task includes instructions for installing the required Python libraries and other dependencies and for running the OFO tools directly in Python.</p>
+<p>When running OFO tools as Python code directly, you will first need to load the required libraries into memory. Each OFO tutorial includes code demonstrating how to do this. After loading the libraries, you can run the OFO tools directly in Python.</p>
+<p>There are three common ways to run Python code: in a Jupyter notebook, as a standalone script, or as a command-line entrypoint (all described below).</p>
+<p>Regardless how you will run Python code, you will need to have the required Python libraries and other dependencies installed in your Python environment. Installing Python libraries and their dependencies on a computer requires creating a Python <em>environment</em>, which is a self-contained installation of Python and the relevant libraries. The OFO recommends the <a href="https://docs.conda.io/en/latest/">Conda</a> system for creating and managing Python environments. {TODO: Update this if we can move everything to <code>venv</code>.} Each OFO tutorial task includes instructions for creating a Conda environment and installing the required Python libraries and other dependencies in that environment. To be able to do this, you need to have Conda and Poetry installed on your computer.</p>
+<h4 id="installing-conda">Installing Conda<a class="headerlink" href="#installing-conda" title="Permanent link">¶</a></h4>
+<p>We recommend installing <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> because it is smaller and simpler than the full Anaconda distribution and contains everything you need.
+TODO: Any further install instructions required?</p>
+<h4 id="installing-poetry">Installing Poetry<a class="headerlink" href="#installing-poetry" title="Permanent link">¶</a></h4>
+<p>TODO: Brief description of what Poetry does and pointer to Poetry install instructions</p>
+<h4 id="python-command-line-entrypoints">Python command-line entrypoints<a class="headerlink" href="#python-command-line-entrypoints" title="Permanent link">¶</a></h4>
+<p>The OFO provides command-line entrypoints for each of its tools. These are Python code files that can be run from a terminal window with a single command. Inside, they load the required Python libraries and call the relevant Python functions to perform the task. They provide standardized handling of processing parameters that are provided by the user in the command line call. The command-line entrypoints are useful for users who are not familiar with Python, as they can simply be run as provided and do not require any modifications to the Python code. Each OFO tutorial task includes instructions for running the command-line entrypoints for that task. Here is an example of running a command-line entrypoint to detect trees from a canopy height model using the OFO <a href="https://github.com/open-forest-observatory/tree-detection-framework">Tree Detection Framework</a>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-detection-framework
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>path/to/data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>path/to/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
+</code></pre></div>
+<h4 id="jupyter-notebooks">Jupyter notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permanent link">¶</a></h4>
+<p>One way to run Python code is in a <a href="https://jupyter.org/">Jupyter notebook</a>, which is an interactive document that can contain both text and code that can be run. Jupyter notebooks are useful for data processing tasks because they allow you to run code in small chunks and see the results immediately, which is helpful for exploring data and debugging code. Each OFO tutorial task includes a Jupyter notebook that performs each step. Jupyter notebooks run inside a Conda environment; they are not an alternative to Conda.</p>
+<p>TODO: Instructions on how to install Jupyter (link to Jupyter documentation), access the Jupyter server, and run notebooks, including connecting to the right Python environment.</p>
+<h4 id="custom-python-scripts">Custom Python scripts<a class="headerlink" href="#custom-python-scripts" title="Permanent link">¶</a></h4>
+<p>Python code can also be run as standalone scripts, outside of Jupyter notebooks. Scripts are simply files containing Python code that can be run from a terminal window or inside an IDE such as <a href="https://code.visualstudio.com/">VS Code</a> or <a href="https://positron.posit.co/">Positron</a>. Each OFO tutorial provides the Python code snippets to accomplish each step, but it is the user's responsibility to piece them together into a complete script. From a terminal, you would run a script like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>my-environment<span class="w"> </span><span class="c1"># Activate the Conda environment containing the required libraries</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python<span class="w"> </span>path/to/my-script.py<span class="w">   </span><span class="c1"># Run the script</span>
+</code></pre></div>
 
 
 
@@ -1518,7 +1649,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 10, 2026 02:41:00 UTC">October 10, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 10, 2026 20:27:55 UTC">October 10, 2026</span>
   </span>
 
     
