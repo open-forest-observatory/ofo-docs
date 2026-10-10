@@ -5,3 +5,4 @@ mkdocs-nav-weight
 mkdocs-git-revision-date-localized-plugin
 mkdocs-git-committers-plugin-2
 mkdocs-pagetree-plugin
+mkdocs-glightbox
