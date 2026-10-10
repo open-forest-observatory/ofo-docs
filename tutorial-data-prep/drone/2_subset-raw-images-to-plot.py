@@ -23,16 +23,16 @@ import geopandas as gpd
 from PIL import Image
 
 # Mission folders created by 1_download-raw-images.py. Each is subset into a folder under
-# OUTPUT_ROOT named after the mission folder plus 'subset' (e.g. '000448' -> '000448subset').
+# OUTPUT_ROOT named after the mission folder plus 'clip' (e.g. '000448' -> '000448clip').
 MISSION_DIRS = [
     "/ofo-share/project-data/tutorial-data/pre-tutorial-data/raw-drone-photos/000448",
     "/ofo-share/project-data/tutorial-data/pre-tutorial-data/raw-drone-photos/000452",
 ]
-PLOT_BOUNDARY_PATH = "/ofo-share/project-data/tutorial-data/tutorial-data/ground-reference/ofo-ground-reference-plot_0030.gpkg"
+PLOT_BOUNDARY_PATH = "/ofo-share/project-data/tutorial-data/tutorial-data/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg"
 # Distance (meters) beyond the plot boundary within which photos are kept
 BUFFER_M = 60
-OUTPUT_ROOT = "/ofo-share/project-data/tutorial-data/tutorial-data/drone/raw-drone-photos"
-BOUNDARY_OUTPUT_PATH = "/ofo-share/project-data/tutorial-data/tutorial-data/drone/boundaries/composite1_boundary.gpkg"
+OUTPUT_ROOT = "/ofo-share/project-data/tutorial-data/tutorial-data/inputs/drone/raw-drone-photos"
+BOUNDARY_OUTPUT_PATH = "/ofo-share/project-data/tutorial-data/tutorial-data/inputs/drone/boundaries/composite1_boundary.gpkg"
 
 PHOTO_EXTENSIONS = (".jpg", ".jpeg", ".tif", ".tiff")
 
