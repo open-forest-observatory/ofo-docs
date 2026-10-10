@@ -31,7 +31,7 @@ MISSION_DIRS = [
 PLOT_BOUNDARY_PATH = "/ofo-share/project-data/tutorial-data/tutorial-data/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg"
 # Distance (meters) beyond the plot boundary within which photos are kept
 BUFFER_M = 60
-OUTPUT_ROOT = "/ofo-share/project-data/tutorial-data/tutorial-data/inputs/drone/raw-drone-photos"
+OUTPUT_ROOT = "/ofo-share/project-data/tutorial-data/tutorial-data/inputs/drone/raw-drone-photos/composite1"
 BOUNDARY_OUTPUT_PATH = "/ofo-share/project-data/tutorial-data/tutorial-data/inputs/drone/boundaries/composite1_boundary.gpkg"
 
 PHOTO_EXTENSIONS = (".jpg", ".jpeg", ".tif", ".tiff")
