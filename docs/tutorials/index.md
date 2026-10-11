@@ -88,7 +88,7 @@ To be able to run Docker containers, you need to install Docker on your computer
 
 #### Downloading all OFO Docker images in advance
 
-Each OFO tutorial task includes code to download the Docker images required for that task. However, downloads can be slow. If you want to download all OFO Docker images in advance so you don't have to wait for downloads when going through the tutorials, you can run the following commands.
+Each OFO tutorial task includes code to download the Docker images required for that task. However, downloads can be slow depending on your internet connection. If you want to download all OFO Docker images in advance so you don't have to wait for downloads when going through the tutorials, you can run the following commands.
 
 ```bash
 # TODO: Commands to download all OFO Docker iages
@@ -140,4 +140,12 @@ Python code can also be run as standalone scripts, outside of Jupyter notebooks.
 ```bash
 conda activate my-environment # Activate the Conda environment containing the required libraries
 python path/to/my-script.py   # Run the script
+```
+
+#### Setting up all Python environments in advance
+
+Each OFO tutorial task includes code to set up the Python environment required for that task. However, setup can be slow, especially on slow to moderate speed internet connections due to library downloads. If you want to set up all Python environments in advance so you don't have to wait for downloads when going through the tutorials, you can run the following commands.
+
+```bash
+# TODO: Commands to set up all python envs needed across all tutorials
 ```

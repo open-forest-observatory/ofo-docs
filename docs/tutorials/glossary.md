@@ -23,6 +23,6 @@ A georeferenced image created by stitching together multiple overlapping aerial 
 
 ## Variable-radius local maximum filter { #lmf }
 
-An algorithm that searches each pixel in a canopy height model to determine whether it is a local maximum (i.e., a treetop) by comparing its height to neighboring pixels. The neighboring pixels that are checked are those within a radius that varies based on the height of the pixel being evaluated. The relationship between the pixel's height and the radius of the search area is defined by a user-specified function.
+An algorithm that searches each pixel in a canopy height model to determine whether it is a local maximum (i.e., a predicted treetop) by comparing its height to neighboring pixels. The neighboring pixels that are checked are those within a radius that varies based on the height of the pixel being evaluated. The relationship between the pixel's height and the radius of the search area is defined by a user-specified function.
 
 ![Local maximum filter](/assets/images/tutorials/lmf.png)
