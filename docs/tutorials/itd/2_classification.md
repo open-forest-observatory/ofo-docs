@@ -6,7 +6,8 @@ weight: 30
 
 We will use the OFO tools [Geograypher](https://github.com/open-forest-observatory/tree-detection-framework) and [Tree Classification Framework](https://github.com/open-forest-observatory/tree-classification-framework) to generate predictions of tree species and live/dead status for detected trees. We will use all of the views of each detected tree from each drone photo it appears in. Because the raw drone photos are not geospatial data products, some intermediate processing using OFO tools is required.The process follows this workflow:
 
- - Use Geograypher to (1) crop out each view of each tree from each drone photo it appears in and (2) link each crop to the ID of the corresponding detected tree.
+ - Use Geograypher to render the unique ID of each detected tree to the perspective of each image it appears in
+ - Use the Tree Classification Framework to crop out each view of each tree from each drone photo it appears, while preserving the unique ID of the tree
  - Use the Tree Classification Framework to generate a prediction of species and live/dead status for each individual tree crop
  - Use the Tree Classification Framework to aggregate the predictions for each individual tree crop into a single prediction for each detected tree.
 
@@ -19,9 +20,11 @@ TODO: Consider adding illustrative schematics here or (more likely) below.
 
 | Name                            | Source         | Example file                                                                                            |
 | ------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------- |
-| Detected tree crowns            | Tree detection | [composite1_tree-crowns_geometric_v01.gpkg](https://ucdavis.box.com/s/ormrucvnmrgj0qhpt0hs63mij8kjs9q6) |
 | Raw drone photos                | Drone flight   | [raw-drone-photos/composite1](https://ucdavis.box.com/s/p2w2cw4bjrsjwjgcr11m1luqh89v3fxh)               |
 | Photogrammetry camera locations | Photogrammetry | [composite1_cameras.xml](https://ucdavis.box.com/s/qallapylahuq7u76dv9fef8tp2aoxlyp)                    |
+| Photogrammetry mesh | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
+| Digital terrain model | Photogrammetry | [composite1_dtm-ptcloud.tif](https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows)                    |
+| Detected tree crowns            | Tree detection | [composite1_tree-crowns_geometric_v01.gpkg](https://ucdavis.box.com/s/ormrucvnmrgj0qhpt0hs63mij8kjs9q6) |
 
 The detected tree crowns may be ones you produced in the [Detection task](/tutorials/itd/1_detection.md), or you can use the pre-generated detections in the tutorial data folder (linked above). It is important that the detections and photogrammetry camera locations be derived from the same photogrammetry run, using the same raw drone photos that you will use for this task.
 
