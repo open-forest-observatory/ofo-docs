@@ -39,7 +39,7 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
     Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
     ```bash
-    export DATA_DIR="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_DIR="path/to/data/"
     docker run --rm --user "$(id -u):$(id -g)" \
     -v "${DATA_DIR}:/data" \
     ghcr.io/open-forest-observatory/geograypher:latest \
@@ -68,7 +68,7 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
     ```bash
     conda activate TODO: Name of the Conda environment
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path/to/data/"
     python -m geograypher.entrypoints.render_labels \
         --mesh-file ${DATA_FOLDER}/inputs/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
@@ -108,3 +108,49 @@ Before we can use computer vision to classify trees to species, we need to:
 This means that ultimately, for every geospatial tree crown, we will end up with multiple cropped images, each from a different viewpoint.
 
 TODO: Illustrative schematic here?
+
+=== "Docker (recommended)"
+
+    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+
+    ```bash
+    export DATA_FOLDER="path/to/data/"
+    docker run --rm --user "$(id -u):$(id -g)" \
+        -v "${DATA_FOLDER}:/data" \
+        ghcr.io/open-forest-observatory/tree-classification-framework:latest \
+        python -m tree_classification_framework.chip_images \
+           /data/inputs/drone/raw-drone-photos/composite1 \
+           /data/intermediate/renders \
+           /data/intermediate/chips \
+           --n-workers 4 \
+           --n-chips-per-tree 10
+    ```
+
+=== "Python command-line entrypoint"
+
+    TODO: Need to merge the install instructions for both tools here?
+
+    TODO: This can just be the TCF installation instructions I think
+
+    Install the Geograypher and Tree Classification Framework libraries and their dependencies into a Conda environment following their [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/), then activate the Conda environment in a terminal window:
+
+    ```bash
+    conda activate TODO: Name of the Conda environment
+    export DATA_FOLDER="path/to/data/"
+    python -m tree_classification_framework.chip_images \
+       ${DATA_FOLDER}/inputs/drone/raw-drone-photos/composite1 \
+       ${DATA_FOLDER}/intermediate/renders \
+       ${DATA_FOLDER}/intermediate/chips \
+       --n-workers 4 \
+       --n-chips-per-tree 10
+    ```
+
+=== "Custom Python script"
+
+    TODO: Repeat the Conda env instructions from above once complete.
+
+     Then load the required libraries:
+
+    ```python
+    # TODO: Complete python lines to load libraries
+    ```
