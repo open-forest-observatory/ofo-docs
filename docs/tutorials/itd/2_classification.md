@@ -35,6 +35,28 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
     Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
+    ```bash
+    export DATA_DIR="/ofo-share/repos/david/ofo-docs/data"
+    docker run --rm --user "$(id -u):$(id -g)" \
+    -v "${DATA_DIR}:/data" \
+    ghcr.io/open-forest-observatory/geograypher:latest \
+    python -m geograypher.entrypoints.render_labels \
+        --mesh-file /data/inputs/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-CRS 32610 \
+        --cameras-file  /data/inputs/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --texture /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        --texture-column-name unique_ID \
+        --image-folder /data/inputs/drone/raw-drone-photos/composite1 \
+        --render-savefolder /data/intermediate/renders \
+        --original-image-folder /data/raw-drone-photos \
+        --labels-vis-folder /data/intermediate/renders-vis \
+        --mesh-ROI-buffer-radius-meters 10 \
+        --cameras-ROI-buffer-radius-meters 20 \
+        --render-image-scale 0.125 \
+        --DTM-file /data/inputs/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --ground-height-threshold 2.0
+    ```
+
 === "Python command-line entrypoint"
 
     TODO: Need to merge the install instructions for both tools here?
@@ -43,12 +65,28 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
     ```bash
     conda activate TODO: Name of the Conda environment
+    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    python -m geograypher.entrypoints.render_labels \
+        --mesh-file ${DATA_FOLDER}/inputs/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-CRS 32610 \
+        --cameras-file  ${DATA_FOLDER}/inputs/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --texture ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        --texture-column-name unique_ID \
+        --image-folder ${DATA_FOLDER}/inputs/drone/raw-drone-photos/composite1 \
+        --render-savefolder ${DATA_FOLDER}/intermediate/renders \
+        --original-image-folder /data/raw-drone-photos \
+        --labels-vis-folder ${DATA_FOLDER}/intermediate/renders-vis \
+        --mesh-ROI-buffer-radius-meters 10 \
+        --cameras-ROI-buffer-radius-meters 20 \
+        --render-image-scale 0.125 \
+        --DTM-file ${DATA_FOLDER}/inputs/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --ground-height-threshold 2.0
     ```
 
 === "Custom Python script"
 
-    TODO: Repeat the Conda env instructions from above once complete. 
-    
+    TODO: Repeat the Conda env instructions from above once complete.
+
      Then load the required libraries:
 
     ```python
