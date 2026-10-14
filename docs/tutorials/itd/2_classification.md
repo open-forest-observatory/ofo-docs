@@ -134,6 +134,10 @@ TODO: Illustrative schematic here?
 
     Install the Geograypher and Tree Classification Framework libraries and their dependencies into a Conda environment following their [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/), then activate the Conda environment in a terminal window:
 
+=== "Custom Python script"
+
+    TODO:
+
 ## Classify each crop
 
 TODO: Illustrative schematic here?
@@ -166,3 +170,49 @@ TODO: Illustrative schematic here?
     It is very difficult to install the dependencies for `MMPretrain` and the exact steps depend on
     your system. Therefore, it is strongly recommended that you use the docker version to run this
     step.
+
+## Assign predictions to individual trees
+
+Before we can use computer vision to classify trees to species, we need to:
+
+- Take the geospatial tree crowns that we detected in the [Detection task](/tutorials/itd/1_detection.md)
+- For detected tree crown, find all the drone photos it appeared in
+- For each photo the tree appeared in crop the view of it from the photo.
+
+This means that ultimately, for every geospatial tree crown, we will end up with multiple cropped images, each from a different viewpoint.
+
+TODO: Illustrative schematic here?
+
+=== "Docker (recommended)"
+
+    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+
+    ```bash
+    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    docker run --rm --user "$(id -u):$(id -g)" \
+        -v "${DATA_FOLDER}:/data" \
+        ghcr.io/open-forest-observatory/tree-classification-framework:latest \
+        python -m tree_classification_framework.assign_predictions_to_trees \
+           /data/intermediate/classified-live-dead.json \
+           live_dead \
+           /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+           /data/outputs/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+    ```
+    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
+
+=== "Python command-line entrypoint"
+
+    TODO: This can just be the TCF installation instructions I think
+
+    ```bash
+    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    python -m tree_classification_framework.assign_predictions_to_trees \
+       ${DATA_FOLDER}/intermediate/classified-species.json \
+       species \
+       ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+       ${DATA_FOLDER}/outputs/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
+    ```
+    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
+
+=== "Custom Python script"
+    TODO:
