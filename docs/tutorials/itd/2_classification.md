@@ -11,11 +11,6 @@ We will use the OFO tools [Geograypher](https://github.com/open-forest-observato
  - Use the OFO fork of MMPretrain to generate a prediction of species and live/dead status for each individual tree crop
  - Use the Tree Classification Framework to aggregate the predictions for each individual tree crop into a single prediction for each detected tree.
 
-TODO: Consider moving the above text into the actual workflow sections below.
-
-TODO: Consider adding illustrative schematics here or (more likely) below.
-
-
 ## Required input data
 
 | Name                            | Source         | Example file                                                                                            |
@@ -33,13 +28,27 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 !!! info "Before you begin"
 
     Make sure you have gone through the [OFO tutorial preparation](/tutorials/index.md#preparing-to-follow-the-tutorials) guidance.
-
 === "Docker (recommended)"
 
     Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
+=== "Python command-line entrypoint"
+
+    Install the Geograypher following its [installation instructions](https://open-forest-observatory.github.io/geograypher/getting_started/installation/#advanceddeveloper-installation).
+    TODO figure out how to install all three tools. Likely just say you need to do each one independently.
+
+
+=== "Custom Python script"
+    TODO same as above
+
+
+## Rendering tree locations to images
+
+=== "Docker (recommended)"
+
     ```bash
     export DATA_DIR="path/to/data/"
+
     docker run --rm --user "$(id -u):$(id -g)" \
     -v "${DATA_DIR}:/data" \
     ghcr.io/open-forest-observatory/geograypher:latest \
@@ -62,13 +71,11 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 === "Python command-line entrypoint"
 
-    TODO: Need to merge the install instructions for both tools here?
-
-    Install the Geograypher and Tree Classification Framework libraries and their dependencies into a Conda environment following their [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/), then activate the Conda environment in a terminal window:
-
     ```bash
-    conda activate TODO: Name of the Conda environment
     export DATA_FOLDER="path/to/data/"
+
+    conda activate geograypher
+
     python -m geograypher.entrypoints.render_labels \
         --mesh-file ${DATA_FOLDER}/inputs/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
@@ -88,9 +95,11 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 === "Custom Python script"
 
-    TODO: Repeat the Conda env instructions from above once complete.
+    ```bash
+    conda activate geograypher
+    ```
 
-     Then load the required libraries:
+    # TODO Then load the required libraries:
 
     ```python
     # TODO: Complete python lines to load libraries
