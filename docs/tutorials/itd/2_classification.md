@@ -4,11 +4,11 @@ weight: 30
 
 # Task 2: Classification
 
-We will use the OFO tools [Geograypher](https://github.com/open-forest-observatory/tree-detection-framework) and [Tree Classification Framework](https://github.com/open-forest-observatory/tree-classification-framework) to generate predictions of tree species and live/dead status for detected trees. We will use all of the views of each detected tree from each drone photo it appears in. Because the raw drone photos are not geospatial data products, some intermediate processing using OFO tools is required.The process follows this workflow:
+We will use the OFO tools [Geograypher](https://github.com/open-forest-observatory/tree-detection-framework) and [Tree Classification Framework](https://github.com/open-forest-observatory/tree-classification-framework) and an OFO fork of [MMPretrain](https://github.com/open-forest-observatory/mmpretrain) to generate predictions of tree species and live/dead status for detected trees. We will use all of the views of each detected tree from each drone photo it appears in. Because the raw drone photos are not geospatial data products, some intermediate processing using OFO tools is required.The process follows this workflow:
 
  - Use Geograypher to render the unique ID of each detected tree to the perspective of each image it appears in
  - Use the Tree Classification Framework to crop out each view of each tree from each drone photo it appears, while preserving the unique ID of the tree
- - Use the Tree Classification Framework to generate a prediction of species and live/dead status for each individual tree crop
+ - Use the OFO fork of MMPretrain to generate a prediction of species and live/dead status for each individual tree crop
  - Use the Tree Classification Framework to aggregate the predictions for each individual tree crop into a single prediction for each detected tree.
 
 TODO: Consider moving the above text into the actual workflow sections below.
