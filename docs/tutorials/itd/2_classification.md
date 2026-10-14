@@ -134,23 +134,35 @@ TODO: Illustrative schematic here?
 
     Install the Geograypher and Tree Classification Framework libraries and their dependencies into a Conda environment following their [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/), then activate the Conda environment in a terminal window:
 
+## Classify each crop
+
+TODO: Illustrative schematic here?
+
+=== "Docker (recommended)"
+
+    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+
     ```bash
-    conda activate TODO: Name of the Conda environment
-    export DATA_FOLDER="path/to/data/"
-    python -m tree_classification_framework.chip_images \
-       ${DATA_FOLDER}/inputs/drone/raw-drone-photos/composite1 \
-       ${DATA_FOLDER}/intermediate/renders \
-       ${DATA_FOLDER}/intermediate/chips \
-       --n-workers 4 \
-       --n-chips-per-tree 10
+    docker run --rm --user "$(id -u):$(id -g)" \
+        --gpus all --group-add "$(stat -c %g /dev/nvidia0)" \
+        -v "${DATA_FOLDER}:/data" \
+        ghcr.io/open-forest-observatory/mmpretrain:latest \
+        python /app/tools/predict.py \
+           /data/intermediate/chips \
+           /data/inputs/models/dead_live_config.py \
+           /data/inputs/models/dead_live_model.pth \
+           /data/intermediate/classified-live-dead.json
     ```
+    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
+
+=== "Python command-line entrypoint"
+
+    It is very difficult to install the dependencies for `MMPretrain` and the exact steps depend on
+    your system. Therefore, it is strongly recommended that you use the docker version to run this
+    step.
 
 === "Custom Python script"
 
-    TODO: Repeat the Conda env instructions from above once complete.
-
-     Then load the required libraries:
-
-    ```python
-    # TODO: Complete python lines to load libraries
-    ```
+    It is very difficult to install the dependencies for `MMPretrain` and the exact steps depend on
+    your system. Therefore, it is strongly recommended that you use the docker version to run this
+    step.
