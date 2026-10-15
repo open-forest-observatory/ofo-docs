@@ -56,7 +56,7 @@ Each tree is assigned a unique numerical ID when it is detected. Since the mesh 
 
 The original drone images are not required at this stage except for visualization. An example is shown below of the rendered individual tree IDs rendered to the perspective of the image, and overlaid on it.
 
-TODO image of render /ofo-share/repos/david/ofo-docs/docs/assets/images/tutorials/composite1_rendered-IDs.png
+![rendered-IDs](/assets/images/tutorials/composite1_rendered-IDs.png)
 
 === "Docker (recommended)"
 
