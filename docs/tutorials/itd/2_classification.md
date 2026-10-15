@@ -50,6 +50,14 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 ## Rendering tree locations to images
 
+The first step in classifying trees is to understand what region of each image observes each tree using `Geograypher`. The first two inputs are from photogrammetry: the 3D structure of the scene represented as a mesh and the location and orientation from which each image was captured. The 2D geospatial locations of the tree crowns is also obtained, using the detection algorithm in the last section. Additionally, the digital terrain model (DTM) from photogrammetry plays a minor role in determining which part of the mesh represent the ground.
+
+Each tree is assigned a unique numerical ID when it is detected. Since the mesh has geospatial reference information, these IDs can be transfered from the 2D representation of the crowns to the corresponding 3D mesh faces. From there, techniques from computer graphics are used to render the IDs from the mesh to the perspective of each image. Norably, this rendering process is oclusion-aware, so if a tree is blocked from view by another obstacle, it will not be spuriously rendered.
+
+The original drone images are not required at this stage except for visualization. An example is shown below of the rendered individual tree IDs rendered to the perspective of the image, and overlaid on it.
+
+TODO image of render /ofo-share/repos/david/ofo-docs/docs/assets/images/tutorials/composite1_rendered-IDs.png
+
 === "Docker (recommended)"
 
     ```bash
