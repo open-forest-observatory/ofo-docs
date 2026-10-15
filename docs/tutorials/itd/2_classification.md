@@ -17,8 +17,8 @@ We will use the OFO tools [Geograypher](https://github.com/open-forest-observato
 | ------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------- |
 | Raw drone photos                | Drone flight   | [raw-drone-photos/composite1](https://ucdavis.box.com/s/p2w2cw4bjrsjwjgcr11m1luqh89v3fxh)               |
 | Photogrammetry camera locations | Photogrammetry | [composite1_cameras.xml](https://ucdavis.box.com/s/qallapylahuq7u76dv9fef8tp2aoxlyp)                    |
-| Photogrammetry mesh | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
-| Digital terrain model | Photogrammetry | [composite1_dtm-ptcloud.tif](https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows)                    |
+| Photogrammetry [mesh] | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
+| [Digital terrain model] | Photogrammetry | [composite1_dtm-ptcloud.tif](https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows)                    |
 | Detected tree crowns            | Tree detection | [composite1_tree-crowns_geometric_v01.gpkg](https://ucdavis.box.com/s/ormrucvnmrgj0qhpt0hs63mij8kjs9q6) |
 | Species and live/dead classification models            | Model training (beyond tutorial scope) | [models](https://ucdavis.box.com/s/sx6p6cgzhzafl33x6eigh6v5lvy4x8z6) |
 
@@ -51,7 +51,7 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 ## Rendering tree locations to images
 
-The first step in classifying trees is use `Geograypher` to understand what region of each image observes each tree. The first two inputs are from photogrammetry: the 3D structure of the scene represented as a mesh and the location and orientation from which each image was captured. The 2D geospatial locations of the tree crowns is also obtained using the detection algorithm in the last section. Additionally, the digital terrain model (DTM) from photogrammetry is used in this particular application for determining which part of the mesh represent the ground.
+The first step in classifying trees is use `Geograypher` to understand what region of each image observes each tree. The first two inputs are from photogrammetry: the 3D structure of the scene represented as a [mesh] and the location and orientation from which each image was captured. The 2D geospatial locations of the tree crowns is also obtained using the detection algorithm in the last section. Additionally, the digital terrain model ([DTM]) from photogrammetry is used in this particular application for determining which part of the mesh represent the ground.
 
 Each tree is assigned a unique numerical ID when it is detected. Since the mesh has geospatial reference information, these IDs can be transfered from the 2D representation of the crowns to the corresponding 3D mesh faces. From there, techniques from computer graphics are used to render the IDs from the mesh to the perspective of each image. Norably, this rendering process is oclusion-aware, so if a tree is blocked from view by another obstacle, it will not be spuriously rendered. This produces a single-channel image encoding the ID of the observed tree (or a special background ID) at each pixel, for each image in the original set of drone images.
 
