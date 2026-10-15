@@ -9,7 +9,7 @@ We will use the OFO tools [Geograypher](https://github.com/open-forest-observato
  - Use Geograypher to render the unique ID of each detected tree to the perspective of each image it appears in
  - Use the Tree Classification Framework to crop out each view of each tree from each drone photo it appears, while preserving the unique ID of the tree
  - Use the OFO fork of MMPretrain to generate a prediction of species and live/dead status for each individual tree crop
- - Use the Tree Classification Framework to aggregate the predictions for each individual tree crop into a single prediction for each detected tree.
+ - Use the Tree Classification Framework to aggregate the predictions for each individual tree crop into a single geospatial prediction for each detected tree.
 
 ## Required input data
 
@@ -20,6 +20,7 @@ We will use the OFO tools [Geograypher](https://github.com/open-forest-observato
 | Photogrammetry mesh | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
 | Digital terrain model | Photogrammetry | [composite1_dtm-ptcloud.tif](https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows)                    |
 | Detected tree crowns            | Tree detection | [composite1_tree-crowns_geometric_v01.gpkg](https://ucdavis.box.com/s/ormrucvnmrgj0qhpt0hs63mij8kjs9q6) |
+| Species and live/dead classification models            | Model training (beyond tutorial scope) | [models](https://ucdavis.box.com/s/sx6p6cgzhzafl33x6eigh6v5lvy4x8z6) |
 
 The detected tree crowns may be ones you produced in the [Detection task](/tutorials/itd/1_detection.md), or you can use the pre-generated detections in the tutorial data folder (linked above). It is important that the detections and photogrammetry camera locations be derived from the same photogrammetry run, using the same raw drone photos that you will use for this task.
 
@@ -50,9 +51,9 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 ## Rendering tree locations to images
 
-The first step in classifying trees is to understand what region of each image observes each tree using `Geograypher`. The first two inputs are from photogrammetry: the 3D structure of the scene represented as a mesh and the location and orientation from which each image was captured. The 2D geospatial locations of the tree crowns is also obtained, using the detection algorithm in the last section. Additionally, the digital terrain model (DTM) from photogrammetry plays a minor role in determining which part of the mesh represent the ground.
+The first step in classifying trees is use `Geograypher` to understand what region of each image observes each tree. The first two inputs are from photogrammetry: the 3D structure of the scene represented as a mesh and the location and orientation from which each image was captured. The 2D geospatial locations of the tree crowns is also obtained using the detection algorithm in the last section. Additionally, the digital terrain model (DTM) from photogrammetry is used in this particular application for determining which part of the mesh represent the ground.
 
-Each tree is assigned a unique numerical ID when it is detected. Since the mesh has geospatial reference information, these IDs can be transfered from the 2D representation of the crowns to the corresponding 3D mesh faces. From there, techniques from computer graphics are used to render the IDs from the mesh to the perspective of each image. Norably, this rendering process is oclusion-aware, so if a tree is blocked from view by another obstacle, it will not be spuriously rendered.
+Each tree is assigned a unique numerical ID when it is detected. Since the mesh has geospatial reference information, these IDs can be transfered from the 2D representation of the crowns to the corresponding 3D mesh faces. From there, techniques from computer graphics are used to render the IDs from the mesh to the perspective of each image. Norably, this rendering process is oclusion-aware, so if a tree is blocked from view by another obstacle, it will not be spuriously rendered. This produces a single-channel image encoding the ID of the observed tree (or a special background ID) at each pixel, for each image in the original set of drone images.
 
 The original drone images are not required at this stage except for visualization. An example is shown below of the rendered individual tree IDs rendered to the perspective of the image, and overlaid on it.
 
@@ -122,13 +123,9 @@ The original drone images are not required at this stage except for visualizatio
 
 ## Crop the view of each tree from each drone photo
 
-Before we can use computer vision to classify trees to species, we need to:
+The last step identifies the location of each tree in each image, but additional processing is required to prepare this data for a computer vision predition model. Specifically, we use a classification model which takes an image and produces a single label. To accomdate this format, we must create one image per view of each tree. Using the rendered mask from geograypher, a rectangular region surrounding each observed tree is cropped from the original image. Then, any content within the crop but outside the bounds of the tree is set to a background color. Finally, each chip is written out, while preserving both the structure of what image it was derived from and the ID of the tree it was generated from.
 
-- Take the geospatial tree crowns that we detected in the [Detection task](/tutorials/itd/1_detection.md)
-- For detected tree crown, find all the drone photos it appeared in
-- For each photo the tree appeared in crop the view of it from the photo.
-
-This means that ultimately, for every geospatial tree crown, we will end up with multiple cropped images, each from a different viewpoint.
+![crop](/assets/images/tutorials/composite1_crop.png)
 
 TODO: Illustrative schematic here?
 
@@ -163,7 +160,9 @@ TODO: Illustrative schematic here?
 
 ## Classify each crop
 
-TODO: Illustrative schematic here?
+We can use models previously trained by the OFO to classify each chip. In this step, we'll use two independent models: one for predicting live vs. dead trees and another for prediction species. The latter model is illustrative and was developed for eight common species in western mixed conifer forests. These models are used to classify each chip independently, and one file is created for each of the species and live/dead prediction results, summarizing the predicted class for each image.
+
+TODO: Illustrative schematic here? This one is probably the most conceptually simple.
 
 === "Docker (recommended)"
 
@@ -196,13 +195,7 @@ TODO: Illustrative schematic here?
 
 ## Assign predictions to individual trees
 
-Before we can use computer vision to classify trees to species, we need to:
-
-- Take the geospatial tree crowns that we detected in the [Detection task](/tutorials/itd/1_detection.md)
-- For detected tree crown, find all the drone photos it appeared in
-- For each photo the tree appeared in crop the view of it from the photo.
-
-This means that ultimately, for every geospatial tree crown, we will end up with multiple cropped images, each from a different viewpoint.
+The end goal of this process is to have geospatial, tree-level predictions. Each tree is likely to been observed many times from different viewpoints and will therefore have multiple classification results. We maintain the tree's unique ID through all steps in the process, so the view-level predictions still tie back to a specific tree. Since predictions may differ across views, we take the modal (most common) prediction across all views, and assign this as the predicted tree label. This information is joined with the geospatial crown information that was orignally used to generate the chips and saved out. In addition to the predicted class, we also include the number of views which contributed to the prediction and the fraction of views that agreed with the modal prediction. These attributes are suffixed with `_n_preds` and `_frac_matching_mode`, respectively, and may be used in downstream tasks to filter out low-confidence predictions.
 
 TODO: Illustrative schematic here?
 
