@@ -135,6 +135,9 @@ TODO: Illustrative schematic here?
 
     ```bash
     export DATA_FOLDER="path/to/data/"
+
+    conda activate tree-classification-framework
+
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
@@ -148,11 +151,16 @@ TODO: Illustrative schematic here?
 
 === "Python command-line entrypoint"
 
-    TODO: Need to merge the install instructions for both tools here?
+    ```bash
+    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
 
-    TODO: This can just be the TCF installation instructions I think
-
-    Install the Geograypher and Tree Classification Framework libraries and their dependencies into a Conda environment following their [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/), then activate the Conda environment in a terminal window:
+    python -m tree_classification_framework.chip_images \
+       ${DATA_FOLDER}/inputs/drone/raw-drone-photos/composite1 \
+       ${DATA_FOLDER}/intermediate/renders \
+       ${DATA_FOLDER}/intermediate/chips \
+       --n-workers 4 \
+       --n-chips-per-tree 10
+    ```
 
 === "Custom Python script"
 
@@ -169,6 +177,8 @@ TODO: Illustrative schematic here? This one is probably the most conceptually si
     Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
     ```bash
+    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all --group-add "$(stat -c %g /dev/nvidia0)" \
         -v "${DATA_FOLDER}:/data" \
@@ -205,6 +215,7 @@ TODO: Illustrative schematic here?
 
     ```bash
     export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
@@ -222,6 +233,9 @@ TODO: Illustrative schematic here?
 
     ```bash
     export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+
+    conda activate tree-classification-framework
+
     python -m tree_classification_framework.assign_predictions_to_trees \
        ${DATA_FOLDER}/intermediate/classified-species.json \
        species \
