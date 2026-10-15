@@ -21,6 +21,19 @@ A georeferenced image created by stitching together multiple overlapping aerial 
 
 ![Orthomosaic](/assets/images/tutorials/composite1_ortho-dsm-ptcloud.png)
 
+## Digital terrain model (DTM) { #dtm }
+
+A representation of the bare-earth altitude. This is produced by photogrammetry which employs algorithms to identify which portion of the scene represents ground. In the visualization below, brightness represents altitude, normalized to min and max.
+
+![DTM](/assets/images/tutorials/composite1_dtm.png)
+
+## Mesh { #mesh }
+
+A representation of a surface in 3D produced by many photogrammetry tools. It consists of a set of points called vertices connected by triangular faces. This data structure is common in the field of computer graphics and is used to perform rendering operations.
+
+![Mesh](/assets/images/tutorials/composite1_mesh.png)
+
+
 ## Variable-radius local maximum filter { #lmf }
 
 An algorithm that searches each pixel in a canopy height model to determine whether it is a local maximum (i.e., a predicted treetop) by comparing its height to neighboring pixels. The neighboring pixels that are checked are those within a radius that varies based on the height of the pixel being evaluated. The relationship between the pixel's height and the radius of the search area is defined by a user-specified function.
