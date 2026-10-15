@@ -34,8 +34,14 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 === "Python command-line entrypoint"
 
-    Install the Geograypher following its [installation instructions](https://open-forest-observatory.github.io/geograypher/getting_started/installation/#advanceddeveloper-installation).
-    TODO figure out how to install all three tools. Likely just say you need to do each one independently.
+    This workflow requires three separate environments, for each `geograypher`, `tree-classification-framework`, and `mmpretrain`.
+
+    Install `geograypher` following its [installation instructions](https://open-forest-observatory.github.io/geograypher/getting_started/installation/#advanceddeveloper-installation).
+
+    Install `tree-classification-framework` following its [installation instructions](https://github.com/open-forest-observatory/tree-classification-framework#install).
+
+    Install `MMPretrain` following its [installation instructions](https://github.com/open-forest-observatory/mmpretrain#installation).
+    - TODO this fails with the following error `ImportError: /home/exouser/miniconda3/envs/open-mmlab/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so: undefined symbol: iJIT_NotifyEvent`.
 
 
 === "Custom Python script"
