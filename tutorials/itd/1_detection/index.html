@@ -1576,7 +1576,7 @@
 </div>
 <h2 id="geometric-tree-detection-from-a-canopy-height-model">Geometric tree detection from a canopy height model<a class="headerlink" href="#geometric-tree-detection-from-a-canopy-height-model" title="Permanent link">¶</a></h2>
 <p>First, we will use a <em>geometric algorithm</em> implemented in the Tree Detection Framework to detect treetops as local maxima in the canopy height model (CHM). This approach uses a <a data-preview="" href="../../glossary/#lmf">variable-radius local maximum filter</a>. We will demonstrate with the CHM linked above:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh.png" data-desc-position="bottom"><img alt="CHM" src="../../../assets/images/tutorials/composite1_chm-mesh.png"></a></p>
+<p></p>
 <p>TODO: More context?</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Docker</label><label for="__tabbed_2_2">Jupyter</label><label for="__tabbed_2_3">Python command-line entrypoint</label><label for="__tabbed_2_4">Python script</label></div>
 <div class="tabbed-content">
@@ -1625,15 +1625,15 @@
 </div>
 </div>
 <p>This command saves two geospatial output files: points representing detected tree tops and polygons representing detected tree crowns. You can visualize these outputs in GIS software like <a href="https://qgis.org/en/site/">QGIS</a>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v01.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v01.png"></a></p>
+<p></p>
 <p>The detected trees all have a <code>height</code> attribute extracted from the CHM. The heights were used to size the tree points in the visualization above.</p>
 <p>The geometric tree detection algorithm can be parameterized in many different ways. For example, the value passed to <code>raster-blur-sigma</code> controls the amount of smoothing applied to the CHM before detecting local maxima. The values given for <code>a</code>, <code>b</code>, and <code>c</code> in the <code>tree-top-detector-kwargs</code> affects the local maximum search radius relative to the height of the tree. Other parameters not supplied here (and thus using their defaults) include <code>chip_size</code> and <code>chip_stride</code>, which control how large CHMs are split up into manageable chunks prior to processing, and <code>resolution</code>, which controls the resolution the CHM is resampled to prior to running the algorithm. See the <a href="https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/detect_geometric_two_stage/">Tree Detection Framework documentation</a> for a detailed description of all parameters. Here is an example of the effect of setting the treetop detector parameter <code>c</code> to <code>5</code>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v02.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v02.png"></a></p>
+<p></p>
 <p>The Open Forest Observatory has done extensive testing of the geometric tree detection algorithm and has found that the default parameters used here work well in many California conifer forests. Some of our parameter tuning work is published in <a href="https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.13860" rel="noopener" target="_blank">Methods in Ecology and Evolution <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2z"></path></svg></span></a>, and other work is in progress.</p>
 <h2 id="computer-vision-tree-detection-from-an-orthomosaic">Computer vision tree detection from an orthomosaic<a class="headerlink" href="#computer-vision-tree-detection-from-an-orthomosaic" title="Permanent link">¶</a></h2>
 <p>The Tree Detection Framework also provides an interface to several existing computer vision models for detecting trees from an <a data-preview="" href="../../glossary/#orthomosaic">orthomosaic</a>. These models run fastest when a GPU is available, but some can also run on a CPU in a reasonable amount of time, particularly for small orthomoaics.</p>
 <p>We will first demonstrate using it to run DeepForest on the orthomosaic linked above:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_ortho-dsm-ptcloud.png" data-desc-position="bottom"><img alt="Orthomosaic" src="../../../assets/images/tutorials/composite1_ortho-dsm-ptcloud.png"></a></p>
+<p></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><input id="__tabbed_3_4" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Docker</label><label for="__tabbed_3_2">Jupyter</label><label for="__tabbed_3_3">Python command-line entrypoint</label><label for="__tabbed_3_4">Python script</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1681,7 +1681,7 @@
 </div>
 </div>
 <p>This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like <a href="https://qgis.org/en/site/">QGIS</a>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png"></a></p>
+<p></p>
 <p>The rectangle bounding box output format is specific to the DeepForest model. TODO: Demonstration of converting them to masks/centroids with heights?</p>
 <p>TODO: A few sentences on the parameters including the units (pixels or meters), roughly following the pattern in the geometric detection section above. Possibly a vis of the effect of changing the params and/or a schematic of the concept of chip size and stride.</p>
 <p>TODO: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.</p>
