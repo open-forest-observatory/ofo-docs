@@ -75,6 +75,12 @@ To align the drone and reference data we use an algorithm that takes the [CHM] l
 === "Python command-line entrypoint"
 
     ```bash
+    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+
+    python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
+        --CHM-file ${DATA_FOLDER}/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        --tree-points-file ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        --output-shift-summary ${DATA_FOLDER}/intermediate/reference-drone-registration.csv
     ```
 
 === "Python script"
