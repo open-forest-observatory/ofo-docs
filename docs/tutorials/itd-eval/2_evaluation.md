@@ -51,7 +51,7 @@ TODO
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path/to/data"
+    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
