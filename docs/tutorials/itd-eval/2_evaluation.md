@@ -61,7 +61,8 @@ TODO
             /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             /data/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
             --shift-file /data/intermediate/reference-drone-registration.csv  \
-            --vis-file /data/output/tree-scoring-matches.png
+            --output-file /data/outputs/tree-scoring-metrics.json \
+            --vis-file /data/outputs/tree-scoring-matches.png
     ```
 
     Windows: TODO
@@ -83,6 +84,7 @@ TODO
         ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
         ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
         --shift-file ${DATA_FOLDER}/intermediate/reference-drone-registration.csv  \
+        --output-file /data/outputs/tree-scoring-metrics.json \
         --vis-file ${DATA_FOLDER}/outputs/tree-scoring-matches.png
     ```
 
