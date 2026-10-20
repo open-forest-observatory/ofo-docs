@@ -53,7 +53,7 @@ The optimal shift is used to create a shifted copy of the original trees. Also, 
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path/to/data/"
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
@@ -77,7 +77,7 @@ The optimal shift is used to create a shifted copy of the original trees. Also, 
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path/to/data/"
 
     python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
         --CHM-file ${DATA_FOLDER}/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \

@@ -10,8 +10,9 @@ The final task is assessing the quality of the detected trees. This is done by c
 
 | Name                  | Source                         | Example file                                                                                   |
 | --------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |
-| Shifted reference trees | Registration algorithm       | [ofo-ground-reference-trees_0030_shifted.gpkg](TODO)          |
-| Detected trees        | Tree detection algorithm       | [composite1_tree-tops_geometric_v01.gpkg](TODO)          |
+| Ground reference trees | Manual field work             | [ofo-ground-reference-trees_0030.gpkg](https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn)          |
+| Detected trees         | Tree detection algorithm      | [composite1_tree-tops_geometric_v01.gpkg](TODO)          |
+| Registration file      | Registration algorithm        | [ofo-ground-reference-trees_0030_shifted.gpkg](TODO)          |
 
 ## Setup
 
@@ -50,10 +51,17 @@ TODO
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path/to/data"
+
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
+        python -m tree_registration_and_matching.entrypoints.score_detected_trees \
+            /data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            /data/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+            --shift-file /data/intermediate/reference-drone-registration.csv  \
+            --vis-file /data/output/tree-scoring-matches.png
     ```
 
     Windows: TODO
@@ -68,7 +76,14 @@ TODO
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path/to/data"
+
+    python -m tree_registration_and_matching.entrypoints.score_detected_trees \
+        ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+        --shift-file ${DATA_FOLDER}/intermediate/reference-drone-registration.csv  \
+        --vis-file ${DATA_FOLDER}/outputs/tree-scoring-matches.png
     ```
 
 === "Python script"
