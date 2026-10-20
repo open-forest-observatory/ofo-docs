@@ -46,6 +46,7 @@ Before comparing predicted trees against ground reference data, we need to make 
 
 To align the drone and reference data we use an algorithm that takes the [CHM] linked above and reference tree locations and heights as input. Specifically, we compute the correlations between the height of the reference trees and the location on the CHM at which the trees are, across a grid of shifts from the initial location. The shift which maximizes the correlation between observed and CHM-derived height is considered the optimal registration.
 
+The optimal shift is used to create a shifted copy of the original trees. Also, a summary file is created describing the shift, as well as some diagnostic metrics that can be used to interpret whether the result is likely to be correct.
 
 === "Docker"
 
@@ -59,6 +60,7 @@ To align the drone and reference data we use an algorithm that takes the [CHM] l
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
             --CHM-file /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
             --tree-points-file /data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+            --output-shifted-trees /data/intermediate/ofo-ground-reference-trees_0030_shifted.gpkg \
             --output-shift-summary /data/intermediate/reference-drone-registration.csv
 
     ```
@@ -80,6 +82,7 @@ To align the drone and reference data we use an algorithm that takes the [CHM] l
     python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
         --CHM-file ${DATA_FOLDER}/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
         --tree-points-file ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        --output-shifted-trees ${DATA_FOLDER}/intermediate/ofo-ground-reference-trees_0030_shifted.gpkg \
         --output-shift-summary ${DATA_FOLDER}/intermediate/reference-drone-registration.csv
     ```
 
