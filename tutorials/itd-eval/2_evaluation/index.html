@@ -811,6 +811,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task 2: Evaluation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -827,6 +845,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#required-input-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required input data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detection-evaluation-with-height-dependent-matching-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detection evaluation with height-dependent matching threshold
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1367,6 +1437,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#required-input-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required input data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detection-evaluation-with-height-dependent-matching-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detection evaluation with height-dependent matching threshold
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1391,7 +1502,128 @@
 
 
 <h1 id="task-2-evaluation">Task 2: Evaluation<a class="headerlink" href="#task-2-evaluation" title="Permanent link">¶</a></h1>
-<p>Text here</p>
+<p>The final task is assessing the quality of the detected trees. This is done by comparing the locations of detected trees to those of spatially-shifted field reference trees. This process produces precision, recall, and F1 scores for the tree detection task.</p>
+<h2 id="required-input-data">Required input data<a class="headerlink" href="#required-input-data" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Source</th>
+<th>Example file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ground reference trees</td>
+<td>Manual field work</td>
+<td><a href="https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn">ofo-ground-reference-trees_0030.gpkg</a></td>
+</tr>
+<tr>
+<td>Detected trees</td>
+<td>Tree detection algorithm</td>
+<td><a href="https://ucdavis.box.com/s/tese51t1g97a3jb3f67iaohefftkg5cn">composite1_tree-tops_geometric_v01.gpkg</a></td>
+</tr>
+<tr>
+<td>Registration file</td>
+<td>Registration algorithm</td>
+<td><a href="https://ucdavis.box.com/s/r7k8iuduhxwulf5u1osydhuf8ohaqhbv">reference-drone-registration.csv</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Before you begin</p>
+<p>Make sure you have gone through the <a href="../../#preparing-to-follow-the-tutorials">OFO tutorial preparation</a> guidance.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Docker (recommended)</label><label for="__tabbed_1_2">Jupyter</label><label for="__tabbed_1_3">Python command-line entrypoint</label><label for="__tabbed_1_4">Python script</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Follow our <a href="../../#docker">Docker guide</a> to understand what Docker is and ensure your system is set up to run Docker containers.</p>
+</div>
+<div class="tabbed-block">
+<p>TODO: Link to the notebook we will be using, info to set up Conda env as for the other Python options?</p>
+</div>
+<div class="tabbed-block">
+<p>Install the Tree Registration and Matching library and its dependencies following the <a href="https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install">installation instructions</a>.</p>
+</div>
+<div class="tabbed-block">
+<p>Install the Tree Registration and Matching library and its dependencies following the <a href="https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install">installation instructions</a>.</p>
+<p>Then load the required libraries:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># TODO: Complete python lines to load libraries</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="detection-evaluation-with-height-dependent-matching-threshold">Detection evaluation with height-dependent matching threshold<a class="headerlink" href="#detection-evaluation-with-height-dependent-matching-threshold" title="Permanent link">¶</a></h2>
+<p>The tree detection scoring algorithm operates on the ground reference and drone-predicted trees, both represented as sets points with associated height information. A drone tree can match a field tree if it is within a variable threshold distance, based on the field tree height. This threshold is defined as 0.1 the height of the field tree plus 1m. This approach is described in <a href="https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.13860" rel="noopener" target="_blank">Methods in Ecology and Evolution <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2z"></path></svg></span></a>. Spatial error may mean that threshold distance criteria allows matches that are not one-to-one, so the final one-to-one matching is constructed by pairing the trees with the minimum distance satisfying the threshold criteria and then removing both paired trees from consideration. This process repeats until all tree pairs with a threshold-satisfying distance are matched. The scoring process is restricted to the region 5m away from the plot bounds, to ensure that no spatial edge-effects occur, and to field trees over 10m in height.</p>
+<p>An example of the matched trees is shown below. Note that for tree pairs that are very well aligned it may be hard to see the black line indicating they are paired.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/tree-scoring-matches.png" data-desc-position="bottom"><img alt="matched trees" src="../../../assets/images/tutorials/tree-scoring-matches.png"></a></p>
+<p>For this example, the following metric values were obtained:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Precision</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Recall</td>
+<td>0.73</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>0.84</td>
+</tr>
+</tbody>
+</table>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Docker</label><label for="__tabbed_2_2">Jupyter</label><label for="__tabbed_2_3">Python command-line entrypoint</label><label for="__tabbed_2_4">Python script</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Linux/Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"/ofo-share/repos/david/ofo-docs/data"</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-registration-and-matching:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_registration_and_matching.entrypoints.score_detected_trees<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span>/data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span>/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span>/data/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span>--shift-file<span class="w"> </span>/data/intermediate/registration/reference-drone-registration.csv<span class="w">  </span><span class="se">\</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span>--output-file<span class="w"> </span>/data/outputs/detection-evaluation/tree-scoring-metrics.json<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span>--vis-file<span class="w"> </span>/data/outputs/detection-evaluation/tree-scoring-matches.png
+</code></pre></div>
+<p>Windows: TODO</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path/to/data"</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_registration_and_matching.entrypoints.score_detected_trees<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span>--shift-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/intermediate/registration/reference-drone-registration.csv<span class="w">  </span><span class="se">\</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span>--output-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/outputs/detection-evaluation/tree-scoring-metrics.json<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span>--vis-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/outputs/detection-evaluation/tree-scoring-matches.png
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># TODO write out the appropriate parts of the entrypoint here:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># https://github.com/open-forest-observatory/tree-registration-and-matching/blob/4246c5185833061989c91314eddec71d28cafb19/tree_registration_and_matching/entrypoints/match_field_attributes_to_drone.py#L15</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 
 
 
@@ -1414,7 +1646,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 21:06:06 UTC">October 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 21, 2026 03:00:34 UTC">October 21, 2026</span>
   </span>
 
     
@@ -1441,6 +1673,11 @@
 
     
     <nav>
+      
+        <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
+          
+          <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
+        </a>
       
         <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
           

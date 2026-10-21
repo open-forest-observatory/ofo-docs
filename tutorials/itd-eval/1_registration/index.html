@@ -783,6 +783,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task 1: Co-registration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -799,6 +817,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#required-input-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required input data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registration-using-height-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registration using height correlation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1367,6 +1437,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#required-input-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required input data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registration-using-height-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registration using height correlation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1391,8 +1502,99 @@
 
 
 <h1 id="task-1-co-registration">Task 1: Co-registration<a class="headerlink" href="#task-1-co-registration" title="Permanent link">¶</a></h1>
-<p>Before comparing predicted trees against reference data, we need to make sure the two datasets are spatially co-registered.</p>
-<p>Text here</p>
+<p>Before comparing predicted trees against ground reference data, we need to make sure the two datasets are spatially co-registered.</p>
+<h2 id="required-input-data">Required input data<a class="headerlink" href="#required-input-data" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Source</th>
+<th>Example file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a data-preview="" href="../../glossary/#chm">Canopy height model</a></td>
+<td>Photogrammetry post-processing</td>
+<td><a href="https://ucdavis.box.com/s/s02rs8rndobua45ukw0rjb8zysihicl4">composite1_chm-mesh.tif</a></td>
+</tr>
+<tr>
+<td>Ground reference trees</td>
+<td>Manual field work</td>
+<td><a href="https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn">ofo-ground-reference-trees_0030.gpkg</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Before you begin</p>
+<p>Make sure you have gone through the <a href="../../#preparing-to-follow-the-tutorials">OFO tutorial preparation</a> guidance.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Docker (recommended)</label><label for="__tabbed_1_2">Jupyter</label><label for="__tabbed_1_3">Python command-line entrypoint</label><label for="__tabbed_1_4">Python script</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Follow our <a href="../../#docker">Docker guide</a> to understand what Docker is and ensure your system is set up to run Docker containers.</p>
+</div>
+<div class="tabbed-block">
+<p>TODO: Link to the notebook we will be using, info to set up Conda env as for the other Python options?</p>
+</div>
+<div class="tabbed-block">
+<p>Install the Tree Registration and Matching library and its dependencies following the <a href="https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install">installation instructions</a>.</p>
+</div>
+<div class="tabbed-block">
+<p>Install the Tree Registration and Matching library and its dependencies following the <a href="https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install">installation instructions</a>.</p>
+<p>Then load the required libraries:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># TODO: Complete python lines to load libraries</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="registration-using-height-correlation">Registration using height correlation<a class="headerlink" href="#registration-using-height-correlation" title="Permanent link">¶</a></h2>
+<p>While both the drone imagery and reference tree locations are georeferenced with GPS, each set of measurements can have an independent bias due to atmospheric effects. This creates a spatial offset which is commonly on the order of several meters between the two sets of data. An example of this phenomana can be seen below, where the field reference trees are shifted upward and slightly left relative to the corresponding drone trees. Note that the white line represents plot bounds, showing the region within which trees were surveyed.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/registration-initial.png" data-desc-position="bottom"><img alt="initial registration" src="../../../assets/images/tutorials/registration-initial.png"></a></p>
+<p>The OFO has developed a tool called <a href="https://github.com/open-forest-observatory/tree-registration-and-matching">tree registration and matching</a> to automatically identify the spatial registration between two datasets. The specific algorithm we will be using registers a set of ground reference trees to a drone-derived <a data-preview="" href="../../glossary/#chm">CHM</a>.</p>
+<p>To align the drone and reference data we use an algorithm that takes the <a data-preview="" href="../../glossary/#chm">CHM</a> linked above and reference tree locations and heights as input. Specifically, we compute the correlations between the height of the reference trees and the location on the CHM at which the trees are, across a grid of shifts from the initial location. The shift which maximizes the correlation between observed and CHM-derived height is considered the optimal registration. The commands to run this algorithm are below.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Docker</label><label for="__tabbed_2_2">Jupyter</label><label for="__tabbed_2_3">Python command-line entrypoint</label><label for="__tabbed_2_4">Python script</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Linux/Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path/to/data/"</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-registration-and-matching:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_registration_and_matching.entrypoints.register_trees_to_CHM<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span>--CHM-file<span class="w"> </span>/data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span>--tree-points-file<span class="w"> </span>/data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span>--output-shifted-trees<span class="w"> </span>/data/intermediate/registration/ofo-ground-reference-trees_0030_shifted.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span>--output-shift-summary<span class="w"> </span>/data/intermediate/registration/reference-drone-registration.csv
+</code></pre></div>
+<p>Windows: TODO</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path/to/data/"</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_registration_and_matching.entrypoints.register_trees_to_CHM<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>--CHM-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>--tree-points-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span>--output-shifted-trees<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/intermediate/registration/ofo-ground-reference-trees_0030_shifted.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span>--output-shift-summary<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/intermediate/registration/reference-drone-registration.csv
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># TODO write out the appropriate parts of the entrypoint here:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># https://github.com/open-forest-observatory/tree-registration-and-matching/blob/4246c5185833061989c91314eddec71d28cafb19/tree_registration_and_matching/entrypoints/match_field_attributes_to_drone.py#L15</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The optimal shift is used to create a shifted copy of the original trees. Also, a summary file is created describing the shift, as well as diagnostic metrics that can be used to interpret whether the result is likely to be correct.</p>
+<p>A visualization of the shifted trees is shown below. Note that now the surveyed tree tops match up much better with the drone data. While there are some errors, these errors are in different directions, so no single shift would improve all trees dramatically.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/registration-final.png" data-desc-position="bottom"><img alt="final registration" src="../../../assets/images/tutorials/registration-final.png"></a></p>
 
 
 
@@ -1415,7 +1617,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 17:13:21 UTC">October 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 21, 2026 18:05:59 UTC">October 21, 2026</span>
   </span>
 
     
@@ -1442,6 +1644,11 @@
 
     
     <nav>
+      
+        <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
+          
+          <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
+        </a>
       
         <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
           
