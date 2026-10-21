@@ -44,7 +44,18 @@ The final task is assessing the quality of the detected trees. This is done by c
 
 ## Detection evaluation with height-dependent matching threshold
 
-TODO
+The tree detection scoring algorithm operates on the ground reference and drone-predicted trees, both represented as sets points with associated height information. A drone tree can match a field tree if it is within a variable threshold distance, based on the field tree height. This threshold is defined as 0.1 the height of the field tree plus 1m. This approach is described in [Methods in Ecology and Evolution :material-open-in-new:](https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.13860){target="_blank" rel="noopener"}. Spatial error may mean that threshold distance criteria allows matches that are not one-to-one, so the final one-to-one matching is constructed by pairing the trees with the minimum distance satisfying the threshold criteria and then removing both paired trees from consideration. This process repeats until all tree pairs with a threshold-satisfying distance are matched. The scoring process is restricted to the region 5m away from the plot bounds, to ensure that no spatial edge-effects occur, and to field trees over 10m in height.
+
+An example of the matched trees is shown below. Note that for tree pairs that are very well aligned it may be hard to see the black line indicating they are paired.
+![matched trees](/assets/images/tutorials/tree-scoring-matches.png)
+
+For this example, the following metric values were obtained:
+
+| Metric   | Value    |
+| -------- | -------- |
+| Precision|  1.0     |
+| Recall   |  0.73    |
+| F1       |  0.84    |
 
 === "Docker"
 
