@@ -4,11 +4,7 @@ weight: 20
 
 # Task 1: Co-registration
 
-Before comparing predicted trees against ground reference data, we need to make sure the two datasets are spatially co-registered. While both the drone imagery and reference tree locations are georeferenced with GPS, each set of measurements can have an independent bias due to atmospheric effects. This creates a spatial offset which is commonly on the order of several meters between the two sets of data. An example of this phenomana can be seen below, where the field reference trees are shifted upward and slightly left relative to the corresponding drone trees.
-
-![initial registration](/assets/images/tutorials/registration-initial.png)
-
-The OFO has developed a tool called [tree registration and matching](https://github.com/open-forest-observatory/tree-registration-and-matching) to automatically identify the spatial registration between two datasets. The specific algorithm we will be using registers a set of ground reference trees to a drone-derived [CHM].
+Before comparing predicted trees against ground reference data, we need to make sure the two datasets are spatially co-registered.
 
 ## Required input data
 
@@ -46,14 +42,13 @@ The OFO has developed a tool called [tree registration and matching](https://git
     ```
 
 ## Registration using height correlation
+While both the drone imagery and reference tree locations are georeferenced with GPS, each set of measurements can have an independent bias due to atmospheric effects. This creates a spatial offset which is commonly on the order of several meters between the two sets of data. An example of this phenomana can be seen below, where the field reference trees are shifted upward and slightly left relative to the corresponding drone trees. Note that the white line represents plot bounds, showing the region within which trees were surveyed.
 
-To align the drone and reference data we use an algorithm that takes the [CHM] linked above and reference tree locations and heights as input. Specifically, we compute the correlations between the height of the reference trees and the location on the CHM at which the trees are, across a grid of shifts from the initial location. The shift which maximizes the correlation between observed and CHM-derived height is considered the optimal registration.
+![initial registration](/assets/images/tutorials/registration-initial.png)
 
-The optimal shift is used to create a shifted copy of the original trees. Also, a summary file is created describing the shift, as well as some diagnostic metrics that can be used to interpret whether the result is likely to be correct.
+The OFO has developed a tool called [tree registration and matching](https://github.com/open-forest-observatory/tree-registration-and-matching) to automatically identify the spatial registration between two datasets. The specific algorithm we will be using registers a set of ground reference trees to a drone-derived [CHM].
 
-An example of the shifted trees is shown below. Note that now the surveyed tree tops match up much better with the drone data. While there are some errors, these errors are in different directions, so no single shift would improve all trees dramatically.
-
-![final registration](/assets/images/tutorials/registration-final.png)
+To align the drone and reference data we use an algorithm that takes the [CHM] linked above and reference tree locations and heights as input. Specifically, we compute the correlations between the height of the reference trees and the location on the CHM at which the trees are, across a grid of shifts from the initial location. The shift which maximizes the correlation between observed and CHM-derived height is considered the optimal registration. The commands to run this algorithm are below.
 
 === "Docker"
 
@@ -99,3 +94,9 @@ An example of the shifted trees is shown below. Note that now the surveyed tree 
     # TODO write out the appropriate parts of the entrypoint here:
     # https://github.com/open-forest-observatory/tree-registration-and-matching/blob/4246c5185833061989c91314eddec71d28cafb19/tree_registration_and_matching/entrypoints/match_field_attributes_to_drone.py#L15
     ```
+
+The optimal shift is used to create a shifted copy of the original trees. Also, a summary file is created describing the shift, as well as diagnostic metrics that can be used to interpret whether the result is likely to be correct.
+
+A visualization of the shifted trees is shown below. Note that now the surveyed tree tops match up much better with the drone data. While there are some errors, these errors are in different directions, so no single shift would improve all trees dramatically.
+
+![final registration](/assets/images/tutorials/registration-final.png)
