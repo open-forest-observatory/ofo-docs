@@ -223,7 +223,7 @@ TODO: Illustrative schematic here?
            /data/intermediate/per-chip-classifications/classified-live-dead.json \
            live_dead \
            /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-           /data/outputs/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+           /data/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 

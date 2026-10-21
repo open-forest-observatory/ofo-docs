@@ -11,8 +11,8 @@ The final task is assessing the quality of the detected trees. This is done by c
 | Name                  | Source                         | Example file                                                                                   |
 | --------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |
 | Ground reference trees | Manual field work             | [ofo-ground-reference-trees_0030.gpkg](https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn)          |
-| Detected trees         | Tree detection algorithm      | [composite1_tree-tops_geometric_v01.gpkg](TODO)          |
-| Registration file      | Registration algorithm        | [ofo-ground-reference-trees_0030_shifted.gpkg](TODO)          |
+| Detected trees         | Tree detection algorithm      | [composite1_tree-tops_geometric_v01.gpkg](https://ucdavis.box.com/s/tese51t1g97a3jb3f67iaohefftkg5cn)          |
+| Registration file      | Registration algorithm        | [reference-drone-registration.csv](https://ucdavis.box.com/s/r7k8iuduhxwulf5u1osydhuf8ohaqhbv)          |
 
 ## Setup
 
@@ -95,7 +95,7 @@ For this example, the following metric values were obtained:
         ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
         ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
         --shift-file ${DATA_FOLDER}/intermediate/registration/reference-drone-registration.csv  \
-        --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json \
+        --output-file ${DATA_FOLDER}/outputs/detection-evaluation/tree-scoring-metrics.json \
         --vis-file ${DATA_FOLDER}/outputs/detection-evaluation/tree-scoring-matches.png
     ```
 
