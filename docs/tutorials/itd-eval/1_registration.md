@@ -67,8 +67,8 @@ An example of the shifted trees is shown below. Note that now the surveyed tree 
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
             --CHM-file /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
             --tree-points-file /data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-            --output-shifted-trees /data/intermediate/ofo-ground-reference-trees_0030_shifted.gpkg \
-            --output-shift-summary /data/intermediate/reference-drone-registration.csv
+            --output-shifted-trees /data/intermediate/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+            --output-shift-summary /data/intermediate/registration/reference-drone-registration.csv
 
     ```
 
@@ -89,8 +89,8 @@ An example of the shifted trees is shown below. Note that now the surveyed tree 
     python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
         --CHM-file ${DATA_FOLDER}/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
         --tree-points-file ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        --output-shifted-trees ${DATA_FOLDER}/intermediate/ofo-ground-reference-trees_0030_shifted.gpkg \
-        --output-shift-summary ${DATA_FOLDER}/intermediate/reference-drone-registration.csv
+        --output-shifted-trees ${DATA_FOLDER}/intermediate/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+        --output-shift-summary ${DATA_FOLDER}/intermediate/registration/reference-drone-registration.csv
     ```
 
 === "Python script"

@@ -71,9 +71,9 @@ For this example, the following metric values were obtained:
             /data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
             /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             /data/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
-            --shift-file /data/intermediate/reference-drone-registration.csv  \
-            --output-file /data/outputs/tree-scoring-metrics.json \
-            --vis-file /data/outputs/tree-scoring-matches.png
+            --shift-file /data/intermediate/registration/reference-drone-registration.csv  \
+            --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json \
+            --vis-file /data/outputs/detection-evaluation/tree-scoring-matches.png
     ```
 
     Windows: TODO
@@ -94,9 +94,9 @@ For this example, the following metric values were obtained:
         ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
         ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
         ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
-        --shift-file ${DATA_FOLDER}/intermediate/reference-drone-registration.csv  \
-        --output-file /data/outputs/tree-scoring-metrics.json \
-        --vis-file ${DATA_FOLDER}/outputs/tree-scoring-matches.png
+        --shift-file ${DATA_FOLDER}/intermediate/registration/reference-drone-registration.csv  \
+        --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json \
+        --vis-file ${DATA_FOLDER}/outputs/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Python script"

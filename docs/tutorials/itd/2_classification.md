@@ -187,7 +187,7 @@ TODO: Illustrative schematic here? This one is probably the most conceptually si
            /data/intermediate/chips \
            /data/inputs/models/dead_live_config.py \
            /data/inputs/models/dead_live_model.pth \
-           /data/intermediate/classified-live-dead.json
+           /data/intermediate/per-chip-classifications/classified-live-dead.json
     ```
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
@@ -220,7 +220,7 @@ TODO: Illustrative schematic here?
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.assign_predictions_to_trees \
-           /data/intermediate/classified-live-dead.json \
+           /data/intermediate/per-chip-classifications/classified-live-dead.json \
            live_dead \
            /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
            /data/outputs/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
@@ -237,7 +237,7 @@ TODO: Illustrative schematic here?
     conda activate tree-classification-framework
 
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_FOLDER}/intermediate/classified-species.json \
+       ${DATA_FOLDER}/intermediate/per-chip-classifications/classified-species.json \
        species \
        ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
        ${DATA_FOLDER}/outputs/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
