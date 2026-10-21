@@ -8,6 +8,8 @@ Before comparing predicted trees against ground reference data, we need to make 
 
 ![initial registration](/assets/images/tutorials/registration-initial.png)
 
+The OFO has developed a tool called [tree registration and matching](https://github.com/open-forest-observatory/tree-registration-and-matching) to automatically identify the spatial registration between two datasets. The specific algorithm we will be using registers a set of ground reference trees to a drone-derived [CHM].
+
 ## Required input data
 
 | Name                  | Source                         | Example file                                                                                   |
