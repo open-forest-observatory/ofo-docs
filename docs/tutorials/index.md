@@ -48,7 +48,7 @@ Docker provides a convenient way for users to run OFO software without having to
         -v "path/to/data:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-            /data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
             /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             --raster-blur-sigma 0.5
     ```
@@ -60,7 +60,7 @@ Docker provides a convenient way for users to run OFO software without having to
         -v "path\to\data:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
-            /data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
             /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
             --raster-blur-sigma 0.5 `
     ```
@@ -122,7 +122,7 @@ The OFO provides command-line entrypoints for each of its tools. These are Pytho
 ```bash
 conda activate tree-detection-framework
 python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-    path/to/data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+    path/to/data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
     path/to/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
     --raster-blur-sigma 0.5 \
 ```

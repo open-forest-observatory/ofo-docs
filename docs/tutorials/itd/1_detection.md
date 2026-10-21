@@ -65,7 +65,7 @@ TODO: More context?
         -v "path/to/data:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-            /data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
             /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
             --raster-blur-sigma 0.5 \
@@ -79,7 +79,7 @@ TODO: More context?
         -v "path\to\data:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
-            /data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
             /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
             --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --raster-blur-sigma 0.5 `
@@ -94,7 +94,7 @@ TODO: More context?
 
     ```bash
     python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-        path/to/data/inputs/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        path/to/data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
         path/to/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
         --tree-crowns-save-path path/to/data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --raster-blur-sigma 0.5 \
@@ -149,7 +149,7 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
         -v "$HOME/ofo-tutorial-testing:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.generate_predictions \
-            --raster-folder-path /data/inputs/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
+            --raster-folder-path /data/inputs/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
             --tree-detection-model deepforest \
             --chip-size 1024 \
             --chip-stride 768 \
