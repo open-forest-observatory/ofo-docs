@@ -15,12 +15,12 @@ We will use the OFO tools [Geograypher](https://github.com/open-forest-observato
 
 | Name                            | Source         | Example file                                                                                            |
 | ------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------- |
-| Raw drone photos                | Drone flight   | [raw-drone-photos/composite1](https://ucdavis.box.com/s/p2w2cw4bjrsjwjgcr11m1luqh89v3fxh)               |
+| Raw drone photos                | Drone flight   | [drone/raw-drone-photos/composite1](https://ucdavis.box.com/s/p2w2cw4bjrsjwjgcr11m1luqh89v3fxh)               |
 | Photogrammetry camera locations | Photogrammetry | [composite1_cameras.xml](https://ucdavis.box.com/s/qallapylahuq7u76dv9fef8tp2aoxlyp)                    |
 | Photogrammetry [mesh] | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
 | [Digital terrain model] | Photogrammetry | [composite1_dtm-ptcloud.tif](https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows)                    |
 | Detected tree crowns            | Tree detection | [composite1_tree-crowns_geometric_v01.gpkg](https://ucdavis.box.com/s/ormrucvnmrgj0qhpt0hs63mij8kjs9q6) |
-| Species and live/dead classification models            | Model training (beyond tutorial scope) | [models](https://ucdavis.box.com/s/sx6p6cgzhzafl33x6eigh6v5lvy4x8z6) |
+| Species and live/dead classification models            | Model training (beyond tutorial scope) | [cv-models](https://ucdavis.box.com/s/sx6p6cgzhzafl33x6eigh6v5lvy4x8z6) |
 
 The detected tree crowns may be ones you produced in the [Detection task](/tutorials/itd/1_detection.md), or you can use the pre-generated detections in the tutorial data folder (linked above). It is important that the detections and photogrammetry camera locations be derived from the same photogrammetry run, using the same raw drone photos that you will use for this task.
 
@@ -68,19 +68,19 @@ The original drone images are not required at this stage except for visualizatio
     -v "${DATA_DIR}:/data" \
     ghcr.io/open-forest-observatory/geograypher:latest \
     python -m geograypher.entrypoints.render_labels \
-        --mesh-file /data/inputs/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-file /data/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file  /data/inputs/drone/photogrammetry-outputs/composite1_cameras.xml \
-        --texture /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        --cameras-file  /data/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
-        --image-folder /data/inputs/drone/raw-drone-photos/composite1 \
-        --render-savefolder /data/intermediate/renders \
-        --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder /data/intermediate/renders-vis \
+        --image-folder /data/drone/raw-drone-photos/composite1 \
+        --render-savefolder /data/renders \
+        --original-image-folder /data/drone/raw-drone-photos \
+        --labels-vis-folder /data/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
-        --DTM-file /data/inputs/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --DTM-file /data/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
 
@@ -92,19 +92,19 @@ The original drone images are not required at this stage except for visualizatio
     conda activate geograypher
 
     python -m geograypher.entrypoints.render_labels \
-        --mesh-file ${DATA_FOLDER}/inputs/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-file ${DATA_FOLDER}/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file  ${DATA_FOLDER}/inputs/drone/photogrammetry-outputs/composite1_cameras.xml \
-        --texture ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        --cameras-file  ${DATA_FOLDER}/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --texture ${DATA_FOLDER}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
-        --image-folder ${DATA_FOLDER}/inputs/drone/raw-drone-photos/composite1 \
-        --render-savefolder ${DATA_FOLDER}/intermediate/renders \
-        --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder ${DATA_FOLDER}/intermediate/renders-vis \
+        --image-folder ${DATA_FOLDER}/drone/raw-drone-photos/composite1 \
+        --render-savefolder ${DATA_FOLDER}/renders \
+        --original-image-folder ${DATA_FOLDER}/drone/raw-drone-photos \
+        --labels-vis-folder ${DATA_FOLDER}/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
-        --DTM-file ${DATA_FOLDER}/inputs/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --DTM-file ${DATA_FOLDER}/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
 
@@ -142,9 +142,9 @@ TODO: Illustrative schematic here?
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.chip_images \
-           /data/inputs/drone/raw-drone-photos/composite1 \
-           /data/intermediate/renders \
-           /data/intermediate/chips \
+           /data/drone/raw-drone-photos/composite1 \
+           /data/renders \
+           /data/drone/tree-chips \
            --n-workers 4 \
            --n-chips-per-tree 10
     ```
@@ -155,9 +155,9 @@ TODO: Illustrative schematic here?
     export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
 
     python -m tree_classification_framework.chip_images \
-       ${DATA_FOLDER}/inputs/drone/raw-drone-photos/composite1 \
-       ${DATA_FOLDER}/intermediate/renders \
-       ${DATA_FOLDER}/intermediate/chips \
+       ${DATA_FOLDER}/drone/raw-drone-photos/composite1 \
+       ${DATA_FOLDER}/renders \
+       ${DATA_FOLDER}/drone/tree-chips \
        --n-workers 4 \
        --n-chips-per-tree 10
     ```
@@ -184,10 +184,10 @@ TODO: Illustrative schematic here? This one is probably the most conceptually si
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/mmpretrain:latest \
         python /app/tools/predict.py \
-           /data/intermediate/chips \
-           /data/inputs/models/dead_live_config.py \
-           /data/inputs/models/dead_live_model.pth \
-           /data/intermediate/per-chip-classifications/classified-live-dead.json
+           /data/drone/tree-chips \
+           /data/cv-models/dead_live_config.py \
+           /data/cv-models/dead_live_model.pth \
+           /data/per-chip-classifications/classified-live-dead.json
     ```
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
@@ -220,10 +220,10 @@ TODO: Illustrative schematic here?
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.assign_predictions_to_trees \
-           /data/intermediate/per-chip-classifications/classified-live-dead.json \
+           /data/per-chip-classifications/classified-live-dead.json \
            live_dead \
-           /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-           /data/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+           /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+           /data/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
@@ -237,10 +237,10 @@ TODO: Illustrative schematic here?
     conda activate tree-classification-framework
 
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_FOLDER}/intermediate/per-chip-classifications/classified-species.json \
+       ${DATA_FOLDER}/per-chip-classifications/classified-species.json \
        species \
-       ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-       ${DATA_FOLDER}/outputs/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
+       ${DATA_FOLDER}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+       ${DATA_FOLDER}/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
     ```
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 

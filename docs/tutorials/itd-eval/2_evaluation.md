@@ -57,12 +57,12 @@ The tree detection scoring algorithm operates on the ground reference and drone-
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
         python -m tree_registration_and_matching.entrypoints.score_detected_trees \
-            /data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-            /data/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
-            --shift-file /data/intermediate/registration/reference-drone-registration.csv  \
-            --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json \
-            --vis-file /data/outputs/detection-evaluation/tree-scoring-matches.png
+            /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            /data/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+            --shift-file /data/registration/reference-drone-registration.csv  \
+            --output-file /data/detection-evaluation/tree-scoring-metrics.json \
+            --vis-file /data/detection-evaluation/tree-scoring-matches.png
     ```
 
     Windows: TODO
@@ -80,12 +80,12 @@ The tree detection scoring algorithm operates on the ground reference and drone-
     export DATA_FOLDER="path/to/data"
 
     python -m tree_registration_and_matching.entrypoints.score_detected_trees \
-        ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        ${DATA_FOLDER}/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-        ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-plot_0030.gpkg \
-        --shift-file ${DATA_FOLDER}/intermediate/registration/reference-drone-registration.csv  \
-        --output-file ${DATA_FOLDER}/outputs/detection-evaluation/tree-scoring-metrics.json \
-        --vis-file ${DATA_FOLDER}/outputs/detection-evaluation/tree-scoring-matches.png
+        ${DATA_FOLDER}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        ${DATA_FOLDER}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        ${DATA_FOLDER}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+        --shift-file ${DATA_FOLDER}/registration/reference-drone-registration.csv  \
+        --output-file ${DATA_FOLDER}/detection-evaluation/tree-scoring-metrics.json \
+        --vis-file ${DATA_FOLDER}/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Python script"
