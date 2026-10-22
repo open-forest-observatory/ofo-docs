@@ -50,7 +50,8 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 
 === "Custom Python script"
-    TODO same as above
+
+    Install the same three environments as described for the Python command-line entrypoint. Each step below is run from a Python script in the corresponding environment (`geograypher`, `tree-classification-framework`, or `mmpretrain`).
 
 
 ## Rendering tree locations to images
@@ -143,10 +144,46 @@ The original drone images are not required at this stage except for visualizatio
     conda activate geograypher
     ```
 
-    # TODO Then load the required libraries:
+    Then run the following Python script:
 
     ```python
-    # TODO: Complete python lines to load libraries
+    from pathlib import Path
+
+    import pyproj
+    from geograypher.entrypoints.render_labels import render_labels
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    MESH_FILE = Path(DATA_DIR, "drone", "photogrammetry-outputs", "composite1_mesh.ply")
+    CAMERAS_FILE = Path(DATA_DIR, "drone", "photogrammetry-outputs", "composite1_cameras.xml")
+    DTM_FILE = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_dtm-ptcloud.tif")
+    TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+    IMAGE_FOLDER = Path(DATA_DIR, "drone", "raw-drone-photos", "composite1")
+    MESH_CRS = pyproj.CRS.from_epsg(32610)
+    ORIGNAL_IMAGE_FOLDER = "/data/raw-drone-photos"
+
+    # Define the outputs
+    RENDER_SAVEFOLDER = Path(DATA_DIR, "renders")
+    LABELS_VIS_FOLDER = Path(DATA_DIR, "renders-vis")
+
+    render_labels(
+        mesh_file=MESH_FILE,
+        mesh_CRS=MESH_CRS,
+        cameras_file=CAMERAS_FILE,
+        texture=TREE_CROWNS_FILE,
+        texture_column_name="unique_ID",
+        image_folder=IMAGE_FOLDER,
+        render_savefolder=RENDER_SAVEFOLDER,
+        original_image_folder=ORIGNAL_IMAGE_FOLDER,
+        labels_vis_folder=LABELS_VIS_FOLDER,
+        mesh_ROI_buffer_radius_meters=10,
+        cameras_ROI_buffer_radius_meters=20,
+        render_image_scale=0.125,
+        DTM_file=DTM_FILE,
+        ground_height_threshold=2.0,
+    )
     ```
 
 This command produces a file tree of images (in the `renders` folder) that exactly mirrors the structure of the original raw drone photos, except that instead of the original RGB images, there are single-channel images in which each pixel contains the unique ID of the tree that was observed at that pixel.
@@ -210,7 +247,35 @@ TODO: Illustrative schematic here?
 
 === "Custom Python script"
 
-    TODO:
+    ```bash
+    conda activate tree-classification-framework
+    ```
+
+    Then run the following Python script:
+
+    ```python
+    from pathlib import Path
+
+    from tree_classification_framework.chip_images import process_folder
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    IMAGE_FOLDER = Path(DATA_DIR, "drone", "raw-drone-photos", "composite1")
+    RENDERS_FOLDER = Path(DATA_DIR, "renders")
+
+    # Define the outputs
+    CHIPS_FOLDER = Path(DATA_DIR, "drone", "tree-chips")
+
+    process_folder(
+        images_folder=IMAGE_FOLDER,
+        renders_folder=RENDERS_FOLDER,
+        output_dir=CHIPS_FOLDER,
+        n_workers=4,
+        n_chips_per_tree=10,
+    )
+    ```
 
 This produces, in the tree-chips folder, a file tree parallelling that of the original raw drone photos, but in place of each image file is a folder. Each folder contains the cropped images of each tree that was observed in that image, with each file named with the unique numeric ID of the tree it represents.
 
@@ -338,8 +403,38 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Custom Python script"
-    TODO:
+    ```bash
+    conda activate tree-classification-framework
+    ```
+
+    Then run the following Python script:
+
+    ```python
+    from pathlib import Path
+
+    from tree_classification_framework.assign_predictions_to_trees import assign_predictions_to_trees
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    IMAGE_LEVEL_PREDICTIONS_FILE = Path(DATA_DIR, "tree-chips-classified", "classified-live-dead.json")
+    TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+
+    # Define the outputs
+    CLASSIFIED_CROWNS_FILE = Path(DATA_DIR, "classified-trees", "composite1_tree-crowns_geometric_v01_live_dead.gpkg")
+
+    assign_predictions_to_trees(
+        output_column_name="live_dead",
+        image_level_predictions_file=IMAGE_LEVEL_PREDICTIONS_FILE,
+        input_tree_crowns_file=TREE_CROWNS_FILE,
+        output_tree_crowns_file=CLASSIFIED_CROWNS_FILE,
+    )
+    ```
+
+    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 This produces a new geospatial file containing all of the attributes of the original input file, plus the prediction data.
 
 ![Detected tree crowns with species](/assets/images/tutorials/composite1_detected-crowns-w-species.png)
+
