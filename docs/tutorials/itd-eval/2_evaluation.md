@@ -38,11 +38,7 @@ The detected tree crowns and registration file may be ones you produced in the [
 
     Install the Tree Registration and Matching library and its dependencies following the [installation instructions](https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install).
 
-     Then load the required libraries:
-
-    ```python
-    # TODO: Complete python lines to load libraries
-    ```
+    Then run the script below in that environment.
 
 ## Detection evaluation with spatial tolerance
 
@@ -90,10 +86,6 @@ The commands to run this algorithm are shown below.
             --vis-file /data/detection-evaluation/tree-scoring-matches.png
     ```
 
-=== "Jupyter"
-
-    This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.
-
 === "Python command-line entrypoint"
 
     ```bash
@@ -111,8 +103,32 @@ The commands to run this algorithm are shown below.
 === "Python script"
 
     ```python
-    # TODO write out the appropriate parts of the entrypoint here:
-    # https://github.com/open-forest-observatory/tree-registration-and-matching/blob/4246c5185833061989c91314eddec71d28cafb19/tree_registration_and_matching/entrypoints/match_field_attributes_to_drone.py#L15
+    from pathlib import Path
+
+    from tree_registration_and_matching.entrypoints.score_detected_trees import score_detected_trees
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    FIELD_TREES_FILE = Path(DATA_DIR, "ground-reference", "ofo-ground-reference-trees_0030.gpkg")
+    DRONE_TREES_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-tops_geometric_v01.gpkg")
+    FIELD_PLOT_BOUNDS_FILE = Path(DATA_DIR, "ground-reference", "ofo-ground-reference-plot_0030.gpkg")
+    SHIFT_FILE = Path(DATA_DIR, "registration", "reference-drone-registration.csv")
+
+    # Define the outputs
+    OUTPUT_FILE = Path(DATA_DIR, "detection-evaluation", "tree-scoring-metrics.json")
+    VIS_FILE = Path(DATA_DIR, "detection-evaluation", "tree-scoring-matches.png")
+
+    metrics = score_detected_trees(
+        field_trees_file=FIELD_TREES_FILE,
+        drone_trees_file=DRONE_TREES_FILE,
+        field_plot_bounds_file=FIELD_PLOT_BOUNDS_FILE,
+        shift_file=SHIFT_FILE,
+        output_file=OUTPUT_FILE,
+        vis_file=VIS_FILE,
+    )
+    print(metrics)
     ```
 
 This saves out a map image depicting the detected and reference trees and the matches between them. Ground reference trees are indicated in light blue, drone-detected trees are in red, and the matches between them are in pink. The plot bounds are shown in white.
