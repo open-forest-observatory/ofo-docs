@@ -111,7 +111,7 @@ This algorithm identifies the optimal shift and saves out a CSV file that descri
 
 | estimated_shift_x | estimated_shift_y | shift_CRS  | optimal_correlation | ratio_quality_metric | n_shift_trees | CHM_file                | average_error_frac |
 | ----------------- | ----------------- | ---------- | ------------------- | -------------------- | ------------- | ----------------------- | ------------------ |
-| 0.999999999999999 | -4.2              | EPSG:32610 | 0.6992              | 0.7261               | 31            | composite1_chm-mesh.tif | 0.1958             |
+| 1.0               | -4.2              | EPSG:32610 | 0.6992              | 0.7261               | 31            | composite1_chm-mesh.tif | 0.1958             |
 
 It also saves a shifted copy of the original reference trees as a geospatial point file that is otherwise identical to the original.
 
