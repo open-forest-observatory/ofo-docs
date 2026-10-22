@@ -60,16 +60,25 @@ To align the drone and reference data we use an algorithm that takes the [CHM] l
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
-            --CHM-file /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-            --tree-points-file /data/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-            --output-shifted-trees /data/intermediate/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
-            --output-shift-summary /data/intermediate/registration/reference-drone-registration.csv
-
+            --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+            --output-shifted-trees /data/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+            --output-shift-summary /data/registration/reference-drone-registration.csv
     ```
 
-    Windows: TODO
+    Windows:
 
     ```powershell
+    $env:DATA_DIR = "path\to\data"
+
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
+        python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM `
+            --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg `
+            --output-shifted-trees /data/registration/ofo-ground-reference-trees_0030_shifted.gpkg `
+            --output-shift-summary /data/registration/reference-drone-registration.csv
     ```
 
 === "Jupyter"
@@ -82,10 +91,10 @@ To align the drone and reference data we use an algorithm that takes the [CHM] l
     export DATA_FOLDER="path/to/data/"
 
     python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
-        --CHM-file ${DATA_FOLDER}/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        --tree-points-file ${DATA_FOLDER}/inputs/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        --output-shifted-trees ${DATA_FOLDER}/intermediate/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
-        --output-shift-summary ${DATA_FOLDER}/intermediate/registration/reference-drone-registration.csv
+        --CHM-file ${DATA_FOLDER}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        --tree-points-file ${DATA_FOLDER}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        --output-shifted-trees ${DATA_FOLDER}/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+        --output-shift-summary ${DATA_FOLDER}/registration/reference-drone-registration.csv
     ```
 
 === "Python script"

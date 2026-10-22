@@ -39,8 +39,8 @@ We will use the OFO's [Tree Detection Framework](https://github.com/open-forest-
 
 === "Python script"
 
-    Install the Tree Detection Framework Python library and its dependencies into a Conda environment following the [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/).   
-    
+    Install the Tree Detection Framework Python library and its dependencies into a Conda environment following the [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/).
+
      Then load the required libraries:
 
     ```python
@@ -61,13 +61,15 @@ TODO: More context?
     Linux/Mac:
 
     ```bash
+    DATA_DIR="path/to/data/"
+
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "path/to/data:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-            /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-            --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+            /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            --tree-crowns-save-path /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
             --raster-blur-sigma 0.5 \
             --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
@@ -75,13 +77,15 @@ TODO: More context?
     Windows:
 
     ```powershell
+    $env:DATA_DIR = "path\to\data"
+
     docker run --rm `
-        -v "path\to\data:/data" `
+        -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
-            /data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
-            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
-            --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
+            /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
+            --tree-crowns-save-path /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --raster-blur-sigma 0.5 `
             --tree-top-detector-kwargs '{\"a\": 0, \"b\": 0.0325, \"c\": 0.25, \"min_ht\": 5}'
     ```
@@ -94,9 +98,9 @@ TODO: More context?
 
     ```bash
     python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-        path/to/data/inputs/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        path/to/data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-        --tree-crowns-save-path path/to/data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        path/to/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        path/to/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        --tree-crowns-save-path path/to/data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --raster-blur-sigma 0.5 \
         --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
@@ -149,13 +153,13 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
         -v "$HOME/ofo-tutorial-testing:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.generate_predictions \
-            --raster-folder-path /data/inputs/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
+            --raster-folder-path /data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
             --tree-detection-model deepforest \
             --chip-size 1024 \
             --chip-stride 768 \
             --resolution 0.05 \
             --run-nms \
-            --predictions-save-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+            --predictions-save-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
 
     Windows:
