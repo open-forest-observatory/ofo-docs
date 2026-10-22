@@ -195,20 +195,60 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
 
 === "Jupyter"
 
-    This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.
+    This step is perfomed by this [notebook](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/predict_detections.ipynb). Note that the constants in cell 2 will need to be changed to reflect the data used in this documentation.
 
 === "Python command-line entrypoint"
 
-    ```python
-    # TODO
+    ```bash
+    DATA_DIR="path/to/data"
+
+    python -m tree_detection_framework.entrypoints.generate_predictions \
+        --raster-folder-path ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
+        --tree-detection-model deepforest \
+        --chip-size 1024 \
+        --chip-stride 768 \
+        --resolution 0.05 \
+        --run-nms \
+        --predictions-save-path ${DATA_DIR}/data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
+    Note that you can replace `deepforest` with `detectree2` to run that model.
 
 === "Python script"
 
     ```python
-    # TODO: Lines to load inputs
-    # TODO: Lines to run tree detection algorithm
-    # TODO: Lines to write outputs
+    from pathlib import Path
+
+    from tree_detection_framework.entrypoints.generate_predictions import (
+        generate_predictions,
+    )
+
+    DATA_DIR = Path("path/to/data")
+
+    RASTER_FOLDER_PATH = Path(
+        DATA_DIR,
+        "drone",
+        "photogrammetry-postprocessed",
+        "full",
+        "composite1_ortho-dsm-ptcloud.tif",
+    )
+    PREDICTIONS_SAVE_PATH = Path(
+        DATA_DIR, "data", "detected-trees", "composite1_tree-crowns_deepforest_v01.gpkg"
+    )
+    TREE_DETECTION_MODEL = "deepforest"
+    CHIP_SIZE = 1024
+    CHIP_STRIDE = 768
+    RESOLUTION = 0.05
+    RUN_NMS = True
+
+    generate_predictions(
+        raster_folder_path=RASTER_FOLDER_PATH,
+        predictions_save_path=PREDICTIONS_SAVE_PATH,
+        tree_detection_model=TREE_DETECTION_MODEL,
+        chip_size=CHIP_SIZE,
+        chip_stride=CHIP_STRIDE,
+        resolution=RESOLUTION,
+        run_nms=RUN_NMS,
+    )
     ```
 
 This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like [QGIS](https://qgis.org/en/site/):
