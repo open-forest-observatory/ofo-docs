@@ -4,14 +4,14 @@ weight: 20
 
 # Task 1: Co-registration
 
-Before comparing predicted trees against ground reference data, we need to make sure the two datasets are spatially co-registered.
+For many applications, we may wish to compare the results of drone-based tree detection and classification against ground reference data. However, before we can do any comparison, we need to make sure the two datasets are spatially co-registered (aligned).
 
 ## Required input data
 
-| Name                  | Source                         | Example file                                                                                   |
-| --------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |
-| [Canopy height model] | Photogrammetry post-processing | [composite1_chm-mesh.tif](https://ucdavis.box.com/s/s02rs8rndobua45ukw0rjb8zysihicl4)          |
-| Ground reference trees | Manual field work | [ofo-ground-reference-trees_0030.gpkg](https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn)          |
+| Name                   | Source                         | Example file                                                                                       |
+| ---------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------- |
+| [Canopy height model]  | Photogrammetry post-processing | [composite1_chm-mesh.tif](https://ucdavis.box.com/s/s02rs8rndobua45ukw0rjb8zysihicl4)              |
+| Ground reference trees (geospatial points) | Manual fieldwork              | [ofo-ground-reference-trees_0030.gpkg](https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn) |
 
 ## Setup
 
@@ -42,13 +42,16 @@ Before comparing predicted trees against ground reference data, we need to make 
     ```
 
 ## Registration using height correlation
-While both the drone imagery and reference tree locations are georeferenced with GPS, each set of measurements can have an independent bias due to atmospheric effects. This creates a spatial offset which is commonly on the order of several meters between the two sets of data. An example of this phenomana can be seen below, where the field reference trees are shifted upward and slightly left relative to the corresponding drone trees. Note that the white line represents plot bounds, showing the region within which trees were surveyed.
+
+While both the drone imagery and reference tree locations are usually georeferenced with GPS/GNSS, each set of measurements can have an independent bias due to GPS/GNSS error (e.g., atmospheric distortions, signal attenuation by the tree canopy) a the time of survey. This creates a spatial offset, commonly on the order of several meters, between the two sets of data. An example of this phenomenon can be seen below, where the field reference trees (blue points) are shifted upward and slightly left relative to the corresponding drone trees represented by the CHM. The white line represents the bounds of of the ground plot, showing the region within which trees were surveyed.
 
 ![initial registration](/assets/images/tutorials/registration-initial.png)
 
-The OFO has developed a tool called [tree registration and matching](https://github.com/open-forest-observatory/tree-registration-and-matching) to automatically identify the spatial registration between two datasets. The specific algorithm we will be using registers a set of ground reference trees to a drone-derived [CHM].
+The OFO has developed the [Tree Registration and Matching Toolkit](https://github.com/open-forest-observatory/tree-registration-and-matching) (TRAM) to automatically identify the spatial registration between two datasets. The specific algorithm we will be using here registers a set of ground reference trees (geospatial points) to a drone-derived [CHM] (a geospatial raster). TRAM also contains algorithms to register two sets of geospatial points (e.g., ground reference trees and drone-detected trees).
 
-To align the drone and reference data we use an algorithm that takes the [CHM] linked above and reference tree locations and heights as input. Specifically, we compute the correlations between the height of the reference trees and the location on the CHM at which the trees are, across a grid of shifts from the initial location. The shift which maximizes the correlation between observed and CHM-derived height is considered the optimal registration. The commands to run this algorithm are below.
+The algorithm use will use to align the drone and reference data takes the CHM and ground reference tree locations (with a `height` attribute for each tree) as input. The algorithm extracts the height value from the CHM at each reference tree location, then computes the correlation between the reference tree heights and the CHM-derived heights. It then shifts the reference tree locations across a grid of offsets in both the x and y directions, and at each offset, re-computes the height correlation. The result is a grid of correlation values, where the maximum correlation indicates the optimal shift to align the two datasets.
+
+The commands to run this algorithm are below.
 
 === "Docker"
 
@@ -104,8 +107,14 @@ To align the drone and reference data we use an algorithm that takes the [CHM] l
     # https://github.com/open-forest-observatory/tree-registration-and-matching/blob/4246c5185833061989c91314eddec71d28cafb19/tree_registration_and_matching/entrypoints/match_field_attributes_to_drone.py#L15
     ```
 
-The optimal shift is used to create a shifted copy of the original trees. Also, a summary file is created describing the shift, as well as diagnostic metrics that can be used to interpret whether the result is likely to be correct.
+This algorithm identifies the optimal shift and saves out a CSV file that describes the shift, including diagnostic metrics that can be used to interpret whether the result is likely to be correct.
 
-A visualization of the shifted trees is shown below. Note that now the surveyed tree tops match up much better with the drone data. While there are some errors, these errors are in different directions, so no single shift would improve all trees dramatically.
+| estimated_shift_x | estimated_shift_y | shift_CRS  | optimal_correlation | ratio_quality_metric | n_shift_trees | CHM_file                | average_error_frac |
+| ----------------- | ----------------- | ---------- | ------------------- | -------------------- | ------------- | ----------------------- | ------------------ |
+| 1.0               | -4.2              | EPSG:32610 | 0.6992              | 0.7261               | 31            | composite1_chm-mesh.tif | 0.1958             |
+
+It also saves a shifted copy of the original reference trees as a geospatial point file that is otherwise identical to the original.
 
 ![final registration](/assets/images/tutorials/registration-final.png)
+
+Note that now the surveyed tree tops match up much better with the drone CHM. While there are some errors, these errors are in different directions for every tree, so no single shift would improve all trees dramatically. Some small amount of tree-level error is always expected, due largely to human error during ground survey and the fact that ground surveyed tree locations (tree stems) are not always directly under the tree tops. In the next task, we will see that despite these errors, we can use a simple matching algorithm to identify the tree-to-tree correspondences between the two datasets.
