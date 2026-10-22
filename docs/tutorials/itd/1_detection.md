@@ -190,7 +190,19 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     Windows:
 
     ```powershell
-    # TODO
+    $env:DATA_DIR = "C:\Users\david\dev\ofo-docs\data"
+
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-detection-framework:latest `
+        python -m tree_detection_framework.entrypoints.generate_predictions `
+            --raster-folder-path /data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif `
+            --tree-detection-model deepforest `
+            --chip-size 1024 `
+            --chip-stride 768 `
+            --resolution 0.05 `
+            --run-nms `
+            --predictions-save-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
 
 === "Jupyter"
