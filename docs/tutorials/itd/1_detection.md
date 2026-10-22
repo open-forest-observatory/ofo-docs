@@ -117,7 +117,7 @@ This command saves two geospatial output files: points representing detected tre
 
 ![CHM with detected trees](/assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v01.png)
 
-The detected trees all have a `height` attribute extracted from the CHM. The heights were used to size the tree points in the visualization above.
+The detected trees all have a `height` attribute extracted from the CHM by Tree Detection Framework. The heights were used to size the tree points in the visualization above.
 
 The geometric tree detection algorithm can be parameterized in many different ways. For example, the value passed to `raster-blur-sigma` controls the amount of smoothing applied to the CHM before detecting local maxima. The values given for `a`, `b`, and `c` in the `tree-top-detector-kwargs` affects the local maximum search radius relative to the height of the tree. Other parameters not supplied here (and thus using their defaults) include `chip_size` and `chip_stride`, which control how large CHMs are split up into manageable chunks prior to processing, and `resolution`, which controls the resolution the CHM is resampled to prior to running the algorithm. See the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/detect_geometric_two_stage/) for a detailed description of all parameters. Here is an example of the effect of setting the treetop detector parameter `c` to `5`.
 
@@ -190,17 +190,17 @@ This step saves a geospatial file of polygons (rectangles) representing the boun
 
 ![CHM with detected trees](/assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png)
 
-The rectangle bounding box output format is specific to the DeepForest model. TODO: Demonstration of converting them to masks/centroids with heights?
+The rectangle bounding box output format is specific to the DeepForest model. TODO DR: Demonstration of converting them to masks/centroids with heights?
 
-TODO: A few sentences on the parameters including the units (pixels or meters), roughly following the pattern in the geometric detection section above. Possibly a vis of the effect of changing the params and/or a schematic of the concept of chip size and stride.
+TODO DR: A few sentences on the parameters including the units (pixels or meters), roughly following the pattern in the geometric detection section above. Possibly a vis of the effect of changing the params and/or a schematic of the concept of chip size and stride.
 
-TODO: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.
+TODO DR: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.
 
-TODO: Table of supported models.
+TODO DR: Table of supported models.
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
 
-TODO: The above (running the entrypoint for Detectree2) gave me the error below and I had to fix it by adding `-w /data \` to the docker command. Can we avoid needing this? Possibly this is due to me running it in WSL.
+TODO DR: The above (running the entrypoint for Detectree2) gave me the error below and I had to fix it by adding `-w /data \` to the docker command. Can we avoid needing this? Possibly this is due to me running it in WSL.
 TODO: Also even with this fix it errored, as detectree2 appears to require a GPU, do we know that and can we avoid it?
 ```
 Traceback (most recent call last):

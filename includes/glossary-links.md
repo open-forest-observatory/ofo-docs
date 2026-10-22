@@ -3,5 +3,5 @@
 [DTM]: /tutorials/glossary.md#dtm
 [digital terrain model]: /tutorials/glossary.md#dtm
 [orthomosaic]: /tutorials/glossary.md#orthomosaic
-[mesh]: /tutorials/glossary.md#mesh
+[mesh model]: /tutorials/glossary.md#mesh-model
 [variable-radius local maximum filter]: /tutorials/glossary.md#lmf
