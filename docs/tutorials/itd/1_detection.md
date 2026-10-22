@@ -77,8 +77,10 @@ TODO: More context?
     Windows:
 
     ```powershell
+    $env:DATA_DIR = "path\to\data"
+
     docker run --rm `
-        -v "path\to\data:/data" `
+        -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
             /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
