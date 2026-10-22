@@ -21,7 +21,7 @@ To translate between geospatial coordinates (detected trees) and raw drone photo
 | ------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------- |
 | Raw drone photos                | Drone flight   | [drone/raw-drone-photos/composite1](https://ucdavis.box.com/s/p2w2cw4bjrsjwjgcr11m1luqh89v3fxh)               |
 | Photogrammetry camera locations | Photogrammetry | [composite1_cameras.xml](https://ucdavis.box.com/s/qallapylahuq7u76dv9fef8tp2aoxlyp)                    |
-| Photogrammetry [mesh] | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
+| Photogrammetry [mesh model] | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
 | [Digital terrain model] | Photogrammetry | [composite1_dtm-ptcloud.tif](https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows)                    |
 | Detected tree crowns            | Tree detection | [composite1_tree-crowns_geometric_v01.gpkg](https://ucdavis.box.com/s/ormrucvnmrgj0qhpt0hs63mij8kjs9q6) |
 | Species and live/dead classification models            | Model training (beyond tutorial scope) | [cv-models](https://ucdavis.box.com/s/sx6p6cgzhzafl33x6eigh6v5lvy4x8z6) |
