@@ -27,7 +27,7 @@ A representation of the bare-earth altitude. This is produced by photogrammetry 
 
 ![DTM](/assets/images/tutorials/composite1_dtm.png)
 
-## Mesh { #mesh }
+## Mesh model { #mesh-model }
 
 A representation of a surface in 3D produced by many photogrammetry tools. It consists of a set of points called vertices connected by triangular faces. This data structure is common in the field of computer graphics and is used to perform rendering operations.
 

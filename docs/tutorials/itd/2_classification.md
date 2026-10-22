@@ -4,12 +4,16 @@ weight: 30
 
 # Task 2: Classification
 
-We will use the OFO tools [Geograypher](https://github.com/open-forest-observatory/tree-detection-framework) and [Tree Classification Framework](https://github.com/open-forest-observatory/tree-classification-framework) and an OFO fork of [MMPretrain](https://github.com/open-forest-observatory/mmpretrain) to generate predictions of tree species and live/dead status for detected trees. We will use all of the views of each detected tree from each drone photo it appears in. Because the raw drone photos are not geospatial data products, some intermediate processing using OFO tools is required.The process follows this workflow:
+Our goal here is to predict the species and live/dead status of every detected tree using computer vision applied to the _raw drone photos_. To do this, we will use the OFO tools [Geograypher](https://github.com/open-forest-observatory/tree-detection-framework) and [Tree Classification Framework](https://github.com/open-forest-observatory/tree-classification-framework) and an OFO fork (modification) of [MMPretrain](https://github.com/open-forest-observatory/mmpretrain), an external tool that simplifies running computer vision models.
+
+We will use all of the views of each detected tree from each drone photo it appears in. Because the raw drone photos are not geospatial data products, some intermediate processing using OFO tools is required. The process follows this workflow:
 
  - Use Geograypher to render the unique ID of each detected tree to the perspective of each image it appears in
- - Use the Tree Classification Framework to crop out each view of each tree from each drone photo it appears, while preserving the unique ID of the tree
+ - Use the Tree Classification Framework to crop out each view of each tree from each drone photo it appears in, while preserving the unique ID of the tree
  - Use the OFO fork of MMPretrain to generate a prediction of species and live/dead status for each individual tree crop
  - Use the Tree Classification Framework to aggregate the predictions for each individual tree crop into a single geospatial prediction for each detected tree.
+
+To translate between geospatial coordinates (detected trees) and raw drone photos, we will need 3D models of the site derived from processing the raw photos using photogrammetry.
 
 ## Required input data
 
@@ -51,13 +55,15 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 ## Rendering tree locations to images
 
-The first step in classifying trees is use `Geograypher` to understand what region of each image observes each tree. The first two inputs are from photogrammetry: the 3D structure of the scene represented as a [mesh] and the location and orientation from which each image was captured. The 2D geospatial locations of the tree crowns is also obtained using the detection algorithm in the last section. Additionally, the digital terrain model ([DTM]) from photogrammetry is used in this particular application for determining which part of the mesh represent the ground.
+The first step in classifying trees is use `Geograypher` to understand what region of each image observes each tree--or at a lower level, where in 3D geographic space is a given pixel from a raw drone image. The first two inputs are from photogrammetry: (a) the 3D structure of the scene represented as a [mesh model], and (b) the location and orientation from which each image was captured, produced by photogrammetry as an XML file. Additionally, the digital terrain model ([DTM]) (derived from post-processing photogrammetry products) is used in this particular application for determining which part of the mesh represent the ground. Finally, we require the 2D geospatial locations of the detected tree crowns, obtained using a detection algorithm such as those demonstrated in [Task 1](/tutorials/itd/1_detection.md).
 
-Each tree is assigned a unique numerical ID when it is detected. Since the mesh has geospatial reference information, these IDs can be transfered from the 2D representation of the crowns to the corresponding 3D mesh faces. From there, techniques from computer graphics are used to render the IDs from the mesh to the perspective of each image. Norably, this rendering process is oclusion-aware, so if a tree is blocked from view by another obstacle, it will not be spuriously rendered. This produces a single-channel image encoding the ID of the observed tree (or a special background ID) at each pixel, for each image in the original set of drone images.
+Fortunately, if we know the precise location of the camera sensor at at the time each image is captured (which we obtain from photogrammetry), along with the parameters of the camera's lens (also from photogrammetry), then we can use geometry to translate each pixel in a raw drone image into a _ray_ in 3D space. The place where this ray intersects the 3D mesh model is the location in 3D space that is represented by that pixel. Geograypher uses techniques from computer graphics to perform these calculations efficiently. Notably, this rendering process is occlusion-aware, so if one tree is in front of another from the camera's perspective, the pixel will be assigned to the tree in front.
 
-The original drone images are not required at this stage except for visualization. An example is shown below of the rendered individual tree IDs rendered to the perspective of the image, and overlaid on it.
+![Image to mesh projection](/assets/images/tutorials/image-mesh-projection.png)
 
-![rendered-IDs](/assets/images/tutorials/composite1_rendered-ids.png)
+Each tree is assigned a unique numerical ID when it is detected. Since the mesh model has geospatial reference information, these IDs can be transferred from the 2D geospatil representation of the crowns to the corresponding 3D mesh faces. Then, we use Geograypher to assign those IDs to the corresponding pixels in each raw drone image. This produces a single-channel image encoding the ID of the observed tree (or a special `background` ID) at each pixel, for each image in the original set of drone images.
+
+The original drone images are not required at this stage except for visualization.
 
 === "Docker (recommended)"
 
@@ -143,12 +149,14 @@ The original drone images are not required at this stage except for visualizatio
     # TODO: Complete python lines to load libraries
     ```
 
+This command produces a file tree of images (in the `renders` folder) that exactly mirrors the structure of the original raw drone photos, except that instead of the original RGB images, there are single-channel images in which each pixel contains the unique ID of the tree that was observed at that pixel.
+
+![Rendered IDs](/assets/images/tutorials/composite1_rendered-ids.png)
+
 
 ## Crop the view of each tree from each drone photo
 
-The last step identifies the location of each tree in each image, but additional processing is required to prepare this data for a computer vision predition model. Specifically, we use a classification model which takes an image and produces a single label. To accomdate this format, we must create one image per view of each tree. Using the rendered mask from geograypher, a rectangular region surrounding each observed tree is cropped from the original image. Then, any content within the crop but outside the bounds of the tree is set to a background color. Finally, each chip is written out, while preserving both the structure of what image it was derived from and the ID of the tree it was generated from.
-
-![crop](/assets/images/tutorials/composite1_crop.png)
+The previous step identified the location of each tree in each image, but additional processing is required to prepare this data for a computer vision prediction model. Specifically, we use a _classification model_, which takes an image and produces a single label. To accommodate this format, we must create one image per view of each tree. Using the rendered mask from Geograypher, a rectangular region surrounding each observed tree is cropped from the original image. Then, any content within the crop but outside the bounds of the tree is set to a background color. Finally, each chip is written out, while preserving both the structure of the image it was derived from and the ID of the tree it was generated from.
 
 TODO: Illustrative schematic here?
 
@@ -204,11 +212,14 @@ TODO: Illustrative schematic here?
 
     TODO:
 
+This produces, in the tree-chips folder, a file tree parallelling that of the original raw drone photos, but in place of each image file is a folder. Each folder contains the cropped images of each tree that was observed in that image, with each file named with the unique numeric ID of the tree it represents.
+
+![crop](/assets/images/tutorials/composite1_crop2_000448-02_000498.png)
+
+
 ## Classify each crop
 
-We can use models previously trained by the OFO to classify each chip. In this step, we'll use two independent models: one for predicting live vs. dead trees and another for prediction species. The latter model is illustrative and was developed for eight common species in western mixed conifer forests. These models are used to classify each chip independently, and one file is created for each of the species and live/dead prediction results, summarizing the predicted class for each image.
-
-TODO: Illustrative schematic here? This one is probably the most conceptually simple.
+We can use computer vision models previously trained by the OFO to classify each chip. In this step, we'll use two independent models: one for predicting live vs. dead status and another for predicting species. The latter model is illustrative and was developed for eight common species in Sierra Nevada mixed-conifer forests. We use these models to classify each chip independently
 
 === "Docker (recommended)"
 
@@ -261,11 +272,18 @@ TODO: Illustrative schematic here? This one is probably the most conceptually si
     your system. Therefore, it is strongly recommended that you use the docker version to run this
     step.
 
+This results in one file (in JSON format) for the live/dead predictions and one for the species predictions, providing the predicted class for each image. For example:
+
+| Image path                                                                    | Predicted class |
+| ----------------------------------------------------------------------------- | --------------- |
+| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00018.png` | ABCO            |
+| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00090.png` | CADE27          |
+| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00094.png` | CADE27          |
+| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00023.png` | PILA            |
+
 ## Assign predictions to individual trees
 
-The end goal of this process is to have geospatial, tree-level predictions. Each tree is likely to been observed many times from different viewpoints and will therefore have multiple classification results. We maintain the tree's unique ID through all steps in the process, so the view-level predictions still tie back to a specific tree. Since predictions may differ across views, we take the modal (most common) prediction across all views, and assign this as the predicted tree label. This information is joined with the geospatial crown information that was orignally used to generate the chips and saved out. In addition to the predicted class, we also include the number of views which contributed to the prediction and the fraction of views that agreed with the modal prediction. These attributes are suffixed with `_n_preds` and `_frac_matching_mode`, respectively, and may be used in downstream tasks to filter out low-confidence predictions.
-
-TODO: Illustrative schematic here?
+The end goal of this process is to have geospatial, tree-level predictions. Each tree is likely to have been observed many times from different viewpoints and will therefore have multiple classification results. We maintain the tree's unique ID through all steps in the process, so the view-level predictions still tie back to a specific tree. Since predictions may differ across views, we take the modal (most common) prediction across all views, and assign this as the predicted tree label. This information is then joined with the geospatial crown information that was originally used to generate the chips, then saved out (as a new geospatial file). In addition to the predicted class, we also include the number of views which contributed to the prediction and the fraction of views that agreed with the modal prediction. These attributes are suffixed with `_n_preds` and `_frac_matching_mode`, respectively, and may be used in downstream tasks to filter out low-confidence predictions.
 
 === "Docker (recommended)"
 
@@ -321,3 +339,7 @@ TODO: Illustrative schematic here?
 
 === "Custom Python script"
     TODO:
+
+This produces a new geospatial file containing all of the attributes of the original input file, plus the prediction data.
+
+![Detected tree crowns with species](/assets/images/tutorials/composite1_detected-crowns-w-species.png)
