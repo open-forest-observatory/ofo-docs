@@ -64,12 +64,21 @@ To align the drone and reference data we use an algorithm that takes the [CHM] l
             --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
             --output-shifted-trees /data/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
             --output-shift-summary /data/registration/reference-drone-registration.csv
-
     ```
 
-    Windows: TODO
+    Windows:
 
     ```powershell
+    $env:DATA_DIR = "path\to\data"
+
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
+        python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM `
+            --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg `
+            --output-shifted-trees /data/registration/ofo-ground-reference-trees_0030_shifted.gpkg `
+            --output-shift-summary /data/registration/reference-drone-registration.csv
     ```
 
 === "Jupyter"

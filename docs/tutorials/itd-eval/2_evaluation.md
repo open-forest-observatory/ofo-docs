@@ -65,9 +65,21 @@ The tree detection scoring algorithm operates on the ground reference and drone-
             --vis-file /data/detection-evaluation/tree-scoring-matches.png
     ```
 
-    Windows: TODO
+    Windows:
 
     ```powershell
+    $env:DATA_DIR = "path\to\data"
+
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
+        python -m tree_registration_and_matching.entrypoints.score_detected_trees `
+            /data/ground-reference/ofo-ground-reference-trees_0030.gpkg `
+            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
+            /data/ground-reference/ofo-ground-reference-plot_0030.gpkg `
+            --shift-file /data/registration/reference-drone-registration.csv `
+            --output-file /data/detection-evaluation/tree-scoring-metrics.json `
+            --vis-file /data/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Jupyter"
