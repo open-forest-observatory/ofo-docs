@@ -92,7 +92,9 @@ TODO: More context?
 
 === "Jupyter"
 
-    This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.
+    This step is performed by the following notebook: [here](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/sequential_geometric_detector.ipynb).
+
+    TODO this could be improved by visualizing the detected tree tops.
 
 === "Python command-line entrypoint"
 
@@ -108,9 +110,28 @@ TODO: More context?
 === "Python script"
 
     ```python
-    # TODO: Lines to load inputs
-    # TODO: Lines to run geometric tree detection algorithm
-    # TODO: Lines to write outputs
+    from pathlib import Path
+
+    from tree_detection_framework.entrypoints.detect_geometric_two_stage import detect_trees_two_stage
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    CHM_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
+    TREE_TOPS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-tops_geometric_v01.gpkg")
+    TREE_CROWNS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+    RASTER_BLUR_SIGMA = 0.5
+    TREE_TOP_DETECTOR_KWARGS = {"a": 0, "b": 0.0325, "c": 0.25, "mit_ht": 5}
+
+    # Run detection
+    detect_trees_two_stage(
+        CHM_file=CHM_PATH,
+        tree_tops_save_path=TREE_TOPS_SAVE_PATH,
+        tree_crowns_save_path=TREE_CROWNS_SAVE_PATH,
+        raster_blur_sigma=RASTER_BLUR_SIGMA,
+        tree_top_detector_kwargs=TREE_TOP_DETECTOR_KWARGS,
+    )
     ```
 
 This command saves two geospatial output files: points representing detected tree tops and polygons representing detected tree crowns. You can visualize these outputs in GIS software like [QGIS](https://qgis.org/en/site/):
