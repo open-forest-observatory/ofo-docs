@@ -35,12 +35,6 @@ For many applications, we may wish to compare the results of drone-based tree de
 
     Install the Tree Registration and Matching library and its dependencies following the [installation instructions](https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install).
 
-     Then load the required libraries:
-
-    ```python
-    # TODO: Complete python lines to load libraries
-    ```
-
 ## Registration using height correlation
 
 While both the drone imagery and reference tree locations are usually georeferenced with GPS/GNSS, each set of measurements can have an independent bias due to GPS/GNSS error (e.g., atmospheric distortions, signal attenuation by the tree canopy) a the time of survey. This creates a spatial offset, commonly on the order of several meters, between the two sets of data. An example of this phenomenon can be seen below, where the field reference trees (blue points) are shifted upward and slightly left relative to the corresponding drone trees represented by the CHM. The white line represents the bounds of of the ground plot, showing the region within which trees were surveyed.
@@ -86,7 +80,9 @@ The commands to run this algorithm are below.
 
 === "Jupyter"
 
-    This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.
+    TODO
+
+    The notebook [here](https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/examples/example_registration_real_data_CHM.ipynb) shows a similar process. To directly use this notebook you would need to modify both cells 2 and 3.
 
 === "Python command-line entrypoint"
 
@@ -102,9 +98,32 @@ The commands to run this algorithm are below.
 
 === "Python script"
 
+    ```bash
+    conda activate tree-registration-and-matching
+    ```
+
     ```python
-    # TODO write out the appropriate parts of the entrypoint here:
-    # https://github.com/open-forest-observatory/tree-registration-and-matching/blob/4246c5185833061989c91314eddec71d28cafb19/tree_registration_and_matching/entrypoints/match_field_attributes_to_drone.py#L15
+    from pathlib import Path
+
+    from tree_registration_and_matching.entrypoints.register_trees_to_CHM import register_trees_to_CHM
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    CHM_FILE = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
+    TREE_POINTS_FILE = Path(DATA_DIR, "ground-reference", "ofo-ground-reference-trees_0030.gpkg")
+
+    # Define the outputs
+    OUTPUT_SHIFTED_TREES = Path(DATA_DIR, "registration", "ofo-ground-reference-trees_0030_shifted.gpkg")
+    OUTPUT_SHIFT_SUMMARY = Path(DATA_DIR, "registration", "reference-drone-registration.csv")
+
+    register_trees_to_CHM(
+        tree_points_file=TREE_POINTS_FILE,
+        CHM_file=CHM_FILE,
+        output_shifted_trees=OUTPUT_SHIFTED_TREES,
+        output_shift_summary=OUTPUT_SHIFT_SUMMARY,
+    )
     ```
 
 This algorithm identifies the optimal shift and saves out a CSV file that describes the shift, including diagnostic metrics that can be used to interpret whether the result is likely to be correct.
