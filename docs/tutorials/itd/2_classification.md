@@ -190,7 +190,7 @@ TODO: Illustrative schematic here?
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path\to\data"
 
     python -m tree_classification_framework.chip_images \
        ${DATA_FOLDER}/drone/raw-drone-photos/composite1 \
@@ -214,8 +214,10 @@ TODO: Illustrative schematic here? This one is probably the most conceptually si
 
     Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
+    Note that this command expects a GPU, but can be run without one. If your machine does not have a GPU, remove the line that includes `--gpus all`.
+
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path\to\data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all --group-add "$(stat -c %g /dev/nvidia0)" \
@@ -230,12 +232,13 @@ TODO: Illustrative schematic here? This one is probably the most conceptually si
 
     Windows:
 
-    TODO this needs to be tested
+    TODO does the GPU passthrough require group permission modification like the Linux command above?
     ```powershell
-    $env:DATA_DIR = "path\to\data"
+    $env:DATA_DIR = "C:\Users\david\dev\ofo-docs\data"
 
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
+        --gpus all `
         ghcr.io/open-forest-observatory/mmpretrain:latest `
         python /app/tools/predict.py `
            /data/drone/tree-chips `
@@ -271,7 +274,7 @@ TODO: Illustrative schematic here?
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path\to\data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
@@ -304,7 +307,7 @@ TODO: Illustrative schematic here?
     TODO: This can just be the TCF installation instructions I think
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path\to\data"
 
     conda activate tree-classification-framework
 

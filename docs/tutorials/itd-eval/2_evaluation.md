@@ -51,7 +51,7 @@ The tree detection scoring algorithm operates on the ground reference and drone-
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="/ofo-share/repos/david/ofo-docs/data"
+    export DATA_FOLDER="path\to\data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
