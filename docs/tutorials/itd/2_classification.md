@@ -59,7 +59,7 @@ The first step in classifying trees is use `Geograypher` to understand what regi
 
 Fortunately, if we know the precise location of the camera sensor at at the time each image is captured (which we obtain from photogrammetry), along with the parameters of the camera's lens (also from photogrammetry), then we can use geometry to translate each pixel in a raw drone image into a _ray_ in 3D space. The place where this ray intersects the 3D mesh model is the location in 3D space that is represented by that pixel. Geograypher uses techniques from computer graphics to perform these calculations efficiently. Notably, this rendering process is occlusion-aware, so if one tree is in front of another from the camera's perspective, the pixel will be assigned to the tree in front.
 
-![Image to mesh projection](/assets/images/tutorials/image-mesh-projection.png){ width="50%" }
+![Image to mesh projection](/assets/images/tutorials/image-mesh-projection.png){ width="40%" }
 
 Each tree is assigned a unique numerical ID when it is detected. Since the mesh model has geospatial reference information, these IDs can be transferred from the 2D geospatil representation of the crowns to the corresponding 3D mesh faces. Then, we use Geograypher to assign those IDs to the corresponding pixels in each raw drone image. This produces a single-channel image encoding the ID of the observed tree (or a special `background` ID) at each pixel, for each image in the original set of drone images.
 
@@ -214,7 +214,7 @@ TODO: Illustrative schematic here?
 
 This produces, in the tree-chips folder, a file tree parallelling that of the original raw drone photos, but in place of each image file is a folder. Each folder contains the cropped images of each tree that was observed in that image, with each file named with the unique numeric ID of the tree it represents.
 
-![crop](/assets/images/tutorials/composite1_crop2_000448-02_000498.png)
+![crop](/assets/images/tutorials/composite1_crop2_000448-02_000498.png){ width="40%" }
 
 
 ## Classify each crop
