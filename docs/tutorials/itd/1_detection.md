@@ -280,11 +280,10 @@ The Tree Detection Framework provides a standardized interface to several differ
 | --- | --- | --- | --- |
 | DeepForest | Task-specific training | Orthomosaic | Bounding box |
 | Detectree2 | Task-specific training | Orthomosaic | Crown polygon |
+| Restor TCD | Task-specific training | Orthomosaic | Crown polygon |
 | Segment Anything Model v2 (SAM2) | Generic pretraining (foundational model) | Orthomosaic | Crown polygon |
 | Segment Anything Model v3 (SAM3) | Generic pretraining, with class information (foundational model) | Orthomosaic | Crown polygon |
 | Local maximum filter + Watershed segmentation | Learning-free algorithm | Canopy height model (CHM) | Tree-top point and crown polygon |
-
-TODO DR: determine if we want to include the TCD (restor-foundation) model in this list, since it doesn't appear we've tested it much
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
 
