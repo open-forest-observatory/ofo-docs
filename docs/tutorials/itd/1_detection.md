@@ -269,7 +269,11 @@ This step saves a geospatial file of polygons (rectangles) representing the boun
 
 The rectangle bounding box output format is specific to the DeepForest model. TODO DR: Demonstration of converting them to masks/centroids with heights?
 
-TODO DR: A few sentences on the parameters including the units (pixels or meters), roughly following the pattern in the geometric detection section above. Possibly a vis of the effect of changing the params and/or a schematic of the concept of chip size and stride.
+Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The `chip_size` and `chip_stride` parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the `run_nms` argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the `resolution` parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of trees is detected well. By coarsening the resolution to `0.2m`, only the largest trees are detected, as seen visualized below.
+
+TODO DR: consider visualizing a chip from each resolution.
+
+![Ortho with deepforest detections from low-res chips](/assets/images/tutorials/composite1_ortho_w-detections_deepforest-bbox_v01_low-res.png)
 
 TODO DR: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.
 
