@@ -50,7 +50,8 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 
 === "Custom Python script"
-    TODO same as above
+
+    Install the same three environments as described for the Python command-line entrypoint. Each step below is run from a Python script in the corresponding environment (`geograypher`, `tree-classification-framework`, or `mmpretrain`).
 
 
 ## Rendering tree locations to images
@@ -67,16 +68,18 @@ The original drone images are not required at this stage except for visualizatio
 
 === "Docker (recommended)"
 
+    Linux/Mac:
+
     ```bash
-    export DATA_DIR="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
-    -v "${DATA_DIR}:/data" \
-    ghcr.io/open-forest-observatory/geograypher:latest \
-    python -m geograypher.entrypoints.render_labels \
+        -v "${DATA_DIR}:/data" \
+        ghcr.io/open-forest-observatory/geograypher:latest \
+        python -m geograypher.entrypoints.render_labels \
         --mesh-file /data/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file  /data/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --cameras-file /data/drone/photogrammetry-outputs/composite1_cameras.xml \
         --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
         --image-folder /data/drone/raw-drone-photos/composite1 \
@@ -90,6 +93,8 @@ The original drone images are not required at this stage except for visualizatio
         --ground-height-threshold 2.0
     ```
 
+    Windows:
+
     ```powershell
     $env:DATA_DIR = "path\to\data"
 
@@ -99,7 +104,7 @@ The original drone images are not required at this stage except for visualizatio
         python -m geograypher.entrypoints.render_labels `
             --mesh-file /data/drone/photogrammetry-outputs/composite1_mesh.ply `
             --mesh-CRS 32610 `
-            --cameras-file  /data/drone/photogrammetry-outputs/composite1_cameras.xml `
+            --cameras-file /data/drone/photogrammetry-outputs/composite1_cameras.xml `
             --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --texture-column-name unique_ID `
             --image-folder /data/drone/raw-drone-photos/composite1 `
@@ -116,24 +121,24 @@ The original drone images are not required at this stage except for visualizatio
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     conda activate geograypher
 
     python -m geograypher.entrypoints.render_labels \
-        --mesh-file ${DATA_FOLDER}/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-file ${DATA_DIR}/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file  ${DATA_FOLDER}/drone/photogrammetry-outputs/composite1_cameras.xml \
-        --texture ${DATA_FOLDER}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        --cameras-file ${DATA_DIR}/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --texture ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
-        --image-folder ${DATA_FOLDER}/drone/raw-drone-photos/composite1 \
-        --render-savefolder ${DATA_FOLDER}/renders \
+        --image-folder ${DATA_DIR}/drone/raw-drone-photos/composite1 \
+        --render-savefolder ${DATA_DIR}/renders \
         --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder ${DATA_FOLDER}/renders-vis \
+        --labels-vis-folder ${DATA_DIR}/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
-        --DTM-file ${DATA_FOLDER}/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --DTM-file ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
 
@@ -143,10 +148,46 @@ The original drone images are not required at this stage except for visualizatio
     conda activate geograypher
     ```
 
-    # TODO Then load the required libraries:
+    Then run the following Python script:
 
     ```python
-    # TODO: Complete python lines to load libraries
+    from pathlib import Path
+
+    import pyproj
+    from geograypher.entrypoints.render_labels import render_labels
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    MESH_FILE = Path(DATA_DIR, "drone", "photogrammetry-outputs", "composite1_mesh.ply")
+    CAMERAS_FILE = Path(DATA_DIR, "drone", "photogrammetry-outputs", "composite1_cameras.xml")
+    DTM_FILE = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_dtm-ptcloud.tif")
+    TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+    IMAGE_FOLDER = Path(DATA_DIR, "drone", "raw-drone-photos", "composite1")
+    MESH_CRS = pyproj.CRS.from_epsg(32610)
+    ORIGNAL_IMAGE_FOLDER = "/data/raw-drone-photos"
+
+    # Define the outputs
+    RENDER_SAVEFOLDER = Path(DATA_DIR, "renders")
+    LABELS_VIS_FOLDER = Path(DATA_DIR, "renders-vis")
+
+    render_labels(
+        mesh_file=MESH_FILE,
+        mesh_CRS=MESH_CRS,
+        cameras_file=CAMERAS_FILE,
+        texture=TREE_CROWNS_FILE,
+        texture_column_name="unique_ID",
+        image_folder=IMAGE_FOLDER,
+        render_savefolder=RENDER_SAVEFOLDER,
+        original_image_folder=ORIGNAL_IMAGE_FOLDER,
+        labels_vis_folder=LABELS_VIS_FOLDER,
+        mesh_ROI_buffer_radius_meters=10,
+        cameras_ROI_buffer_radius_meters=20,
+        render_image_scale=0.125,
+        DTM_file=DTM_FILE,
+        ground_height_threshold=2.0,
+    )
     ```
 
 This command produces a file tree of images (in the `renders` folder) that exactly mirrors the structure of the original raw drone photos, except that instead of the original RGB images, there are single-channel images in which each pixel contains the unique ID of the tree that was observed at that pixel.
@@ -162,13 +203,13 @@ TODO: Illustrative schematic here?
 
 === "Docker (recommended)"
 
-    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+    Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.chip_images \
            /data/drone/raw-drone-photos/composite1 \
@@ -198,19 +239,47 @@ TODO: Illustrative schematic here?
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     python -m tree_classification_framework.chip_images \
-       ${DATA_FOLDER}/drone/raw-drone-photos/composite1 \
-       ${DATA_FOLDER}/renders \
-       ${DATA_FOLDER}/drone/tree-chips \
+       ${DATA_DIR}/drone/raw-drone-photos/composite1 \
+       ${DATA_DIR}/renders \
+       ${DATA_DIR}/drone/tree-chips \
        --n-workers 4 \
        --n-chips-per-tree 10
     ```
 
 === "Custom Python script"
 
-    TODO:
+    ```bash
+    conda activate tree-classification-framework
+    ```
+
+    Then run the following Python script:
+
+    ```python
+    from pathlib import Path
+
+    from tree_classification_framework.chip_images import process_folder
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    IMAGE_FOLDER = Path(DATA_DIR, "drone", "raw-drone-photos", "composite1")
+    RENDERS_FOLDER = Path(DATA_DIR, "renders")
+
+    # Define the outputs
+    CHIPS_FOLDER = Path(DATA_DIR, "drone", "tree-chips")
+
+    process_folder(
+        images_folder=IMAGE_FOLDER,
+        renders_folder=RENDERS_FOLDER,
+        output_dir=CHIPS_FOLDER,
+        n_workers=4,
+        n_chips_per_tree=10,
+    )
+    ```
 
 This produces, in the tree-chips folder, a file tree parallelling that of the original raw drone photos, but in place of each image file is a folder. Each folder contains the cropped images of each tree that was observed in that image, with each file named with the unique numeric ID of the tree it represents.
 
@@ -223,16 +292,18 @@ We can use computer vision models previously trained by the OFO to classify each
 
 === "Docker (recommended)"
 
-    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+    !!! warning "Running without a GPU"
 
-    Note that this command expects a GPU, but can be run without one. If your machine does not have a GPU, remove the line that includes `--gpus all`.
+        If you are running this on a machine without a GPU, remove `--gpus all` from the `docker run` command below.
+
+    Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all --group-add "$(stat -c %g /dev/nvidia0)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/mmpretrain:latest \
         python /app/tools/predict.py \
            /data/drone/tree-chips \
@@ -243,9 +314,8 @@ We can use computer vision models previously trained by the OFO to classify each
 
     Windows:
 
-    TODO does the GPU passthrough require group permission modification like the Linux command above?
     ```powershell
-    $env:DATA_DIR = "C:\Users\david\dev\ofo-docs\data"
+    $env:DATA_DIR = "path/to/data"
 
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
@@ -292,10 +362,10 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.assign_predictions_to_trees \
            /data/tree-chips-classified/classified-live-dead.json \
@@ -318,6 +388,7 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
            /data/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
+
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Python command-line entrypoint"
@@ -325,21 +396,52 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
     TODO: This can just be the TCF installation instructions I think
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     conda activate tree-classification-framework
 
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_FOLDER}/tree-chips-classified/classified-species.json \
+       ${DATA_DIR}/tree-chips-classified/classified-species.json \
        species \
-       ${DATA_FOLDER}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-       ${DATA_FOLDER}/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
+       ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+       ${DATA_DIR}/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
     ```
+
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Custom Python script"
-    TODO:
+    ```bash
+    conda activate tree-classification-framework
+    ```
+
+    Then run the following Python script:
+
+    ```python
+    from pathlib import Path
+
+    from tree_classification_framework.assign_predictions_to_trees import assign_predictions_to_trees
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    IMAGE_LEVEL_PREDICTIONS_FILE = Path(DATA_DIR, "tree-chips-classified", "classified-live-dead.json")
+    TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+
+    # Define the outputs
+    CLASSIFIED_CROWNS_FILE = Path(DATA_DIR, "classified-trees", "composite1_tree-crowns_geometric_v01_live_dead.gpkg")
+
+    assign_predictions_to_trees(
+        output_column_name="live_dead",
+        image_level_predictions_file=IMAGE_LEVEL_PREDICTIONS_FILE,
+        input_tree_crowns_file=TREE_CROWNS_FILE,
+        output_tree_crowns_file=CLASSIFIED_CROWNS_FILE,
+    )
+    ```
+
+    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 This produces a new geospatial file containing all of the attributes of the original input file, plus the prediction data.
 
 ![Detected tree crowns with species](/assets/images/tutorials/composite1_detected-crowns-w-species.png)
+

@@ -61,7 +61,7 @@ TODO: More context?
     Linux/Mac:
 
     ```bash
-    DATA_DIR="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
@@ -92,15 +92,19 @@ TODO: More context?
 
 === "Jupyter"
 
-    This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.
+    This step is performed by the following notebook: [here](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/sequential_geometric_detector.ipynb). You can change the constants in the second cell.
+
+    TODO: this notebook could be improved by visualizing the detected tree tops.
 
 === "Python command-line entrypoint"
 
     ```bash
+    export DATA_DIR="path/to/data"
+
     python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-        path/to/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        path/to/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-        --tree-crowns-save-path path/to/data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        --tree-crowns-save-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --raster-blur-sigma 0.5 \
         --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
@@ -108,9 +112,28 @@ TODO: More context?
 === "Python script"
 
     ```python
-    # TODO: Lines to load inputs
-    # TODO: Lines to run geometric tree detection algorithm
-    # TODO: Lines to write outputs
+    from pathlib import Path
+
+    from tree_detection_framework.entrypoints.detect_geometric_two_stage import detect_trees_two_stage
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    CHM_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
+    TREE_TOPS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-tops_geometric_v01.gpkg")
+    TREE_CROWNS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+    RASTER_BLUR_SIGMA = 0.5
+    TREE_TOP_DETECTOR_KWARGS = {"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}
+
+    # Run detection
+    detect_trees_two_stage(
+        CHM_file=CHM_PATH,
+        tree_tops_save_path=TREE_TOPS_SAVE_PATH,
+        tree_crowns_save_path=TREE_CROWNS_SAVE_PATH,
+        raster_blur_sigma=RASTER_BLUR_SIGMA,
+        tree_top_detector_kwargs=TREE_TOP_DETECTOR_KWARGS,
+    )
     ```
 
 This command saves two geospatial output files: points representing detected tree tops and polygons representing detected tree crowns. You can visualize these outputs in GIS software like [QGIS](https://qgis.org/en/site/):
@@ -143,14 +166,18 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
 
     ```bash
     #TODO: Fix this the need to define the cache folders and eliminate need to use $HOME so we can set it to `path/to/data`
-    mkdir -p "$HOME/ofo-tutorial-testing/.cache"
+    # TODO I don't fully understand the comment above
+    export DATA_DIR="path/to/data"
 
-    docker run --rm --gpus all --user "$(id -u):$(id -g)" \
+    mkdir -p "$DATA_DIR/.cache"
+
+    docker run --rm --user "$(id -u):$(id -g)" \
+        --gpus all  --group-add "$(stat -c %g /dev/nvidia0)" \
         -w /data \
         -e HOME=/data/.cache \
         -e TORCH_HOME=/data/.cache/torch \
         -e MPLCONFIGDIR=/data/.cache/matplotlib \
-        -v "$HOME/ofo-tutorial-testing:/data" \
+        -v "$DATA_DIR:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.generate_predictions \
             --raster-folder-path /data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
@@ -165,25 +192,75 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     Windows:
 
     ```powershell
-    # TODO
+    $env:DATA_DIR = "path\to\data"
+
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-detection-framework:latest `
+        python -m tree_detection_framework.entrypoints.generate_predictions `
+            --raster-folder-path /data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif `
+            --tree-detection-model deepforest `
+            --chip-size 1024 `
+            --chip-stride 768 `
+            --resolution 0.05 `
+            --run-nms `
+            --predictions-save-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
 
 === "Jupyter"
 
-    This step is performed by lines XX-YY (TODO) of the Jupyter notebook {TODO: Link to notebook}.
+    This step is perfomed by this [notebook](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/predict_detections.ipynb). Note that the constants in cell 2 will need to be changed to reflect the data used in this documentation.
 
 === "Python command-line entrypoint"
 
-    ```python
-    # TODO
+    ```bash
+    export DATA_DIR="path/to/data"
+
+    python -m tree_detection_framework.entrypoints.generate_predictions \
+        --raster-folder-path ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
+        --tree-detection-model deepforest \
+        --chip-size 1024 \
+        --chip-stride 768 \
+        --resolution 0.05 \
+        --run-nms \
+        --predictions-save-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
+
+    Note that you can replace `deepforest` with `detectree2` to run that model.
 
 === "Python script"
 
     ```python
-    # TODO: Lines to load inputs
-    # TODO: Lines to run tree detection algorithm
-    # TODO: Lines to write outputs
+    from pathlib import Path
+
+    from tree_detection_framework.entrypoints.generate_predictions import (
+        generate_predictions,
+    )
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    RASTER_FOLDER_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_ortho-dsm-ptcloud.tif")
+    TREE_DETECTION_MODEL = "deepforest"
+    CHIP_SIZE = 1024
+    CHIP_STRIDE = 768
+    RESOLUTION = 0.05
+    RUN_NMS = True
+
+    # Define the outputs
+    PREDICTIONS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_deepforest_v01.gpkg")
+
+    # Run detection
+    generate_predictions(
+        raster_folder_path=RASTER_FOLDER_PATH,
+        predictions_save_path=PREDICTIONS_SAVE_PATH,
+        tree_detection_model=TREE_DETECTION_MODEL,
+        chip_size=CHIP_SIZE,
+        chip_stride=CHIP_STRIDE,
+        resolution=RESOLUTION,
+        run_nms=RUN_NMS,
+    )
     ```
 
 This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like [QGIS](https://qgis.org/en/site/):
