@@ -275,7 +275,7 @@ TODO DR: consider visualizing a chip from each resolution.
 
 ![Ortho with deepforest detections from low-res chips](/assets/images/tutorials/composite1_ortho_w-detections_deepforest-bbox_v01_low-res.png)
 
-TODO DR: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.
+The Tree Detection Framework provides a standardized interface to several different methods of performing tree detection, taken from the literature. TDF handles the process of chipping a raster into smaller chips, generating predictions on each chip, and merging these predictions back together in one command, so this complexity is hidden from the user and end-to-end workflows are easy to run. A key benefit of TDF is the ability to quickly compare multiple models, while holding key pre- and post-processing parameters consistent. TDF is also optimized for realistic-scale raster data, meaning that it can be directly applied to even the largest drone flights.
 
 TODO DR: Table of supported models.
 
