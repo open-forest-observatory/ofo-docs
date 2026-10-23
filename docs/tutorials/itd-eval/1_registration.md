@@ -53,6 +53,7 @@ The commands to run this algorithm are below.
 
     ```bash
     export DATA_FOLDER="path/to/data/"
+
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_FOLDER}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
@@ -97,10 +98,6 @@ The commands to run this algorithm are below.
     ```
 
 === "Python script"
-
-    ```bash
-    conda activate tree-registration-and-matching
-    ```
 
     ```python
     from pathlib import Path

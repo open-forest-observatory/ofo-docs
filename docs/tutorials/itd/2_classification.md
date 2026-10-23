@@ -68,6 +68,8 @@ The original drone images are not required at this stage except for visualizatio
 
 === "Docker (recommended)"
 
+    Linux/Mac:
+
     ```bash
     export DATA_DIR="path/to/data/"
 
@@ -90,6 +92,8 @@ The original drone images are not required at this stage except for visualizatio
         --DTM-file /data/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
+
+    Windows:
 
     ```powershell
     $env:DATA_DIR = "path\to\data"
@@ -199,7 +203,7 @@ TODO: Illustrative schematic here?
 
 === "Docker (recommended)"
 
-    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+    Linux/Mac:
 
     ```bash
     export DATA_FOLDER="path/to/data/"
@@ -288,9 +292,11 @@ We can use computer vision models previously trained by the OFO to classify each
 
 === "Docker (recommended)"
 
-    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+    !!! warning "Running without a GPU"
 
-    Note that this command expects a GPU, but can be run without one. If your machine does not have a GPU, remove the line that includes `--gpus all`.
+        If you are running this on a machine without a GPU, remove `--gpus all` from the `docker run` command below.
+
+    Linux/Mac:
 
     ```bash
     export DATA_FOLDER="path\to\data"
@@ -308,9 +314,8 @@ We can use computer vision models previously trained by the OFO to classify each
 
     Windows:
 
-    TODO does the GPU passthrough require group permission modification like the Linux command above?
     ```powershell
-    $env:DATA_DIR = "C:\Users\david\dev\ofo-docs\data"
+    $env:DATA_DIR = "path/to/data"
 
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
