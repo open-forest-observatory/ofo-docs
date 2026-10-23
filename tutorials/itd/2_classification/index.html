@@ -756,6 +756,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#crop-the-view-of-each-tree-from-each-drone-photo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop the view of each tree from each drone photo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classify-each-crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classify each crop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assign-predictions-to-individual-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assign predictions to individual trees
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1476,6 +1509,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#crop-the-view-of-each-tree-from-each-drone-photo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crop the view of each tree from each drone photo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classify-each-crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classify each crop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assign-predictions-to-individual-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assign predictions to individual trees
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1572,7 +1638,7 @@
 - TODO this fails with the following error <code>ImportError: /home/exouser/miniconda3/envs/open-mmlab/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so: undefined symbol: iJIT_NotifyEvent</code>.</p>
 </div>
 <div class="tabbed-block">
-<p>TODO same as above</p>
+<p>Install the same three environments as described for the Python command-line entrypoint. Each step below is run from a Python script in the corresponding environment (<code>geograypher</code>, <code>tree-classification-framework</code>, or <code>mmpretrain</code>).</p>
 </div>
 </div>
 </div>
@@ -1585,15 +1651,16 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Docker (recommended)</label><label for="__tabbed_2_2">Python command-line entrypoint</label><label for="__tabbed_2_3">Custom Python script</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data/"</span>
+<p>Linux/Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>ghcr.io/open-forest-observatory/geograypher:latest<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>python<span class="w"> </span>-m<span class="w"> </span>geograypher.entrypoints.render_labels<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span>ghcr.io/open-forest-observatory/geograypher:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>geograypher.entrypoints.render_labels<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span>--mesh-file<span class="w"> </span>/data/drone/photogrammetry-outputs/composite1_mesh.ply<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span>--mesh-CRS<span class="w"> </span><span class="m">32610</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span>--cameras-file<span class="w">  </span>/data/drone/photogrammetry-outputs/composite1_cameras.xml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span>--cameras-file<span class="w"> </span>/data/drone/photogrammetry-outputs/composite1_cameras.xml<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span>--texture<span class="w"> </span>/data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span>--texture-column-name<span class="w"> </span>unique_ID<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span>--image-folder<span class="w"> </span>/data/drone/raw-drone-photos/composite1<span class="w"> </span><span class="se">\</span>
@@ -1606,6 +1673,7 @@
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span>--DTM-file<span class="w"> </span>/data/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span>--ground-height-threshold<span class="w"> </span><span class="m">2</span>.0
 </code></pre></div>
+<p>Windows:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$env:DATA_DIR</span> <span class="p">=</span> <span class="s2">"path\to\data"</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
@@ -1614,7 +1682,7 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">geograypher</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">render_labels</span> <span class="p">`</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="p">-</span><span class="n">-mesh</span><span class="o">-file</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">photogrammetry-outputs</span><span class="p">/</span><span class="n">composite1_mesh</span><span class="p">.</span><span class="n">ply</span> <span class="p">`</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="p">-</span><span class="n">-mesh-CRS</span> <span class="n">32610</span> <span class="p">`</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="p">-</span><span class="n">-cameras</span><span class="o">-file</span>  <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">photogrammetry-outputs</span><span class="p">/</span><span class="n">composite1_cameras</span><span class="p">.</span><span class="n">xml</span> <span class="p">`</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="p">-</span><span class="n">-cameras</span><span class="o">-file</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">photogrammetry-outputs</span><span class="p">/</span><span class="n">composite1_cameras</span><span class="p">.</span><span class="n">xml</span> <span class="p">`</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="p">-</span><span class="n">-texture</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="p">-</span><span class="n">-texture-column-name</span> <span class="n">unique_ID</span> <span class="p">`</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="p">-</span><span class="n">-image-folder</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">raw-drone-photos</span><span class="p">/</span><span class="n">composite1</span> <span class="p">`</span>
@@ -1629,32 +1697,68 @@
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path/to/data/"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>conda<span class="w"> </span>activate<span class="w"> </span>geograypher
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>python<span class="w"> </span>-m<span class="w"> </span>geograypher.entrypoints.render_labels<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span>--mesh-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/drone/photogrammetry-outputs/composite1_mesh.ply<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span>--mesh-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/photogrammetry-outputs/composite1_mesh.ply<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span>--mesh-CRS<span class="w"> </span><span class="m">32610</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span>--cameras-file<span class="w">  </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/drone/photogrammetry-outputs/composite1_cameras.xml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span>--texture<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span>--cameras-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/photogrammetry-outputs/composite1_cameras.xml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span>--texture<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span>--texture-column-name<span class="w"> </span>unique_ID<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span>--image-folder<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/drone/raw-drone-photos/composite1<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span>--render-savefolder<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/renders<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span>--image-folder<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/raw-drone-photos/composite1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span>--render-savefolder<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/renders<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span>--original-image-folder<span class="w"> </span>/data/raw-drone-photos<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span>--labels-vis-folder<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/renders-vis<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span>--labels-vis-folder<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/renders-vis<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span>--mesh-ROI-buffer-radius-meters<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span>--cameras-ROI-buffer-radius-meters<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span>--render-image-scale<span class="w"> </span><span class="m">0</span>.125<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span>--DTM-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span>--DTM-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span>--ground-height-threshold<span class="w"> </span><span class="m">2</span>.0
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>geograypher
 </code></pre></div>
-<h1 id="todo-then-load-the-required-libraries">TODO Then load the required libraries:<a class="headerlink" href="#todo-then-load-the-required-libraries" title="Permanent link">¶</a></h1>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># TODO: Complete python lines to load libraries</span>
+<p>Then run the following Python script:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyproj</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">geograypher.entrypoints.render_labels</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_labels</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Change this line</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"path/to/data"</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Define the inputs</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">MESH_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"photogrammetry-outputs"</span><span class="p">,</span> <span class="s2">"composite1_mesh.ply"</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">CAMERAS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"photogrammetry-outputs"</span><span class="p">,</span> <span class="s2">"composite1_cameras.xml"</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">DTM_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"photogrammetry-postprocessed"</span><span class="p">,</span> <span class="s2">"full"</span><span class="p">,</span> <span class="s2">"composite1_dtm-ptcloud.tif"</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">TREE_CROWNS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"detected-trees"</span><span class="p">,</span> <span class="s2">"composite1_tree-crowns_geometric_v01.gpkg"</span><span class="p">)</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">IMAGE_FOLDER</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"raw-drone-photos"</span><span class="p">,</span> <span class="s2">"composite1"</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="n">MESH_CRS</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">CRS</span><span class="o">.</span><span class="n">from_epsg</span><span class="p">(</span><span class="mi">32610</span><span class="p">)</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">ORIGNAL_IMAGE_FOLDER</span> <span class="o">=</span> <span class="s2">"/data/raw-drone-photos"</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># Define the outputs</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="n">RENDER_SAVEFOLDER</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"renders"</span><span class="p">)</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="n">LABELS_VIS_FOLDER</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"renders-vis"</span><span class="p">)</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="n">render_labels</span><span class="p">(</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="n">mesh_file</span><span class="o">=</span><span class="n">MESH_FILE</span><span class="p">,</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    <span class="n">mesh_CRS</span><span class="o">=</span><span class="n">MESH_CRS</span><span class="p">,</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>    <span class="n">cameras_file</span><span class="o">=</span><span class="n">CAMERAS_FILE</span><span class="p">,</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>    <span class="n">texture</span><span class="o">=</span><span class="n">TREE_CROWNS_FILE</span><span class="p">,</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>    <span class="n">texture_column_name</span><span class="o">=</span><span class="s2">"unique_ID"</span><span class="p">,</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>    <span class="n">image_folder</span><span class="o">=</span><span class="n">IMAGE_FOLDER</span><span class="p">,</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>    <span class="n">render_savefolder</span><span class="o">=</span><span class="n">RENDER_SAVEFOLDER</span><span class="p">,</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>    <span class="n">original_image_folder</span><span class="o">=</span><span class="n">ORIGNAL_IMAGE_FOLDER</span><span class="p">,</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>    <span class="n">labels_vis_folder</span><span class="o">=</span><span class="n">LABELS_VIS_FOLDER</span><span class="p">,</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>    <span class="n">mesh_ROI_buffer_radius_meters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>    <span class="n">cameras_ROI_buffer_radius_meters</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>    <span class="n">render_image_scale</span><span class="o">=</span><span class="mf">0.125</span><span class="p">,</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>    <span class="n">DTM_file</span><span class="o">=</span><span class="n">DTM_FILE</span><span class="p">,</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>    <span class="n">ground_height_threshold</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1667,11 +1771,11 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Docker (recommended)</label><label for="__tabbed_3_2">Python command-line entrypoint</label><label for="__tabbed_3_3">Custom Python script</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Follow our <a href="../../#docker">Docker guide</a> to understand what Docker is and ensure your system is set up to run Docker containers.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path/to/data/"</span>
+<p>Linux/Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-classification-framework:latest<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_classification_framework.chip_images<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">       </span>/data/drone/raw-drone-photos/composite1<span class="w"> </span><span class="se">\</span>
@@ -1695,18 +1799,42 @@
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path\to\data"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_classification_framework.chip_images<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/drone/raw-drone-photos/composite1<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/renders<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/drone/tree-chips<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/raw-drone-photos/composite1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/renders<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/tree-chips<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">   </span>--n-workers<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">   </span>--n-chips-per-tree<span class="w"> </span><span class="m">10</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>TODO:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-classification-framework
+</code></pre></div>
+<p>Then run the following Python script:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tree_classification_framework.chip_images</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_folder</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># Change this line</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"path/to/data"</span><span class="p">)</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Define the inputs</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">IMAGE_FOLDER</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"raw-drone-photos"</span><span class="p">,</span> <span class="s2">"composite1"</span><span class="p">)</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">RENDERS_FOLDER</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"renders"</span><span class="p">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c1"># Define the outputs</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">CHIPS_FOLDER</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"tree-chips"</span><span class="p">)</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="n">process_folder</span><span class="p">(</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="n">images_folder</span><span class="o">=</span><span class="n">IMAGE_FOLDER</span><span class="p">,</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>    <span class="n">renders_folder</span><span class="o">=</span><span class="n">RENDERS_FOLDER</span><span class="p">,</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>    <span class="n">output_dir</span><span class="o">=</span><span class="n">CHIPS_FOLDER</span><span class="p">,</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>    <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>    <span class="n">n_chips_per_tree</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="p">)</span>
+</code></pre></div>
 </div>
 </div>
 </div>
@@ -1717,34 +1845,36 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><input id="__tabbed_4_3" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">Docker (recommended)</label><label for="__tabbed_4_2">Python command-line entrypoint</label><label for="__tabbed_4_3">Custom Python script</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Follow our <a href="../../#docker">Docker guide</a> to understand what Docker is and ensure your system is set up to run Docker containers.</p>
-<p>Note that this command expects a GPU, but can be run without one. If your machine does not have a GPU, remove the line that includes <code>--gpus all</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path\to\data"</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>--group-add<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span>%g<span class="w"> </span>/dev/nvidia0<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span>ghcr.io/open-forest-observatory/mmpretrain:latest<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span>python<span class="w"> </span>/app/tools/predict.py<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">       </span>/data/drone/tree-chips<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">       </span>/data/cv-models/dead_live_config.py<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">       </span>/data/cv-models/dead_live_model.pth<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">       </span>/data/tree-chips-classified/classified-live-dead.json
+<div class="admonition warning">
+<p class="admonition-title">Running without a GPU</p>
+<p>If you are running this on a machine without a GPU, remove <code>--gpus all</code> from the <code>docker run</code> command below.</p>
+</div>
+<p>Linux/Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>--group-add<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span>%g<span class="w"> </span>/dev/nvidia0<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>ghcr.io/open-forest-observatory/mmpretrain:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span>python<span class="w"> </span>/app/tools/predict.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">       </span>/data/drone/tree-chips<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">       </span>/data/cv-models/dead_live_config.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">       </span>/data/cv-models/dead_live_model.pth<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">       </span>/data/tree-chips-classified/classified-live-dead.json
 </code></pre></div>
 <p>Windows:</p>
-<p>TODO does the GPU passthrough require group permission modification like the Linux command above?
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$env:DATA_DIR</span> <span class="p">=</span> <span class="s2">"C:\Users\david\dev\ofo-docs\data"</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">-v</span> <span class="s2">"${env:DATA_DIR}:/data"</span> <span class="p">`</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="p">-</span><span class="n">-gpus</span> <span class="n">all</span> <span class="p">`</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">mmpretrain</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">python</span> <span class="p">/</span><span class="n">app</span><span class="p">/</span><span class="n">tools</span><span class="p">/</span><span class="n">predict</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">tree-chips</span> <span class="p">`</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">cv-models</span><span class="p">/</span><span class="n">dead_live_config</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">cv-models</span><span class="p">/</span><span class="n">dead_live_model</span><span class="p">.</span><span class="n">pth</span> <span class="p">`</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">tree-chips-classified</span><span class="p">/</span><span class="n">classified-live-dead</span><span class="p">.</span><span class="n">json</span>
-</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">$env:DATA_DIR</span> <span class="p">=</span> <span class="s2">"path/to/data"</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">-v</span> <span class="s2">"${env:DATA_DIR}:/data"</span> <span class="p">`</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="p">-</span><span class="n">-gpus</span> <span class="n">all</span> <span class="p">`</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">mmpretrain</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="n">python</span> <span class="p">/</span><span class="n">app</span><span class="p">/</span><span class="n">tools</span><span class="p">/</span><span class="n">predict</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">tree-chips</span> <span class="p">`</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">cv-models</span><span class="p">/</span><span class="n">dead_live_config</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">cv-models</span><span class="p">/</span><span class="n">dead_live_model</span><span class="p">.</span><span class="n">pth</span> <span class="p">`</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">tree-chips-classified</span><span class="p">/</span><span class="n">classified-live-dead</span><span class="p">.</span><span class="n">json</span>
+</code></pre></div>
 <p>Note that you can run the species prediction step by replacing <code>live_dead</code> with <code>species</code> in all lines.</p>
 </div>
 <div class="tabbed-block">
@@ -1793,47 +1923,71 @@ step.</p>
 <div class="tabbed-block">
 <p>Follow our <a href="../../#docker">Docker guide</a> to understand what Docker is and ensure your system is set up to run Docker containers.</p>
 <p>Linux/Mac:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path\to\data"</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-classification-framework:latest<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_classification_framework.assign_predictions_to_trees<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">       </span>/data/tree-chips-classified/classified-live-dead.json<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">       </span>live_dead<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">       </span>/data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">       </span>/data/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-classification-framework:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_classification_framework.assign_predictions_to_trees<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">       </span>/data/tree-chips-classified/classified-live-dead.json<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">       </span>live_dead<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">       </span>/data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">       </span>/data/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
 </code></pre></div>
 <p>Windows:</p>
-<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">$env:DATA_DIR</span> <span class="p">=</span> <span class="s2">"path\to\data"</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">-v</span> <span class="s2">"${env:DATA_DIR}:/data"</span> <span class="p">`</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-classification-framework</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_classification_framework</span><span class="p">.</span><span class="n">assign_predictions_to_trees</span> <span class="p">`</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">tree-chips-classified</span><span class="p">/</span><span class="n">classified-live-dead</span><span class="p">.</span><span class="n">json</span> <span class="p">`</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>       <span class="n">live_dead</span> <span class="p">`</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">classified-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_geometric_v01_live_dead</span><span class="p">.</span><span class="n">gpkg</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">$env:DATA_DIR</span> <span class="p">=</span> <span class="s2">"path\to\data"</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">-v</span> <span class="s2">"${env:DATA_DIR}:/data"</span> <span class="p">`</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-classification-framework</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_classification_framework</span><span class="p">.</span><span class="n">assign_predictions_to_trees</span> <span class="p">`</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">tree-chips-classified</span><span class="p">/</span><span class="n">classified-live-dead</span><span class="p">.</span><span class="n">json</span> <span class="p">`</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>       <span class="n">live_dead</span> <span class="p">`</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>       <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">classified-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_geometric_v01_live_dead</span><span class="p">.</span><span class="n">gpkg</span>
 </code></pre></div>
-Note that you can run the species prediction step by replacing <code>live_dead</code> with <code>species</code> in all lines.<p></p>
+<p>Note that you can run the species prediction step by replacing <code>live_dead</code> with <code>species</code> in all lines.</p>
 </div>
 <div class="tabbed-block">
 <p>TODO: This can just be the TCF installation instructions I think</p>
-<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_FOLDER</span><span class="o">=</span><span class="s2">"path\to\data"</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-classification-framework
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_classification_framework.assign_predictions_to_trees<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/tree-chips-classified/classified-species.json<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">   </span>species<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_FOLDER</span><span class="si">}</span>/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-classification-framework
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_classification_framework.assign_predictions_to_trees<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/tree-chips-classified/classified-species.json<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">   </span>species<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/detected-trees/composite1_tree-crowns_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">   </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
 </code></pre></div>
-Note that you can run the species prediction step by replacing <code>live_dead</code> with <code>species</code> in all lines.<p></p>
+<p>Note that you can run the species prediction step by replacing <code>live_dead</code> with <code>species</code> in all lines.</p>
 </div>
 <div class="tabbed-block">
-<p>TODO:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-classification-framework
+</code></pre></div>
+<p>Then run the following Python script:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tree_classification_framework.assign_predictions_to_trees</span><span class="w"> </span><span class="kn">import</span> <span class="n">assign_predictions_to_trees</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1"># Change this line</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"path/to/data"</span><span class="p">)</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="c1"># Define the inputs</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="n">IMAGE_LEVEL_PREDICTIONS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"tree-chips-classified"</span><span class="p">,</span> <span class="s2">"classified-live-dead.json"</span><span class="p">)</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="n">TREE_CROWNS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"detected-trees"</span><span class="p">,</span> <span class="s2">"composite1_tree-crowns_geometric_v01.gpkg"</span><span class="p">)</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="c1"># Define the outputs</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="n">CLASSIFIED_CROWNS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"classified-trees"</span><span class="p">,</span> <span class="s2">"composite1_tree-crowns_geometric_v01_live_dead.gpkg"</span><span class="p">)</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="n">assign_predictions_to_trees</span><span class="p">(</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>    <span class="n">output_column_name</span><span class="o">=</span><span class="s2">"live_dead"</span><span class="p">,</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>    <span class="n">image_level_predictions_file</span><span class="o">=</span><span class="n">IMAGE_LEVEL_PREDICTIONS_FILE</span><span class="p">,</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>    <span class="n">input_tree_crowns_file</span><span class="o">=</span><span class="n">TREE_CROWNS_FILE</span><span class="p">,</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>    <span class="n">output_tree_crowns_file</span><span class="o">=</span><span class="n">CLASSIFIED_CROWNS_FILE</span><span class="p">,</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="p">)</span>
+</code></pre></div>
+<p>Note that you can run the species prediction step by replacing <code>live_dead</code> with <code>species</code> in all lines.</p>
 </div>
 </div>
 </div>
@@ -1861,7 +2015,7 @@ Note that you can run the species prediction step by replacing <code>live_dead</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 22, 2026 21:34:19 UTC">October 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2026 00:26:46 UTC">October 23, 2026</span>
   </span>
 
     
@@ -1889,14 +2043,14 @@ Note that you can run the species prediction step by replacing <code>live_dead</
     
     <nav>
       
-        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
-          
-          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&amp;size=72" alt="youngdjn">
-        </a>
-      
         <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
           
           <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
+        </a>
+      
+        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
+          
+          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&amp;size=72" alt="youngdjn">
         </a>
       
         <a href="https://github.com/web-flow" class="md-author" title="@web-flow">
