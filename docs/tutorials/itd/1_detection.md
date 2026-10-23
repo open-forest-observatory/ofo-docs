@@ -61,7 +61,7 @@ TODO: More context?
     Linux/Mac:
 
     ```bash
-    DATA_DIR="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
@@ -99,10 +99,12 @@ TODO: More context?
 === "Python command-line entrypoint"
 
     ```bash
+    export DATA_DIR="path/to/data"
+
     python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-        path/to/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        path/to/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-        --tree-crowns-save-path path/to/data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        --tree-crowns-save-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --raster-blur-sigma 0.5 \
         --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
@@ -122,7 +124,7 @@ TODO: More context?
     TREE_TOPS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-tops_geometric_v01.gpkg")
     TREE_CROWNS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
     RASTER_BLUR_SIGMA = 0.5
-    TREE_TOP_DETECTOR_KWARGS = {"a": 0, "b": 0.0325, "c": 0.25, "mit_ht": 5}
+    TREE_TOP_DETECTOR_KWARGS = {"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}
 
     # Run detection
     detect_trees_two_stage(
@@ -165,7 +167,7 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     ```bash
     #TODO: Fix this the need to define the cache folders and eliminate need to use $HOME so we can set it to `path/to/data`
     # TODO I don't fully understand the comment above
-    DATA_DIR="path/to/data"
+    export DATA_DIR="path/to/data"
 
     mkdir -p "$DATA_DIR/.cache"
 
@@ -190,7 +192,7 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "C:\Users\david\dev\ofo-docs\data"
+    $env:DATA_DIR = "path\to\data"
 
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
@@ -212,7 +214,7 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
 === "Python command-line entrypoint"
 
     ```bash
-    DATA_DIR="path/to/data"
+    export DATA_DIR="path/to/data"
 
     python -m tree_detection_framework.entrypoints.generate_predictions \
         --raster-folder-path ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
@@ -221,8 +223,9 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
         --chip-stride 768 \
         --resolution 0.05 \
         --run-nms \
-        --predictions-save-path ${DATA_DIR}/data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+        --predictions-save-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
+
     Note that you can replace `deepforest` with `detectree2` to run that model.
 
 === "Python script"
@@ -234,24 +237,21 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
         generate_predictions,
     )
 
+    # Change this line
     DATA_DIR = Path("path/to/data")
 
-    RASTER_FOLDER_PATH = Path(
-        DATA_DIR,
-        "drone",
-        "photogrammetry-postprocessed",
-        "full",
-        "composite1_ortho-dsm-ptcloud.tif",
-    )
-    PREDICTIONS_SAVE_PATH = Path(
-        DATA_DIR, "data", "detected-trees", "composite1_tree-crowns_deepforest_v01.gpkg"
-    )
+    # Define the inputs
+    RASTER_FOLDER_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_ortho-dsm-ptcloud.tif")
     TREE_DETECTION_MODEL = "deepforest"
     CHIP_SIZE = 1024
     CHIP_STRIDE = 768
     RESOLUTION = 0.05
     RUN_NMS = True
 
+    # Define the outputs
+    PREDICTIONS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_deepforest_v01.gpkg")
+
+    # Run detection
     generate_predictions(
         raster_folder_path=RASTER_FOLDER_PATH,
         predictions_save_path=PREDICTIONS_SAVE_PATH,

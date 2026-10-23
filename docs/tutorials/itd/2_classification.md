@@ -71,15 +71,15 @@ The original drone images are not required at this stage except for visualizatio
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
-    -v "${DATA_DIR}:/data" \
-    ghcr.io/open-forest-observatory/geograypher:latest \
-    python -m geograypher.entrypoints.render_labels \
+        -v "${DATA_DIR}:/data" \
+        ghcr.io/open-forest-observatory/geograypher:latest \
+        python -m geograypher.entrypoints.render_labels \
         --mesh-file /data/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file  /data/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --cameras-file /data/drone/photogrammetry-outputs/composite1_cameras.xml \
         --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
         --image-folder /data/drone/raw-drone-photos/composite1 \
@@ -104,7 +104,7 @@ The original drone images are not required at this stage except for visualizatio
         python -m geograypher.entrypoints.render_labels `
             --mesh-file /data/drone/photogrammetry-outputs/composite1_mesh.ply `
             --mesh-CRS 32610 `
-            --cameras-file  /data/drone/photogrammetry-outputs/composite1_cameras.xml `
+            --cameras-file /data/drone/photogrammetry-outputs/composite1_cameras.xml `
             --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --texture-column-name unique_ID `
             --image-folder /data/drone/raw-drone-photos/composite1 `
@@ -121,24 +121,24 @@ The original drone images are not required at this stage except for visualizatio
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     conda activate geograypher
 
     python -m geograypher.entrypoints.render_labels \
-        --mesh-file ${DATA_FOLDER}/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-file ${DATA_DIR}/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file  ${DATA_FOLDER}/drone/photogrammetry-outputs/composite1_cameras.xml \
-        --texture ${DATA_FOLDER}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        --cameras-file ${DATA_DIR}/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --texture ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
-        --image-folder ${DATA_FOLDER}/drone/raw-drone-photos/composite1 \
-        --render-savefolder ${DATA_FOLDER}/renders \
+        --image-folder ${DATA_DIR}/drone/raw-drone-photos/composite1 \
+        --render-savefolder ${DATA_DIR}/renders \
         --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder ${DATA_FOLDER}/renders-vis \
+        --labels-vis-folder ${DATA_DIR}/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
-        --DTM-file ${DATA_FOLDER}/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --DTM-file ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
 
@@ -206,10 +206,10 @@ TODO: Illustrative schematic here?
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.chip_images \
            /data/drone/raw-drone-photos/composite1 \
@@ -239,12 +239,12 @@ TODO: Illustrative schematic here?
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     python -m tree_classification_framework.chip_images \
-       ${DATA_FOLDER}/drone/raw-drone-photos/composite1 \
-       ${DATA_FOLDER}/renders \
-       ${DATA_FOLDER}/drone/tree-chips \
+       ${DATA_DIR}/drone/raw-drone-photos/composite1 \
+       ${DATA_DIR}/renders \
+       ${DATA_DIR}/drone/tree-chips \
        --n-workers 4 \
        --n-chips-per-tree 10
     ```
@@ -299,11 +299,11 @@ We can use computer vision models previously trained by the OFO to classify each
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all --group-add "$(stat -c %g /dev/nvidia0)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/mmpretrain:latest \
         python /app/tools/predict.py \
            /data/drone/tree-chips \
@@ -362,10 +362,10 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.assign_predictions_to_trees \
            /data/tree-chips-classified/classified-live-dead.json \
@@ -388,6 +388,7 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
            /data/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
+
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Python command-line entrypoint"
@@ -395,16 +396,17 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
     TODO: This can just be the TCF installation instructions I think
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     conda activate tree-classification-framework
 
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_FOLDER}/tree-chips-classified/classified-species.json \
+       ${DATA_DIR}/tree-chips-classified/classified-species.json \
        species \
-       ${DATA_FOLDER}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-       ${DATA_FOLDER}/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
+       ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+       ${DATA_DIR}/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
     ```
+
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Custom Python script"
