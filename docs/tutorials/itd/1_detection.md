@@ -173,7 +173,6 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
 
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all  --group-add "$(stat -c %g /dev/nvidia0)" \
-        -w /data \
         -e HOME=/data/.cache \
         -e TORCH_HOME=/data/.cache/torch \
         -e MPLCONFIGDIR=/data/.cache/matplotlib \
@@ -288,8 +287,6 @@ The Tree Detection Framework provides a standardized interface to several differ
 TODO DR: determine if we want to include the TCD (restor-foundation) model in this list, since it doesn't appear we've tested it much
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
-
-TODO: Also even with this fix it errored, as detectree2 appears to require a GPU, do we know that and can we avoid it?
 
 TODO: SAM2 run without a GPU gave the error `UserWarning: cannot import name '_C' from 'sam2' (/usr/local/lib/python3.10/dist-packages/sam2/__init__.py)`, not sure if this is due to the lack of a GPU or if it is a separate issue. Have not yet tried running it on a GPU.
 
