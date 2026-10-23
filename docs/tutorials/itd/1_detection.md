@@ -289,26 +289,8 @@ TODO DR: determine if we want to include the TCD (restor-foundation) model in th
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
 
-TODO DR: The above (running the entrypoint for Detectree2) gave me the error below and I had to fix it by adding `-w /data \` to the docker command. Can we avoid needing this? Possibly this is due to me running it in WSL.
 TODO: Also even with this fix it errored, as detectree2 appears to require a GPU, do we know that and can we avoid it?
-```
-Traceback (most recent call last):
-  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 275, in <module>
-    generate_predictions(**args.__dict__)
-  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 135, in generate_predictions
-    dtree2_module = Detectree2Module(param_dict)
-  File "/app/tree_detection_framework/detection/models.py", line 196, in __init__
-    self.cfg = self.setup_cfg(**self.param_dict)
-  File "/app/tree_detection_framework/detection/models.py", line 270, in setup_cfg
-    Path(cfg.OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
-  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
-    self._accessor.mkdir(self, mode)
-PermissionError: [Errno 13] Permission denied: 'train_outputs'
-```
+
 TODO: SAM2 run without a GPU gave the error `UserWarning: cannot import name '_C' from 'sam2' (/usr/local/lib/python3.10/dist-packages/sam2/__init__.py)`, not sure if this is due to the lack of a GPU or if it is a separate issue. Have not yet tried running it on a GPU.
 
 TODO: Demonstration of how to get SAM3 weights and run SAM3?
