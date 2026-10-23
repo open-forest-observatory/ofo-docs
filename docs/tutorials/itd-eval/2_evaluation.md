@@ -55,16 +55,16 @@ The commands to run this algorithm are shown below.
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path\to\data"
+    export DATA_DIR="path/to/data"
 
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
         python -m tree_registration_and_matching.entrypoints.score_detected_trees \
             /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
             /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             /data/ground-reference/ofo-ground-reference-plot_0030.gpkg \
-            --shift-file /data/registration/reference-drone-registration.csv  \
+            --shift-file /data/registration/reference-drone-registration.csv \
             --output-file /data/detection-evaluation/tree-scoring-metrics.json \
             --vis-file /data/detection-evaluation/tree-scoring-matches.png
     ```
@@ -89,15 +89,15 @@ The commands to run this algorithm are shown below.
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="path/to/data"
+    export DATA_DIR="path/to/data"
 
     python -m tree_registration_and_matching.entrypoints.score_detected_trees \
-        ${DATA_FOLDER}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        ${DATA_FOLDER}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-        ${DATA_FOLDER}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
-        --shift-file ${DATA_FOLDER}/registration/reference-drone-registration.csv  \
-        --output-file ${DATA_FOLDER}/detection-evaluation/tree-scoring-metrics.json \
-        --vis-file ${DATA_FOLDER}/detection-evaluation/tree-scoring-matches.png
+        ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        ${DATA_DIR}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+        --shift-file ${DATA_DIR}/registration/reference-drone-registration.csv \
+        --output-file ${DATA_DIR}/detection-evaluation/tree-scoring-metrics.json \
+        --vis-file ${DATA_DIR}/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Python script"

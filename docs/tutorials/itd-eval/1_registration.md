@@ -52,9 +52,10 @@ The commands to run this algorithm are below.
     Linux/Mac:
 
     ```bash
-    export DATA_FOLDER="path/to/data/"
+    export DATA_DIR="path/to/data"
+
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "${DATA_FOLDER}:/data" \
+        -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
             --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
@@ -87,20 +88,16 @@ The commands to run this algorithm are below.
 === "Python command-line entrypoint"
 
     ```bash
-    export DATA_FOLDER="path/to/data/"
+    export DATA_DIR="path/to/data"
 
     python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
-        --CHM-file ${DATA_FOLDER}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        --tree-points-file ${DATA_FOLDER}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        --output-shifted-trees ${DATA_FOLDER}/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
-        --output-shift-summary ${DATA_FOLDER}/registration/reference-drone-registration.csv
+        --CHM-file ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        --tree-points-file ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        --output-shifted-trees ${DATA_DIR}/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+        --output-shift-summary ${DATA_DIR}/registration/reference-drone-registration.csv
     ```
 
 === "Python script"
-
-    ```bash
-    conda activate tree-registration-and-matching
-    ```
 
     ```python
     from pathlib import Path
