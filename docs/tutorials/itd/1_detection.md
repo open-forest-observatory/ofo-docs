@@ -165,17 +165,10 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     Linux/Mac:
 
     ```bash
-    #TODO: Fix this the need to define the cache folders and eliminate need to use $HOME so we can set it to `path/to/data`
-    # TODO I don't fully understand the comment above
     export DATA_DIR="path/to/data"
-
-    mkdir -p "$DATA_DIR/.cache"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all  --group-add "$(stat -c %g /dev/nvidia0)" \
-        -e HOME=/data/.cache \
-        -e TORCH_HOME=/data/.cache/torch \
-        -e MPLCONFIGDIR=/data/.cache/matplotlib \
         -v "$DATA_DIR:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.generate_predictions \
