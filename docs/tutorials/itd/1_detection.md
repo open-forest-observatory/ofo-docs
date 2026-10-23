@@ -92,9 +92,9 @@ TODO: More context?
 
 === "Jupyter"
 
-    This step is performed by the following notebook: [here](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/sequential_geometric_detector.ipynb).
+    This step is performed by the following notebook: [here](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/sequential_geometric_detector.ipynb). You can change the constants in the second cell.
 
-    TODO this could be improved by visualizing the detected tree tops.
+    TODO: this notebook could be improved by visualizing the detected tree tops.
 
 === "Python command-line entrypoint"
 

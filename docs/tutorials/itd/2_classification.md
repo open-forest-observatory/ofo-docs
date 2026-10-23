@@ -68,6 +68,8 @@ The original drone images are not required at this stage except for visualizatio
 
 === "Docker (recommended)"
 
+    Linux/Mac:
+
     ```bash
     export DATA_DIR="path/to/data/"
 
@@ -90,6 +92,8 @@ The original drone images are not required at this stage except for visualizatio
         --DTM-file /data/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
+
+    Windows:
 
     ```powershell
     $env:DATA_DIR = "path\to\data"
