@@ -1,6 +1,6 @@
 /* Glossary links (see includes/glossary-links.md): dotted underline in the
    text color, preview on hover */
-.md-typeset a[href*="glossary/#"] {
+.md-typeset a[href*="glossary-of-"][href*="/#"] {
   color: inherit;
   text-decoration: underline dotted;
   text-decoration-color: var(--md-default-fg-color--light);
@@ -8,8 +8,8 @@
   text-underline-offset: 0.2em;
   cursor: help;
 }
-.md-typeset a[href*="glossary/#"]:hover,
-.md-typeset a[href*="glossary/#"]:focus {
+.md-typeset a[href*="glossary-of-"][href*="/#"]:hover,
+.md-typeset a[href*="glossary-of-"][href*="/#"]:focus {
   color: inherit;
   text-decoration-color: var(--md-accent-fg-color);
 }

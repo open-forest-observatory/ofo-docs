@@ -496,6 +496,8 @@
       
         
       
+        
+      
     
     
     
@@ -951,14 +953,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../glossary/" class="md-nav__link">
+      <a href="../../glossary-of-terms/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Glossary
+    Glossary of terms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary-of-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary of tools
   
 
     
@@ -1568,7 +1598,7 @@
 
 
 <h1 id="task-2-classification">Task 2: Classification<a class="headerlink" href="#task-2-classification" title="Permanent link">¶</a></h1>
-<p>Our goal here is to predict the species and live/dead status of every detected tree using computer vision applied to the <em>raw drone photos</em>. To do this, we will use the OFO tools <a href="https://github.com/open-forest-observatory/tree-detection-framework">Geograypher</a> and <a href="https://github.com/open-forest-observatory/tree-classification-framework">Tree Classification Framework</a> and an OFO fork (modification) of <a href="https://github.com/open-forest-observatory/mmpretrain">MMPretrain</a>, an external tool that simplifies running computer vision models.</p>
+<p>Our goal here is to predict the species and live/dead status of every detected tree using computer vision applied to the <em>raw drone photos</em>. To do this, we will use the OFO tools <a data-preview="" href="../../glossary-of-tools/#geograypher">Geograypher</a> and <a data-preview="" href="../../glossary-of-tools/#tcf">Tree Classification Framework</a> and an OFO fork (modification) of <a data-preview="" href="../../glossary-of-tools/#mmpretrain">MMPretrain</a>, an external tool that simplifies running computer vision models.</p>
 <p>We will use all of the views of each detected tree from each drone photo it appears in. Because the raw drone photos are not geospatial data products, some intermediate processing using OFO tools is required. The process follows this workflow:</p>
 <ul>
 <li>Use Geograypher to render the unique ID of each detected tree to the perspective of each image it appears in</li>
@@ -1598,12 +1628,12 @@
 <td><a href="https://ucdavis.box.com/s/qallapylahuq7u76dv9fef8tp2aoxlyp">composite1_cameras.xml</a></td>
 </tr>
 <tr>
-<td>Photogrammetry <a data-preview="" href="../../glossary/#mesh-model">mesh model</a></td>
+<td>Photogrammetry <a data-preview="" href="../../glossary-of-terms/#mesh-model">mesh model</a></td>
 <td>Photogrammetry</td>
 <td><a href="https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p">composite1_mesh.ply</a></td>
 </tr>
 <tr>
-<td><a data-preview="" href="../../glossary/#dtm">Digital terrain model</a></td>
+<td><a data-preview="" href="../../glossary-of-terms/#dtm">Digital terrain model</a></td>
 <td>Photogrammetry</td>
 <td><a href="https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows">composite1_dtm-ptcloud.tif</a></td>
 </tr>
@@ -1643,7 +1673,7 @@
 </div>
 </div>
 <h2 id="rendering-tree-locations-to-images">Rendering tree locations to images<a class="headerlink" href="#rendering-tree-locations-to-images" title="Permanent link">¶</a></h2>
-<p>The first step in classifying trees is use <code>Geograypher</code> to understand what region of each image observes each tree--or at a lower level, where in 3D geographic space is a given pixel from a raw drone image. The first two inputs are from photogrammetry: (a) the 3D structure of the scene represented as a <a data-preview="" href="../../glossary/#mesh-model">mesh model</a>, and (b) the location and orientation from which each image was captured, produced by photogrammetry as an XML file. Additionally, the digital terrain model (<a data-preview="" href="../../glossary/#dtm">DTM</a>) (derived from post-processing photogrammetry products) is used in this particular application for determining which part of the mesh represent the ground. Finally, we require the 2D geospatial locations of the detected tree crowns, obtained using a detection algorithm such as those demonstrated in <a href="../1_detection/">Task 1</a>.</p>
+<p>The first step in classifying trees is use <code>Geograypher</code> to understand what region of each image observes each tree--or at a lower level, where in 3D geographic space is a given pixel from a raw drone image. The first two inputs are from photogrammetry: (a) the 3D structure of the scene represented as a <a data-preview="" href="../../glossary-of-terms/#mesh-model">mesh model</a>, and (b) the location and orientation from which each image was captured, produced by photogrammetry as an XML file. Additionally, the digital terrain model (<a data-preview="" href="../../glossary-of-terms/#dtm">DTM</a>) (derived from post-processing photogrammetry products) is used in this particular application for determining which part of the mesh represent the ground. Finally, we require the 2D geospatial locations of the detected tree crowns, obtained using a detection algorithm such as those demonstrated in <a href="../1_detection/">Task 1</a>.</p>
 <p>Fortunately, if we know the precise location of the camera sensor at at the time each image is captured (which we obtain from photogrammetry), along with the parameters of the camera's lens (also from photogrammetry), then we can use geometry to translate each pixel in a raw drone image into a <em>ray</em> in 3D space. The place where this ray intersects the 3D mesh model is the location in 3D space that is represented by that pixel. Geograypher uses techniques from computer graphics to perform these calculations efficiently. Notably, this rendering process is occlusion-aware, so if one tree is in front of another from the camera's perspective, the pixel will be assigned to the tree in front.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/image-mesh-projection.png" data-desc-position="bottom"><img alt="Image to mesh projection" src="../../../assets/images/tutorials/image-mesh-projection.png" width="40%"></a></p>
 <p>Each tree is assigned a unique numerical ID when it is detected. Since the mesh model has geospatial reference information, these IDs can be transferred from the 2D geospatil representation of the crowns to the corresponding 3D mesh faces. Then, we use Geograypher to assign those IDs to the corresponding pixels in each raw drone image. This produces a single-channel image encoding the ID of the observed tree (or a special <code>background</code> ID) at each pixel, for each image in the original set of drone images.</p>
@@ -2015,7 +2045,7 @@ step.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2026 00:26:46 UTC">October 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 24, 2026 22:46:27 UTC">October 24, 2026</span>
   </span>
 
     
@@ -2043,14 +2073,14 @@ step.</p>
     
     <nav>
       
-        <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
-          
-          <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
-        </a>
-      
         <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
           
           <img src="https://avatars.githubusercontent.com/u/22568494?v=4&amp;size=72" alt="youngdjn">
+        </a>
+      
+        <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
+          
+          <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
         </a>
       
         <a href="https://github.com/web-flow" class="md-author" title="@web-flow">
