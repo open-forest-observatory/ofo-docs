@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -26,10 +26,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1668,28 +1668,20 @@
 <p>If you are running this on a machine without a GPU, remove <code>--gpus all</code> from the <code>docker run</code> command below.</p>
 </div>
 <p>Linux/Mac:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">#TODO: Fix this the need to define the cache folders and eliminate need to use $HOME so we can set it to `path/to/data`</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># TODO I don't fully understand the comment above</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$DATA_DIR</span><span class="s2">/.cache"</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span>--gpus<span class="w"> </span>all<span class="w">  </span>--group-add<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span>%g<span class="w"> </span>/dev/nvidia0<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>-w<span class="w"> </span>/data<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span>-e<span class="w"> </span><span class="nv">HOME</span><span class="o">=</span>/data/.cache<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span>-e<span class="w"> </span><span class="nv">TORCH_HOME</span><span class="o">=</span>/data/.cache/torch<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span>-e<span class="w"> </span><span class="nv">MPLCONFIGDIR</span><span class="o">=</span>/data/.cache/matplotlib<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$DATA_DIR</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework:latest<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.generate_predictions<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span>--raster-folder-path<span class="w"> </span>/data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">        </span>--tree-detection-model<span class="w"> </span>deepforest<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">        </span>--chip-size<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span>--chip-stride<span class="w"> </span><span class="m">768</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">        </span>--resolution<span class="w"> </span><span class="m">0</span>.05<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">        </span>--run-nms<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">        </span>--predictions-save-path<span class="w"> </span>/data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"path/to/data"</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span>--gpus<span class="w"> </span>all<span class="w">  </span>--group-add<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span>%g<span class="w"> </span>/dev/nvidia0<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$DATA_DIR</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.generate_predictions<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span>--raster-folder-path<span class="w"> </span>/data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">        </span>--tree-detection-model<span class="w"> </span>deepforest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span>--chip-size<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span>--chip-stride<span class="w"> </span><span class="m">768</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span>--resolution<span class="w"> </span><span class="m">0</span>.05<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">        </span>--run-nms<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">        </span>--predictions-save-path<span class="w"> </span>/data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
 </code></pre></div>
 <p>Windows:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">$env:DATA_DIR</span> <span class="p">=</span> <span class="s2">"path\to\data"</span>
@@ -1762,31 +1754,62 @@
 <p>This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like <a href="https://qgis.org/en/site/">QGIS</a>:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png"></a></p>
 <p>The rectangle bounding box output format is specific to the DeepForest model. TODO DR: Demonstration of converting them to masks/centroids with heights?</p>
-<p>TODO DR: A few sentences on the parameters including the units (pixels or meters), roughly following the pattern in the geometric detection section above. Possibly a vis of the effect of changing the params and/or a schematic of the concept of chip size and stride.</p>
-<p>TODO DR: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.</p>
-<p>TODO DR: Table of supported models.</p>
+<p>Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The <code>chip_size</code> and <code>chip_stride</code> parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the <code>run_nms</code> argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the <code>resolution</code> parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of trees is detected well. By coarsening the resolution to <code>0.2m</code>, only the largest trees are detected, as seen visualized below.</p>
+<p>TODO DR: consider visualizing a chip from each resolution.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_ortho_w-detections_deepforest-bbox_v01_low-res.png" data-desc-position="bottom"><img alt="Ortho with deepforest detections from low-res chips" src="../../../assets/images/tutorials/composite1_ortho_w-detections_deepforest-bbox_v01_low-res.png"></a></p>
+<p>The Tree Detection Framework provides a standardized interface to several different methods of performing tree detection, taken from the literature. TDF handles the process of chipping a raster into smaller chips, generating predictions on each chip, and merging these predictions back together in one command, so this complexity is hidden from the user and end-to-end workflows are easy to run. A key benefit of TDF is the ability to quickly compare multiple models, while holding key pre- and post-processing parameters consistent. TDF is also optimized for realistic-scale raster data, meaning that it can be directly applied to even the largest drone flights. A table of the supported approaches is below.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Learning Strategy</th>
+<th>Input Data</th>
+<th>Output Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeepForest</td>
+<td>Task-specific training</td>
+<td>Orthomosaic</td>
+<td>Bounding box</td>
+</tr>
+<tr>
+<td>Detectree2</td>
+<td>Task-specific training</td>
+<td>Orthomosaic</td>
+<td>Crown polygon</td>
+</tr>
+<tr>
+<td>Restor TCD</td>
+<td>Task-specific training</td>
+<td>Orthomosaic</td>
+<td>Crown polygon</td>
+</tr>
+<tr>
+<td>Segment Anything Model v2 (SAM2)</td>
+<td>Generic pretraining (foundational model)</td>
+<td>Orthomosaic</td>
+<td>Crown polygon</td>
+</tr>
+<tr>
+<td>Segment Anything Model v3 (SAM3)</td>
+<td>Generic pretraining, with class information (foundational model)</td>
+<td>Orthomosaic</td>
+<td>Crown polygon</td>
+</tr>
+<tr>
+<td>Local maximum filter + Watershed segmentation</td>
+<td>Learning-free algorithm</td>
+<td>Canopy height model (CHM)</td>
+<td>Tree-top point and crown polygon</td>
+</tr>
+</tbody>
+</table>
 <p>To run detections using an alternative model, simply change <code>deepforest</code> above to the name of the model you want to use. For example, here we have changed it to <code>detectree2</code>. (TODO: Add visualization of Detectree2 output.)</p>
-<p>TODO DR: The above (running the entrypoint for Detectree2) gave me the error below and I had to fix it by adding <code>-w /data \</code> to the docker command. Can we avoid needing this? Possibly this is due to me running it in WSL.
-TODO: Also even with this fix it errored, as detectree2 appears to require a GPU, do we know that and can we avoid it?
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Traceback (most recent call last):
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    return _run_code(code, main_globals, None,
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    exec(code, run_globals)
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 275, in &lt;module&gt;
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    generate_predictions(**args.__dict__)
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 135, in generate_predictions
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    dtree2_module = Detectree2Module(param_dict)
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>  File "/app/tree_detection_framework/detection/models.py", line 196, in __init__
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    self.cfg = self.setup_cfg(**self.param_dict)
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>  File "/app/tree_detection_framework/detection/models.py", line 270, in setup_cfg
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>    Path(cfg.OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    self._accessor.mkdir(self, mode)
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>PermissionError: [Errno 13] Permission denied: 'train_outputs'
+<p>For SAM3, you must follow the prompts <a href="https://huggingface.com/facebook/sam3">here</a>. This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go to <a href="https://huggingface.co/settings/tokens">here</a>, select <code>Create new token</code>, and then select Token type <code>Read</code>. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model, as follows</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>--sam3-huggingface-token<span class="w"> </span>SAM3_HUGGINGFACE_TOKEN
 </code></pre></div>
-TODO: SAM2 run without a GPU gave the error <code>UserWarning: cannot import name '_C' from 'sam2' (/usr/local/lib/python3.10/dist-packages/sam2/__init__.py)</code>, not sure if this is due to the lack of a GPU or if it is a separate issue. Have not yet tried running it on a GPU.<p></p>
-<p>TODO: Demonstration of how to get SAM3 weights and run SAM3?</p>
 <p>For full description of the TDF computer vision tree detection module and its options, see the <a href="https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/">Tree Detection Framework documentation</a>.</p>
 
 
@@ -1810,7 +1833,7 @@ TODO: SAM2 run without a GPU gave the error <code>UserWarning: cannot import nam
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2026 00:26:46 UTC">October 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 24, 2026 00:40:01 UTC">October 24, 2026</span>
   </span>
 
     
@@ -1841,6 +1864,11 @@ TODO: SAM2 run without a GPU gave the error <code>UserWarning: cannot import nam
         <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
           
           <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
+        </a>
+      
+        <a href="https://github.com/web-flow" class="md-author" title="@web-flow">
+          
+          <img src="https://avatars.githubusercontent.com/u/19864447?v=4&amp;size=72" alt="web-flow">
         </a>
       
         <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
@@ -1905,10 +1933,10 @@ TODO: SAM2 run without a GPU gave the error <code>UserWarning: cannot import nam
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
       
         <script src="../../../assets/mkdocs_pagetree_plugin.js"></script>
       
