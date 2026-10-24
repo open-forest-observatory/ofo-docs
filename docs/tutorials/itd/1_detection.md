@@ -280,7 +280,7 @@ The Tree Detection Framework provides a standardized interface to several differ
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
 
-For SAM3, you must follow the prompts [here](https://huggingface.co/facebook/sam3). This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go to https://huggingface.co/settings/tokens. Select `Create new token` and then select Token type `Read`. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model, as follows
+For SAM3, you must follow the prompts [here](https://huggingface.com/facebook/sam3). This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go to https://huggingface.co/settings/tokens. Select `Create new token` and then select Token type `Read`. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model, as follows
 
 ```bash
 --sam3-huggingface-token SAM3_HUGGINGFACE_TOKEN
