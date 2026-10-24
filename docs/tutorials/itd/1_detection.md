@@ -165,18 +165,10 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     Linux/Mac:
 
     ```bash
-    #TODO: Fix this the need to define the cache folders and eliminate need to use $HOME so we can set it to `path/to/data`
-    # TODO I don't fully understand the comment above
     export DATA_DIR="path/to/data"
-
-    mkdir -p "$DATA_DIR/.cache"
 
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all  --group-add "$(stat -c %g /dev/nvidia0)" \
-        -w /data \
-        -e HOME=/data/.cache \
-        -e TORCH_HOME=/data/.cache/torch \
-        -e MPLCONFIGDIR=/data/.cache/matplotlib \
         -v "$DATA_DIR:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.generate_predictions \
@@ -269,36 +261,29 @@ This step saves a geospatial file of polygons (rectangles) representing the boun
 
 The rectangle bounding box output format is specific to the DeepForest model. TODO DR: Demonstration of converting them to masks/centroids with heights?
 
-TODO DR: A few sentences on the parameters including the units (pixels or meters), roughly following the pattern in the geometric detection section above. Possibly a vis of the effect of changing the params and/or a schematic of the concept of chip size and stride.
+Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The `chip_size` and `chip_stride` parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the `run_nms` argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the `resolution` parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of trees is detected well. By coarsening the resolution to `0.2m`, only the largest trees are detected, as seen visualized below.
 
-TODO DR: Brief text on the benefits of TDF, including comparing TDF vs. running the different models independently.
+TODO DR: consider visualizing a chip from each resolution.
 
-TODO DR: Table of supported models.
+![Ortho with deepforest detections from low-res chips](/assets/images/tutorials/composite1_ortho_w-detections_deepforest-bbox_v01_low-res.png)
+
+The Tree Detection Framework provides a standardized interface to several different methods of performing tree detection, taken from the literature. TDF handles the process of chipping a raster into smaller chips, generating predictions on each chip, and merging these predictions back together in one command, so this complexity is hidden from the user and end-to-end workflows are easy to run. A key benefit of TDF is the ability to quickly compare multiple models, while holding key pre- and post-processing parameters consistent. TDF is also optimized for realistic-scale raster data, meaning that it can be directly applied to even the largest drone flights. A table of the supported approaches is below.
+
+| Method | Learning Strategy | Input Data | Output Format |
+| --- | --- | --- | --- |
+| DeepForest | Task-specific training | Orthomosaic | Bounding box |
+| Detectree2 | Task-specific training | Orthomosaic | Crown polygon |
+| Restor TCD | Task-specific training | Orthomosaic | Crown polygon |
+| Segment Anything Model v2 (SAM2) | Generic pretraining (foundational model) | Orthomosaic | Crown polygon |
+| Segment Anything Model v3 (SAM3) | Generic pretraining, with class information (foundational model) | Orthomosaic | Crown polygon |
+| Local maximum filter + Watershed segmentation | Learning-free algorithm | Canopy height model (CHM) | Tree-top point and crown polygon |
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
 
-TODO DR: The above (running the entrypoint for Detectree2) gave me the error below and I had to fix it by adding `-w /data \` to the docker command. Can we avoid needing this? Possibly this is due to me running it in WSL.
-TODO: Also even with this fix it errored, as detectree2 appears to require a GPU, do we know that and can we avoid it?
-```
-Traceback (most recent call last):
-  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 275, in <module>
-    generate_predictions(**args.__dict__)
-  File "/app/tree_detection_framework/entrypoints/generate_predictions.py", line 135, in generate_predictions
-    dtree2_module = Detectree2Module(param_dict)
-  File "/app/tree_detection_framework/detection/models.py", line 196, in __init__
-    self.cfg = self.setup_cfg(**self.param_dict)
-  File "/app/tree_detection_framework/detection/models.py", line 270, in setup_cfg
-    Path(cfg.OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
-  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
-    self._accessor.mkdir(self, mode)
-PermissionError: [Errno 13] Permission denied: 'train_outputs'
-```
-TODO: SAM2 run without a GPU gave the error `UserWarning: cannot import name '_C' from 'sam2' (/usr/local/lib/python3.10/dist-packages/sam2/__init__.py)`, not sure if this is due to the lack of a GPU or if it is a separate issue. Have not yet tried running it on a GPU.
+For SAM3, you must follow the prompts [here](https://huggingface.com/facebook/sam3). This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go to [here](https://huggingface.co/settings/tokens), select `Create new token`, and then select Token type `Read`. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model, as follows
 
-TODO: Demonstration of how to get SAM3 weights and run SAM3?
+```bash
+--sam3-huggingface-token SAM3_HUGGINGFACE_TOKEN
+```
 
 For full description of the TDF computer vision tree detection module and its options, see the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/).
