@@ -280,8 +280,10 @@ The Tree Detection Framework provides a standardized interface to several differ
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
 
-TODO: SAM2 run without a GPU gave the error `UserWarning: cannot import name '_C' from 'sam2' (/usr/local/lib/python3.10/dist-packages/sam2/__init__.py)`, not sure if this is due to the lack of a GPU or if it is a separate issue. Have not yet tried running it on a GPU.
+For SAM3, you must follow the prompts [here](https://huggingface.co/facebook/sam3). This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go to https://huggingface.co/settings/tokens. Select `Create new token` and then select Token type `Read`. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model, as follows
 
-TODO: Demonstration of how to get SAM3 weights and run SAM3?
+```bash
+--sam3-huggingface-token SAM3_HUGGINGFACE_TOKEN
+```
 
 For full description of the TDF computer vision tree detection module and its options, see the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/).
