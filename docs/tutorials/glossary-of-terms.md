@@ -5,9 +5,9 @@ weight: 100
 # to its heading anchor.
 ---
 
-# Glossary
+# Glossary of terms
 
-This page defines common technical terms used in the OFO tutorials. TODO: Expand on these definitions.
+This page defines common technical terms used in the OFO tutorials.
 
 ## Canopy height model (CHM) { #chm }
 
@@ -31,7 +31,9 @@ A representation of the bare-earth altitude. This is produced by photogrammetry 
 
 A representation of a surface in 3D produced by many photogrammetry tools. It consists of a set of points called vertices connected by triangular faces. This data structure is common in the field of computer graphics and is used to perform rendering operations.
 
-![Mesh](/assets/images/tutorials/composite1_mesh.png)
+![Mesh model](/assets/images/tutorials/mesh-model-illustration.png)
+
+![Mesh model](/assets/images/tutorials/composite1_mesh.png)
 
 
 ## Variable-radius local maximum filter { #lmf }

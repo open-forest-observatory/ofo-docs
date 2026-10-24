@@ -41,7 +41,7 @@ While both the drone imagery and reference tree locations are usually georeferen
 
 ![initial registration](/assets/images/tutorials/registration-initial.png)
 
-The OFO has developed the [Tree Registration and Matching Toolkit](https://github.com/open-forest-observatory/tree-registration-and-matching) (TRAM) to automatically identify the spatial registration between two datasets. The specific algorithm we will be using here registers a set of ground reference trees (geospatial points) to a drone-derived [CHM] (a geospatial raster). TRAM also contains algorithms to register two sets of geospatial points (e.g., ground reference trees and drone-detected trees).
+The OFO has developed the [Tree Registration and Matching Toolkit] (TRAM) to automatically identify the spatial registration between two datasets. The specific algorithm we will be using here registers a set of ground reference trees (geospatial points) to a drone-derived [CHM] (a geospatial raster). TRAM also contains algorithms to register two sets of geospatial points (e.g., ground reference trees and drone-detected trees).
 
 The algorithm use will use to align the drone and reference data takes the CHM and ground reference tree locations (with a `height` attribute for each tree) as input. The algorithm extracts the height value from the CHM at each reference tree location, then computes the correlation between the reference tree heights and the CHM-derived heights. It then shifts the reference tree locations across a grid of offsets in both the x and y directions, and at each offset, re-computes the height correlation. The result is a grid of correlation values, where the maximum correlation indicates the optimal shift to align the two datasets.
 

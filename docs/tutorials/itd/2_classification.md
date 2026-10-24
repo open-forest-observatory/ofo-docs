@@ -4,7 +4,7 @@ weight: 30
 
 # Task 2: Classification
 
-Our goal here is to predict the species and live/dead status of every detected tree using computer vision applied to the _raw drone photos_. To do this, we will use the OFO tools [Geograypher](https://github.com/open-forest-observatory/tree-detection-framework) and [Tree Classification Framework](https://github.com/open-forest-observatory/tree-classification-framework) and an OFO fork (modification) of [MMPretrain](https://github.com/open-forest-observatory/mmpretrain), an external tool that simplifies running computer vision models.
+Our goal here is to predict the species and live/dead status of every detected tree using computer vision applied to the _raw drone photos_. To do this, we will use the OFO tools [Geograypher] and [Tree Classification Framework] and an OFO fork (modification) of [MMPretrain], an external tool that simplifies running computer vision models.
 
 We will use all of the views of each detected tree from each drone photo it appears in. Because the raw drone photos are not geospatial data products, some intermediate processing using OFO tools is required. The process follows this workflow:
 

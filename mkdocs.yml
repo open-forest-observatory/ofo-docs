@@ -67,7 +67,9 @@ markdown_extensions:
       configurations:
         - targets:
             include:
-              - tutorials/glossary.md
+              - tutorials/glossary-of-terms.md
+              - tutorials/glossary-of-tools.md
+              - tutorials/glossary-of-tools.md
 
 extra_css:
   - stylesheets/extra.css

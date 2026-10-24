@@ -4,7 +4,7 @@ weight: 20
 
 # Task 1: Detection & mapping
 
-We will use the OFO's [Tree Detection Framework](https://github.com/open-forest-observatory/tree-detection-framework) to detect and delineate tree crowns from drone-derived data products using a variety of approaches, including a geometric algorithm applied to a [canopy height model] (CHM) and several different computer vision algorithms applied an [orthomosaic].
+We will use the OFO's [Tree Detection Framework] to detect and delineate tree crowns from drone-derived data products using a variety of approaches, including a geometric algorithm applied to a [canopy height model] (CHM) and several different computer vision algorithms applied an [orthomosaic].
 
 ## Required input data
 
@@ -136,7 +136,7 @@ TODO: More context?
     )
     ```
 
-This command saves two geospatial output files: points representing detected tree tops and polygons representing detected tree crowns. You can visualize these outputs in GIS software like [QGIS](https://qgis.org/en/site/):
+This command saves two geospatial output files: points representing detected tree tops and polygons representing detected tree crowns. You can visualize these outputs in GIS software like [QGIS]:
 
 ![CHM with detected trees](/assets/images/tutorials/composite1_chm-mesh_w-detections_geometric_v01.png)
 
@@ -255,7 +255,7 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     )
     ```
 
-This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like [QGIS](https://qgis.org/en/site/):
+This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like [QGIS]:
 
 ![CHM with detected trees](/assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png)
 
