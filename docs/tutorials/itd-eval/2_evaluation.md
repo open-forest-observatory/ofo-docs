@@ -20,11 +20,11 @@ The detected tree crowns and registration file may be ones you produced in the [
 
 !!! info "Before you begin"
 
-    Make sure you have gone through the [OFO tutorial preparation](/tutorials/index.md#preparing-to-follow-the-tutorials) guidance.
+    Make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance.
 
 === "Docker (recommended)"
 
-    Follow our [Docker guide](/tutorials/index.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
+    Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
 === "Jupyter"
 
