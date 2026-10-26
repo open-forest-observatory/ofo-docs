@@ -51,7 +51,7 @@ Docker provides a convenient way for users to run OFO software without having to
 
     ```bash
     docker run --rm --user "$(id -u):$(id -g)" \
-        -v "path/to/data:/data" \
+        -v "path/to/local/data:/data/in/container" \
         ghcr.io/open-forest-observatory/tree-detection-framework \
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
             /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
@@ -63,7 +63,7 @@ Docker provides a convenient way for users to run OFO software without having to
 
     ```powershell
     docker run --rm `
-        -v "path\to\data:/data" `
+        -v "path\to\local\data:/data/in/container" `
         ghcr.io/open-forest-observatory/tree-detection-framework `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
             /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
@@ -71,7 +71,7 @@ Docker provides a convenient way for users to run OFO software without having to
             --raster-blur-sigma 0.5 `
     ```
 
-This command downloads the `tree-detection-framework` Docker image (if it is not already downloaded), runs the software in the image, and saves the output files to your computer. The `-v` option specifies a folder on your computer that is made available to the software running in the Docker container, which sees it at the path following the `:`. In this case, the folder `path/to/data` on your computer is made available as `/data` inside the container. The input and output file paths are specified relative to this folder.
+This command downloads the `tree-detection-framework` Docker image (if it is not already downloaded), runs the software in the image, and saves the output files to your computer. The `-v` option specifies a folder on your computer that is made available to the software running in the Docker container, which sees it at the path following the `:`. In this case, the folder `path/to/local/data` on your computer is made available as `/data/in/container` inside the container. The input and output file paths are specified relative to this folder.
 
 To be able to run Docker containers, you need to install Docker on your computer.
 
