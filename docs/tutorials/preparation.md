@@ -8,17 +8,36 @@ The information here applies to all OFO tutorials. Follow the guidance here befo
 
 ## Example input data
 
-For all tutorial data processing tasks, we provide example input data you can use (though you can alternatively use your own data). If you will use the example data, we recommend you download the entire folder of example data in advance, as its file tree matches the expectations of the example code in the tutorials. In the tutorials, you will just need to change `path/to/data/` to the path on your computer where you downloaded the example data.
+For all tutorial data processing tasks, we provide example input data you can use (though you can alternatively use your own data). If you will use the example data, we recommend you download the entire folder of example data in advance, as its file tree matches the expectations of the example code in the tutorials. We recommend downloading the example data to a folder named `ofo-tutorial-data` in your home directory.
 
 [:material-download: Download example data](https://ucdavis.box.com/s/iq6afom3pxg81y8vts8imidy3a91fvoy) (4.6 GB)
 
 Alternatively, you can download just the input data needed for a specific tutorial task (linked in an "input data" table near the top of each tutorial task page). In that case, you may need to modify the input file paths in the example code more extensively to match the location of the input data on your computer.
 
+## Setting the `DATA_DIR` environment variable
+
+Before running any of the tutorials, you will need to set an environment variable, `DATA_DIR`, that the example code looks for in order to find the input data. Run this line in every new terminal window where you will run the tutorial code. Adjust the path below to match the location of the example data on your computer.
+
+=== "Linux/Mac"
+
+    ```bash
+    export DATA_DIR="~/ofo-tutorial-data"
+    ```
+
+=== "Windows (PowerShell)"
+
+    ```powershell
+    $env:DATA_DIR = "$HOME\ofo-tutorial-data"
+    ```
+
+By default, the tutorial exercises will save output data to an `outputs` folder at the top level of this directory.
+
+
 ## Computing hardware requirements
 
-For processing a single drone mission at a time (up to ~50 ha), a standard laptop or desktop computer is generally sufficient, with a few exceptions: tasks involving computer vision inference generally require a GPU.
+For processing a single drone mission at a time (up to ~50 ha), a standard laptop or desktop computer is generally sufficient, though computer vision inference tasks will generally be much faster if a GPU is available.
 
-## Docker overview
+## Docker
 
 !!! question "Should I use Docker?"
 

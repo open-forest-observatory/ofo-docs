@@ -15,38 +15,9 @@ We will use the OFO's [Tree Detection Framework] to detect and delineate tree cr
 
 ## Setup
 
-!!! info "Before you begin"
+Before you begin, make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance. We recommend running OFO tools via their [Docker] images. Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers. If instead you plan to run the tools in a local Python environment, follow the local installation instructions to set up a Conda environment for the following tools:
 
-    Make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance.
-
-=== "Docker (recommended)"
-
-    Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
-
-=== "Jupyter"
-
-    TODO: Link to the notebook we will be using, info to set up Conda env as for the other Python options?
-
-=== "Python command-line entrypoint"
-
-    Install the Tree Detection Framework Python library and its dependencies into a Conda environment following the [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/), then activate the Conda environment in a terminal window:
-
-    ```bash
-    conda activate tree-detection-framework
-    ```
-
-    {TODO: To the TDF install instructions, add a mention of the need to install Conda, and link to Conda install instructions instructions (ideally miniconda?). Consider using venv instead, since already included with python? Unless other OFO packages do require conda. Alternatively, consider adding Conda install info/link to the tutorials overview page.}
-
-=== "Python script"
-
-    Install the Tree Detection Framework Python library and its dependencies into a Conda environment following the [installation instructions](https://open-forest-observatory.github.io/tree-detection-framework/getting_started/installation/).
-
-     Then load the required libraries:
-
-    ```python
-    # TODO: Complete python lines to load libraries
-    ```
-
+- [Tree Detection Framework]
 
 ## Geometric tree detection from a canopy height model
 
@@ -54,22 +25,18 @@ First, we will use a *geometric algorithm* implemented in the Tree Detection Fra
 
 ![CHM](/assets/images/tutorials/composite1_chm-mesh.png)
 
-TODO: More context?
-
 === "Docker"
 
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
             /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-            --tree-crowns-save-path /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
             --raster-blur-sigma 0.5 \
             --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
@@ -77,39 +44,45 @@ TODO: More context?
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path\to\data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
             /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
-            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
-            --tree-crowns-save-path /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
+            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
+            --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --raster-blur-sigma 0.5 `
             --tree-top-detector-kwargs '{\"a\": 0, \"b\": 0.0325, \"c\": 0.25, \"min_ht\": 5}'
     ```
 
 === "Jupyter"
 
-    This step is performed by the following notebook: [here](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/sequential_geometric_detector.ipynb). You can change the constants in the second cell.
+    This step is performed by the TDF [Geometric Detector example notebook](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/sequential_geometric_detector.ipynb). You can change the constants in the second cell. Ensure Jupyter is using the the `tree-detection-framework` Conda environment.
 
-    TODO: this notebook could be improved by visualizing the detected tree tops.
+    <!-- TODO: this notebook could be improved by visualizing the detected tree tops. -->
 
 === "Python command-line entrypoint"
 
-    ```bash
-    export DATA_DIR="path/to/data"
+    In your terminal, activate the `tree-detection-framework` Conda environment.
 
+    ```bash
+    conda activate tree-detection-framework
+    ```
+
+    Then run the [geometric detection entrypoint script](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/tree_detection_framework/entrypoints/detect_geometric_two_stage.py).
+
+    ```bash
     python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
         ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-        --tree-crowns-save-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        ${DATA_DIR}/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        --tree-crowns-save-path ${DATA_DIR}/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --raster-blur-sigma 0.5 \
         --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
 
 === "Python script"
+
+    Run the following code from within the `tree-detection-framework` Conda environment.
 
     ```python
     from pathlib import Path
@@ -165,8 +138,6 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all  --group-add "$(stat -c %g /dev/nvidia0)" \
         -v "$DATA_DIR:/data" \
@@ -178,14 +149,12 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
             --chip-stride 768 \
             --resolution 0.05 \
             --run-nms \
-            --predictions-save-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+            --predictions-save-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
 
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path\to\data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
@@ -196,18 +165,24 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
             --chip-stride 768 `
             --resolution 0.05 `
             --run-nms `
-            --predictions-save-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+            --predictions-save-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
 
 === "Jupyter"
 
-    This step is perfomed by this [notebook](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/predict_detections.ipynb). Note that the constants in cell 2 will need to be changed to reflect the data used in this documentation.
+    This step is performed by the TDF [tree detection example notebook](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/examples/predict_detections.ipynb). Note that the constants in cell 2 will need to be changed to reflect the data used in this documentation. Ensure Jupyter is using the the `tree-detection-framework` Conda environment.
 
 === "Python command-line entrypoint"
 
-    ```bash
-    export DATA_DIR="path/to/data"
+    In your terminal, activate the `tree-detection-framework` Conda environment.
 
+    ```bash
+    conda activate tree-detection-framework
+    ```
+
+    Then run the [prediction generation entrypoint script](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/tree_detection_framework/entrypoints/generate_predictions.py).
+
+    ```bash
     python -m tree_detection_framework.entrypoints.generate_predictions \
         --raster-folder-path ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
         --tree-detection-model deepforest \
@@ -215,12 +190,14 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
         --chip-stride 768 \
         --resolution 0.05 \
         --run-nms \
-        --predictions-save-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+        --predictions-save-path ${DATA_DIR}/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
     ```
 
     Note that you can replace `deepforest` with `detectree2` to run that model.
 
 === "Python script"
+
+    Run the following code from within the `tree-detection-framework` Conda environment.
 
     ```python
     from pathlib import Path
@@ -263,7 +240,7 @@ The rectangle bounding box output format is specific to the DeepForest model. TO
 
 Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The `chip_size` and `chip_stride` parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the `run_nms` argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the `resolution` parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of trees is detected well. By coarsening the resolution to `0.2m`, only the largest trees are detected, as seen visualized below.
 
-TODO DR: consider visualizing a chip from each resolution.
+<!-- TODO DR: consider visualizing a chip from each resolution. -->
 
 ![Ortho with deepforest detections from low-res chips](/assets/images/tutorials/composite1_ortho_w-detections_deepforest-bbox_v01_low-res.png)
 
@@ -280,10 +257,10 @@ The Tree Detection Framework provides a standardized interface to several differ
 
 To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
 
-For SAM3, you must follow the prompts [here](https://huggingface.com/facebook/sam3). This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go to [here](https://huggingface.co/settings/tokens), select `Create new token`, and then select Token type `Read`. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model, as follows
+To enable support for SAM3, you must follow the prompts [here](https://huggingface.com/facebook/sam3). This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go [here](https://huggingface.co/settings/tokens), select `Create new token`, and select Token type `Read`. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model:
 
 ```bash
 --sam3-huggingface-token SAM3_HUGGINGFACE_TOKEN
 ```
 
-For full description of the TDF computer vision tree detection module and its options, see the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/).
+For a full description of the TDF computer vision tree detection module and its options, see the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/).

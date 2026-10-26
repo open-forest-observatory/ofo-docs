@@ -15,29 +15,13 @@ For many applications, we may wish to compare the results of drone-based tree de
 
 ## Setup
 
-!!! info "Before you begin"
+Before you begin, make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance. We recommend running OFO tools via their [Docker] images. Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers. If instead you plan to run the tools in a local Python environment, follow the local installation instructions to set up a Conda environment for the following tools:
 
-    Make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance.
+- [Tree Registration and Matching Toolkit]
 
-=== "Docker (recommended)"
+## Dataset co-registration using height correlation
 
-    Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
-
-=== "Jupyter"
-
-    TODO: Link to the notebook we will be using, info to set up Conda env as for the other Python options?
-
-=== "Python command-line entrypoint"
-
-    Install the Tree Registration and Matching library and its dependencies following the [installation instructions](https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install).
-
-=== "Python script"
-
-    Install the Tree Registration and Matching library and its dependencies following the [installation instructions](https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install).
-
-## Registration using height correlation
-
-While both the drone imagery and reference tree locations are usually georeferenced with GPS/GNSS, each set of measurements can have an independent bias due to GPS/GNSS error (e.g., atmospheric distortions, signal attenuation by the tree canopy) a the time of survey. This creates a spatial offset, commonly on the order of several meters, between the two sets of data. An example of this phenomenon can be seen below, where the field reference trees (blue points) are shifted upward and slightly left relative to the corresponding drone trees represented by the CHM. The white line represents the bounds of of the ground plot, showing the region within which trees were surveyed.
+Although both the drone imagery and reference tree locations are usually georeferenced with GPS/GNSS, each set of measurements can have an independent bias due to GPS/GNSS error (e.g., atmospheric distortions, signal attenuation by the tree canopy) at the time of survey. This creates a spatial offset, commonly on the order of several meters, between the two sets of data. An example of this phenomenon can be seen below, where the field reference trees (blue points) are shifted upward and slightly left relative to the corresponding drone trees represented by the CHM. The white line represents the bounds of of the ground plot, showing the region within which trees were surveyed.
 
 ![initial registration](/assets/images/tutorials/registration-initial.png)
 
@@ -52,52 +36,56 @@ The commands to run this algorithm are below.
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
             --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
             --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-            --output-shifted-trees /data/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
-            --output-shift-summary /data/registration/reference-drone-registration.csv
+            --output-shifted-trees /data/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+            --output-shift-summary /data/outputs/registration/reference-drone-registration.csv
     ```
 
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path\to\data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM `
             --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
             --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg `
-            --output-shifted-trees /data/registration/ofo-ground-reference-trees_0030_shifted.gpkg `
-            --output-shift-summary /data/registration/reference-drone-registration.csv
+            --output-shifted-trees /data/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg `
+            --output-shift-summary /data/outputs/registration/reference-drone-registration.csv
     ```
 
 === "Jupyter"
 
-    TODO
+    <!-- TODO: Create and add a link to aJupyter notebook -->
 
-    The notebook [here](https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/examples/example_registration_real_data_CHM.ipynb) shows a similar process. To directly use this notebook you would need to modify both cells 2 and 3.
+    In development. The [TRAM registration example notebook](https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/examples/example_registration_real_data_CHM.ipynb) shows a similar process. To directly use this notebook you would need to modify both cells 2 and 3. Ensure Jupyter is using the the `tree-registration-and-matching` Conda environment.
 
 === "Python command-line entrypoint"
 
-    ```bash
-    export DATA_DIR="path/to/data"
+    In your terminal, activate the `tree-registration-and-matching` Conda environment.
 
+    ```bash
+    conda activate tree-registration-and-matching
+    ```
+
+    Then run the [trees-to-CHM registration entrypoint script](https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/tree_registration_and_matching/entrypoints/register_trees_to_CHM.py).
+
+    ```bash
     python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
         --CHM-file ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
         --tree-points-file ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        --output-shifted-trees ${DATA_DIR}/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
-        --output-shift-summary ${DATA_DIR}/registration/reference-drone-registration.csv
+        --output-shifted-trees ${DATA_DIR}/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+        --output-shift-summary ${DATA_DIR}/outputs/registration/reference-drone-registration.csv
     ```
 
 === "Python script"
+
+    Run the following code from within the `tree-registration-and-matching` Conda environment.
 
     ```python
     from pathlib import Path

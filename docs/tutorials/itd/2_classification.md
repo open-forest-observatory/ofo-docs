@@ -30,39 +30,21 @@ The detected tree crowns may be ones you produced in the [Detection task](/tutor
 
 ## Setup
 
-!!! info "Before you begin"
+Before you begin, make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance. We recommend running OFO tools via their [Docker] images. Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers. If instead you plan to run the tools in a local Python environment, follow the local installation instructions to set up a Conda environment for the following tools:
 
-    Make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance.
-=== "Docker (recommended)"
-
-    Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
-
-=== "Python command-line entrypoint"
-
-    This workflow requires three separate environments, for each `geograypher`, `tree-classification-framework`, and `mmpretrain`.
-
-    Install `geograypher` following its [installation instructions](https://open-forest-observatory.github.io/geograypher/getting_started/installation/#advanceddeveloper-installation).
-
-    Install `tree-classification-framework` following its [installation instructions](https://github.com/open-forest-observatory/tree-classification-framework#install).
-
-    Install `MMPretrain` following its [installation instructions](https://github.com/open-forest-observatory/mmpretrain#installation).
-    - TODO this fails with the following error `ImportError: /home/exouser/miniconda3/envs/open-mmlab/lib/python3.8/site-packages/torch/lib/libtorch_cpu.so: undefined symbol: iJIT_NotifyEvent`.
-
-
-=== "Custom Python script"
-
-    Install the same three environments as described for the Python command-line entrypoint. Each step below is run from a Python script in the corresponding environment (`geograypher`, `tree-classification-framework`, or `mmpretrain`).
-
+- [Geograypher]
+- [Tree Classification Framework]
+- [MMPretrain]
 
 ## Rendering tree locations to images
 
-The first step in classifying trees is use `Geograypher` to understand what region of each image observes each tree--or at a lower level, where in 3D geographic space is a given pixel from a raw drone image. The first two inputs are from photogrammetry: (a) the 3D structure of the scene represented as a [mesh model], and (b) the location and orientation from which each image was captured, produced by photogrammetry as an XML file. Additionally, the digital terrain model ([DTM]) (derived from post-processing photogrammetry products) is used in this particular application for determining which part of the mesh represent the ground. Finally, we require the 2D geospatial locations of the detected tree crowns, obtained using a detection algorithm such as those demonstrated in [Task 1](/tutorials/itd/1_detection.md).
+The first step in classifying trees is use [Geograypher] to understand what region of each image observes each tree--or at a lower level, where in 3D geographic space is a given pixel from a raw drone image. The first two inputs are from photogrammetry: (a) the 3D structure of the scene represented as a [mesh model], and (b) the location and orientation from which each image was captured, produced by photogrammetry as an XML file. Additionally, the digital terrain model ([DTM]) (derived from post-processing photogrammetry products) is used in this particular application for determining which part of the mesh represent the ground. Finally, we require the 2D geospatial locations of the detected tree crowns, obtained using a detection algorithm such as those demonstrated in [Task 1](/tutorials/itd/1_detection.md).
 
 Fortunately, if we know the precise location of the camera sensor at at the time each image is captured (which we obtain from photogrammetry), along with the parameters of the camera's lens (also from photogrammetry), then we can use geometry to translate each pixel in a raw drone image into a _ray_ in 3D space. The place where this ray intersects the 3D mesh model is the location in 3D space that is represented by that pixel. Geograypher uses techniques from computer graphics to perform these calculations efficiently. Notably, this rendering process is occlusion-aware, so if one tree is in front of another from the camera's perspective, the pixel will be assigned to the tree in front.
 
 ![Image to mesh projection](/assets/images/tutorials/image-mesh-projection.png){ width="40%" }
 
-Each tree is assigned a unique numerical ID when it is detected. Since the mesh model has geospatial reference information, these IDs can be transferred from the 2D geospatil representation of the crowns to the corresponding 3D mesh faces. Then, we use Geograypher to assign those IDs to the corresponding pixels in each raw drone image. This produces a single-channel image encoding the ID of the observed tree (or a special `background` ID) at each pixel, for each image in the original set of drone images.
+Each tree is assigned a unique numeric ID when it is detected. Since the mesh model has geospatial reference information, these IDs can be transferred from the 2D geospatial representation of the crowns to the corresponding 3D mesh faces. Then, we use Geograypher to assign those IDs to the corresponding pixels in each raw drone image. This produces a single-channel image encoding the ID of the observed tree (or a special `background` ID) at each pixel, for each image in the original set of drone images.
 
 The original drone images are not required at this stage except for visualization.
 
@@ -71,8 +53,6 @@ The original drone images are not required at this stage except for visualizatio
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/geograypher:latest \
@@ -83,9 +63,9 @@ The original drone images are not required at this stage except for visualizatio
         --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
         --image-folder /data/drone/raw-drone-photos/composite1 \
-        --render-savefolder /data/renders \
+        --render-savefolder /data/outputs/renders \
         --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder /data/renders-vis \
+        --labels-vis-folder /data/outputs/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
@@ -96,8 +76,6 @@ The original drone images are not required at this stage except for visualizatio
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path\to\data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/geograypher:latest `
@@ -108,9 +86,9 @@ The original drone images are not required at this stage except for visualizatio
             --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --texture-column-name unique_ID `
             --image-folder /data/drone/raw-drone-photos/composite1 `
-            --render-savefolder /data/renders `
+            --render-savefolder /data/outputs/renders `
             --original-image-folder /data/raw-drone-photos `
-            --labels-vis-folder /data/renders-vis `
+            --labels-vis-folder /data/outputs/renders-vis `
             --mesh-ROI-buffer-radius-meters 10 `
             --cameras-ROI-buffer-radius-meters 20 `
             --render-image-scale 0.125 `
@@ -120,11 +98,15 @@ The original drone images are not required at this stage except for visualizatio
 
 === "Python command-line entrypoint"
 
+    In your terminal, activate the `geograypher` Conda environment.
+
     ```bash
-    export DATA_DIR="path/to/data"
-
     conda activate geograypher
+    ```
 
+    Then run the [label rendering entrypoint script](https://github.com/open-forest-observatory/geograypher/blob/main/geograypher/entrypoints/render_labels.py).
+
+    ```bash
     python -m geograypher.entrypoints.render_labels \
         --mesh-file ${DATA_DIR}/drone/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
@@ -132,9 +114,9 @@ The original drone images are not required at this stage except for visualizatio
         --texture ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
         --image-folder ${DATA_DIR}/drone/raw-drone-photos/composite1 \
-        --render-savefolder ${DATA_DIR}/renders \
+        --render-savefolder ${DATA_DIR}/outputs/renders \
         --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder ${DATA_DIR}/renders-vis \
+        --labels-vis-folder ${DATA_DIR}/outputs/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
@@ -144,11 +126,7 @@ The original drone images are not required at this stage except for visualizatio
 
 === "Custom Python script"
 
-    ```bash
-    conda activate geograypher
-    ```
-
-    Then run the following Python script:
+    Run the following code from within the `geograypher` Conda environment.
 
     ```python
     from pathlib import Path
@@ -199,22 +177,20 @@ This command produces a file tree of images (in the `renders` folder) that exact
 
 The previous step identified the location of each tree in each image, but additional processing is required to prepare this data for a computer vision prediction model. Specifically, we use a _classification model_, which takes an image and produces a single label. To accommodate this format, we must create one image per view of each tree. Using the rendered mask from Geograypher, a rectangular region surrounding each observed tree is cropped from the original image. Then, any content within the crop but outside the bounds of the tree is set to a background color. Finally, each chip is written out, while preserving both the structure of the image it was derived from and the ID of the tree it was generated from.
 
-TODO: Illustrative schematic here?
+<!-- TODO: Illustrative schematic here? -->
 
 === "Docker (recommended)"
 
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.chip_images \
            /data/drone/raw-drone-photos/composite1 \
-           /data/renders \
-           /data/drone/tree-chips \
+           /data/outputs/renders \
+           /data/outputs/drone/tree-chips \
            --n-workers 4 \
            --n-chips-per-tree 10
     ```
@@ -222,15 +198,13 @@ TODO: Illustrative schematic here?
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path\to\data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-classification-framework:latest `
         python -m tree_classification_framework.chip_images `
            /data/drone/raw-drone-photos/composite1 `
-           /data/renders `
-           /data/drone/tree-chips `
+           /data/outputs/renders `
+           /data/outputs/drone/tree-chips `
            --n-workers 4 `
            --n-chips-per-tree 10
     ```
@@ -238,24 +212,26 @@ TODO: Illustrative schematic here?
 
 === "Python command-line entrypoint"
 
-    ```bash
-    export DATA_DIR="path/to/data"
+    In your terminal, activate the `tree-classification-framework` Conda environment.
 
+    ```bash
+    conda activate tree-classification-framework
+    ```
+
+    Then run the [image chipping entrypoint script](https://github.com/open-forest-observatory/tree-classification-framework/blob/main/tree_classification_framework/chip_images.py).
+
+    ```bash
     python -m tree_classification_framework.chip_images \
        ${DATA_DIR}/drone/raw-drone-photos/composite1 \
-       ${DATA_DIR}/renders \
-       ${DATA_DIR}/drone/tree-chips \
+       ${DATA_DIR}/outputs/renders \
+       ${DATA_DIR}/outputs/drone/tree-chips \
        --n-workers 4 \
        --n-chips-per-tree 10
     ```
 
 === "Custom Python script"
 
-    ```bash
-    conda activate tree-classification-framework
-    ```
-
-    Then run the following Python script:
+    Run the following code from within the `tree-classification-framework` Conda environment.
 
     ```python
     from pathlib import Path
@@ -299,122 +275,103 @@ We can use computer vision models previously trained by the OFO to classify each
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         --gpus all --group-add "$(stat -c %g /dev/nvidia0)" \
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/mmpretrain:latest \
         python /app/tools/predict.py \
-           /data/drone/tree-chips \
+           /data/outputs/drone/tree-chips \
            /data/cv-models/dead_live_config.py \
            /data/cv-models/dead_live_model.pth \
-           /data/tree-chips-classified/classified-live-dead.json
+           /data/outputs/tree-chips-classified/classified-live-dead.json
     ```
 
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path/to/data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         --gpus all `
         ghcr.io/open-forest-observatory/mmpretrain:latest `
         python /app/tools/predict.py `
-           /data/drone/tree-chips `
+           /data/outputs/drone/tree-chips `
            /data/cv-models/dead_live_config.py `
            /data/cv-models/dead_live_model.pth `
-           /data/tree-chips-classified/classified-live-dead.json
+           /data/outputs/tree-chips-classified/classified-live-dead.json
     ```
 
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Python command-line entrypoint"
 
-    It is very difficult to install the dependencies for `MMPretrain` and the exact steps depend on
-    your system. Therefore, it is strongly recommended that you use the docker version to run this
-    step.
+    It is very difficult to install the dependencies for `MMPretrain` and the exact steps depend on your system. Therefore, it is strongly recommended that you run MMPretrain using Docker rather than a local Python environment.
 
 === "Custom Python script"
 
-    It is very difficult to install the dependencies for `MMPretrain` and the exact steps depend on
-    your system. Therefore, it is strongly recommended that you use the docker version to run this
-    step.
+    It is very difficult to install the dependencies for `MMPretrain` and the exact steps depend on your system. Therefore, it is strongly recommended that you run MMPretrain using Docker rather than a local Python environment.
 
 This results in one file (in JSON format) for the live/dead predictions and one for the species predictions, providing the predicted class for each image. For example:
 
 | Image path                                                                    | Predicted class |
 | ----------------------------------------------------------------------------- | --------------- |
-| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00018.png` | ABCO            |
-| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00090.png` | CADE27          |
-| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00094.png` | CADE27          |
-| `/data/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00023.png` | PILA            |
+| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00018.png` | ABCO            |
+| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00090.png` | CADE27          |
+| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00094.png` | CADE27          |
+| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00023.png` | PILA            |
 
 ## Assign predictions to individual trees
 
-The end goal of this process is to have geospatial, tree-level predictions. Each tree is likely to have been observed many times from different viewpoints and will therefore have multiple classification results. We maintain the tree's unique ID through all steps in the process, so the view-level predictions still tie back to a specific tree. Since predictions may differ across views, we take the modal (most common) prediction across all views, and assign this as the predicted tree label. This information is then joined with the geospatial crown information that was originally used to generate the chips, then saved out (as a new geospatial file). In addition to the predicted class, we also include the number of views which contributed to the prediction and the fraction of views that agreed with the modal prediction. These attributes are suffixed with `_n_preds` and `_frac_matching_mode`, respectively, and may be used in downstream tasks to filter out low-confidence predictions.
+The end goal of this process is to obtain a tree-level class prediction for each tree. Each tree is likely to have been observed many times, from different viewpoints, and will therefore have multiple classification results. We maintain the tree's unique ID through all steps in the process, so the view-level predictions still tie back to a specific tree. Since predictions may differ across views, we take the modal (most common) prediction across all views, and assign this as the predicted tree label. This information is then joined with the geospatial crown information that was originally used to generate the chips, then saved out (as a new geospatial file). In addition to the predicted class, we also include the number of views which contributed to the prediction and the fraction of views that agreed with the modal prediction. These attributes are suffixed with `_n_preds` and `_frac_matching_mode`, respectively, and may be used in downstream tasks to filter out low-confidence predictions.
 
 === "Docker (recommended)"
-
-    Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
 
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.assign_predictions_to_trees \
-           /data/tree-chips-classified/classified-live-dead.json \
+           /data/outputs/tree-chips-classified/classified-live-dead.json \
            live_dead \
            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-           /data/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+           /data/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
 
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path\to\data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-classification-framework:latest `
         python -m tree_classification_framework.assign_predictions_to_trees `
-           /data/tree-chips-classified/classified-live-dead.json `
+           /data/outputs/tree-chips-classified/classified-live-dead.json `
            live_dead `
            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
-           /data/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+           /data/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
-
-    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Python command-line entrypoint"
 
-    TODO: This can just be the TCF installation instructions I think
+    In your terminal, activate the `tree-classification-framework` Conda environment.
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     conda activate tree-classification-framework
+    ```
 
+    Then run the [prediction assignment entrypoint script](https://github.com/open-forest-observatory/tree-classification-framework/blob/main/tree_classification_framework/assign_predictions_to_trees.py).
+
+    ```bash
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_DIR}/tree-chips-classified/classified-species.json \
+       ${DATA_DIR}/outputs/tree-chips-classified/classified-species.json \
        species \
        ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-       ${DATA_DIR}/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
+       ${DATA_DIR}/outputs/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
     ```
-
-    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
 
 === "Custom Python script"
-    ```bash
-    conda activate tree-classification-framework
-    ```
 
-    Then run the following Python script:
+    Run the following code from within the `tree-classification-framework` Conda environment.
 
     ```python
     from pathlib import Path
@@ -439,9 +396,6 @@ The end goal of this process is to have geospatial, tree-level predictions. Each
     )
     ```
 
-    Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
-
 This produces a new geospatial file containing all of the attributes of the original input file, plus the prediction data.
 
 ![Detected tree crowns with species](/assets/images/tutorials/composite1_detected-crowns-w-species.png)
-

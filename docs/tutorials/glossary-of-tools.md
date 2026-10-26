@@ -161,6 +161,12 @@ Segment Anything Model 3, the successor to [SAM2] from Meta, which can detect an
 
 An external toolbox that simplifies training and running computer vision image classification models. In the tutorials, the OFO fork (a modified copy) of MMPretrain applies previously trained models to the cropped tree images to predict each tree's species and live/dead status. [Documentation](https://mmpretrain.readthedocs.io/), [OFO fork](https://github.com/open-forest-observatory/mmpretrain)
 
+??? info "Installation instructions"
+
+    It is very difficult to install the dependencies for MMPretrain, and the exact steps depend on your system. Therefore, it is strongly recommended that you run MMPretrain using [Docker] rather than a local Python environment. You can use the Docker image `ghcr.io/open-forest-observatory/mmpretrain` to run the OFO fork's [prediction tool](https://github.com/open-forest-observatory/mmpretrain/tree/main/tools) (`tools/predict.py`). See the [classification tutorial](itd/2_classification.md) for an example command.
+
+    If you must install locally, follow the [OFO fork installation instructions](https://github.com/open-forest-observatory/mmpretrain#installation) to create a separate [Conda] environment, as MMPretrain's dependencies are likely to conflict with those of other OFO tools.
+
 ### Docker { #docker }
 
 A system for distributing software together with all of its dependencies in a container that runs the same way on any operating system. OFO provides a Docker _image_ (the blueprint for a container) for each of its tools, so the tutorials can be run without installing Python libraries directly. See the [Docker guide](/tutorials/preparation.md#docker) for installation and usage. [Project page](https://www.docker.com/)

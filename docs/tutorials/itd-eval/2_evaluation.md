@@ -18,31 +18,13 @@ The detected tree crowns and registration file may be ones you produced in the [
 
 ## Setup
 
-!!! info "Before you begin"
+Before you begin, make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance. We recommend running OFO tools via their [Docker] images. Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers. If instead you plan to run the tools in a local Python environment, follow the local installation instructions to set up a Conda environment for the following tools:
 
-    Make sure you have gone through the [OFO tutorial preparation](/tutorials/preparation.md) guidance.
-
-=== "Docker (recommended)"
-
-    Follow our [Docker guide](/tutorials/preparation.md#docker) to understand what Docker is and ensure your system is set up to run Docker containers.
-
-=== "Jupyter"
-
-    TODO: Link to the notebook we will be using, info to set up Conda env as for the other Python options?
-
-=== "Python command-line entrypoint"
-
-    Install the Tree Registration and Matching library and its dependencies following the [installation instructions](https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install).
-
-=== "Python script"
-
-    Install the Tree Registration and Matching library and its dependencies following the [installation instructions](https://github.com/open-forest-observatory/tree-registration-and-matching/tree/main#install).
-
-    Then run the script below in that environment.
+- [Tree Registration and Matching Toolkit]
 
 ## Detection evaluation with spatial tolerance
 
-The tree detection evaluation algorithm quantifies how well the detected trees correspond to the ground reference trees. Does every detected tree correspond to a real tree observed on the ground? Does every real tree have a corresponding detected tree? To answer these quetions, we need to pair the detected trees with their corresponding ground reference trees. However, due to random spatial error in both the drone and ground reference datasets, corresponding trees are never exactly co-located. Therefore, we allow a spatial tolerance in determining whether a detected tree corresponds to a ground reference tree. The spatial tolerance is a function of the height of the ground reference tree, with taller trees having a larger tolerance. This approach, published in [Methods in Ecology and Evolution :material-open-in-new:](https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.13860){target="_blank" rel="noopener"}, accounts for the fact that taller trees are morely likely to have a lean or complex crown morphology such that the tree top (the point detected by drone) is not directly above the stem (the point mapped in the ground survey).
+The tree detection evaluation algorithm quantifies how well the detected trees correspond to the ground reference trees. Does every detected tree correspond to a real tree observed on the ground? Does every real tree have a corresponding detected tree? To answer these questions, we need to pair the detected trees with their corresponding ground reference trees. However, due to random spatial error in both the drone and ground reference datasets, corresponding trees are never exactly co-located. Therefore, we allow a spatial tolerance in determining whether a detected tree corresponds to a ground reference tree. The spatial tolerance is a function of the height of the ground reference tree, with taller trees having a larger tolerance. This approach, published in [Methods in Ecology and Evolution :material-open-in-new:](https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.13860){target="_blank" rel="noopener"}, accounts for the fact that taller trees are morely likely to have a lean or complex crown morphology such that the tree top (the point detected by drone) is not directly above the stem (the point mapped in the ground survey).
 
 The spatial tolerance could, in some cases, allow a given ground tree to match to more than one drone tree or vice-versa. To avoid this, the algorithm uses a greedy matching approach which identifies the best (spatially closest) match between the two datasets, then removes those trees from further matching, then computes the next best match, and so on until all trees have been matched or no more matches can be made.
 
@@ -55,8 +37,6 @@ The commands to run this algorithm are shown below.
     Linux/Mac:
 
     ```bash
-    export DATA_DIR="path/to/data"
-
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
@@ -65,15 +45,13 @@ The commands to run this algorithm are shown below.
             /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             /data/ground-reference/ofo-ground-reference-plot_0030.gpkg \
             --shift-file /data/registration/reference-drone-registration.csv \
-            --output-file /data/detection-evaluation/tree-scoring-metrics.json \
-            --vis-file /data/detection-evaluation/tree-scoring-matches.png
+            --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json \
+            --vis-file /data/outputs/detection-evaluation/tree-scoring-matches.png
     ```
 
     Windows:
 
     ```powershell
-    $env:DATA_DIR = "path\to\data"
-
     docker run --rm `
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
@@ -82,25 +60,33 @@ The commands to run this algorithm are shown below.
             /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
             /data/ground-reference/ofo-ground-reference-plot_0030.gpkg `
             --shift-file /data/registration/reference-drone-registration.csv `
-            --output-file /data/detection-evaluation/tree-scoring-metrics.json `
-            --vis-file /data/detection-evaluation/tree-scoring-matches.png
+            --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json `
+            --vis-file /data/outputs/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Python command-line entrypoint"
 
-    ```bash
-    export DATA_DIR="path/to/data"
+    In your terminal, activate the `tree-registration-and-matching` Conda environment.
 
+    ```bash
+    conda activate tree-registration-and-matching
+    ```
+
+    Then run the [tree detection scoring entrypoint script](https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/tree_registration_and_matching/entrypoints/score_detected_trees.py).
+
+    ```bash
     python -m tree_registration_and_matching.entrypoints.score_detected_trees \
         ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
         ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
         ${DATA_DIR}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
         --shift-file ${DATA_DIR}/registration/reference-drone-registration.csv \
-        --output-file ${DATA_DIR}/detection-evaluation/tree-scoring-metrics.json \
-        --vis-file ${DATA_DIR}/detection-evaluation/tree-scoring-matches.png
+        --output-file ${DATA_DIR}/outputs/detection-evaluation/tree-scoring-metrics.json \
+        --vis-file ${DATA_DIR}/outputs/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Python script"
+
+    Run the following code from within the `tree-registration-and-matching` Conda environment.
 
     ```python
     from pathlib import Path
@@ -131,7 +117,7 @@ The commands to run this algorithm are shown below.
     print(metrics)
     ```
 
-This saves out a map image depicting the detected and reference trees and the matches between them. Ground reference trees are indicated in light blue, drone-detected trees are in red, and the matches between them are in pink. The plot bounds are shown in white.
+This saves out a map image depicting the detected and reference trees and the matches between them. Ground reference trees are indicated in light blue, drone-detected trees are in red, and the matches between them are in pink. The plot boundary is shown in white.
 
 ![matched trees](/assets/images/tutorials/tree-scoring-matches.png)
 
