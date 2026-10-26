@@ -635,6 +635,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-the-data_dir-environment-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting the DATA_DIR environment variable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#computing-hardware-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -646,15 +657,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-overview" class="md-nav__link">
+  <a href="#docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Docker overview
+        Docker
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Docker overview">
+    <nav class="md-nav" aria-label="Docker">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1624,6 +1635,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-the-data_dir-environment-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting the DATA_DIR environment variable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#computing-hardware-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1635,15 +1657,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-overview" class="md-nav__link">
+  <a href="#docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Docker overview
+        Docker
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Docker overview">
+    <nav class="md-nav" aria-label="Docker">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1784,38 +1806,53 @@
 <h1 id="preparing-to-follow-the-tutorials">Preparing to follow the tutorials<a class="headerlink" href="#preparing-to-follow-the-tutorials" title="Permanent link">¶</a></h1>
 <p>The information here applies to all OFO tutorials. Follow the guidance here before starting any of the tutorials.</p>
 <h2 id="example-input-data">Example input data<a class="headerlink" href="#example-input-data" title="Permanent link">¶</a></h2>
-<p>For all tutorial data processing tasks, we provide example input data you can use (though you can alternatively use your own data). If you will use the example data, we recommend you download the entire folder of example data in advance, as its file tree matches the expectations of the example code in the tutorials. In the tutorials, you will just need to change <code>path/to/data/</code> to the path on your computer where you downloaded the example data.</p>
+<p>For all tutorial data processing tasks, we provide example input data you can use (though you can alternatively use your own data). If you will use the example data, we recommend you download the entire folder of example data in advance, as its file tree matches the expectations of the example code in the tutorials. We recommend downloading the example data to a folder named <code>ofo-tutorial-data</code> in your home directory.</p>
 <p><a href="https://ucdavis.box.com/s/iq6afom3pxg81y8vts8imidy3a91fvoy"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7z"></path></svg></span> Download example data</a> (4.6 GB)</p>
 <p>Alternatively, you can download just the input data needed for a specific tutorial task (linked in an "input data" table near the top of each tutorial task page). In that case, you may need to modify the input file paths in the example code more extensively to match the location of the input data on your computer.</p>
+<h2 id="setting-the-data_dir-environment-variable">Setting the <code>DATA_DIR</code> environment variable<a class="headerlink" href="#setting-the-data_dir-environment-variable" title="Permanent link">¶</a></h2>
+<p>Before running any of the tutorials, you will need to set an environment variable, <code>DATA_DIR</code>, that the example code looks for in order to find the input data. Run this line in every new terminal window where you will run the tutorial code. Adjust the path below to match the location of the example data on your computer.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux/Mac</label><label for="__tabbed_1_2">Windows (PowerShell)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">"~/ofo-tutorial-data"</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$env:DATA_DIR</span> <span class="p">=</span> <span class="s2">"$HOME\ofo-tutorial-data"</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>By default, the tutorial exercises will save output data to an <code>outputs</code> folder at the top level of this directory.</p>
 <h2 id="computing-hardware-requirements">Computing hardware requirements<a class="headerlink" href="#computing-hardware-requirements" title="Permanent link">¶</a></h2>
-<p>For processing a single drone mission at a time (up to ~50 ha), a standard laptop or desktop computer is generally sufficient, with a few exceptions: tasks involving computer vision inference generally require a GPU.</p>
-<h2 id="docker-overview">Docker overview<a class="headerlink" href="#docker-overview" title="Permanent link">¶</a></h2>
+<p>For processing a single drone mission at a time (up to ~50 ha), a standard laptop or desktop computer is generally sufficient, though computer vision inference tasks will generally be much faster if a GPU is available.</p>
+<h2 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">¶</a></h2>
 <div class="admonition question">
 <p class="admonition-title">Should I use Docker?</p>
 <p>OFO tools are written in Python, and they require some work to install. Docker is an alternative to running Python code directly that minimizes installation complexity. However, running Python code directly affords more flexibility and control. If you wish to run OFO tools using Python directly, skip to the <a href="#native-python">Native Python</a> section below.</p>
 </div>
 <p>Docker is a system that allows software developers to distribute software packages, including all their dependencies, in a way that can be run on any operating system. For each OFO tool, OFO provides a Docker <em>image</em>, which essentially contains the software (Python code), its dependencies, and a minimal operating system. When you run an instance of a Docker image on your computer, it is called a <em>container</em>.</p>
 <p>Docker provides a convenient way for users to run OFO software without having to run any Python code directly, or worry about installing Python libraries and other dependencies. When users run OFO tools using Docker, they run a single command in a terminal window. This command specifies the Docker image to use, the input and output file locations, and the processing parameters. A docker command might look like the following (in this case for detecting trees from a canopy height model using the OFO <a data-preview="" href="../glossary-of-tools/#tdf">Tree Detection Framework</a>):</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux/Mac</label><label for="__tabbed_1_2">Windows (PowerShell)</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Linux/Mac</label><label for="__tabbed_2_2">Windows (PowerShell)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"path/to/data:/data"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span>/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span>/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"path/to/data:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span>/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span>/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">-v</span> <span class="s2">"path\to\data:/data"</span> <span class="p">`</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-detection-framework</span> <span class="p">`</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_detection_framework</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">detect_geometric_two_stage</span> <span class="p">`</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-tops_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="p">-</span><span class="n">-raster-blur-sigma</span> <span class="n">0</span><span class="p">.</span><span class="n">5</span> <span class="p">`</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">-v</span> <span class="s2">"path\to\data:/data"</span> <span class="p">`</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-detection-framework</span> <span class="p">`</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_detection_framework</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">detect_geometric_two_stage</span> <span class="p">`</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-tops_geometric_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="p">-</span><span class="n">-raster-blur-sigma</span> <span class="n">0</span><span class="p">.</span><span class="n">5</span> <span class="p">`</span>
 </code></pre></div>
 </div>
 </div>
@@ -1824,17 +1861,17 @@
 <p>To be able to run Docker containers, you need to install Docker on your computer.</p>
 <h3 id="install-docker">Install Docker<a class="headerlink" href="#install-docker" title="Permanent link">¶</a></h3>
 <p>Below are the minimal instructions for installing Docker on Linux, Mac, or Windows. For more detailed instructions, see the <a href="https://docs.docker.com/get-docker/">Docker documentation</a>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Linux</label><label for="__tabbed_2_2">Mac</label><label for="__tabbed_2_3">Windows</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Linux</label><label for="__tabbed_3_2">Mac</label><label for="__tabbed_3_3">Windows</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
 </code></pre></div>
 <p>Then log out and back in.</p>
 </div>
 <div class="tabbed-block">
 <p>Requires <a href="https://brew.sh/">Homebrew</a>. After installing, open the Docker app once to start it.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>docker
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>docker
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1847,11 +1884,11 @@
 </div>
 <h3 id="optional-download-all-ofo-docker-images-in-advance">Optional: Download all OFO Docker images in advance<a class="headerlink" href="#optional-download-all-ofo-docker-images-in-advance" title="Permanent link">¶</a></h3>
 <p>Each OFO tutorial task includes code that will download the Docker image(s) required for that task. However, downloads can be slow depending on your internet connection. If you want to download all OFO Docker images in advance so you don't have to wait for downloads when going through the tutorials, you can run the following commands.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/tree-detection-framework
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/tree-classification-framework
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/tree-registration-and-matching
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/geograypher
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/mmpretrain
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/tree-detection-framework
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/tree-classification-framework
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/tree-registration-and-matching
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/geograypher
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/open-forest-observatory/mmpretrain
 </code></pre></div>
 <p>These commands work the same on Linux, Mac, and Windows (PowerShell). The images are several gigabytes each, so make sure you have sufficient disk space.</p>
 <h2 id="native-python">Native Python<a class="headerlink" href="#native-python" title="Permanent link">¶</a></h2>
@@ -1861,26 +1898,26 @@
 <p>Regardless how you will run Python code, you will need to have the required Python libraries and other dependencies installed in your Python environment. Installing Python libraries and their dependencies on a computer requires creating a Python <em>environment</em>, which is a self-contained installation of Python and the relevant libraries. The OFO recommends the <a href="https://docs.conda.io/en/latest/">Conda</a> system for creating and managing Python environments. Each OFO tutorial task includes instructions for creating a Conda environment and installing the required Python libraries and other dependencies in that environment. To be able to do this, you need to have Conda and Poetry installed on your computer.</p>
 <h3 id="install-conda">Install Conda<a class="headerlink" href="#install-conda" title="Permanent link">¶</a></h3>
 <p>We recommend installing <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> because it is smaller and simpler than the full Anaconda distribution and contains everything you need.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Linux</label><label for="__tabbed_3_2">Mac</label><label for="__tabbed_3_3">Windows</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><input id="__tabbed_4_3" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">Linux</label><label for="__tabbed_4_2">Mac</label><label for="__tabbed_4_3">Windows</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.sh
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>bash<span class="w"> </span>Miniconda3-latest-Linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.sh
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>bash<span class="w"> </span>Miniconda3-latest-Linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.sh
 </code></pre></div>
 <p>Follow the prompts, then close and reopen your terminal.</p>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>miniconda
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>conda<span class="w"> </span>init<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">"</span><span class="nv">$SHELL</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>miniconda
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>conda<span class="w"> </span>init<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">"</span><span class="nv">$SHELL</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
 </code></pre></div>
 <p>Then close and reopen your terminal.</p>
 </div>
 <div class="tabbed-block">
 <p>In PowerShell:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">winget</span> <span class="n">install</span> <span class="n">Anaconda</span><span class="p">.</span><span class="n">Miniconda3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">winget</span> <span class="n">install</span> <span class="n">Anaconda</span><span class="p">.</span><span class="n">Miniconda3</span>
 </code></pre></div>
 <p>Then open "Anaconda Prompt" from the Start menu and run the following once to make <code>conda</code> available in PowerShell:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">conda</span> <span class="n">init</span> <span class="n">powershell</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">conda</span> <span class="n">init</span> <span class="n">powershell</span>
 </code></pre></div>
 <p>Close and reopen PowerShell. If you see an error about running scripts being disabled, run <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> and reopen PowerShell again.</p>
 <p>You should now be able to access Conda from PowerShell and Anaconda Prompt.</p>
@@ -1892,19 +1929,19 @@
 <p><a href="https://python-poetry.org/">Poetry</a> is a tool for installing Python libraries. Many OFO tools list their required libraries (and the exact versions to use) in a file called <code>pyproject.toml</code>, and Poetry reads that file to install everything the tool needs into your active Conda environment. Follow the <a href="https://python-poetry.org/docs/#installation">Poetry installation instructions</a> to install it, then confirm it works by running <code>poetry --version</code> in a terminal.</p>
 <h3 id="python-command-line-entrypoints">Python command-line entrypoints<a class="headerlink" href="#python-command-line-entrypoints" title="Permanent link">¶</a></h3>
 <p>The OFO provides command-line entrypoints for each of its tools. These are Python code files that can be run from a terminal window with a single command. Inside, they load the required Python libraries and call the relevant Python functions to perform the task. They provide standardized handling of processing parameters that are provided by the user in the command line call. The command-line entrypoints are useful for users who are not familiar with Python, as they can simply be run as provided and do not require any modifications to the Python code. Each OFO tutorial task includes instructions for running the command-line entrypoints for that task. Here is an example of running a command-line entrypoint to detect trees from a canopy height model using the OFO <a href="https://github.com/open-forest-observatory/tree-detection-framework">Tree Detection Framework</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-detection-framework
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span>path/to/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span>path/to/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-detection-framework
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.detect_geometric_two_stage<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span>path/to/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span>path/to/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span>--raster-blur-sigma<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="se">\</span>
 </code></pre></div>
 <h3 id="jupyter-notebooks">Jupyter notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permanent link">¶</a></h3>
 <p>One way to run Python code is in a <a href="https://jupyter.org/">Jupyter notebook</a>, which is an interactive document that can contain both text and code that can be run. Jupyter notebooks are useful for data processing tasks because they allow you to run code in small chunks and see the results immediately, which is helpful for exploring data and debugging code. Each OFO tutorial task includes a Jupyter notebook that performs each step. Jupyter notebooks run inside a Conda environment; they are not an alternative to Conda.</p>
 <p>TODO: Instructions on how to install Jupyter (link to Jupyter documentation), access the Jupyter server, and run notebooks, including connecting to the right Python environment.</p>
 <h3 id="custom-python-scripts">Custom Python scripts<a class="headerlink" href="#custom-python-scripts" title="Permanent link">¶</a></h3>
 <p>Python code can also be run as standalone scripts, outside of Jupyter notebooks. Scripts are simply files containing Python code that can be run from a terminal window or inside an IDE such as <a href="https://code.visualstudio.com/">VS Code</a> or <a href="https://positron.posit.co/">Positron</a>. Each OFO tutorial provides the Python code snippets to accomplish each step, but it is the user's responsibility to piece them together into a complete script. From a terminal, you would run a script like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>my-environment<span class="w"> </span><span class="c1"># Activate the Conda environment containing the required libraries</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>python<span class="w"> </span>path/to/my-script.py<span class="w">   </span><span class="c1"># Run the script</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>my-environment<span class="w"> </span><span class="c1"># Activate the Conda environment containing the required libraries</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>python<span class="w"> </span>path/to/my-script.py<span class="w">   </span><span class="c1"># Run the script</span>
 </code></pre></div>
 <h3 id="setting-up-all-python-environments-in-advance">Setting up all Python environments in advance<a class="headerlink" href="#setting-up-all-python-environments-in-advance" title="Permanent link">¶</a></h3>
 <p>Each OFO tutorial task includes instructions to set up the Python environment required for tools used by that task. However, setup can be slow, especially on slow to moderate speed internet connections, due to library downloads. If you want to set up all Python environments in advance so you don't have to wait for downloads when going through the tutorials, run the installation instructions associated with each tool in the <a data-preview="" href="../glossary-of-tools/">Glossary of tools</a>.</p>
@@ -1930,7 +1967,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 25, 2026 02:52:30 UTC">October 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 26, 2026 05:33:16 UTC">October 26, 2026</span>
   </span>
 
     
