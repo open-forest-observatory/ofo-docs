@@ -263,7 +263,12 @@ To enable support for SAM3, you must follow the prompts [here](https://huggingfa
 --sam3-huggingface-token SAM3_HUGGINGFACE_TOKEN
 ```
 
-The computer vision tree detection approaches do not product a point representation of trees by default. If this representation is required it can be produced by the approach below. One application that requires this tree top points is matching detected trees to field reference trees, as shown in (TODO: ITD:eval:step2)
+## Determining tree tops from computer vision detections
+
+The computer vision tree detection approaches do not product a point representation of trees by default. One application that requires this tree top points is matching detected trees to field reference trees, as shown in [Task 2: Evaluation](/tutorials/itd-eval/2_evaluation.md). If tree points are required, they can be produced as a subsequent step using the following approach. In the example visualized below, the highest CHM point within the detection is selected as the tree top. Alternatively, this approach can be replaced with simply selecting the centroid, by replacing the `--method` with `centroid`. In either case, the height is extracted from the corresponding point on the CHM, if provided.
+
+![CHM-derived points](/assets/images/tutorials/composite1_detected-crowns_chm-max.png).
+
 === "Docker"
 
     Linux/Mac:
@@ -272,17 +277,24 @@ The computer vision tree detection approaches do not product a point representat
     docker run --rm --user "$(id -u):$(id -g)" \
         -v "$DATA_DIR:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
-        python -m tree_detection_framework.entrypoints.polygon_to_points \
+        python -m tree_detection_framework.entrypoints.polygons_to_points \
             --detections-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg \
             --chm-path /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-            --output-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points.gpkg \
-            --method chm
+            --output-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg \
+            --method chm_max
     ```
 
     Windows:
 
     ```powershell
-    TODO
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-detection-framework:latest `
+        python -m tree_detection_framework.entrypoints.polygons_to_points `
+            --detections-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg `
+            --chm-path /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            --output-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg `
+            --method chm_max
     ```
 
 === "Python command-line entrypoint"
@@ -296,7 +308,11 @@ The computer vision tree detection approaches do not product a point representat
     Then run the [polygons to points script](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/tree_detection_framework/entrypoints/polygons_to_points.py) script.
 
     ```bash
-    TODO
+    python -m tree_detection_framework.entrypoints.polygons_to_points \
+        --detections-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg \
+        --chm-path ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        --output-path ${DATA_DIR}/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg \
+        --method chm_max
     ```
 
 === "Python script"
@@ -313,8 +329,17 @@ The computer vision tree detection approaches do not product a point representat
     # Change this line
     DATA_DIR = Path("path/to/data")
 
-    TODO
-    ```
+    DETECTIONS_DIR = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_deepforest_v01.gpkg")
+    CHM_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
+    OUTPUT_PATH = Path(DATA_DIR, "outputs", "detected-trees", "composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg")
+    METHOD = "chm_max"
 
+    polygons_to_points(
+        detections_path = DETECTIONS_DIR,
+        output_path = OUTPUT_PATH,
+        method = METHOD,
+        chm_path = CHM_PATH,
+    )
+    ```
 
 For a full description of the TDF computer vision tree detection module and its options, see the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/).
