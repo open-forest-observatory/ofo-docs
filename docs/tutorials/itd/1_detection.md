@@ -238,13 +238,13 @@ This step saves a geospatial file of polygons (rectangles) representing the boun
 
 The rectangle bounding box output format is specific to the DeepForest model.
 
-Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The `chip_size` and `chip_stride` parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the `run_nms` argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the `resolution` parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of trees is detected well. By coarsening the resolution to `0.2m`, only the largest trees are detected, as seen visualized below.
+Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The `chip_size` and `chip_stride` parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the `run_nms` argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the `resolution` parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of tree is detected well. By coarsening the resolution to `0.2m`, only the largest trees are detected, as visualized below.
 
 <!-- TODO DR: consider visualizing a chip from each resolution. -->
 
 ![Ortho with deepforest detections from low-res chips](/assets/images/tutorials/composite1_ortho_w-detections_deepforest-bbox_v01_low-res.png)
 
-The Tree Detection Framework provides a standardized interface to several different methods of performing tree detection, taken from the literature. TDF handles the process of chipping a raster into smaller chips, generating predictions on each chip, and merging these predictions back together in one command, so this complexity is hidden from the user and end-to-end workflows are easy to run. A key benefit of TDF is the ability to quickly compare multiple models, while holding key pre- and post-processing parameters consistent. TDF is also optimized for realistic-scale raster data, meaning that it can be directly applied to even the largest drone flights. A table of the supported approaches is below.
+The Tree Detection Framework provides a standardized interface to several different methods of performing tree detection, taken from the literature. TDF handles the process of chipping a raster into smaller chips, generating predictions on each chip, and merging these predictions back together in one command, so this complexity is abstracted from the user, and end-to-end workflows are easy to run. A key benefit of TDF is the ability to quickly compare multiple models, while holding key pre- and post-processing parameters consistent. TDF is also optimized for realistic-scale raster data, meaning that it can be directly applied to even the largest drone flights. A table of the supported approaches is below.
 
 | Method | Learning Strategy | Input Data | Output Format |
 | --- | --- | --- | --- |
@@ -255,7 +255,9 @@ The Tree Detection Framework provides a standardized interface to several differ
 | Segment Anything Model v3 (SAM3) | Generic pretraining, with class information (foundational model) | Orthomosaic | Crown polygon |
 | Local maximum filter + Watershed segmentation | Learning-free algorithm | Canopy height model (CHM) | Tree-top point and crown polygon |
 
-To run detections using an alternative model, simply change `deepforest` above to the name of the model you want to use. For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.)
+To run detections using an alternative model, simply change `deepforest` in the command above to the name of the model you want to use.
+
+<!-- For example, here we have changed it to `detectree2`. (TODO: Add visualization of Detectree2 output.) -->
 
 To enable support for SAM3, you must follow the prompts [here](https://huggingface.com/facebook/sam3). This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go [here](https://huggingface.co/settings/tokens), select `Create new token`, and select Token type `Read`. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model:
 
@@ -263,11 +265,9 @@ To enable support for SAM3, you must follow the prompts [here](https://huggingfa
 --sam3-huggingface-token SAM3_HUGGINGFACE_TOKEN
 ```
 
-## Determining tree tops from computer vision detections
+## Generating tree top points from computer vision detections
 
-The computer vision tree detection approaches do not product a point representation of trees by default. One application that requires this tree top points is matching detected trees to field reference trees, as shown in [Task 2: Evaluation](/tutorials/itd-eval/2_evaluation.md). If tree points are required, they can be produced as a subsequent step using the following approach. In the example visualized below, the highest CHM point within the detection is selected as the tree top. Alternatively, this approach can be replaced with simply selecting the centroid, by replacing the `--method` with `centroid`. In either case, the height is extracted from the corresponding point on the CHM, if provided.
-
-![CHM-derived points](/assets/images/tutorials/composite1_detected-crowns_chm-max.png).
+The computer vision tree detection approaches do not product a point representation of trees by default. However, tree top points are required for matching detected trees to ground reference trees, as demonstrated in the [Evaluation](/tutorials/itd-eval/) tutorial. TDF provides a tool to generate tree top points from computer vision crown polygons.
 
 === "Docker"
 
@@ -341,5 +341,10 @@ The computer vision tree detection approaches do not product a point representat
         chm_path = CHM_PATH,
     )
     ```
+This saves a geospatial file of points representing the detected tree tops, with heights extracted from the CHM.
+
+![CHM-derived points](/assets/images/tutorials/composite1_detected-crowns_chm-max.png).
+
+In this example, the highest CHM point within each detection polygon is selected as the tree top. Alternatively, this approach can be replaced with simply selecting the centroid, by replacing the `chm_max` method with `centroid`. In either case, the height is extracted from the corresponding point on the CHM, if provided.
 
 For a full description of the TDF computer vision tree detection module and its options, see the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/).
