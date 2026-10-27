@@ -236,7 +236,7 @@ This step saves a geospatial file of polygons (rectangles) representing the boun
 
 ![CHM with detected trees](/assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png)
 
-The rectangle bounding box output format is specific to the DeepForest model. TODO DR: Demonstration of converting them to masks/centroids with heights?
+The rectangle bounding box output format is specific to the DeepForest model.
 
 Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The `chip_size` and `chip_stride` parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the `run_nms` argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the `resolution` parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of trees is detected well. By coarsening the resolution to `0.2m`, only the largest trees are detected, as seen visualized below.
 
@@ -262,5 +262,59 @@ To enable support for SAM3, you must follow the prompts [here](https://huggingfa
 ```bash
 --sam3-huggingface-token SAM3_HUGGINGFACE_TOKEN
 ```
+
+The computer vision tree detection approaches do not product a point representation of trees by default. If this representation is required it can be produced by the approach below. One application that requires this tree top points is matching detected trees to field reference trees, as shown in (TODO: ITD:eval:step2)
+=== "Docker"
+
+    Linux/Mac:
+
+    ```bash
+    docker run --rm --user "$(id -u):$(id -g)" \
+        -v "$DATA_DIR:/data" \
+        ghcr.io/open-forest-observatory/tree-detection-framework:latest \
+        python -m tree_detection_framework.entrypoints.polygon_to_points \
+            --detections-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg \
+            --chm-path /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            --output-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points.gpkg \
+            --method chm
+    ```
+
+    Windows:
+
+    ```powershell
+    TODO
+    ```
+
+=== "Python command-line entrypoint"
+
+    In your terminal, activate the `tree-detection-framework` Conda environment.
+
+    ```bash
+    conda activate tree-detection-framework
+    ```
+
+    Then run the [polygons to points script](https://github.com/open-forest-observatory/tree-detection-framework/blob/main/tree_detection_framework/entrypoints/polygons_to_points.py) script.
+
+    ```bash
+    TODO
+    ```
+
+=== "Python script"
+
+    Run the following code from within the `tree-detection-framework` Conda environment.
+
+    ```python
+    from pathlib import Path
+
+    from tree_detection_framework.entrypoints.polygons_to_points import (
+        polygons_to_points,
+    )
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    TODO
+    ```
+
 
 For a full description of the TDF computer vision tree detection module and its options, see the [Tree Detection Framework documentation](https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/).
