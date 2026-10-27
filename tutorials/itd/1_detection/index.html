@@ -771,6 +771,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#determining-tree-tops-from-computer-vision-detections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Determining tree tops from computer vision detections
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1558,6 +1569,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#determining-tree-tops-from-computer-vision-detections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Determining tree tops from computer vision detections
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1788,7 +1810,7 @@
 </div>
 <p>This step saves a geospatial file of polygons (rectangles) representing the bounding boxes of detected tree crowns. You can visualize these outputs in GIS software like <a data-preview="" href="../../glossary-of-tools/#qgis">QGIS</a>:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png" data-desc-position="bottom"><img alt="CHM with detected trees" src="../../../assets/images/tutorials/composite1_chm-mesh_w-detections_deepforest-bbox_v01.png"></a></p>
-<p>The rectangle bounding box output format is specific to the DeepForest model. TODO DR: Demonstration of converting them to masks/centroids with heights?</p>
+<p>The rectangle bounding box output format is specific to the DeepForest model.</p>
 <p>Since geospatial rasters are often large, we cannot assume that a computer vision model can generate predictions for the whole raster at once. Instead, the raster is broken up into smaller chips, and an independent prediction is generated on each one. These predictions are subsequently merged back together. The <code>chip_size</code> and <code>chip_stride</code> parameters, both in pixels, represent the chip dimensions and how much the sliding window moves between each chip. The computer vision models may produce overlapping detections, and the <code>run_nms</code> argument controls whether the non-max suppression algorithm should be run to only retain the highest-confidence detection if multiple overlap. Finally, the <code>resolution</code> parameter controls the size in meters of a single pixel in the chip, and the original data is resampled on the fly to achieve this. In practice, this parameter has a large impact on the performance of models and specifically what size of trees is detected well. By coarsening the resolution to <code>0.2m</code>, only the largest trees are detected, as seen visualized below.</p>
 <!-- TODO DR: consider visualizing a chip from each resolution. -->
 
@@ -1846,6 +1868,71 @@
 <p>To enable support for SAM3, you must follow the prompts <a href="https://huggingface.com/facebook/sam3">here</a>. This will require you to create a HuggingFace account if you do not have one already. After creating an account, you must wait for your request to be manually reviewed. Then go <a href="https://huggingface.co/settings/tokens">here</a>, select <code>Create new token</code>, and select Token type <code>Read</code>. Enter an arbitrary name and create the token. Copy the token and store it somewhere, since you won't be able to see its value after creating it. Finally, add it to the list of arguments when running the SAM3 model:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>--sam3-huggingface-token<span class="w"> </span>SAM3_HUGGINGFACE_TOKEN
 </code></pre></div>
+<h2 id="determining-tree-tops-from-computer-vision-detections">Determining tree tops from computer vision detections<a class="headerlink" href="#determining-tree-tops-from-computer-vision-detections" title="Permanent link">¶</a></h2>
+<p>The computer vision tree detection approaches do not product a point representation of trees by default. One application that requires this tree top points is matching detected trees to field reference trees, as shown in <a href="../../itd-eval/2_evaluation/">Task 2: Evaluation</a>. If tree points are required, they can be produced as a subsequent step using the following approach. In the example visualized below, the highest CHM point within the detection is selected as the tree top. Alternatively, this approach can be replaced with simply selecting the centroid, by replacing the <code>--method</code> with <code>centroid</code>. In either case, the height is extracted from the corresponding point on the CHM, if provided.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/composite1_detected-crowns_chm-max.png" data-desc-position="bottom"><img alt="CHM-derived points" src="../../../assets/images/tutorials/composite1_detected-crowns_chm-max.png"></a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Docker</label><label for="__tabbed_3_2">Python command-line entrypoint</label><label for="__tabbed_3_3">Python script</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Linux/Mac:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--user<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$DATA_DIR</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-detection-framework:latest<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.polygons_to_points<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">        </span>--detections-path<span class="w"> </span>/data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">        </span>--chm-path<span class="w"> </span>/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span>--output-path<span class="w"> </span>/data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">        </span>--method<span class="w"> </span>chm_max
+</code></pre></div>
+<p>Windows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">-v</span> <span class="s2">"${env:DATA_DIR}:/data"</span> <span class="p">`</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-detection-framework</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_detection_framework</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">polygons_to_points</span> <span class="p">`</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="p">-</span><span class="n">-detections-path</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_deepforest_v01</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="p">-</span><span class="n">-chm-path</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="p">-</span><span class="n">-output-path</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">detected-trees</span><span class="p">/</span><span class="n">composite1_tree-crowns_deepforest_v01-tree_points_chm-max</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        <span class="p">-</span><span class="n">-method</span> <span class="n">chm_max</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>In your terminal, activate the <code>tree-detection-framework</code> Conda environment.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>tree-detection-framework
+</code></pre></div>
+<p>Then run the <a href="https://github.com/open-forest-observatory/tree-detection-framework/blob/main/tree_detection_framework/entrypoints/polygons_to_points.py">polygons to points script</a> script.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_detection_framework.entrypoints.polygons_to_points<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span>--detections-path<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span>--chm-path<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span>--output-path<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span>--method<span class="w"> </span>chm_max
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Run the following code from within the <code>tree-detection-framework</code> Conda environment.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tree_detection_framework.entrypoints.polygons_to_points</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">polygons_to_points</span><span class="p">,</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># Change this line</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"path/to/data"</span><span class="p">)</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="n">DETECTIONS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"detected-trees"</span><span class="p">,</span> <span class="s2">"composite1_tree-crowns_deepforest_v01.gpkg"</span><span class="p">)</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="n">CHM_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"photogrammetry-postprocessed"</span><span class="p">,</span> <span class="s2">"full"</span><span class="p">,</span> <span class="s2">"composite1_chm-mesh.tif"</span><span class="p">)</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="n">OUTPUT_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"outputs"</span><span class="p">,</span> <span class="s2">"detected-trees"</span><span class="p">,</span> <span class="s2">"composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg"</span><span class="p">)</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="n">METHOD</span> <span class="o">=</span> <span class="s2">"chm_max"</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="n">polygons_to_points</span><span class="p">(</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>    <span class="n">detections_path</span> <span class="o">=</span> <span class="n">DETECTIONS_DIR</span><span class="p">,</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>    <span class="n">output_path</span> <span class="o">=</span> <span class="n">OUTPUT_PATH</span><span class="p">,</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>    <span class="n">method</span> <span class="o">=</span> <span class="n">METHOD</span><span class="p">,</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>    <span class="n">chm_path</span> <span class="o">=</span> <span class="n">CHM_PATH</span><span class="p">,</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>For a full description of the TDF computer vision tree detection module and its options, see the <a href="https://open-forest-observatory.github.io/tree-detection-framework/command_line_usage/generate_predictions/">Tree Detection Framework documentation</a>.</p>
 
 
@@ -1869,7 +1956,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 26, 2026 05:33:16 UTC">October 26, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 27, 2026 03:54:21 UTC">October 27, 2026</span>
   </span>
 
     
@@ -1897,14 +1984,14 @@
     
     <nav>
       
-        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
-          
-          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&amp;size=72" alt="youngdjn">
-        </a>
-      
         <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
           
           <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
+        </a>
+      
+        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
+          
+          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&amp;size=72" alt="youngdjn">
         </a>
       
         <a href="https://github.com/web-flow" class="md-author" title="@web-flow">
