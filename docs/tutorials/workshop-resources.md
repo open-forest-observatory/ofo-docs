@@ -75,16 +75,16 @@ The tutorial demo data lives at `~/ofo-tutorial-data` on the VM. The subfolders 
 
 #### Terminal
 
-To transfer files from the VM to your laptop, _open a new terminal window_ and use the `scp` command. For example, to copy everything in the `~/ofo-tutorial-data/output` folder to your local machine, run:
+To transfer files from the VM to your laptop, _open a new terminal window_ and use the `scp` command. For example, to copy everything in the `~/ofo-tutorial-data/output` VM folder to `~/ofo-tutorial-data/output` on your local machine, run:
 
 ```bash
-scp -r YOUR_USERNAME@149.165.169.185:~/ofo-tutorial-data/output .
+scp -r YOUR_USERNAME@149.165.169.185:~/ofo-tutorial-data/output ~/ofo-tutorial-data/output
 ```
 
 To transfer a single file, run:
 
 ```bash
-scp YOUR_USERNAME@149.165.169.185:~/ofo-tutorial-data/output/EXAMPLE_FILE.txt .
+scp YOUR_USERNAME@149.165.169.185:~/ofo-tutorial-data/output/EXAMPLE_FILE.txt ~/ofo-tutorial-data/output/
 ```
 
 #### VS Code
