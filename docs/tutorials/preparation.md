@@ -30,7 +30,7 @@ Before running any of the tutorials, you will need to set an environment variabl
     $env:DATA_DIR = "$HOME\ofo-tutorial-data"
     ```
 
-By default, the tutorial exercises will save output data to an `outputs` folder at the top level of this directory.
+By default, the tutorial exercises will save output data to an `output` folder at the top level of this directory.
 
 
 ## Computing hardware requirements
@@ -54,8 +54,8 @@ Docker provides a convenient way for users to run OFO software without having to
         -v "path/to/local/data:/data/in/container" \
         ghcr.io/open-forest-observatory/tree-detection-framework \
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-            /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            /data/output/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             --raster-blur-sigma 0.5
     ```
 
@@ -66,8 +66,8 @@ Docker provides a convenient way for users to run OFO software without having to
         -v "path\to\local\data:/data/in/container" `
         ghcr.io/open-forest-observatory/tree-detection-framework `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
-            /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
-            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
+            /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            /data/output/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
             --raster-blur-sigma 0.5 `
     ```
 
@@ -186,8 +186,8 @@ The OFO provides command-line entrypoints for each of its tools. These are Pytho
 ```bash
 conda activate tree-detection-framework
 python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-    path/to/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-    path/to/data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+    path/to/data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+    path/to/data/output/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
     --raster-blur-sigma 0.5 \
 ```
 

@@ -45,8 +45,8 @@ The commands to run this algorithm are shown below.
             /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
             /data/ground-reference/ofo-ground-reference-plot_0030.gpkg \
             --shift-file /data/registration/reference-drone-registration.csv \
-            --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json \
-            --vis-file /data/outputs/detection-evaluation/tree-scoring-matches.png
+            --output-file /data/output/detection-evaluation/tree-scoring-metrics.json \
+            --vis-file /data/output/detection-evaluation/tree-scoring-matches.png
     ```
 
     Windows:
@@ -60,8 +60,8 @@ The commands to run this algorithm are shown below.
             /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
             /data/ground-reference/ofo-ground-reference-plot_0030.gpkg `
             --shift-file /data/registration/reference-drone-registration.csv `
-            --output-file /data/outputs/detection-evaluation/tree-scoring-metrics.json `
-            --vis-file /data/outputs/detection-evaluation/tree-scoring-matches.png
+            --output-file /data/output/detection-evaluation/tree-scoring-metrics.json `
+            --vis-file /data/output/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Python command-line entrypoint"
@@ -80,8 +80,8 @@ The commands to run this algorithm are shown below.
         ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
         ${DATA_DIR}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
         --shift-file ${DATA_DIR}/registration/reference-drone-registration.csv \
-        --output-file ${DATA_DIR}/outputs/detection-evaluation/tree-scoring-metrics.json \
-        --vis-file ${DATA_DIR}/outputs/detection-evaluation/tree-scoring-matches.png
+        --output-file ${DATA_DIR}/output/detection-evaluation/tree-scoring-metrics.json \
+        --vis-file ${DATA_DIR}/output/detection-evaluation/tree-scoring-matches.png
     ```
 
 === "Python script"
@@ -103,8 +103,8 @@ The commands to run this algorithm are shown below.
     SHIFT_FILE = Path(DATA_DIR, "registration", "reference-drone-registration.csv")
 
     # Define the outputs
-    OUTPUT_FILE = Path(DATA_DIR, "detection-evaluation", "tree-scoring-metrics.json")
-    VIS_FILE = Path(DATA_DIR, "detection-evaluation", "tree-scoring-matches.png")
+    OUTPUT_FILE = Path(DATA_DIR, "output", "detection-evaluation", "tree-scoring-metrics.json")
+    VIS_FILE = Path(DATA_DIR, "output", "detection-evaluation", "tree-scoring-matches.png")
 
     metrics = score_detected_trees(
         field_trees_file=FIELD_TREES_FILE,

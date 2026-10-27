@@ -19,7 +19,7 @@ To translate between geospatial coordinates (detected trees) and raw drone photo
 
 | Name                            | Source         | Example file                                                                                            |
 | ------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------- |
-| Raw drone photos                | Drone flight   | [drone/raw-drone-photos/composite1](https://ucdavis.box.com/s/p2w2cw4bjrsjwjgcr11m1luqh89v3fxh)               |
+| Raw drone photos                | Drone flight   | [drone-collects/photos-raw/composite1](https://ucdavis.box.com/s/p2w2cw4bjrsjwjgcr11m1luqh89v3fxh)               |
 | Photogrammetry camera locations | Photogrammetry | [composite1_cameras.xml](https://ucdavis.box.com/s/qallapylahuq7u76dv9fef8tp2aoxlyp)                    |
 | Photogrammetry [mesh model] | Photogrammetry | [composite1_mesh.ply](https://ucdavis.box.com/s/lgulbgesty4i95bep12c94v2rhxb1a8p)                    |
 | [Digital terrain model] | Photogrammetry | [composite1_dtm-ptcloud.tif](https://ucdavis.box.com/s/s3jmpxs90d3qlk92k8n8odjrxboyfows)                    |
@@ -57,19 +57,19 @@ The original drone images are not required at this stage except for visualizatio
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/geograypher:latest \
         python -m geograypher.entrypoints.render_labels \
-        --mesh-file /data/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-file /data/photogrammetry/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file /data/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --cameras-file /data/photogrammetry/photogrammetry-outputs/composite1_cameras.xml \
         --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
-        --image-folder /data/drone/raw-drone-photos/composite1 \
-        --render-savefolder /data/outputs/renders \
-        --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder /data/outputs/renders-vis \
+        --image-folder /data/drone-collects/photos-raw/composite1 \
+        --render-savefolder /data/output/renders \
+        --original-image-folder /data/drone-collects/photos-raw \
+        --labels-vis-folder /data/output/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
-        --DTM-file /data/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --DTM-file /data/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
 
@@ -80,19 +80,19 @@ The original drone images are not required at this stage except for visualizatio
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/geograypher:latest `
         python -m geograypher.entrypoints.render_labels `
-            --mesh-file /data/drone/photogrammetry-outputs/composite1_mesh.ply `
+            --mesh-file /data/photogrammetry/photogrammetry-outputs/composite1_mesh.ply `
             --mesh-CRS 32610 `
-            --cameras-file /data/drone/photogrammetry-outputs/composite1_cameras.xml `
+            --cameras-file /data/photogrammetry/photogrammetry-outputs/composite1_cameras.xml `
             --texture /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --texture-column-name unique_ID `
-            --image-folder /data/drone/raw-drone-photos/composite1 `
-            --render-savefolder /data/outputs/renders `
-            --original-image-folder /data/raw-drone-photos `
-            --labels-vis-folder /data/outputs/renders-vis `
+            --image-folder /data/drone-collects/photos-raw/composite1 `
+            --render-savefolder /data/output/renders `
+            --original-image-folder /data/drone-collects/photos-raw `
+            --labels-vis-folder /data/output/renders-vis `
             --mesh-ROI-buffer-radius-meters 10 `
             --cameras-ROI-buffer-radius-meters 20 `
             --render-image-scale 0.125 `
-            --DTM-file /data/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif `
+            --DTM-file /data/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif `
             --ground-height-threshold 2.0
     ```
 
@@ -108,19 +108,19 @@ The original drone images are not required at this stage except for visualizatio
 
     ```bash
     python -m geograypher.entrypoints.render_labels \
-        --mesh-file ${DATA_DIR}/drone/photogrammetry-outputs/composite1_mesh.ply \
+        --mesh-file ${DATA_DIR}/photogrammetry/photogrammetry-outputs/composite1_mesh.ply \
         --mesh-CRS 32610 \
-        --cameras-file ${DATA_DIR}/drone/photogrammetry-outputs/composite1_cameras.xml \
+        --cameras-file ${DATA_DIR}/photogrammetry/photogrammetry-outputs/composite1_cameras.xml \
         --texture ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --texture-column-name unique_ID \
-        --image-folder ${DATA_DIR}/drone/raw-drone-photos/composite1 \
-        --render-savefolder ${DATA_DIR}/outputs/renders \
-        --original-image-folder /data/raw-drone-photos \
-        --labels-vis-folder ${DATA_DIR}/outputs/renders-vis \
+        --image-folder ${DATA_DIR}/drone-collects/photos-raw/composite1 \
+        --render-savefolder ${DATA_DIR}/output/renders \
+        --original-image-folder /data/drone-collects/photos-raw \
+        --labels-vis-folder ${DATA_DIR}/output/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
         --render-image-scale 0.125 \
-        --DTM-file ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
+        --DTM-file ${DATA_DIR}/photogrammetry-postprocessed/full/composite1_dtm-ptcloud.tif \
         --ground-height-threshold 2.0
     ```
 
@@ -138,17 +138,17 @@ The original drone images are not required at this stage except for visualizatio
     DATA_DIR = Path("path/to/data")
 
     # Define the inputs
-    MESH_FILE = Path(DATA_DIR, "drone", "photogrammetry-outputs", "composite1_mesh.ply")
-    CAMERAS_FILE = Path(DATA_DIR, "drone", "photogrammetry-outputs", "composite1_cameras.xml")
-    DTM_FILE = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_dtm-ptcloud.tif")
+    MESH_FILE = Path(DATA_DIR, "photogrammetry", "photogrammetry-outputs", "composite1_mesh.ply")
+    CAMERAS_FILE = Path(DATA_DIR, "photogrammetry", "photogrammetry-outputs", "composite1_cameras.xml")
+    DTM_FILE = Path(DATA_DIR, "photogrammetry-postprocessed", "full", "composite1_dtm-ptcloud.tif")
     TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
-    IMAGE_FOLDER = Path(DATA_DIR, "drone", "raw-drone-photos", "composite1")
+    IMAGE_FOLDER = Path(DATA_DIR, "drone-collects", "photos-raw", "composite1")
     MESH_CRS = pyproj.CRS.from_epsg(32610)
-    ORIGNAL_IMAGE_FOLDER = "/data/raw-drone-photos"
+    ORIGNAL_IMAGE_FOLDER = "/data/drone-collects/photos-raw"
 
     # Define the outputs
-    RENDER_SAVEFOLDER = Path(DATA_DIR, "renders")
-    LABELS_VIS_FOLDER = Path(DATA_DIR, "renders-vis")
+    RENDER_SAVEFOLDER = Path(DATA_DIR, "output", "renders")
+    LABELS_VIS_FOLDER = Path(DATA_DIR, "output", "renders-vis")
 
     render_labels(
         mesh_file=MESH_FILE,
@@ -188,9 +188,9 @@ The previous step identified the location of each tree in each image, but additi
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.chip_images \
-           /data/drone/raw-drone-photos/composite1 \
-           /data/outputs/renders \
-           /data/outputs/drone/tree-chips \
+           /data/drone-collects/photos-raw/composite1 \
+           /data/output/renders \
+           /data/output/tree-chips \
            --n-workers 4 \
            --n-chips-per-tree 10
     ```
@@ -202,9 +202,9 @@ The previous step identified the location of each tree in each image, but additi
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-classification-framework:latest `
         python -m tree_classification_framework.chip_images `
-           /data/drone/raw-drone-photos/composite1 `
-           /data/outputs/renders `
-           /data/outputs/drone/tree-chips `
+           /data/drone-collects/photos-raw/composite1 `
+           /data/output/renders `
+           /data/output/tree-chips `
            --n-workers 4 `
            --n-chips-per-tree 10
     ```
@@ -222,9 +222,9 @@ The previous step identified the location of each tree in each image, but additi
 
     ```bash
     python -m tree_classification_framework.chip_images \
-       ${DATA_DIR}/drone/raw-drone-photos/composite1 \
-       ${DATA_DIR}/outputs/renders \
-       ${DATA_DIR}/outputs/drone/tree-chips \
+       ${DATA_DIR}/drone-collects/photos-raw/composite1 \
+       ${DATA_DIR}/output/renders \
+       ${DATA_DIR}/output/tree-chips \
        --n-workers 4 \
        --n-chips-per-tree 10
     ```
@@ -242,11 +242,11 @@ The previous step identified the location of each tree in each image, but additi
     DATA_DIR = Path("path/to/data")
 
     # Define the inputs
-    IMAGE_FOLDER = Path(DATA_DIR, "drone", "raw-drone-photos", "composite1")
-    RENDERS_FOLDER = Path(DATA_DIR, "renders")
+    IMAGE_FOLDER = Path(DATA_DIR, "drone-collects", "photos-raw", "composite1")
+    RENDERS_FOLDER = Path(DATA_DIR, "output", "renders")
 
     # Define the outputs
-    CHIPS_FOLDER = Path(DATA_DIR, "drone", "tree-chips")
+    CHIPS_FOLDER = Path(DATA_DIR, "output", "tree-chips")
 
     process_folder(
         images_folder=IMAGE_FOLDER,
@@ -280,10 +280,10 @@ We can use computer vision models previously trained by the OFO to classify each
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/mmpretrain:latest \
         python /app/tools/predict.py \
-           /data/outputs/drone/tree-chips \
+           /data/output/tree-chips \
            /data/cv-models/dead_live_config.py \
            /data/cv-models/dead_live_model.pth \
-           /data/outputs/tree-chips-classified/classified-live-dead.json
+           /data/output/tree-chips-classified/classified-live-dead.json
     ```
 
     Windows:
@@ -294,10 +294,10 @@ We can use computer vision models previously trained by the OFO to classify each
         --gpus all `
         ghcr.io/open-forest-observatory/mmpretrain:latest `
         python /app/tools/predict.py `
-           /data/outputs/drone/tree-chips `
+           /data/output/tree-chips `
            /data/cv-models/dead_live_config.py `
            /data/cv-models/dead_live_model.pth `
-           /data/outputs/tree-chips-classified/classified-live-dead.json
+           /data/output/tree-chips-classified/classified-live-dead.json
     ```
 
     Note that you can run the species prediction step by replacing `live_dead` with `species` in all lines.
@@ -314,10 +314,10 @@ This results in one file (in JSON format) for the live/dead predictions and one 
 
 | Image path                                                                    | Predicted class |
 | ----------------------------------------------------------------------------- | --------------- |
-| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00018.png` | ABCO            |
-| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00090.png` | CADE27          |
-| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00094.png` | CADE27          |
-| `/data/outputs/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00023.png` | PILA            |
+| `/data/output/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00018.png` | ABCO            |
+| `/data/output/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00090.png` | CADE27          |
+| `/data/output/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00094.png` | CADE27          |
+| `/data/output/tree-chips-classified/000452clip/000452-01/00/000452-01_000871/00023.png` | PILA            |
 
 ## Assign predictions to individual trees
 
@@ -332,10 +332,10 @@ The end goal of this process is to obtain a tree-level class prediction for each
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.assign_predictions_to_trees \
-           /data/outputs/tree-chips-classified/classified-live-dead.json \
+           /data/output/tree-chips-classified/classified-live-dead.json \
            live_dead \
            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-           /data/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+           /data/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
 
     Windows:
@@ -345,10 +345,10 @@ The end goal of this process is to obtain a tree-level class prediction for each
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-classification-framework:latest `
         python -m tree_classification_framework.assign_predictions_to_trees `
-           /data/outputs/tree-chips-classified/classified-live-dead.json `
+           /data/output/tree-chips-classified/classified-live-dead.json `
            live_dead `
            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
-           /data/outputs/classified-trees/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+           /data/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_live_dead.gpkg
     ```
 
 === "Python command-line entrypoint"
@@ -363,10 +363,10 @@ The end goal of this process is to obtain a tree-level class prediction for each
 
     ```bash
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_DIR}/outputs/tree-chips-classified/classified-species.json \
+       ${DATA_DIR}/output/tree-chips-classified/classified-species.json \
        species \
        ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-       ${DATA_DIR}/outputs/classified-trees/composite1_tree-crowns_geometric_v01_species.gpkg
+       ${DATA_DIR}/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_species.gpkg
     ```
 
 === "Custom Python script"
@@ -382,11 +382,11 @@ The end goal of this process is to obtain a tree-level class prediction for each
     DATA_DIR = Path("path/to/data")
 
     # Define the inputs
-    IMAGE_LEVEL_PREDICTIONS_FILE = Path(DATA_DIR, "tree-chips-classified", "classified-live-dead.json")
+    IMAGE_LEVEL_PREDICTIONS_FILE = Path(DATA_DIR, "output", "tree-chips-classified", "classified-live-dead.json")
     TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
 
     # Define the outputs
-    CLASSIFIED_CROWNS_FILE = Path(DATA_DIR, "classified-trees", "composite1_tree-crowns_geometric_v01_live_dead.gpkg")
+    CLASSIFIED_CROWNS_FILE = Path(DATA_DIR, "output", "detected-trees-classified", "composite1_tree-crowns_geometric_v01_live_dead.gpkg")
 
     assign_predictions_to_trees(
         output_column_name="live_dead",

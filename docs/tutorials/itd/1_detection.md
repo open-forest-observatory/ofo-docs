@@ -34,9 +34,9 @@ First, we will use a *geometric algorithm* implemented in the Tree Detection Fra
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-            /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-            --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+            /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            /data/output/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            --tree-crowns-save-path /data/output/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
             --raster-blur-sigma 0.5 \
             --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
@@ -48,9 +48,9 @@ First, we will use a *geometric algorithm* implemented in the Tree Detection Fra
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.detect_geometric_two_stage `
-            /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
-            /data/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
-            --tree-crowns-save-path /data/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
+            /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            /data/output/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
+            --tree-crowns-save-path /data/output/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
             --raster-blur-sigma 0.5 `
             --tree-top-detector-kwargs '{\"a\": 0, \"b\": 0.0325, \"c\": 0.25, \"min_ht\": 5}'
     ```
@@ -73,9 +73,9 @@ First, we will use a *geometric algorithm* implemented in the Tree Detection Fra
 
     ```bash
     python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
-        ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        ${DATA_DIR}/outputs/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-        --tree-crowns-save-path ${DATA_DIR}/outputs/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+        ${DATA_DIR}/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        ${DATA_DIR}/output/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        --tree-crowns-save-path ${DATA_DIR}/output/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
         --raster-blur-sigma 0.5 \
         --tree-top-detector-kwargs '{"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}'
     ```
@@ -93,9 +93,9 @@ First, we will use a *geometric algorithm* implemented in the Tree Detection Fra
     DATA_DIR = Path("path/to/data")
 
     # Define the inputs
-    CHM_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
-    TREE_TOPS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-tops_geometric_v01.gpkg")
-    TREE_CROWNS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+    CHM_PATH = Path(DATA_DIR, "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
+    TREE_TOPS_SAVE_PATH = Path(DATA_DIR, "output", "detected-trees", "composite1_tree-tops_geometric_v01.gpkg")
+    TREE_CROWNS_SAVE_PATH = Path(DATA_DIR, "output", "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
     RASTER_BLUR_SIGMA = 0.5
     TREE_TOP_DETECTOR_KWARGS = {"a": 0, "b": 0.0325, "c": 0.25, "min_ht": 5}
 
@@ -143,13 +143,13 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
         -v "$DATA_DIR:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.generate_predictions \
-            --raster-folder-path /data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
+            --raster-folder-path /data/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
             --tree-detection-model deepforest \
             --chip-size 1024 \
             --chip-stride 768 \
             --resolution 0.05 \
             --run-nms \
-            --predictions-save-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+            --predictions-save-path /data/output/detected-trees/composite1_tree-crowns_deepforest-bbox_v01.gpkg
     ```
 
     Windows:
@@ -159,13 +159,13 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.generate_predictions `
-            --raster-folder-path /data/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif `
+            --raster-folder-path /data/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif `
             --tree-detection-model deepforest `
             --chip-size 1024 `
             --chip-stride 768 `
             --resolution 0.05 `
             --run-nms `
-            --predictions-save-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+            --predictions-save-path /data/output/detected-trees/composite1_tree-crowns_deepforest-bbox_v01.gpkg
     ```
 
 === "Jupyter"
@@ -184,13 +184,13 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
 
     ```bash
     python -m tree_detection_framework.entrypoints.generate_predictions \
-        --raster-folder-path ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
+        --raster-folder-path ${DATA_DIR}/photogrammetry-postprocessed/full/composite1_ortho-dsm-ptcloud.tif \
         --tree-detection-model deepforest \
         --chip-size 1024 \
         --chip-stride 768 \
         --resolution 0.05 \
         --run-nms \
-        --predictions-save-path ${DATA_DIR}/outputs/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg
+        --predictions-save-path ${DATA_DIR}/output/detected-trees/composite1_tree-crowns_deepforest-bbox_v01.gpkg
     ```
 
     Note that you can replace `deepforest` with `detectree2` to run that model.
@@ -210,7 +210,7 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     DATA_DIR = Path("path/to/data")
 
     # Define the inputs
-    RASTER_FOLDER_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_ortho-dsm-ptcloud.tif")
+    RASTER_FOLDER_PATH = Path(DATA_DIR, "photogrammetry-postprocessed", "full", "composite1_ortho-dsm-ptcloud.tif")
     TREE_DETECTION_MODEL = "deepforest"
     CHIP_SIZE = 1024
     CHIP_STRIDE = 768
@@ -218,7 +218,7 @@ We will first demonstrate using it to run DeepForest on the orthomosaic linked a
     RUN_NMS = True
 
     # Define the outputs
-    PREDICTIONS_SAVE_PATH = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_deepforest_v01.gpkg")
+    PREDICTIONS_SAVE_PATH = Path(DATA_DIR, "output", "detected-trees", "composite1_tree-crowns_deepforest-bbox_v01.gpkg")
 
     # Run detection
     generate_predictions(
@@ -278,9 +278,9 @@ The computer vision tree detection approaches do not product a point representat
         -v "$DATA_DIR:/data" \
         ghcr.io/open-forest-observatory/tree-detection-framework:latest \
         python -m tree_detection_framework.entrypoints.polygons_to_points \
-            --detections-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg \
-            --chm-path /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-            --output-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg \
+            --detections-path /data/detected-trees/composite1_tree-crowns_deepforest-bbox_v01.gpkg \
+            --chm-path /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            --output-path /data/output/detected-trees/composite1_tree-crowns_deepforest-bbox_v01-tree_points_chm-max.gpkg \
             --method chm_max
     ```
 
@@ -291,9 +291,9 @@ The computer vision tree detection approaches do not product a point representat
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-detection-framework:latest `
         python -m tree_detection_framework.entrypoints.polygons_to_points `
-            --detections-path /data/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg `
-            --chm-path /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
-            --output-path /data/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg `
+            --detections-path /data/detected-trees/composite1_tree-crowns_deepforest-bbox_v01.gpkg `
+            --chm-path /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            --output-path /data/output/detected-trees/composite1_tree-crowns_deepforest-bbox_v01-tree_points_chm-max.gpkg `
             --method chm_max
     ```
 
@@ -309,9 +309,9 @@ The computer vision tree detection approaches do not product a point representat
 
     ```bash
     python -m tree_detection_framework.entrypoints.polygons_to_points \
-        --detections-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_deepforest_v01.gpkg \
-        --chm-path ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
-        --output-path ${DATA_DIR}/outputs/detected-trees/composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg \
+        --detections-path ${DATA_DIR}/detected-trees/composite1_tree-crowns_deepforest-bbox_v01.gpkg \
+        --chm-path ${DATA_DIR}/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        --output-path ${DATA_DIR}/output/detected-trees/composite1_tree-crowns_deepforest-bbox_v01-tree_points_chm-max.gpkg \
         --method chm_max
     ```
 
@@ -329,9 +329,9 @@ The computer vision tree detection approaches do not product a point representat
     # Change this line
     DATA_DIR = Path("path/to/data")
 
-    DETECTIONS_DIR = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_deepforest_v01.gpkg")
-    CHM_PATH = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
-    OUTPUT_PATH = Path(DATA_DIR, "outputs", "detected-trees", "composite1_tree-crowns_deepforest_v01-tree_points_chm-max.gpkg")
+    DETECTIONS_DIR = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_deepforest-bbox_v01.gpkg")
+    CHM_PATH = Path(DATA_DIR, "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
+    OUTPUT_PATH = Path(DATA_DIR, "output", "detected-trees", "composite1_tree-crowns_deepforest-bbox_v01-tree_points_chm-max.gpkg")
     METHOD = "chm_max"
 
     polygons_to_points(

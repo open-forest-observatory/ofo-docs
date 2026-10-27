@@ -40,10 +40,10 @@ The commands to run this algorithm are below.
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
-            --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+            --CHM-file /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
             --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-            --output-shifted-trees /data/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
-            --output-shift-summary /data/outputs/registration/reference-drone-registration.csv
+            --output-shifted-trees /data/output/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+            --output-shift-summary /data/output/registration/reference-drone-registration.csv
     ```
 
     Windows:
@@ -53,10 +53,10 @@ The commands to run this algorithm are below.
         -v "${env:DATA_DIR}:/data" `
         ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
         python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM `
-            --CHM-file /data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
+            --CHM-file /data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif `
             --tree-points-file /data/ground-reference/ofo-ground-reference-trees_0030.gpkg `
-            --output-shifted-trees /data/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg `
-            --output-shift-summary /data/outputs/registration/reference-drone-registration.csv
+            --output-shifted-trees /data/output/registration/ofo-ground-reference-trees_0030_shifted.gpkg `
+            --output-shift-summary /data/output/registration/reference-drone-registration.csv
     ```
 
 === "Jupyter"
@@ -77,10 +77,10 @@ The commands to run this algorithm are below.
 
     ```bash
     python -m tree_registration_and_matching.entrypoints.register_trees_to_CHM \
-        --CHM-file ${DATA_DIR}/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
+        --CHM-file ${DATA_DIR}/photogrammetry-postprocessed/full/composite1_chm-mesh.tif \
         --tree-points-file ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        --output-shifted-trees ${DATA_DIR}/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
-        --output-shift-summary ${DATA_DIR}/outputs/registration/reference-drone-registration.csv
+        --output-shifted-trees ${DATA_DIR}/output/registration/ofo-ground-reference-trees_0030_shifted.gpkg \
+        --output-shift-summary ${DATA_DIR}/output/registration/reference-drone-registration.csv
     ```
 
 === "Python script"
@@ -96,12 +96,12 @@ The commands to run this algorithm are below.
     DATA_DIR = Path("path/to/data")
 
     # Define the inputs
-    CHM_FILE = Path(DATA_DIR, "drone", "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
+    CHM_FILE = Path(DATA_DIR, "photogrammetry-postprocessed", "full", "composite1_chm-mesh.tif")
     TREE_POINTS_FILE = Path(DATA_DIR, "ground-reference", "ofo-ground-reference-trees_0030.gpkg")
 
     # Define the outputs
-    OUTPUT_SHIFTED_TREES = Path(DATA_DIR, "registration", "ofo-ground-reference-trees_0030_shifted.gpkg")
-    OUTPUT_SHIFT_SUMMARY = Path(DATA_DIR, "registration", "reference-drone-registration.csv")
+    OUTPUT_SHIFTED_TREES = Path(DATA_DIR, "output", "registration", "ofo-ground-reference-trees_0030_shifted.gpkg")
+    OUTPUT_SHIFT_SUMMARY = Path(DATA_DIR, "output", "registration", "reference-drone-registration.csv")
 
     register_trees_to_CHM(
         tree_points_file=TREE_POINTS_FILE,
