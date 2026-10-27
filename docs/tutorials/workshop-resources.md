@@ -22,6 +22,11 @@ There are two options:
 1. **Remote cloud computing environment**: We will provide a remote cloud computing environment for the workshop, preloaded with all the necessary data and software. You will be able to access this environment from your own laptop via `ssh` (instructions provided).
 2. **Local compute on your laptop**: We provide instructions for running the tools locally, but you will need to install the necessary software and download the data to your laptop in advance. See [Advance preparation](#advance-preparation), below, for details.
 
+## Input data
+
+The preparation instructions below assume you will be using the OFO tutorials demo dataset. You are also welcome to bring your own data (particularly orthomosaics or canopy height models). Many of the examples can be easily adapted to other datasets.
+
+
 ## Advance preparation
 
 Required preparation depends on how you plan to run the software (remotely or locally).
@@ -32,7 +37,7 @@ Install a graphical GIS software like [QGIS](https://qgis.org/en/site/forusers/d
 
 ### Remote computing environment
 
-If you plan to use the remote computing environment, you must have at least *one* of the following installed on your laptop:
+If you plan to use the remote computing environment we will provide, you must have at least *one* of the following installed on your laptop:
 
 - (Recommended) [VS Code](https://code.visualstudio.com/) with the [Remote - SSH extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 - SSH client (confirm access with `ssh -V` in a terminal)
