@@ -1634,20 +1634,20 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>-v<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span><span class="s2">:/data"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>ghcr.io/open-forest-observatory/tree-registration-and-matching:latest<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>python<span class="w"> </span>-m<span class="w"> </span>tree_registration_and_matching.entrypoints.register_trees_to_CHM<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span>--CHM-file<span class="w"> </span>/data/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span>--CHM-file<span class="w"> </span>/data/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span>--tree-points-file<span class="w"> </span>/data/ground-reference/ofo-ground-reference-trees_0030.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span>--output-shifted-trees<span class="w"> </span>/data/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span>--output-shift-summary<span class="w"> </span>/data/outputs/registration/reference-drone-registration.csv
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span>--output-shifted-trees<span class="w"> </span>/data/output/registration/ofo-ground-reference-trees_0030_shifted.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span>--output-shift-summary<span class="w"> </span>/data/output/registration/reference-drone-registration.csv
 </code></pre></div>
 <p>Windows:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">docker</span> <span class="n">run</span> <span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">-v</span> <span class="s2">"${env:DATA_DIR}:/data"</span> <span class="p">`</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">ghcr</span><span class="p">.</span><span class="n">io</span><span class="p">/</span><span class="nb">open-forest</span><span class="n">-observatory</span><span class="p">/</span><span class="n">tree-registration</span><span class="o">-and</span><span class="n">-matching</span><span class="p">:</span><span class="n">latest</span> <span class="p">`</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">python</span> <span class="n">-m</span> <span class="n">tree_registration_and_matching</span><span class="p">.</span><span class="n">entrypoints</span><span class="p">.</span><span class="n">register_trees_to_CHM</span> <span class="p">`</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="p">-</span><span class="n">-CHM</span><span class="o">-file</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">drone</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="p">-</span><span class="n">-CHM</span><span class="o">-file</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">photogrammetry-postprocessed</span><span class="p">/</span><span class="n">full</span><span class="p">/</span><span class="n">composite1_chm-mesh</span><span class="p">.</span><span class="n">tif</span> <span class="p">`</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="p">-</span><span class="n">-tree-points</span><span class="o">-file</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">ground-reference</span><span class="p">/</span><span class="n">ofo-ground-reference-trees_0030</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="p">-</span><span class="n">-output-shifted-trees</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">registration</span><span class="p">/</span><span class="n">ofo-ground-reference-trees_0030_shifted</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="p">-</span><span class="n">-output-shift-summary</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">outputs</span><span class="p">/</span><span class="n">registration</span><span class="p">/</span><span class="n">reference-drone-registration</span><span class="p">.</span><span class="n">csv</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="p">-</span><span class="n">-output-shifted-trees</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">output</span><span class="p">/</span><span class="n">registration</span><span class="p">/</span><span class="n">ofo-ground-reference-trees_0030_shifted</span><span class="p">.</span><span class="n">gpkg</span> <span class="p">`</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="p">-</span><span class="n">-output-shift-summary</span> <span class="p">/</span><span class="n">data</span><span class="p">/</span><span class="n">output</span><span class="p">/</span><span class="n">registration</span><span class="p">/</span><span class="n">reference-drone-registration</span><span class="p">.</span><span class="n">csv</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1660,10 +1660,10 @@
 </code></pre></div>
 <p>Then run the <a href="https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/tree_registration_and_matching/entrypoints/register_trees_to_CHM.py">trees-to-CHM registration entrypoint script</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>-m<span class="w"> </span>tree_registration_and_matching.entrypoints.register_trees_to_CHM<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>--CHM-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/drone/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>--CHM-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/photogrammetry-postprocessed/full/composite1_chm-mesh.tif<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>--tree-points-file<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/ground-reference/ofo-ground-reference-trees_0030.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>--output-shifted-trees<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/outputs/registration/ofo-ground-reference-trees_0030_shifted.gpkg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>--output-shift-summary<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/outputs/registration/reference-drone-registration.csv
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>--output-shifted-trees<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/output/registration/ofo-ground-reference-trees_0030_shifted.gpkg<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>--output-shift-summary<span class="w"> </span><span class="si">${</span><span class="nv">DATA_DIR</span><span class="si">}</span>/output/registration/reference-drone-registration.csv
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1676,12 +1676,12 @@
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"path/to/data"</span><span class="p">)</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># Define the inputs</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">CHM_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"drone"</span><span class="p">,</span> <span class="s2">"photogrammetry-postprocessed"</span><span class="p">,</span> <span class="s2">"full"</span><span class="p">,</span> <span class="s2">"composite1_chm-mesh.tif"</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">CHM_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"photogrammetry-postprocessed"</span><span class="p">,</span> <span class="s2">"full"</span><span class="p">,</span> <span class="s2">"composite1_chm-mesh.tif"</span><span class="p">)</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">TREE_POINTS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"ground-reference"</span><span class="p">,</span> <span class="s2">"ofo-ground-reference-trees_0030.gpkg"</span><span class="p">)</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># Define the outputs</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">OUTPUT_SHIFTED_TREES</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"registration"</span><span class="p">,</span> <span class="s2">"ofo-ground-reference-trees_0030_shifted.gpkg"</span><span class="p">)</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">OUTPUT_SHIFT_SUMMARY</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"registration"</span><span class="p">,</span> <span class="s2">"reference-drone-registration.csv"</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">OUTPUT_SHIFTED_TREES</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"output"</span><span class="p">,</span> <span class="s2">"registration"</span><span class="p">,</span> <span class="s2">"ofo-ground-reference-trees_0030_shifted.gpkg"</span><span class="p">)</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">OUTPUT_SHIFT_SUMMARY</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"output"</span><span class="p">,</span> <span class="s2">"registration"</span><span class="p">,</span> <span class="s2">"reference-drone-registration.csv"</span><span class="p">)</span>
 <a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
 <a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">register_trees_to_CHM</span><span class="p">(</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="n">tree_points_file</span><span class="o">=</span><span class="n">TREE_POINTS_FILE</span><span class="p">,</span>
@@ -1745,7 +1745,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 26, 2026 05:33:16 UTC">October 26, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 27, 2026 04:37:48 UTC">October 27, 2026</span>
   </span>
 
     
@@ -1760,6 +1760,34 @@
 
     
     
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="Contributors">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/youngdjn" class="md-author" title="@youngdjn">
+          
+          <img src="https://avatars.githubusercontent.com/u/22568494?v=4&amp;size=72" alt="youngdjn">
+        </a>
+      
+        <a href="https://github.com/russelldj" class="md-author" title="@russelldj">
+          
+          <img src="https://avatars.githubusercontent.com/u/29384527?v=4&amp;size=72" alt="russelldj">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
     
   </aside>
 
