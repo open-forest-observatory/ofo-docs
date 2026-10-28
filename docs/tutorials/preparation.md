@@ -10,7 +10,7 @@ The information here applies to all OFO tutorials. Follow the guidance here befo
 
 For all tutorial data processing tasks, we provide example input data you can use (though you can alternatively use your own data). If you will use the example data, we recommend you download the entire folder of example data in advance, as its file tree matches the expectations of the example code in the tutorials. We recommend downloading the example data to a folder named `ofo-tutorial-data` in your home directory.
 
-[:material-download: Download example data](https://ucdavis.box.com/s/iq6afom3pxg81y8vts8imidy3a91fvoy) (~6GB)
+[:material-download: Download example data](https://ucdavis.box.com/s/iq6afom3pxg81y8vts8imidy3a91fvoy) (~6 GB)
 
 Alternatively, you can download just the input data needed for a specific tutorial task (linked in an "input data" table near the top of each tutorial task page). In that case, you may need to modify the input file paths in the example code more extensively to match the location of the input data on your computer.
 

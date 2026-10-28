@@ -169,7 +169,7 @@ An external toolbox that simplifies training and running computer vision image c
 
 ### Docker { #docker }
 
-A system for distributing software together with all of its dependencies in a container that runs the same way on any operating system. OFO provides a Docker _image_ (the blueprint for a container) for each of its tools, so the tutorials can be run without installing Python libraries directly. See the [Docker guide](/tutorials/preparation.md#docker) for installation and usage. [Project page](https://www.docker.com/)
+A system for distributing software together with all of its dependencies in a container that runs the same way on any operating system. OFO provides a Docker _image_ (the blueprint for a container) for each of its tools, so the tutorials can be run without installing Python libraries directly. See the [Docker guide](/tutorials/preparation.md#docker) for installation and usage. [Docker website](https://www.docker.com/)
 
 ### Conda { #conda }
 
