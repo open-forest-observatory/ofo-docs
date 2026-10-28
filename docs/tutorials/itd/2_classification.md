@@ -321,7 +321,7 @@ This results in one file (in JSON format) for the live/dead predictions and one 
 
 ## Assign predictions to individual trees
 
-The end goal of this process is to obtain a tree-level class prediction for each tree. Each tree is likely to have been observed many times, from different viewpoints, and will therefore have multiple classification results. We maintain the tree's unique ID through all steps in the process, so the view-level predictions still tie back to a specific tree. Since predictions may differ across views, we take the modal (most common) prediction across all views, and assign this as the predicted tree label. This information is then joined with the geospatial crown information that was originally used to generate the chips, then saved out (as a new geospatial file). In addition to the predicted class, we also include the number of views which contributed to the prediction and the fraction of views that agreed with the modal prediction. These attributes are suffixed with `_n_preds` and `_frac_matching_mode`, respectively, and may be used in downstream tasks to filter out low-confidence predictions.
+The end goal of this process is to obtain a tree-level class prediction for each tree. Each tree is likely to have been observed many times, from different viewpoints, and will therefore have multiple classification results. We maintain the tree's unique ID through all steps in the process, so the view-level predictions still tie back to a specific tree. Since predictions may differ across views, we take the modal (most common) prediction across all views, and assign this as the predicted tree label. This information is then joined with the geospatial crown information that was originally used to generate the chips, then saved out (as a new geospatial file). In addition to the predicted class, we also include the number of views which contributed to the prediction and the fraction of views that agreed with the modal prediction. These attributes are suffixed with `_n_preds` and `_frac_matching_mode`, respectively, and may be used in downstream tasks to filter out low-confidence predictions. The following example runs live/dead classification, but the commands can be modified for species prediction by replacing all instances of `live_dead`/`live-dead` with `species`.
 
 === "Docker (recommended)"
 
@@ -367,12 +367,12 @@ The end goal of this process is to obtain a tree-level class prediction for each
 
     ```bash
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_DIR}/tree-chips-classified/classified-species.json \
-       species \
+       ${DATA_DIR}/tree-chips-classified/classified-live-dead.json \
+       live_dead \
        ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-       ${DATA_DIR}/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_species.gpkg \
+       ${DATA_DIR}/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_live_dead.gpkg \
        --input-tree-tops-file ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
-       --output-tree-tops-file ${DATA_DIR}/output/detected-trees-classified/composite1_tree-tops_geometric_v01_species.gpkg
+       --output-tree-tops-file ${DATA_DIR}/output/detected-trees-classified/composite1_tree-tops_geometric_v01_live_dead.gpkg
     ```
 
 === "Custom Python script"
