@@ -332,10 +332,12 @@ The end goal of this process is to obtain a tree-level class prediction for each
         -v "${DATA_DIR}:/data" \
         ghcr.io/open-forest-observatory/tree-classification-framework:latest \
         python -m tree_classification_framework.assign_predictions_to_trees \
-           /data/output/tree-chips-classified/classified-live-dead.json \
-           live_dead \
-           /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-           /data/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+            /data/output/tree-chips-classified/classified-live-dead.json \
+            live_dead \
+            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
+            /data/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_live_dead.gpkg \
+            --input-tree-tops-file /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            --output-tree-tops-file /data/output/detected-trees-classified/composite1_tree-tops_geometric_v01_live_dead.gpkg
     ```
 
     Windows:
@@ -348,7 +350,9 @@ The end goal of this process is to obtain a tree-level class prediction for each
            /data/output/tree-chips-classified/classified-live-dead.json `
            live_dead `
            /data/detected-trees/composite1_tree-crowns_geometric_v01.gpkg `
-           /data/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_live_dead.gpkg
+           /data/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_live_dead.gpkg `
+           --input-tree-tops-file /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
+           --output-tree-tops-file /data/output/detected-trees-classified/composite1_tree-tops_geometric_v01_live_dead.gpkg
     ```
 
 === "Python command-line entrypoint"
@@ -363,10 +367,12 @@ The end goal of this process is to obtain a tree-level class prediction for each
 
     ```bash
     python -m tree_classification_framework.assign_predictions_to_trees \
-       ${DATA_DIR}/output/tree-chips-classified/classified-species.json \
+       ${DATA_DIR}/tree-chips-classified/classified-species.json \
        species \
        ${DATA_DIR}/detected-trees/composite1_tree-crowns_geometric_v01.gpkg \
-       ${DATA_DIR}/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_species.gpkg
+       ${DATA_DIR}/output/detected-trees-classified/composite1_tree-crowns_geometric_v01_species.gpkg \
+       --input-tree-tops-file ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+       --output-tree-tops-file ${DATA_DIR}/output/detected-trees-classified/composite1_tree-tops_geometric_v01_species.gpkg
     ```
 
 === "Custom Python script"
@@ -384,15 +390,19 @@ The end goal of this process is to obtain a tree-level class prediction for each
     # Define the inputs
     IMAGE_LEVEL_PREDICTIONS_FILE = Path(DATA_DIR, "output", "tree-chips-classified", "classified-live-dead.json")
     TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
+    TREE_TOPS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-tops_geometric_v01.gpkg")
 
     # Define the outputs
     CLASSIFIED_CROWNS_FILE = Path(DATA_DIR, "output", "detected-trees-classified", "composite1_tree-crowns_geometric_v01_live_dead.gpkg")
+    CLASSIFIED_TOPS_FILE = Path(DATA_DIR, "output", "detected-trees-classified", "composite1_tree-tops_geometric_v01_live_dead.gpkg")
 
     assign_predictions_to_trees(
         output_column_name="live_dead",
         image_level_predictions_file=IMAGE_LEVEL_PREDICTIONS_FILE,
         input_tree_crowns_file=TREE_CROWNS_FILE,
         output_tree_crowns_file=CLASSIFIED_CROWNS_FILE,
+        input_tree_tops_file=TREE_TOPS_FILE,
+        output_tree_tops_file=CLASSIFIED_TOPS_FILE,
     )
     ```
 
