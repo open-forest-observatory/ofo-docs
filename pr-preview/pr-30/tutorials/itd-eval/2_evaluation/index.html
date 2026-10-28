@@ -1665,6 +1665,11 @@
 <td><a href="https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn">ofo-ground-reference-trees_0030.gpkg</a></td>
 </tr>
 <tr>
+<td>Ground reference plot</td>
+<td>Manual field work</td>
+<td><a href="https://ucdavis.box.com/s/dqhxw2k5jh8g7649pojnqa3ul3nrmpm1">ofo-ground-reference-plot_0030.gpkg</a></td>
+</tr>
+<tr>
 <td>Detected trees</td>
 <td>Tree detection algorithm</td>
 <td><a href="https://ucdavis.box.com/s/tese51t1g97a3jb3f67iaohefftkg5cn">composite1_tree-tops_geometric_v01.gpkg</a></td>
@@ -1673,6 +1678,11 @@
 <td>Registration file</td>
 <td>Registration algorithm</td>
 <td><a href="https://ucdavis.box.com/s/r7k8iuduhxwulf5u1osydhuf8ohaqhbv">reference-drone-registration.csv</a></td>
+</tr>
+<tr>
+<td>Classified tree tops</td>
+<td>Classification workflow</td>
+<td><a href="https://ucdavis.box.com/s/5kzc7lml8oz7kld90jxflm3isbok1yay">composite1_tree-tops_geometric_v01_species.gpkg</a></td>
 </tr>
 </tbody>
 </table>
@@ -1761,9 +1771,11 @@
 </div>
 </div>
 </div>
-<p>This saves out a map image depicting the detected and reference trees and the matches between them. Ground reference trees are indicated in light blue, drone-detected trees are in red, and the matches between them are in pink. The plot boundary is shown in white.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/tree-scoring-matches.png" data-desc-position="bottom"><img alt="matched trees" src="../../../assets/images/tutorials/tree-scoring-matches.png"></a></p>
-<p>It also saves out a JSON file containing the evaluation metrics. For the example here:</p>
+<p>This command saves out a map image depicting the detected and reference trees and the matches between them.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/tree-scoring-matches-from-TRAM.png" data-desc-position="bottom"><img alt="matched trees TRAM" src="../../../assets/images/tutorials/tree-scoring-matches-from-TRAM.png"></a></p>
+<p>The lines denoting the matches can also be saved out as a geospatial file using the <code>--matches-file</code> flag so the same figure can be recreated in <code>QGIS</code> or similar, potentially with other layers included. In this case, the matches are shown overlayed on the CHM.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/tutorials/tree-scoring-matches.png" data-desc-position="bottom"><img alt="matched trees" src="../../../assets/images/tutorials/tree-scoring-matches.png" width="60%"></a></p>
+<p>Finally, this tool saves out a JSON file containing the evaluation metrics. For the example here:</p>
 <table>
 <thead>
 <tr>
@@ -2040,7 +2052,7 @@ Below is a visualization of the drone-derived tree heights plotted against the f
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 28, 2026 17:49:09 UTC">October 28, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 28, 2026 18:56:12 UTC">October 28, 2026</span>
   </span>
 
     
