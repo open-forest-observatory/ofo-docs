@@ -249,6 +249,7 @@ The following example shows how to score the height predictions.
     )
 
 
+    # Run the function
     _, metrics = score_detected_trees(
         field_trees_file=FIELD_TREES_FILE,
         drone_trees_file=DRONE_TREES_FILE,
@@ -377,6 +378,7 @@ The same approach can be used to score a categorical attribute such as species a
         "species-scoring-matched-values.csv",
     )
 
+    # Run the function
     _, metrics = score_detected_trees(
         field_trees_file=FIELD_TREES_FILE,
         drone_trees_file=DRONE_TREES_FILE,
