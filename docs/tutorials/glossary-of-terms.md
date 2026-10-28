@@ -35,8 +35,6 @@ A representation of a surface in 3D produced by many photogrammetry tools. It co
 
 <div class="sketchfab-embed-wrapper"> <iframe title="OFO North Yuba Stand 1" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/530e3b7b1dd54b8b951f4c72d5c6901b/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/ofo-north-yuba-stand-1-530e3b7b1dd54b8b951f4c72d5c6901b" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> OFO North Yuba Stand 1 </a> by <a href="https://sketchfab.com/djnyoung" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> djnyoung </a> on <a href="https://sketchfab.com" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
 
-![Mesh model](/assets/images/tutorials/composite1_mesh.png)
-
 
 ## Variable-radius local maximum filter { #lmf }
 
