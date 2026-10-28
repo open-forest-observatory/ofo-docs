@@ -11,8 +11,10 @@ The final task is assessing the quality of the detected trees. This is done by c
 | Name                   | Source                   | Example file                                                                                          |
 | ---------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------- |
 | Ground reference trees | Manual field work        | [ofo-ground-reference-trees_0030.gpkg](https://ucdavis.box.com/s/4z4j3npqbdwx2p24mv2zriw3zm1xlfbn)    |
+| Ground reference plot  | Manual field work        | [ofo-ground-reference-plot_0030.gpkg](https://ucdavis.box.com/s/dqhxw2k5jh8g7649pojnqa3ul3nrmpm1)    |
 | Detected trees         | Tree detection algorithm | [composite1_tree-tops_geometric_v01.gpkg](https://ucdavis.box.com/s/tese51t1g97a3jb3f67iaohefftkg5cn) |
 | Registration file      | Registration algorithm   | [reference-drone-registration.csv](https://ucdavis.box.com/s/r7k8iuduhxwulf5u1osydhuf8ohaqhbv)        |
+| Classified tree tops      | Classification workflow   | [composite1_tree-tops_geometric_v01_species.gpkg](https://ucdavis.box.com/s/5kzc7lml8oz7kld90jxflm3isbok1yay)        |
 
 The detected tree crowns and registration file may be ones you produced in the [Detection](/tutorials/itd/1_detection.md) and [Registration](/tutorials/itd-eval/1_registration.md) tasks, respectively, or you can use the pre-generated files in the tutorial data folder (linked above). You may similarly provide your own ground reference trees file, as long as it contains an attribute named `height` for each tree, or use the pre-prepared file in the tutorial data folder.
 
@@ -117,14 +119,277 @@ The commands to run this algorithm are shown below.
     print(metrics)
     ```
 
-This saves out a map image depicting the detected and reference trees and the matches between them. Ground reference trees are indicated in light blue, drone-detected trees are in red, and the matches between them are in pink. The plot boundary is shown in white.
+This command saves out a map image depicting the detected and reference trees and the matches between them.
+![matched trees TRAM](/assets/images/tutorials/tree-scoring-matches-from-TRAM.png)
 
-![matched trees](/assets/images/tutorials/tree-scoring-matches.png)
+The lines denoting the matches can also be saved out as a geospatial file using the `--matches-file` flag so the same figure can be recreated in `QGIS` or similar, potentially with other layers included. In this case, the matches are shown overlayed on the CHM.
 
-It also saves out a JSON file containing the evaluation metrics. For the example here:
+![matched trees](/assets/images/tutorials/tree-scoring-matches.png){width="60%"}
+
+Finally, this tool saves out a JSON file containing the evaluation metrics. For the example here:
 
 | Metric   | Value    |
 | -------- | -------- |
 | Precision|  1.0     |
 | Recall   |  0.73    |
 | F1       |  0.84    |
+
+## Attribute prediction evaluation
+In many applications, the goal is to not only detect trees but also predict an attribute of them. In earlier sections of the tutorial, we presented examples of adding height information to detection trees from a CHM or generating species or live/dead predictions using computer vision. To assess the quality of these predictions, we must compare the predicted values to ground reference values. This can be done by following the procedure above to match ground- and drone-derived trees, and then comparing the predicted and observed attributes. The same tool which scores detection quality can also be used for assessing attribute prediction quality, using additional flags. This works for both continuous and categorical data, with different visualizations and metrics for each.
+
+The `--scoring-metrics-savefile` flag controls where a `.json` file of metrics is written out, evaluating the quality of the predictions. The `--predicted-attribute-savefile` controls where a `.csv` file is written, which has one line for every field tree, and a column for both the field-derived attribute and the drone-derived attribute from the matching tree. Note that some rows may lack a drone derived attribute if that field tree was not matched to a drone tree.
+The final major output is a visualization of the attribute, controlled by the `--vis-attribute-scoring-savefile` flag.
+Below is a visualization of the drone-derived tree heights plotted against the field-derived heights for the corresponding trees.
+![evaluating height predictions](/assets/images/tutorials/composite1_height_scoring.png)
+
+The following example shows how to score the height predictions.
+
+=== "Docker"
+
+    Linux/Mac:
+
+    ```bash
+    docker run --rm --user "$(id -u):$(id -g)" \
+        -v "${DATA_DIR}:/data" \
+        ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
+        python -m tree_registration_and_matching.entrypoints.score_detected_trees \
+            /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+            /data/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+            --shift-file /data/registration/reference-drone-registration.csv \
+            --field-attribute-to-score height \
+            --drone-attribute-to-score height \
+            --continuous-scoring-attribute \
+            --scoring-metrics-savefile /data/output/detection-evaluation/height-scoring-metrics.json \
+            --vis-attribute-scoring-savefile /data/output/detection-evaluation/height-scoring.png \
+            --predicted-attribute-savefile /data/output/detection-evaluation/height-scoring-matched-values.csv
+    ```
+
+    Windows:
+
+    ```powershell
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
+        python -m tree_registration_and_matching.entrypoints.score_detected_trees `
+            /data/ground-reference/ofo-ground-reference-trees_0030.gpkg `
+            /data/detected-trees/composite1_tree-tops_geometric_v01.gpkg `
+            /data/ground-reference/ofo-ground-reference-plot_0030.gpkg `
+            --shift-file /data/registration/reference-drone-registration.csv `
+            --field-attribute-to-score height `
+            --drone-attribute-to-score height `
+            --continuous-scoring-attribute `
+            --scoring-metrics-savefile /data/output/detection-evaluation/height-scoring-metrics.json `
+            --vis-attribute-scoring-savefile /data/output/detection-evaluation/height-scoring.png `
+            --predicted-attribute-savefile /data/output/detection-evaluation/height-scoring-matched-values.csv
+    ```
+
+=== "Python command-line entrypoint"
+
+    In your terminal, activate the `tree-registration-and-matching` Conda environment.
+
+    ```bash
+    conda activate tree-registration-and-matching
+    ```
+
+    Then run the [tree detection scoring entrypoint script](https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/tree_registration_and_matching/entrypoints/score_detected_trees.py).
+
+    ```bash
+    python -m tree_registration_and_matching.entrypoints.score_detected_trees \
+        ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        ${DATA_DIR}/detected-trees/composite1_tree-tops_geometric_v01.gpkg \
+        ${DATA_DIR}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+        --shift-file ${DATA_DIR}/registration/reference-drone-registration.csv \
+        --field-attribute-to-score height \
+        --drone-attribute-to-score height \
+        --continuous-scoring-attribute \
+        --scoring-metrics-savefile ${DATA_DIR}/output/detection-evaluation/height-scoring-metrics.json \
+        --vis-attribute-scoring-savefile ${DATA_DIR}/output/detection-evaluation/height-scoring.png \
+        --predicted-attribute-savefile ${DATA_DIR}/output/detection-evaluation/height-scoring-matched-values.csv
+    ```
+
+=== "Python script"
+
+    Run the following code from within the `tree-registration-and-matching` Conda environment.
+
+    ```python
+    from pathlib import Path
+
+    from tree_registration_and_matching.entrypoints.score_detected_trees import (
+        score_detected_trees,
+    )
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    FIELD_TREES_FILE = Path(
+        DATA_DIR, "ground-reference", "ofo-ground-reference-trees_0030.gpkg"
+    )
+    DRONE_TREES_FILE = Path(
+        DATA_DIR, "detected-trees", "composite1_tree-tops_geometric_v01.gpkg"
+    )
+    FIELD_PLOT_BOUNDS_FILE = Path(
+        DATA_DIR, "ground-reference", "ofo-ground-reference-plot_0030.gpkg"
+    )
+    SHIFT_FILE = Path(DATA_DIR, "registration", "reference-drone-registration.csv")
+    FIELD_ATTRIBUTE_TO_SCORE = "height"
+    DRONE_ATTRIBUTE_TO_SCORE = "height"
+    CATEGORICAL_SCORING_ATTRIBUTE = False
+
+    # Define the outputs
+    SCORING_METRICS_SAVEFILE = Path(
+        DATA_DIR, "output", "detection-evaluation", "height-scoring-metrics.json"
+    )
+    VIS_ATTRIBUTE_SCORING_SAVEFILE = Path(
+        DATA_DIR, "output", "detection-evaluation", "height-scoring.png"
+    )
+    PREDICTED_ATTRIBUTE_SAVEFILE = Path(
+        DATA_DIR, "output", "detection-evaluation", "height-scoring-matched-values.csv"
+    )
+
+
+    # Run the function
+    _, metrics = score_detected_trees(
+        field_trees_file=FIELD_TREES_FILE,
+        drone_trees_file=DRONE_TREES_FILE,
+        field_plot_bounds_file=FIELD_PLOT_BOUNDS_FILE,
+        shift_file=SHIFT_FILE,
+        field_attribute_to_score=FIELD_ATTRIBUTE_TO_SCORE,
+        drone_attribute_to_score=DRONE_ATTRIBUTE_TO_SCORE,
+        categorical_scoring_attribute=CATEGORICAL_SCORING_ATTRIBUTE,
+        scoring_metrics_savefile=SCORING_METRICS_SAVEFILE,
+        vis_attribute_scoring_savefile=VIS_ATTRIBUTE_SCORING_SAVEFILE,
+        predicted_attribute_savefile=PREDICTED_ATTRIBUTE_SAVEFILE,
+    )
+    print(metrics)
+    ```
+
+The same approach can be used to score a categorical attribute such as species as shown below. This produces a confusion matrix visualization and class-wise and overall precision, recall, and F1 metric values. Note that the classified tree tops are used as input.
+
+![scoring species prediction](/assets/images/tutorials/composite1_species_scoring.png)
+
+=== "Docker"
+
+    Linux/Mac:
+
+    ```bash
+    docker run --rm --user "$(id -u):$(id -g)" \
+        -v "${DATA_DIR}:/data" \
+        ghcr.io/open-forest-observatory/tree-registration-and-matching:latest \
+        python -m tree_registration_and_matching.entrypoints.score_detected_trees \
+            /data/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+            /data/classified-trees/composite1_tree-tops_geometric_v01_species.gpkg \
+            /data/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+            --shift-file /data/registration/reference-drone-registration.csv \
+            --field-attribute-to-score species_code \
+            --drone-attribute-to-score species \
+            --categorical-scoring-attribute \
+            --scoring-metrics-savefile /data/output/detection-evaluation/species-scoring-metrics.json \
+            --vis-attribute-scoring-savefile /data/output/detection-evaluation/species-scoring.png \
+            --predicted-attribute-savefile /data/output/detection-evaluation/species-scoring-matched-values.csv
+    ```
+
+    Windows:
+
+    ```powershell
+    docker run --rm `
+        -v "${env:DATA_DIR}:/data" `
+        ghcr.io/open-forest-observatory/tree-registration-and-matching:latest `
+        python -m tree_registration_and_matching.entrypoints.score_detected_trees `
+            /data/ground-reference/ofo-ground-reference-trees_0030.gpkg `
+            /data/classified-trees/composite1_tree-tops_geometric_v01_species.gpkg `
+            /data/ground-reference/ofo-ground-reference-plot_0030.gpkg `
+            --shift-file /data/registration/reference-drone-registration.csv `
+            --field-attribute-to-score species_code `
+            --drone-attribute-to-score species `
+            --categorical-scoring-attribute `
+            --scoring-metrics-savefile /data/output/detection-evaluation/species-scoring-metrics.json `
+            --vis-attribute-scoring-savefile /data/output/detection-evaluation/species-scoring.png `
+            --predicted-attribute-savefile /data/output/detection-evaluation/species-scoring-matched-values.csv
+    ```
+
+=== "Python command-line entrypoint"
+
+    In your terminal, activate the `tree-registration-and-matching` Conda environment.
+
+    ```bash
+    conda activate tree-registration-and-matching
+    ```
+
+    Then run the [tree detection scoring entrypoint script](https://github.com/open-forest-observatory/tree-registration-and-matching/blob/main/tree_registration_and_matching/entrypoints/score_detected_trees.py).
+
+    ```bash
+    python -m tree_registration_and_matching.entrypoints.score_detected_trees \
+        ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
+        ${DATA_DIR}/classified-trees/composite1_tree-tops_geometric_v01_species.gpkg \
+        ${DATA_DIR}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
+        --shift-file ${DATA_DIR}/registration/reference-drone-registration.csv \
+        --field-attribute-to-score species_code \
+        --drone-attribute-to-score species \
+        --categorical-scoring-attribute \
+        --scoring-metrics-savefile ${DATA_DIR}/output/detection-evaluation/species-scoring-metrics.json \
+        --vis-attribute-scoring-savefile ${DATA_DIR}/output/detection-evaluation/species-scoring.png \
+        --predicted-attribute-savefile ${DATA_DIR}/output/detection-evaluation/species-scoring-matched-values.csv
+    ```
+
+=== "Python script"
+
+    Run the following code from within the `tree-registration-and-matching` Conda environment.
+
+    ```python
+    from pathlib import Path
+
+    from tree_registration_and_matching.entrypoints.score_detected_trees import (
+        score_detected_trees,
+    )
+
+    # Change this line
+    DATA_DIR = Path("path/to/data")
+
+    # Define the inputs
+    FIELD_TREES_FILE = Path(
+        DATA_DIR, "ground-reference", "ofo-ground-reference-trees_0030.gpkg"
+    )
+    DRONE_TREES_FILE = Path(
+        DATA_DIR,
+        "classified-trees",
+        "composite1_tree-tops_geometric_v01_species.gpkg",
+    )
+    FIELD_PLOT_BOUNDS_FILE = Path(
+        DATA_DIR, "ground-reference", "ofo-ground-reference-plot_0030.gpkg"
+    )
+    SHIFT_FILE = Path(DATA_DIR, "registration", "reference-drone-registration.csv")
+    FIELD_ATTRIBUTE_TO_SCORE = "species_code"
+    DRONE_ATTRIBUTE_TO_SCORE = "species"
+    CATEGORICAL_SCORING_ATTRIBUTE = True
+
+    # Define the outputs
+    SCORING_METRICS_SAVEFILE = Path(
+        DATA_DIR, "output", "detection-evaluation", "species-scoring-metrics.json"
+    )
+    VIS_ATTRIBUTE_SCORING_SAVEFILE = Path(
+        DATA_DIR, "output", "detection-evaluation", "species-scoring.png"
+    )
+    PREDICTED_ATTRIBUTE_SAVEFILE = Path(
+        DATA_DIR,
+        "output",
+        "detection-evaluation",
+        "species-scoring-matched-values.csv",
+    )
+
+    # Run the function
+    _, metrics = score_detected_trees(
+        field_trees_file=FIELD_TREES_FILE,
+        drone_trees_file=DRONE_TREES_FILE,
+        field_plot_bounds_file=FIELD_PLOT_BOUNDS_FILE,
+        shift_file=SHIFT_FILE,
+        field_attribute_to_score=FIELD_ATTRIBUTE_TO_SCORE,
+        drone_attribute_to_score=DRONE_ATTRIBUTE_TO_SCORE,
+        categorical_scoring_attribute=CATEGORICAL_SCORING_ATTRIBUTE,
+        scoring_metrics_savefile=SCORING_METRICS_SAVEFILE,
+        vis_attribute_scoring_savefile=VIS_ATTRIBUTE_SCORING_SAVEFILE,
+        predicted_attribute_savefile=PREDICTED_ATTRIBUTE_SAVEFILE,
+    )
+    print(metrics)
+    ```
