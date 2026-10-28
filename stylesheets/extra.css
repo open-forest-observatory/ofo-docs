@@ -13,3 +13,10 @@
   color: inherit;
   text-decoration-color: var(--md-accent-fg-color);
 }
+
+/* Sketchfab embeds: full content width, 16:9 */
+.sketchfab-embed-wrapper iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
