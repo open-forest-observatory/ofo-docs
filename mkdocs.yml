@@ -95,6 +95,10 @@ nav:
   - "← OFO home": https://openforestobservatory.org/
   - ...
 
+# Pages listed here show up with `mkdocs serve` but are left out of `mkdocs build`
+draft_docs: |
+  geograypher/
+
 validation:
   links:
     absolute_links: relative_to_docs
