@@ -16,7 +16,7 @@ Be sure to read the [Important details and considerations](#important-details-co
 
 ### Ground reference data
 
-The ground reference dataset consists of traditional manual forest inventory plot data. These data files represent the locations and characteristics of trees in plots that are mapped by technicians on the ground using traditional forest tree stem-mapping methods.
+The ground reference dataset consists of traditional manual forest inventory plot data. These data files represent the locations and characteristics of trees in plots that are mapped by technicians on the ground using traditional forest tree stem-mapping methods. Find the files below via our [Zenodo data record](https://zenodo.org/records/23402904).
 
 - `ofo_ground-reference_plots.gpkg`: Plot-level data and metadata, including plot geospatial footprint, survey dates, protocol components such as tally tree definitions, and data license, in geospatial (geopackage) format
     - `ofo_ground-reference_plots_metadata.md`: Metadata describing the plot dataset, including column definitions, in markdown format.
@@ -26,6 +26,8 @@ The ground reference dataset consists of traditional manual forest inventory plo
 The [OFO Web Catalog](https://openforestobservatory.org/data/drone/) contains web preview functionality for ground reference plot data.
 
 ### Drone-derived data
+
+Find the files below via our Zenodo data record: [https://zenodo.org/records/23402904](https://zenodo.org/records/23402904).
 
 - `ofo_drone-missions.gpkg` Mission-level data and metadata, including geospatial footprint, flight altitude, raw image density, and data license, in geospatial (geopackage) format
     - `ofo_drone-missions_metadata.md`: Metadata describing the drone missions dataset, including column definitions, in markdown format.
