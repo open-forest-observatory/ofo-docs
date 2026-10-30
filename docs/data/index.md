@@ -12,7 +12,7 @@ You can easily browse, preview, and download OFO drone-derived data and ground r
 
 ## Bulk/programmatic data access
 
-Be sure to read the [Important details and considerations](#important-details-and-considerations-and-usage-restrictions) section below to understand important usage restrictions and determine what datasets are appropriate to use in your work.
+Be sure to read the [Important details and considerations](#important-details-considerations-and-usage-restrictions) section below to understand important usage restrictions and determine what datasets are appropriate to use in your work.
 
 ### Ground reference data
 
@@ -23,7 +23,7 @@ The ground reference dataset consists of traditional manual forest inventory plo
 - `ofo_ground-reference_trees.gpkg`: Tree-level data, including tree stem geospatial location, species, size, in geospatial (geopackage) format
     - `ofo_ground-reference_trees_metadata.md`: Metadata describing the tree dataset, including column definitions, in markdown format.
 
-The [OFO web catalog](https://openforestobservatory.org/data/drone/) contains web preview functionality for ground reference plot data.
+The [OFO Web Catalog](https://openforestobservatory.org/data/drone/) contains web preview functionality for ground reference plot data.
 
 ### Drone-derived data
 
@@ -37,9 +37,9 @@ Data files themselves are accessible via the Jetstream2 Object Store (S3-compati
 
 The data files are also accessible via S3 protocol (e.g. AWS S3 CLI, rclone, CyberDuck) at endpoint: <https://js2.jetstream-cloud.org:8001/>, bucket ofo-public.
 
-The [OFO web catalog](https://openforestobservatory.org/data/drone/) contains web preview and direct download functionality for drone-derived data.
+The [OFO Web Catalog](https://openforestobservatory.org/data/drone/) contains web preview and direct download functionality for drone-derived data.
 
-The [OFO STAC catalog](https://github.com/open-forest-observatory/stac) is an alternative means of data access via the standard Spatio-Temporal Asset Catalog specification, but it currently reflects an older processing run for a subset of missions. We plan to update it to reflect our current catalog by the end of 2026 and will prioritize this if/when requested by an external user.
+The [OFO STAC Catalog](https://github.com/open-forest-observatory/stac) is an alternative means of data access via the standard Spatio-Temporal Asset Catalog specification, but it currently reflects an older processing run for a subset of missions. We plan to update it to reflect our current catalog by the end of 2026 and will prioritize this if/when requested by an external user.
 
 #### Drone-derived data types
 
@@ -67,6 +67,7 @@ For questions around the use and interpretation of the data, contact openforesto
 - Data license varies by dataset. All use Creative Commons licenses (most of them requiring data contributor attribution in derivative products), but please be aware that some plot data licenses include non-commercial and share-alike clauses that limit derivative works and their uses in certain contexts.
 - The mapping of drone missions to ground reference plots is not 1:1. Some ground plots are covered by multiple drone missions (or zero drone missions) and vice-versa.
 - Ground reference plots are not necessarily spatially co-registered to the drone missions that include them. In most/all cases, they should be within ~10 m, but for most comparison analysis, it will likely be necessary to perform (manual or automated) co-registration to optimally align the ground data to the drone data.
+- For a DOI and citation option, see our [Zenodo record](https://zenodo.org/records/23402904).
 
 ### Ground-reference data considerations
 
