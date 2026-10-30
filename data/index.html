@@ -1826,7 +1826,7 @@
 <h2 id="web-based-data-catalog">Web-based data catalog<a class="headerlink" href="#web-based-data-catalog" title="Permanent link">¶</a></h2>
 <p>You can easily browse, preview, and download OFO drone-derived data and ground reference data via the <a href="https://openforestobservatory.org/data/">OFO Data Catalog</a>. Be sure to read the <a href="#important-details-considerations-and-usage-restrictions">Important details and considerations</a> section below to understand important usage restrictions and determine what datasets are appropriate to use in your work.</p>
 <h2 id="bulkprogrammatic-data-access">Bulk/programmatic data access<a class="headerlink" href="#bulkprogrammatic-data-access" title="Permanent link">¶</a></h2>
-<p>Be sure to read the <a href="#important-details-and-considerations-and-usage-restrictions">Important details and considerations</a> section below to understand important usage restrictions and determine what datasets are appropriate to use in your work.</p>
+<p>Be sure to read the <a href="#important-details-considerations-and-usage-restrictions">Important details and considerations</a> section below to understand important usage restrictions and determine what datasets are appropriate to use in your work.</p>
 <h3 id="ground-reference-data">Ground reference data<a class="headerlink" href="#ground-reference-data" title="Permanent link">¶</a></h3>
 <p>The ground reference dataset consists of traditional manual forest inventory plot data. These data files represent the locations and characteristics of trees in plots that are mapped by technicians on the ground using traditional forest tree stem-mapping methods.</p>
 <ul>
@@ -1839,7 +1839,7 @@
 </ul>
 </li>
 </ul>
-<p>The <a href="https://openforestobservatory.org/data/drone/">OFO web catalog</a> contains web preview functionality for ground reference plot data.</p>
+<p>The <a href="https://openforestobservatory.org/data/drone/">OFO Web Catalog</a> contains web preview functionality for ground reference plot data.</p>
 <h3 id="drone-derived-data">Drone-derived data<a class="headerlink" href="#drone-derived-data" title="Permanent link">¶</a></h3>
 <ul>
 <li><code>ofo_drone-missions.gpkg</code> Mission-level data and metadata, including geospatial footprint, flight altitude, raw image density, and data license, in geospatial (geopackage) format<ul>
@@ -1853,8 +1853,8 @@
 <li>Many other data products (e.g., canopy height model, raw images) and previews/thumbnails are also available (see 'Data types', below. A representative (but truncated) bucket file listing illustrating file naming conventions can be obtained at: <a href="https://js2.jetstream-cloud.org:8001/swift/v1/ofo-public/">https://js2.jetstream-cloud.org:8001/swift/v1/ofo-public/</a></li>
 </ul>
 <p>The data files are also accessible via S3 protocol (e.g. AWS S3 CLI, rclone, CyberDuck) at endpoint: <a href="https://js2.jetstream-cloud.org:8001/">https://js2.jetstream-cloud.org:8001/</a>, bucket ofo-public.</p>
-<p>The <a href="https://openforestobservatory.org/data/drone/">OFO web catalog</a> contains web preview and direct download functionality for drone-derived data.</p>
-<p>The <a href="https://github.com/open-forest-observatory/stac">OFO STAC catalog</a> is an alternative means of data access via the standard Spatio-Temporal Asset Catalog specification, but it currently reflects an older processing run for a subset of missions. We plan to update it to reflect our current catalog by the end of 2026 and will prioritize this if/when requested by an external user.</p>
+<p>The <a href="https://openforestobservatory.org/data/drone/">OFO Web Catalog</a> contains web preview and direct download functionality for drone-derived data.</p>
+<p>The <a href="https://github.com/open-forest-observatory/stac">OFO STAC Catalog</a> is an alternative means of data access via the standard Spatio-Temporal Asset Catalog specification, but it currently reflects an older processing run for a subset of missions. We plan to update it to reflect our current catalog by the end of 2026 and will prioritize this if/when requested by an external user.</p>
 <h4 id="drone-derived-data-types">Drone-derived data types<a class="headerlink" href="#drone-derived-data-types" title="Permanent link">¶</a></h4>
 <ul>
 <li>Geospatial orthomosaics are named <code>&lt;mission-id&gt;_ortho-dsm-ptcloud.tif</code> or <code>&lt;mission-id&gt;_ortho-dsm-mesh.tif</code> depending whether they were based on a digital surface model made from the point cloud (more detailed) or the mesh (smoother).</li>
@@ -1876,6 +1876,7 @@
 <li>Data license varies by dataset. All use Creative Commons licenses (most of them requiring data contributor attribution in derivative products), but please be aware that some plot data licenses include non-commercial and share-alike clauses that limit derivative works and their uses in certain contexts.</li>
 <li>The mapping of drone missions to ground reference plots is not 1:1. Some ground plots are covered by multiple drone missions (or zero drone missions) and vice-versa.</li>
 <li>Ground reference plots are not necessarily spatially co-registered to the drone missions that include them. In most/all cases, they should be within ~10 m, but for most comparison analysis, it will likely be necessary to perform (manual or automated) co-registration to optimally align the ground data to the drone data.</li>
+<li>For a DOI and citation option, see our <a href="https://zenodo.org/records/23402904">Zenodo record</a>.</li>
 </ul>
 <h3 id="ground-reference-data-considerations">Ground-reference data considerations<a class="headerlink" href="#ground-reference-data-considerations" title="Permanent link">¶</a></h3>
 <ul>
@@ -1951,7 +1952,7 @@ Please note the data licensing details on the visualization page, which apply to
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 30, 2026 17:42:06 UTC">October 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 30, 2026 18:05:25 UTC">October 30, 2026</span>
   </span>
 
     
