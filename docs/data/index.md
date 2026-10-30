@@ -10,6 +10,8 @@ The Open Forest Observatory (OFO) Open Data Catalog consists of two main compone
 
 You can easily browse, preview, and download OFO drone-derived data and ground reference data via the [OFO Data Catalog](https://openforestobservatory.org/data/). Be sure to read the [Important details and considerations](#important-details-considerations-and-usage-restrictions) section below to understand important usage restrictions and determine what datasets are appropriate to use in your work.
 
+[Browse the OFO Data Catalog](https://openforestobservatory.org/data/){ .md-button .md-button--primary }
+
 ## Bulk/programmatic data access
 
 Be sure to read the [Important details and considerations](#important-details-considerations-and-usage-restrictions) section below to understand important usage restrictions and determine what datasets are appropriate to use in your work.
