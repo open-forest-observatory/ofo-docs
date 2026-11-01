@@ -195,7 +195,7 @@ python -m tree_detection_framework.entrypoints.detect_geometric_two_stage \
 
 One way to run Python code is in a [Jupyter notebook](https://jupyter.org/), which is an interactive document that can contain both text and code that can be run. Jupyter notebooks are useful for data processing tasks because they allow you to run code in small chunks and see the results immediately, which is helpful for exploring data and debugging code. Each OFO tutorial task includes a Jupyter notebook that performs each step. Jupyter notebooks run inside a Conda environment; they are not an alternative to Conda.
 
-TODO: Instructions on how to install Jupyter (link to Jupyter documentation), access the Jupyter server, and run notebooks, including connecting to the right Python environment.
+<!-- TODO: Instructions on how to install Jupyter (link to Jupyter documentation), access the Jupyter server, and run notebooks, including connecting to the right Python environment. -->
 
 ### Custom Python scripts
 
