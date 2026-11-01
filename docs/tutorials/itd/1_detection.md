@@ -255,9 +255,7 @@ The Tree Detection Framework provides a standardized interface to several differ
 | Segment Anything Model v3 (SAM3) | Generic pretraining, with class information (foundational model) | Orthomosaic | Crown polygon |
 | Local maximum filter + Watershed segmentation | Learning-free algorithm | Canopy height model (CHM) | Tree-top point and crown polygon |
 
-To run detections using an alternative model, simply change `deepforest` in the command above to the name of the model you want to use.
-
-For example, here we have changed it to `detectree2`.
+To run detections using an alternative model, simply change `deepforest` in the command above to the name of the model you want to use. For example, here we have changed it to `detectree2`.
 
 ![Ortho with detectree2 detections from low-res chips](/assets/images/tutorials/composite1_ortho_w_detections_detectree_v01.png)
 
