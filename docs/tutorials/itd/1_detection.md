@@ -345,7 +345,7 @@ The computer vision tree detection approaches do not product a point representat
     ```
 This saves a geospatial file of points representing the detected tree tops, with heights extracted from the CHM.
 
-![CHM-derived points](/assets/images/tutorials/composite1_detected-crowns_chm-max.png).
+![CHM-derived points](/assets/images/tutorials/composite1_detected-crowns_chm-max.png)
 
 In this example, the highest CHM point within each detection polygon is selected as the tree top. Alternatively, this approach can be replaced with simply selecting the centroid, by replacing the `chm_max` method with `centroid`. In either case, the height is extracted from the corresponding point on the CHM, if provided.
 
