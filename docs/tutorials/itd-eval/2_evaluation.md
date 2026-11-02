@@ -4,7 +4,7 @@ weight: 20
 
 # Task 2: Evaluation
 
-The final task is assessing the quality of the detected trees. This is done by comparing the locations of detected trees to those of field reference trees after co-registering the datasets ([Registration](/tutorials/itd-eval/1_registration.md) task). This process produces metrics quantifying the fraction of real trees the detection algorithm found ("recall"), the fraction of detected trees that were real ("precision"), and a combined metric (F1) that balances the two. The evaluation process also produces a visualization of the matched trees, which can be used to identify patterns in the errors made by the detection algorithm.
+The final task is assessing the quality of the detected trees. This is done by comparing the locations of detected trees to those of field reference trees after co-registering the datasets ([Co-registration](/tutorials/itd-eval/1_registration.md) task). This process produces metrics quantifying the fraction of real trees the detection algorithm found ("recall"), the fraction of detected trees that were real ("precision"), and a combined metric (F1) that balances the two. The evaluation process also produces a visualization of the matched trees, which can be used to identify patterns in the errors made by the detection algorithm.
 
 ## Required input data
 
@@ -139,8 +139,6 @@ In many applications, the goal is to not only detect trees but also predict an a
 
 The `--scoring-metrics-savefile` flag controls where a `.json` file of metrics is written out, evaluating the quality of the predictions. The `--predicted-attribute-savefile` controls where a `.csv` file is written, which has one line for every field tree, and a column for both the field-derived attribute and the drone-derived attribute from the matching tree. Note that some rows may lack a drone derived attribute if that field tree was not matched to a drone tree.
 The final major output is a visualization of the attribute, controlled by the `--vis-attribute-scoring-savefile` flag.
-Below is a visualization of the drone-derived tree heights plotted against the field-derived heights for the corresponding trees.
-![evaluating height predictions](/assets/images/tutorials/composite1_height_scoring.png)
 
 The following example shows how to score the height predictions.
 
@@ -264,10 +262,13 @@ The following example shows how to score the height predictions.
     )
     print(metrics)
     ```
+This produces a scatterplot of predicted vs. observed heights for matched trees.
 
-The same approach can be used to score a categorical attribute such as species as shown below. This produces a confusion matrix visualization and class-wise and overall precision, recall, and F1 metric values. Note that the classified tree tops are used as input.
+![evaluating height predictions](/assets/images/tutorials/composite1_height_scoring.png)
 
-![scoring species prediction](/assets/images/tutorials/composite1_species_scoring.png)
+
+
+The same approach can be used to score a categorical attribute such as species.
 
 === "Docker"
 
@@ -322,7 +323,7 @@ The same approach can be used to score a categorical attribute such as species a
     ```bash
     python -m tree_registration_and_matching.entrypoints.score_detected_trees \
         ${DATA_DIR}/ground-reference/ofo-ground-reference-trees_0030.gpkg \
-        ${DATA_DIR}/classified-trees/composite1_tree-tops_geometric_v01_species.gpkg \
+        ${DATA_DIR}/detected-trees-classified/composite1_tree-tops_geometric_v01_species.gpkg \
         ${DATA_DIR}/ground-reference/ofo-ground-reference-plot_0030.gpkg \
         --shift-file ${DATA_DIR}/registration/reference-drone-registration.csv \
         --field-attribute-to-score species_code \
@@ -353,7 +354,7 @@ The same approach can be used to score a categorical attribute such as species a
     )
     DRONE_TREES_FILE = Path(
         DATA_DIR,
-        "classified-trees",
+        "detected-trees-classified",
         "composite1_tree-tops_geometric_v01_species.gpkg",
     )
     FIELD_PLOT_BOUNDS_FILE = Path(
@@ -393,3 +394,7 @@ The same approach can be used to score a categorical attribute such as species a
     )
     print(metrics)
     ```
+
+This produces a confusion matrix visualization and class-wise and overall precision, recall, and F1 metric values. Note that the classified tree tops are used as input.
+
+![scoring species prediction](/assets/images/tutorials/composite1_species_scoring.png)
