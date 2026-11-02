@@ -398,3 +398,21 @@ The same approach can be used to score a categorical attribute such as species.
 This produces a confusion matrix visualization and class-wise and overall precision, recall, and F1 metric values. Note that the classified tree tops are used as input.
 
 ![scoring species prediction](/assets/images/tutorials/composite1_species_scoring.png)
+
+It also saves a CSV file with the per-tree observed and predicted values. Values in the species column for drone trees are empty if the corresponding field tree was not matched to a drone tree. 
+
+|     | species_code_field | species_drone |
+| --- | ------------------ | ------------- |
+| 0   | ABCO               | ABCO          |
+| 1   | ABCO               | ABMA          |
+| 2   | ABCO               |               |
+| 3   | ABCO               |               |
+| 4   | ABCO               | ABCO          |
+| 5   | ABCO               | ABMA          |
+| 6   | ABCO               | ABCO          |
+| 7   | CADE27             |               |
+| 8   | PSME               | PSME          |
+| 9   | PILA               | PILA          |
+| 10  | ABCO               | ABMA          |
+| 11  | ABCO               |               |
+| ... | ...                | ...           |
