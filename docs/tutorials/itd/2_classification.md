@@ -64,7 +64,7 @@ The original drone images are not required at this stage except for visualizatio
         --texture-column-name unique_ID \
         --image-folder /data/drone-collects/photos-raw/composite1 \
         --render-savefolder /data/output/renders \
-        --original-image-folder /data/drone-collects/photos-raw \
+        --original-image-folder /data/raw-drone-photos \
         --labels-vis-folder /data/output/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
@@ -87,7 +87,7 @@ The original drone images are not required at this stage except for visualizatio
             --texture-column-name unique_ID `
             --image-folder /data/drone-collects/photos-raw/composite1 `
             --render-savefolder /data/output/renders `
-            --original-image-folder /data/drone-collects/photos-raw `
+            --original-image-folder /data/raw-drone-photos `
             --labels-vis-folder /data/output/renders-vis `
             --mesh-ROI-buffer-radius-meters 10 `
             --cameras-ROI-buffer-radius-meters 20 `
@@ -115,7 +115,7 @@ The original drone images are not required at this stage except for visualizatio
         --texture-column-name unique_ID \
         --image-folder ${DATA_DIR}/drone-collects/photos-raw/composite1 \
         --render-savefolder ${DATA_DIR}/output/renders \
-        --original-image-folder /data/drone-collects/photos-raw \
+        --original-image-folder /data/raw-drone-photos \
         --labels-vis-folder ${DATA_DIR}/output/renders-vis \
         --mesh-ROI-buffer-radius-meters 10 \
         --cameras-ROI-buffer-radius-meters 20 \
@@ -144,7 +144,7 @@ The original drone images are not required at this stage except for visualizatio
     TREE_CROWNS_FILE = Path(DATA_DIR, "detected-trees", "composite1_tree-crowns_geometric_v01.gpkg")
     IMAGE_FOLDER = Path(DATA_DIR, "drone-collects", "photos-raw", "composite1")
     MESH_CRS = pyproj.CRS.from_epsg(32610)
-    ORIGNAL_IMAGE_FOLDER = "/data/drone-collects/photos-raw"
+    ORIGNAL_IMAGE_FOLDER = "/data/raw-drone-photos"
 
     # Define the outputs
     RENDER_SAVEFOLDER = Path(DATA_DIR, "output", "renders")
