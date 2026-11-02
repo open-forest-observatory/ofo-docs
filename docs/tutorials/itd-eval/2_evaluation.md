@@ -399,7 +399,7 @@ This produces a confusion matrix visualization and class-wise and overall precis
 
 ![scoring species prediction](/assets/images/tutorials/composite1_species_scoring.png)
 
-It also saves a CSV file with the per-tree observed and predicted values. Values in the species column for drone trees are empty if the corresponding field tree was not matched to a drone tree. 
+It also saves a CSV file with the per-tree observed and predicted values. Values in the species column for drone trees are empty if the corresponding field tree was not matched to a drone tree.
 
 |     | species_code_field | species_drone |
 | --- | ------------------ | ------------- |
