@@ -21,7 +21,7 @@ Before running any of the tutorials, you will need to set an environment variabl
 === "Linux/Mac"
 
     ```bash
-    export DATA_DIR="~/ofo-tutorial-data"
+    export DATA_DIR="$HOME/ofo-tutorial-data"
     ```
 
 === "Windows (PowerShell)"
